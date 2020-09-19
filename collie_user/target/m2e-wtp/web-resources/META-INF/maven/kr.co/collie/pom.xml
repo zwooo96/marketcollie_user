@@ -115,7 +115,21 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>       
+		
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.5</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/servlets.com/cos -->
+		<dependency>
+    		<groupId>servlets.com</groupId>
+    		<artifactId>cos</artifactId>
+    		<version>05Nov2002</version>
+		</dependency>
+		 
 	</dependencies>
     <build>
         <plugins>
