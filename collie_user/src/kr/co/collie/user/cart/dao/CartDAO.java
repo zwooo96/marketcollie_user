@@ -26,24 +26,19 @@ public class CartDAO {
 		return cDAO;
 	}//getInstance
 	
-	private SqlSessionFactory getSqlSessionFactory() throws IOException {
-		if(ssf==null) {
-			//1.xml과 연결(buildpath에서 included와 Excluded룰 모두 삭제 해야 함)
-			String xmlConfig="kr/co/collie/user/dao/collie_config.xml";
-			Reader reader=Resources.getResourceAsReader(xmlConfig);
-			//2.MyBatis Framework 생성
-			ssf=new SqlSessionFactoryBuilder().build(reader);
-			reader.close();//xml을 읽어들인 스트림을 끊는다.
-		}//end if
-		
-		return ssf;
-	}//getSqlSession
-	
 	private SqlSession getSqlSession() {
 		SqlSession ss=null;
 		
 		try {
-			ss=getSqlSessionFactory().openSession();
+			if(ssf==null) {
+				//1.xml과 연결(buildpath에서 included와 Excluded룰 모두 삭제 해야 함)
+				String xmlConfig="kr/co/collie/user/dao/collie_config.xml";
+				Reader reader=Resources.getResourceAsReader(xmlConfig);
+				//2.MyBatis Framework 생성
+				ssf=new SqlSessionFactoryBuilder().build(reader);
+				reader.close();//xml을 읽어들인 스트림을 끊는다.
+			}//end if
+			ss=ssf.openSession();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

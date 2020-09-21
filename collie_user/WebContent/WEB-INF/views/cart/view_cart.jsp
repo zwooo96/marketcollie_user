@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,71 +138,12 @@ $(function(){
 	
 	<div id="container">
 	
-	<div id="mainImg" class="carousel slide" data-ride="carousel">
-	  <div class="carousel-inner">
-	    <div class="carousel-item active" data-interval="3000">
-	      <img src="http://localhost/collie_user/images/main_img1.jpg" class="d-block w-100" alt="...">
-	    </div>
-	    <div class="carousel-item" data-interval="3000">
-	      <img src="http://localhost/collie_user/images/main_img2.jpg" class="d-block w-100" alt="...">
-	    </div>
-	    <div class="carousel-item" data-interval="3000">
-	      <img src="http://localhost/collie_user/images/main_img3.jpg" class="d-block w-100" alt="...">
-	    </div>
-	  </div>
-	  <a class="carousel-control-prev" href="#mainImg" role="button" data-slide="prev">
-	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Previous</span>
-	  </a>
-	  <a class="carousel-control-next" href="#mainImg" role="button" data-slide="next">
-	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-	    <span class="sr-only">Next</span>
-	  </a>
-	</div>
+	장바구니
+	<c:forEach var="cart" items="${ cart_list }">
+	<c:out value="${ cart.item_name }"/><br/>
+	</c:forEach>
 	
-	
-	<div id="containerContentWrap">
-	<div id="containerContent">
-		<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
-			<img src="http://localhost/collie_user/images/item_img1.png" class="card-img-top" alt="...">
-			<div class="card-body">
-			<h6 class="card-title">저탄소 GAP 자몽</h6>
-			<p class="card-text">17,945원</p>
-			</div>
-		</div>
-		<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px;; ">
-			<img src="http://localhost/collie_user/images/item_img2.png" class="card-img-top" alt="...">
-			<div class="card-body">
-			<h6 class="card-title">[말랑카우] 유기농 요거트</h6>
-			<p class="card-text">6,900원</p>
-			</div>
-		</div>
-		<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
-			<img src="http://localhost/collie_user/images/item_img3.png" class="card-img-top" alt="...">
-			<div class="card-body">
-			<h6 class="card-title">[365] 수제 살라미 소세지</h6>
-			<p class="card-text">7,110원</p>
-			</div>
-		</div>
-		<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
-			<img src="http://localhost/collie_user/images/item_img4.png" class="card-img-top" alt="...">
-			<div class="card-body">
-			<h6 class="card-title">[BAAM] 오븐에 구운 베이글</h6>
-			<p class="card-text">4,880원</p>
-			</div>
-		</div>
 	</div>
-	</div>
-	</div>
-	
-	
-	
-	<div id="containerFooterWrap">
-	<div id="containerFooter">
-	<img alt="" src="http://localhost/collie_user/images/main_img4.jpg" style="width: 100%">
-	</div>
-	</div>
-	
 	
 	<div id="footer">
 	<div id="footerContent">
