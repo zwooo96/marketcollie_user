@@ -5,7 +5,7 @@
 	
 	<ul class="nav justify-content-end">
 	  <li class="nav-item">
-	    <a class="nav-link active" href="#" style="color: #000000">로그인</a>
+	    <a class="nav-link active" href="/member/login_frm.jsp" style="color: #000000">로그인</a>
 	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link" href="#" style="color: #000000">회원가입</a>
@@ -17,7 +17,7 @@
 	
 	<div id="logoWrap">
 	<div id="logo">
-		<img alt="" src="http://localhost/collie_user/common/images/logo_green.png" style="width: 200px"/>
+		<img alt="" src="/collie_user/common/images/logo_green.png" style="width: 200px"/>
 	</div>
 	</div>
 	
