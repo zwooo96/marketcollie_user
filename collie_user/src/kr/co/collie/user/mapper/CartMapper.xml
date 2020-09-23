@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.collie.user.cart">
   <select id="selectCartGoods" parameterType="int" resultType="kr.co.collie.user.cart.domain.CartGoodsDomain">
-    select c.cart_num, c.item_num, c.member_num, c.item_cnt, i.item_name, i.item_img
+    select c.cart_num, c.item_num, c.member_num, c.item_cnt, i.item_name, i.item_img, i.item_price
 	from cart c, item i
 	where c.item_num=i.item_num and c.member_num=#{ member_num }
   </select>
