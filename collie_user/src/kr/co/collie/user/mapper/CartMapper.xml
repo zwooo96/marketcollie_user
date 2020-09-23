@@ -8,4 +8,10 @@
 	from cart c, item i
 	where c.item_num=i.item_num and c.member_num=#{ member_num }
   </select>
+
+  <!-- 장바구니에 상품을 추가하는 일 -->
+  <insert id="insertCart" parameterType="kr.co.collie.user.cart.vo.CartVO">
+  	insert into cart(cart_num, item_num, member_num, item_cnt)
+  	values(#{ cart_num }, #{ item_num }, #{ member_num }, #{ item_cnt })
+  </insert>
 </mapper>
