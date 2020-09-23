@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class GetCollieHandler {
-	
 	private static GetCollieHandler gch;
 	private static SqlSessionFactory ssf;
 	
