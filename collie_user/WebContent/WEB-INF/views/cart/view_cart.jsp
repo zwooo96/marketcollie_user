@@ -52,6 +52,16 @@
 #footer{ height: 120px; display: flex; justify-content: center }
 #footerContent{ width: 70%; }
 
+#containerHeader{ height: 150px; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+#containerHeaderTitle{ font-weight: bold; font-size: 20pt; }
+#containerHeaderContent{ font-size: 10pt; color: #bebebe }
+
+#containerHeader{ display: flex; justify-content: center; align-items: center; flex-direction: column; }
+#containerContentWrapper{ display: flex; justify-content: center; align-items: center; flex-direction: column; }
+#contentTable{ width: 70% }
+#tableContent{ height: 100px; }
+
+tr{ vertical-align: middle; }
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -67,7 +77,7 @@ $(function(){
 });//ready
 </script>
 </head>
-<body>
+<body style="font-family: NanumBarunGothic;">
 
 <div id="wrap">
 	<div id="header">
@@ -137,11 +147,45 @@ $(function(){
 	</div>
 	
 	<div id="container">
+	<div id="containerHeader">
+	<a id="containerHeaderTitle">장바구니</a><br/>
+	<a id="containerHeaderContent">주문하실 상품형 및 수량을 정확히 확인 해주세요</a>
+	</div>
 	
-	장바구니
-	<c:forEach var="cart" items="${ cart_list }">
-	<c:out value="${ cart.item_name }"/><br/>
-	</c:forEach>
+	<div id="containerContentWrapper">
+	
+	<div id="contentTable">
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col"><input type="checkbox"></th>
+	      <th scope="col">전체선택</th>
+	      <th scope="col">상품정보</th>
+	      <th scope="col">수량</th>
+	      <th scope="col" colspan="2">상품금액</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		<c:forEach var="cart" items="${ cart_list }">
+	    <tr id="tableContent">
+	      <td style="vertical-align: middle;">
+	      <input type="checkbox" name="${ cart.item_num }">
+	      </td>
+	      <td style="vertical-align: middle;"><c:out value="${ cart.item_img }"/></td>
+	      <td style="vertical-align: middle;">
+	      <c:out value="${ cart.item_name }"/><br/>
+	      <c:out value="${ cart.item_price }"/>원
+	      </td>
+	      <td style="vertical-align: middle;"><c:out value="${ cart.item_cnt }"/></td>
+	      <td style="vertical-align: middle;"><c:out value="${ cart.item_price }"/>원</td>
+	      <td style="vertical-align: middle;">X</td>
+	    </tr>
+		</c:forEach>
+	  </tbody>
+	</table>
+	</div>
+
+	</div>
 	
 	</div>
 	
