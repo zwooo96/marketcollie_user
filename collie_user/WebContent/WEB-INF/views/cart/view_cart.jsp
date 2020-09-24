@@ -6,65 +6,102 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
 
 <style type="text/css">
-@font-face {
- font-family: 'NanumBarunGothic';
- font-style: normal;
- font-weight: 400;
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
-}
+#wrap{ min-height: 1200px; margin: 0px auto; }
 
-@font-face {
- font-family: 'NanumBarunGothic';
- font-style: normal;
- font-weight: 700;
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype')
-}
+#container{ min-height: 900px; }
 
-@font-face {
- font-family: 'NanumBarunGothic';
- font-style: normal;
- font-weight: 300;
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
-}
-
-.nanumbarungothic * {
- font-family: 'NanumBarunGothic', sans-serif;
-}
-
-#wrap{ min-height: 940px; margin: 0px auto; }
-
-#header{ min-height: 200px; display: flex; justify-content: center; }
-#headerContent{ width: 70%; }
-#logoWrap{ height: 120px; display: flex; justify-content: center; }
-#logo{ width: 200px; display: flex; align-items: center; }
-
-#container{ min-height: 600px;}
-#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
-#containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
-#containerFooterWrap{ display: flex; justify-content: center }
-#containerFooter{ width: 70%; }
-
-#footer{ height: 120px; display: flex; justify-content: center }
-#footerContent{ width: 70%; }
-
-#containerHeader{ height: 150px; display: flex; justify-content: center; align-items: center; flex-direction: column; }
-#containerHeaderTitle{ font-weight: bold; font-size: 20pt; }
-#containerHeaderContent{ font-size: 10pt; color: #bebebe }
+#containerHeader{ height: 250px; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+#containerHeaderTitle{ font-size: 30pt; }
+#containerHeaderContent{ font-size: 12pt; color: #bebebe }
 
 #containerHeader{ display: flex; justify-content: center; align-items: center; flex-direction: column; }
 #containerContentWrapper{ display: flex; justify-content: center; align-items: center; flex-direction: column; }
-#contentTable{ width: 70% }
-#tableContent{ height: 100px; }
+#table{ width: 70% }
+#tableContent{ height: 120px; }
 
-tr{ vertical-align: middle; }
+
+table td ,table th{
+    border-top: 2px solid #17462B !important;
+    border-bottom: 2px solid #bebebe !important;
+}
+a, a:hover{ color: #000000; text-decoration: none }
+
+
+/* 체크박스 */
+.checkbox-container {
+position: relative;
+}
+
+.checkbox-container input[type="checkbox"] {
+position: absolute;
+width: 1px;
+height: 1px;
+padding: 0;
+margin: -1px;
+overflow: hidden;
+clip:rect(0,0,0,0);
+border: 0
+}
+
+.checkbox-container input[type="checkbox"] + label {
+display: inline-block;
+position: relative;
+cusor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+.checkbox-container input[type="checkbox"] + label:before {
+content: ' ';
+display: inline-block;
+width: 18px;
+height: 18px;
+line-height: 18px;
+margin: -2px 8px 0 0;
+text-align: center;
+vertical-align: middle;
+background: #fafafa;
+border: 1px solid #cacece;
+border-radius: 3px;
+box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+
+.checkbox-container input[type="checkbox"] + label:active:before,
+.checkbox-container input[type="checkbox"]:checked + label:active:before {
+        box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checkbox-container input[type="checkbox"]:checked + label:before {
+content: '\2713';
+color: #314ca2;
+text-shadow: 1px 1px white;
+background: #17462B;
+border-color: #adb8c0;
+box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+
+
+.quantityWrap{ display: flex; justify-content: center; }
+.quantity{ width: 80% ;border: 0.5px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
+.icoBtn{ border: 0px; }
+.btn_reduce { border-right: 1px solid #ddd;  }
+.btn_rise{ border-left: 1px solid #ddd; }
+
+.collieBtn{ border: 1px solid #17462B; padding: 10px; margin-top: 5px; margin-bottom: 5px; color: #17462B; font-size: 15px; background-color: #fff }
+.collieBtnMain{ border: 1px solid #17462B; padding: 10px 40px 10px 40px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
+
+.priceWrapper{ width: 700px; margin: 20px 0px 50px 0px; display: flex; justify-content: space-between; align-items: center; }
+.priceDiv{ width: 150px; height:150px;border: 1px solid #17462B; text-align: center; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+.priceDivLabel{ color: #404040 }
+.priceDivPrice{ margin-top: 10px; font-size: 17pt; font-weight: bold  }
 </style>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -80,120 +117,103 @@ $(function(){
 <body style="font-family: NanumBarunGothic;">
 
 <div id="wrap">
-	<div id="header">
-	<div id="headerContent">
 	
-	<ul class="nav justify-content-end">
-	  <li class="nav-item">
-	    <a class="nav-link active" href="#" style="color: #000000">로그인</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="#" style="color: #000000">회원가입</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="#" style="color: #000000">고객센터</a>
-	  </li>
-	</ul>
-	
-	<div id="logoWrap">
-	<div id="logo">
-		<img alt="" src="http://localhost/collie_user/images/logo_green.png" style="width: 200px"/>
-	</div>
-	</div>
-	
-	<nav class="navbar navbar-expand-lg navbar-light">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				전체 카테고리
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#">
-						채소
-					</a>
-					<a class="dropdown-item" href="#">
-						과일
-					</a>
-					<a class="dropdown-item" href="#">
-						정육/계란
-					</a>
-					<a class="dropdown-item" href="#">
-						베이커리
-					</a>
-					<a class="dropdown-item" href="#">
-						<img alt="" src="http://localhost/collie_user/images/dairy.png" style="width: 20px; margin-right: 5px"/>유제품
-					</a>
-				</div>
-				</li>
-			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<img alt="" src="http://localhost/collie_user/images/search.png" style="width: 30px; margin-right: 50px">
-				<!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color: #003333; border-color: #003333">
-				</button> -->
-			</form>
-			<a href="cart/view.do">
-			<img alt="" src="http://localhost/collie_user/images/cart.png" style="width: 30px">
-			</a>
-		</div>
-	</nav>
-	
-	
-	</div>
-	</div>
+	<jsp:include page="../common/header.jsp" />
 	
 	<div id="container">
 	<div id="containerHeader">
 	<a id="containerHeaderTitle">장바구니</a><br/>
-	<a id="containerHeaderContent">주문하실 상품형 및 수량을 정확히 확인 해주세요</a>
+	<a id="containerHeaderContent">주문하실 상품명 및 수량을 정확히 확인 해주세요</a>
 	</div>
 	
 	<div id="containerContentWrapper">
 	
-	<div id="contentTable">
+	<div id="table">
+	<form action="" method="post">
 	<table class="table">
 	  <thead>
 	    <tr>
-	      <th scope="col"><input type="checkbox"></th>
-	      <th scope="col">전체선택</th>
-	      <th scope="col">상품정보</th>
-	      <th scope="col">수량</th>
-	      <th scope="col" colspan="2">상품금액</th>
+	      <th style="width: 50px;text-align: center; color: #5e5e5e">
+	      <div class="checkbox-container"><input type="checkbox"><label for="is-subscription"></label></div>
+	      </th>
+	      <th style="width: 100px; color: #5e5e5e">전체선택</th>
+	      <th style="text-align: center; color: #5e5e5e">상품정보</th>
+	      <th style="width: 120px; text-align: center; color: #5e5e5e">수량</th>
+	      <th style="width: 120px; text-align: center; color: #5e5e5e">상품금액</th>
+	      <th style="width: 50px;"></th>
 	    </tr>
 	  </thead>
 	  <tbody>
 		<c:forEach var="cart" items="${ cart_list }">
 	    <tr id="tableContent">
-	      <td style="vertical-align: middle;">
-	      <input type="checkbox" name="${ cart.item_num }">
+	      <td style="vertical-align: middle; text-align: center;">
+	      	<input type="checkbox" name="cart_num" value="${ cart.cart_num }" style="chbox">
 	      </td>
-	      <td style="vertical-align: middle;"><c:out value="${ cart.item_img }"/></td>
-	      <td style="vertical-align: middle;">
-	      <c:out value="${ cart.item_name }"/><br/>
-	      <c:out value="${ cart.item_price }"/>원
+	      <td style="vertical-align: middle; text-align: center;">
+	      	<c:out value="${ cart.item_img }"/>
 	      </td>
-	      <td style="vertical-align: middle;"><c:out value="${ cart.item_cnt }"/></td>
-	      <td style="vertical-align: middle;"><c:out value="${ cart.item_price }"/>원</td>
-	      <td style="vertical-align: middle;">X</td>
+	      <td style="vertical-align: middle;">
+	      	<a href="#${ cart.item_num }" style="font-weight: bold;"><c:out value="${ cart.item_name }"/></a>
+	      	<br/>
+	      	<a style="font-size: 10pt"><c:out value="${ cart.item_price }"/>원</a>
+	      </td>
+	      <td style="vertical-align: middle; text-align: center;">
+	      	<div class="quantityWrap">
+	      	<div class="quantity">
+	      	<button type="button" class="icoBtn"><img src="http://localhost/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px"></button>
+	      	<c:out value="${ cart.item_cnt }"/>
+	      	<button type="button" class="icoBtn"><img src="http://localhost/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px"></button>
+	      	</div>
+	      	</div>
+	      </td>
+	      <td style="vertical-align: middle; text-align: center; font-weight: bold">
+	      	<c:out value="${ cart.item_price * cart.item_cnt }"/>원
+	      </td>
+	      <td style="vertical-align: middle; text-align: center;">
+	      	<a href="#del">
+	      	<img src="http://localhost/collie_user/cart/cart_x.png" style="width: 10px">
+	      	</a>
+	      </td>
 	    </tr>
 		</c:forEach>
 	  </tbody>
 	</table>
+	</form>
+	<input type="button" class="collieBtn" value="선택삭제">
 	</div>
-
+	
+	<div class="priceWrapper">
+	
+	<div class="priceDiv">
+	<div class="priceDivLabel">상품금액</div>
+	<div class="priceDivPrice">
+	<c:out value="${ item_price }"/>17000원
 	</div>
+	</div>
+	+
+	<div class="priceDiv">
+	<div class="priceDivLabel">배송비</div>
+	<div class="priceDivPrice">
+	2500원
+	</div>
+	</div>
+	=
+	<div class="priceDiv">
+	<div class="priceDivLabel">결제예정금액</div>
+	<div class="priceDivPrice">
+	<c:out value="${ item_price }"/>17000원
+	</div>
+	</div>
+	</div>
+	
+	<input type="button" value="주문하기" class="collieBtnMain">
 	
 	</div>
 	
-	<div id="footer">
-	<div id="footerContent">
-	<img alt="" src="http://localhost/collie_user/images/footer.jpg"  style="width: 100%">
 	</div>
-	</div>
+	
+	<jsp:include page="../common/footer.jsp" />
+	
 </div>
 
 </body>
