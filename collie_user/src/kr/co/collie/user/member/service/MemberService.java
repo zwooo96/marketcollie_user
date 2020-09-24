@@ -3,9 +3,8 @@ package kr.co.collie.user.member.service;
 import java.io.IOException;
 
 import kr.co.collie.user.member.dao.MemberDAO;
-import kr.co.collie.user.member.vo.JoinVO;
-import kr.co.collie.user.member.dao.MemberDAO;
 import kr.co.collie.user.member.domain.LoginDomain;
+import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
 public class MemberService {
 	
