@@ -39,14 +39,15 @@ public class MemberController {
 	public String joinForm() {
 		
 		
-		return "";
+		return "member/join_frm";
 	}//
 	
 	@RequestMapping(value="/join_process.do", method= GET)
 	public String join(JoinVO jVO, HttpServletRequest request) {
+		MemberService ms = new MemberService();
 		
 		
-		return "";
+		return "member/join";
 	}//join
 	
 
