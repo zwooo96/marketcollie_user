@@ -40,7 +40,7 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<c:forEach var="cate" items="${cate_list}">
-						<a class="dropdown-item" href="/item/search.do?cate_num=${cate.cate_num}">
+						<a class="dropdown-item" href="item/search.do?cate_num=${cate.cate_num}">
 							<label><c:out value="${cate.cate_name}"/></label>
 						</a>
 					</c:forEach>
