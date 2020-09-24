@@ -9,8 +9,6 @@ import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.dao.MemberDAO;
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.vo.LoginVO;
->>>>>>> branch 'master' of https://github.com/rectangle714/marketcollie_user.git
-
 public class MemberService {
 	
 	public LoginDomain login(LoginVO loginVO) {

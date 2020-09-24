@@ -1,23 +1,9 @@
 package kr.co.collie.user.member.dao;
 
-<<<<<<< HEAD
 import java.io.IOException;
-=======
 import org.apache.ibatis.session.SqlSession;
->>>>>>> branch 'master' of https://github.com/rectangle714/marketcollie_user.git
-
-<<<<<<< HEAD
-import org.apache.ibatis.session.SqlSession;
-
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.member.vo.JoinVO;
-
-public class MemberDAO {
-	
-	
-	
-}//class
-=======
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.vo.LoginVO;
@@ -47,4 +33,3 @@ public class MemberDAO {
 		return logindomain;
 	}
 }
->>>>>>> branch 'master' of https://github.com/rectangle714/marketcollie_user.git
