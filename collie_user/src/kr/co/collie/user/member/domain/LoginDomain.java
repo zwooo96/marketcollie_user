@@ -3,6 +3,7 @@ package kr.co.collie.user.member.domain;
 public class LoginDomain {
 	
 	private int memberNum;
+	private String id, name, email, phone, addr, addrDetail, zipCode;
 	
 	public int getMemberNum() {
 		return memberNum;
@@ -52,6 +53,5 @@ public class LoginDomain {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	private String id, name, email, phone, addr, addrDetail, zipCode;
 
 }
