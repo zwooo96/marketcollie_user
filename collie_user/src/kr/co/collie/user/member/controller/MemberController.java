@@ -31,7 +31,7 @@ public class MemberController {
 		LoginDomain loginDomain=mems.login(loginVO);
 		model.addAttribute("login_info",loginDomain);
 		
-		return "main.do";
+		return "";
 		 
 	}//login
 	
@@ -44,7 +44,6 @@ public class MemberController {
 	
 	@RequestMapping(value="/join_process.do", method= GET)
 	public String join(JoinVO jVO, HttpServletRequest request) {
-		MemberService ms = new MemberService();
 		
 		
 		return "member/join";
