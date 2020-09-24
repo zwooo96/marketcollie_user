@@ -31,9 +31,7 @@ public class MemberController {
 		LoginDomain loginDomain=mems.login(loginVO);
 		model.addAttribute("login_info",loginDomain);
 		
-		return "";
 		return "login_result";
->>>>>>> branch 'master' of https://github.com/rectangle714/marketcollie_user.git
 		 
 	}//login
 	
