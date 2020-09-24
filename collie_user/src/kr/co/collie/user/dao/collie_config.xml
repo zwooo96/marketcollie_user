@@ -19,5 +19,6 @@
   <!-- 실행할 쿼리문을 가진 XML 설정 -->
   <mappers>
     <mapper resource="kr/co/collie/user/mapper/CartMapper.xml"/>
+    <mapper resource="kr/co/collie/user/mapper/MainMapper.xml"/>
   </mappers>
 </configuration>
