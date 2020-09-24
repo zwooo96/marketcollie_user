@@ -32,7 +32,7 @@ public class MemberController {
 		model.addAttribute("login_info",loginDomain);
 		
 		return "main.do";
-		
+		 
 	}//login
 	
 	@RequestMapping(value="/join_form.do", method =GET)
