@@ -37,7 +37,7 @@ $(function(){
 	<div id="container">
 	
 	<div id =loginDiv>
-	<form action="login_process.do">
+	<form action="login_process.do" method="post">
 	<label>아이디</label><input type="text" name="id" class="inputBox"><br/>
 	<label>비밀번호</label><input type="password" name="pass" class="inputBox">
 	<input type="submit" value="로그인">
