@@ -1,9 +1,12 @@
 package kr.co.collie.user.member.dao;
 
+import java.io.IOException;
+
 import org.apache.ibatis.session.SqlSession;
 
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.member.domain.LoginDomain;
+import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
 
 public class MemberDAO {
@@ -29,5 +32,18 @@ public class MemberDAO {
 		logindomain = ss.selectOne("selectLogin",loginVO);
 		ss.close();
 		return logindomain;
-	}
-}
+	}//loginDomain
+	
+	public void insertMember(JoinVO jVO) throws IOException{
+			
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+			
+		ss.insert("insertMember", jVO);
+			
+		ss.commit();
+			
+		ss.close();
+			
+	}//insertMember
+	
+}//class

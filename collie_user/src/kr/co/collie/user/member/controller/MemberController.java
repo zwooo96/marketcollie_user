@@ -1,16 +1,18 @@
 package kr.co.collie.user.member.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.service.MemberService;
+import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import org.springframework.stereotype.Controller;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 public class MemberController {
@@ -30,6 +32,22 @@ public class MemberController {
 		model.addAttribute("login_info",loginDomain);
 		
 		return "main.do";
+		 
 	}//login
+	
+	@RequestMapping(value="/join_form.do", method =GET)
+	public String joinForm() {
+		
+		
+		return "";
+	}//
+	
+	@RequestMapping(value="/join_process.do", method= GET)
+	public String join(JoinVO jVO, HttpServletRequest request) {
+		
+		
+		return "";
+	}//join
+	
 
-}
+}//class
