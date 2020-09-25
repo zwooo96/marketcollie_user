@@ -48,4 +48,24 @@ public class CartDAO {
 		return list;
 	}//selectCartGoods
 	
+	public int updateItemCntPlus(int cartNum) {
+		int cnt=0;
+		
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		cnt=ss.update("updatePlusCnt", cartNum);
+		ss.commit();
+		ss.close();
+		return cnt;
+	}//updateItemCntPlus
+	
+	public int updateItemCntMinus(int cartNum) {
+		int cnt=0;
+		
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		cnt=ss.update("updateMinusCnt", cartNum);
+		ss.commit();
+		ss.close();
+		return cnt;
+	}//updateItemCnt
+	
 }//class
