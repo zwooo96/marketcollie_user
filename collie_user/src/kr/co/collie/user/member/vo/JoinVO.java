@@ -1,7 +1,7 @@
 package kr.co.collie.user.member.vo;
 
 public class JoinVO {
-	String id, pass, name, email, phone, addr, addrDetail, zipCode,ip;
+	String id, pass, name, email, phone, zipcode, addr, addr_detail, ip;
 
 	public String getId() {
 		return id;
@@ -43,6 +43,14 @@ public class JoinVO {
 		this.phone = phone;
 	}
 
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
 	public String getAddr() {
 		return addr;
 	}
@@ -51,20 +59,12 @@ public class JoinVO {
 		this.addr = addr;
 	}
 
-	public String getAddrDetail() {
-		return addrDetail;
+	public String getAddr_detail() {
+		return addr_detail;
 	}
 
-	public void setAddrDetail(String addrDetail) {
-		this.addrDetail = addrDetail;
-	}
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setAddr_detail(String addr_detail) {
+		this.addr_detail = addr_detail;
 	}
 
 	public String getIp() {
@@ -74,6 +74,5 @@ public class JoinVO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
 	
 }

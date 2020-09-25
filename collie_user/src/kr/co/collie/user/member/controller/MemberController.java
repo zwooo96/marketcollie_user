@@ -35,16 +35,28 @@ public class MemberController {
 		 
 	}//login
 	
-	@RequestMapping(value="/join_form.do", method =GET)
+	@RequestMapping(value="/join_form.do", method = {GET,POST})
 	public String joinForm() {
 		
 		
 		return "member/join_frm";
 	}//
 	
-	@RequestMapping(value="/join_process.do", method= GET)
+	@RequestMapping(value="/join_process.do", method= {GET,POST})
 	public String join(JoinVO jVO, HttpServletRequest request) {
+		MemberService ms = new MemberService();
 		
+		jVO.setId(request.getParameter("id"));
+		jVO.setPass(request.getParameter("pass"));
+		jVO.setName(request.getParameter("name"));
+		jVO.setEmail(request.getParameter("email"));
+		jVO.setPhone(request.getParameter("phone"));
+		jVO.setZipcode(request.getParameter("zipcode"));
+		jVO.setAddr(request.getParameter("addr"));
+		jVO.setAddr_detail(request.getParameter("addr_detail"));
+		jVO.setIp(request.getRemoteAddr());
+		
+		ms.join(jVO);
 		
 		return "member/join";
 	}//join
