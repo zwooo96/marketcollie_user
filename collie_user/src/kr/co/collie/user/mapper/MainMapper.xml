@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.collie.user.main">
-
   <select id="selectCateList" resultType="kr.co.collie.user.main.domain.CategoryDomain">
   	select CATE_NUM, CATE_NAME	
   	from category
