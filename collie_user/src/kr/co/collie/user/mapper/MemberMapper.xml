@@ -8,16 +8,26 @@
     from member
     where id =#{id} and pass=#{pass}
   </select>
+  
   <insert id ="insertMember" parameterType="kr.co.collie.user.member.vo.JoinVO">
 	insert into member(MEMBER_NUM, ID, PASS, NAME, EMAIL, PHONE, ZIPCODE, ADDR, ADDR_DETAIL, IP)
 	values(seq_mem_num.nextval, #{ id }, #{ pass }, #{ name }, #{ email },#{ phone }, #{ zipcode }, #{ addr }, #{ addr_detail }, #{ ip } )
   </insert>
+  
+  <select id="chkId" parameterType="String" resultType="int">
+	select count(*) from member where id = #{ id }  
+  </select>
+  
+  <select id="chkEmail" parameterType="String" resultType="int">
+	select count(*) from member where email = #{ email }  
+  </select>
+  
   <select id="selectMemberId" resultType="String" parameterType="kr.co.collie.user.member.vo.FindIdVO">
   	select id
   	from member
   	where name = # { name} and email = #{ email }
   </select>
-
+  
   <select id="selectMemberPass" resultType="String" parameterType="kr.co.collie.user.member.vo.FindPassVO">
   	select pass
   	from member
