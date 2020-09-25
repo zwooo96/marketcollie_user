@@ -38,6 +38,7 @@ public class MainDAO {
 		List<CategoryDomain> cateList = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
 		cateList = ss.selectList("selectCateList");
+		ss.close();
 		return cateList;
 	}
 	

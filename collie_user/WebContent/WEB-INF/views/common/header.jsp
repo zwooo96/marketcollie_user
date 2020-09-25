@@ -12,19 +12,19 @@
 
 	<ul class="nav justify-content-end">
 	  <li class="nav-item">
-	    <a class="nav-link active" href="login_form.do" style="color: #000000">로그인</a>
+	    <a class="nav-link active" href="/collie_user/login_form.do" style="color: #000000">로그인</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" href="join_form.do" style="color: #000000">회원가입</a>
+	    <a class="nav-link" href="/collie_user/join_form.do" style="color: #000000">회원가입</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" href="qna/form.do" style="color: #000000">고객센터</a>
+	    <a class="nav-link" href="/collie_user/qna/form.do" style="color: #000000">고객센터</a>
 	  </li>
 	</ul>
 	
 	<div id="logoWrap">
 	<div id="logo">
-		<a href="index.do"><img alt="" src="common/images/logo_green.png" style="width: 200px"/></a>
+		<a href="index.do"><img alt="" src="/collie_user/common/images/logo_green.png" style="width: 200px"/></a>
 	</div>
 	</div>
 	
@@ -40,19 +40,19 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<c:forEach var="cate" items="${cate_list}">
-						<a class="dropdown-item" href="item/search.do?cate_num=${cate.cate_num}">
+						<a class="dropdown-item" href="/collie_user/item/search.do?cate_num=${cate.cate_num}">
 							<label><c:out value="${cate.cate_name}"/></label>
 						</a>
 					</c:forEach>
 				</div>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0" id="searchFrm" action="item/search.do">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
-				<a href="javascript:clickSearchBtn()" id="searchBtn"><img src="common/images/search.png" style="width: 30px; margin-right: 50px"></a>
+			<form class="form-inline my-2 my-lg-0" id="searchFrm" action="/collie_user/item/search.do">
+				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword">
+				<a href="javascript:clickSearchBtn()" id="searchBtn"><img src="/collie_user/common/images/search.png" style="width: 30px; margin-right: 50px"></a>
 			</form>
-			<a href="cart/view.do">
-			<img src="common/images/cart.png" style="width: 30px">
+			<a href="/collie_user/cart/view.do">
+			<img src="/collie_user/common/images/cart.png" style="width: 30px">
 			</a>
 		</div>
 	</nav>
