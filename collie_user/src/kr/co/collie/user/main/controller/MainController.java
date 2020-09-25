@@ -8,11 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.collie.user.main.domain.CategoryDomain;
 import kr.co.collie.user.main.service.MainService;
 import kr.co.collie.user.member.domain.LoginDomain;
 
+@SessionAttributes("cate_list")
 @Controller
 public class MainController {
 	

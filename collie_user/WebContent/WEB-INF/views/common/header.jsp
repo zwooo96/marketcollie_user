@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 	function clickSearchBtn() {
-		$("#searchFrm").submit();
+		if($("#keyword").val().trim().length > 0) {
+			$("#searchFrm").submit();
+		}
 	}
 </script>
 <div id="header">
@@ -24,7 +26,7 @@
 	
 	<div id="logoWrap">
 	<div id="logo">
-		<a href="index.do"><img alt="" src="/collie_user/common/images/logo_green.png" style="width: 200px"/></a>
+		<a href="/collie_user/index.do"><img alt="" src="/collie_user/common/images/logo_green.png" style="width: 200px"/></a>
 	</div>
 	</div>
 	
@@ -48,7 +50,9 @@
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0" id="searchFrm" action="/collie_user/item/search.do">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword">
+				<span class="d-inline-block" tabindex="0" data-place="bottom" data-toggle="tooltip" title="검색어를 입력하세요." id="search_tooltip">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" />
+				</span>
 				<a href="javascript:clickSearchBtn()" id="searchBtn"><img src="/collie_user/common/images/search.png" style="width: 30px; margin-right: 50px"></a>
 			</form>
 			<a href="/collie_user/cart/view.do">
