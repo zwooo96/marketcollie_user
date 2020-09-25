@@ -12,7 +12,8 @@
 #containerTitleWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
 #containerTitle {width: 70%;}
 #containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
-#containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
+#containerContent{ width: 70%; display: flex; justify-content: space-between; }
+
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -44,15 +45,19 @@ $(function(){
 		</div>
 		<div id="containerContentWrap">
 			<div id="containerContent">
-				<c:forEach items="${search_result}" var="i">
-					<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
-						<img src="/collie_user/common/images/${i.item_img}" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h6 class="card-title">${i.item_name}</h6>
-							<p class="card-text">${i.item_price}원</p>
+				<div class="row row-cols-1 row-cols-md-3">
+					<c:forEach items="${search_result}" var="i">
+						<div class="col mb-4">
+							<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
+								<img src="/collie_user/common/images/item/${i.item_img}" class="card-img-top">
+								<div class="card-body">
+									<h6 class="card-title">${i.item_name}</h6>
+									<p class="card-text">${i.item_price}원</p>
+								</div>
+							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>
