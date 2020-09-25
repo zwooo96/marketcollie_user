@@ -20,6 +20,7 @@
   <mappers>
     <mapper resource="kr/co/collie/user/mapper/CartMapper.xml"/>
     <mapper resource="kr/co/collie/user/mapper/MainMapper.xml"/>
+    <mapper resource="kr/co/collie/user/mapper/MemberMapper.xml"/>
     <mapper resource="kr/co/collie/user/mapper/ItemMapper.xml"/>
   </mappers>
 </configuration>

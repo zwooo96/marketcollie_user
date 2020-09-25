@@ -17,10 +17,10 @@ import kr.co.collie.user.member.vo.LoginVO;
 @Controller
 public class MemberController {
 	
-	@RequestMapping(value = "/login_frm.do",method = GET)
+	@RequestMapping(value = "/login_form.do",method = GET)
 	public String login() {
 		
-		return "member/login_frm";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
+		return "member/login_form";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
 		
 	}
 	
@@ -31,7 +31,7 @@ public class MemberController {
 		LoginDomain loginDomain=mems.login(loginVO);
 		model.addAttribute("login_info",loginDomain);
 		
-		return "main.do";
+		return "login_result";
 		 
 	}//login
 	

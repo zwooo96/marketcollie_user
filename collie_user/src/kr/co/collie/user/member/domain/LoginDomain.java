@@ -2,14 +2,13 @@ package kr.co.collie.user.member.domain;
 
 public class LoginDomain {
 	
-	private int memberNum;
-	private String id, name, email, phone, addr, addrDetail, zipCode;
-	
-	public int getMemberNum() {
-		return memberNum;
+	private int member_num;
+	private String id, name, email, phone, addr, addr_detail, zip_code;
+	public int getMember_num() {
+		return member_num;
 	}
-	public void setMemberNum(int memberNum) {
-		this.memberNum = memberNum;
+	public void setMember_num(int member_num) {
+		this.member_num = member_num;
 	}
 	public String getId() {
 		return id;
@@ -41,17 +40,18 @@ public class LoginDomain {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public String getAddrDetail() {
-		return addrDetail;
+	public String getAddr_detail() {
+		return addr_detail;
 	}
-	public void setAddrDetail(String addrDetail) {
-		this.addrDetail = addrDetail;
+	public void setAddr_detail(String addr_detail) {
+		this.addr_detail = addr_detail;
 	}
-	public String getZipCode() {
-		return zipCode;
+	public String getZip_code() {
+		return zip_code;
 	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setZip_code(String zip_code) {
+		this.zip_code = zip_code;
 	}
-
+	
+	
 }
