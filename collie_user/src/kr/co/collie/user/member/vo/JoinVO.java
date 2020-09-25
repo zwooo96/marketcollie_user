@@ -2,6 +2,7 @@ package kr.co.collie.user.member.vo;
 
 public class JoinVO {
 	String id, pass, name, email, phone, zipcode, addr, addr_detail, ip;
+	
 
 	public String getId() {
 		return id;
