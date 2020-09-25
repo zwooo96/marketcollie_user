@@ -13,4 +13,15 @@
 	insert into member(MEMBER_NUM, ID, PASS, NAME, EMAIL, PHONE, ZIPCODE, ADDR, ADDR_DETAIL, IP)
 	values(seq_mem_num.nextval, #{ id }, #{ pass }, #{ name }, #{ email },#{ phone }, #{ zipcode }, #{ addr }, #{ addr_detail }, #{ ip } )
   </insert>
+  <select id="selectMemberId" resultType="String" parameterType="kr.co.collie.user.member.vo.FindIdVO">
+  	select id
+  	from member
+  	where name = # { name} and email = #{ email }
+  </select>
+
+  <select id="selectMemberPass" resultType="String" parameterType="kr.co.collie.user.member.vo.FindPassVO">
+  	select pass
+  	from member
+  	where id= #{ id } and name = # { name} and email = #{ email }
+  </select>
 </mapper>

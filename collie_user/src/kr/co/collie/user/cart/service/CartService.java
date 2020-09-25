@@ -2,6 +2,8 @@ package kr.co.collie.user.cart.service;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import kr.co.collie.user.cart.dao.CartDAO;
 import kr.co.collie.user.cart.domain.CartGoodsDomain;
 import kr.co.collie.user.cart.vo.CartVO;
@@ -30,5 +32,31 @@ public class CartService {
 		
 		return list;
 	}//getMyCart
+	
+	public String plusItemCnt(int cartNum) {
+		JSONObject json=new JSONObject();
+		json.put("flag","fail");
+		
+		CartDAO cDAO=CartDAO.getInstance();
+		int cnt=cDAO.updateItemCntPlus(cartNum);
+		if(cnt==1) {
+			json.put("flag","success");
+		}
+		
+		return json.toJSONString();
+	}//plusItemCnt
+	
+	public String minusItemCnt(int cartNum) {
+		JSONObject json=new JSONObject();
+		json.put("flag","fail");
+		
+		CartDAO cDAO=CartDAO.getInstance();
+		int cnt=cDAO.updateItemCntMinus(cartNum);
+		if(cnt==1) {
+			json.put("flag","success");
+		}
+		
+		return json.toJSONString();
+	}//minusItemCnt
 	
 }//class

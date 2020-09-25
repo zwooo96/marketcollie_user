@@ -32,59 +32,30 @@ a, a:hover{ color: #000000; text-decoration: none }
 
 
 /* 체크박스 */
-.checkbox-container {
-position: relative;
-}
-
-.checkbox-container input[type="checkbox"] {
-position: absolute;
-width: 1px;
-height: 1px;
-padding: 0;
-margin: -1px;
-overflow: hidden;
-clip:rect(0,0,0,0);
-border: 0
-}
-
-.checkbox-container input[type="checkbox"] + label {
-display: inline-block;
-position: relative;
-cusor: pointer;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-}
-
-.checkbox-container input[type="checkbox"] + label:before {
-content: ' ';
-display: inline-block;
-width: 18px;
-height: 18px;
-line-height: 18px;
-margin: -2px 8px 0 0;
-text-align: center;
-vertical-align: middle;
-background: #fafafa;
-border: 1px solid #cacece;
-border-radius: 3px;
-box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-}
-
-.checkbox-container input[type="checkbox"] + label:active:before,
-.checkbox-container input[type="checkbox"]:checked + label:active:before {
-        box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
-}
-
-.checkbox-container input[type="checkbox"]:checked + label:before {
-content: '\2713';
-color: #314ca2;
-text-shadow: 1px 1px white;
+.checks input[type="checkbox"] { /* 실제 체크박스는 화면에서 숨김 */ 
+display: none; } 
+.checks input[type="checkbox"] + label { 
+display: inline-block; 
+position: relative; 
+cursor: pointer; } 
+.checks input[type="checkbox"] + label:before { /* 가짜 체크박스 */ 
+content: ' '; 
+display: inline-block; 
+width: 20px; /* 체크박스의 너비를 지정 */ 
+height: 20px; /* 체크박스의 높이를 지정 */ 
+line-height: 20px; /* 세로정렬을 위해 높이값과 일치 */ 
+margin: 5px 0px 0 0; 
+text-align: center; 
+vertical-align: middle; 
+background: #ffffff; 
+border: 1px solid #17462B; 
+border-radius : 1px; } 
+.checks input[type="checkbox"]:checked + label:before { /* 체크박스를 체크했을때 */ 
+content: '\2714'; /* 체크표시 유니코드 사용 */ 
+color: #ffffff; 
 background: #17462B;
-border-color: #adb8c0;
-box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-}
+border-color: #17462B; }
+
 
 
 .quantityWrap{ display: flex; justify-content: center; }
@@ -96,7 +67,7 @@ box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,
 .collieBtn{ border: 1px solid #17462B; padding: 10px; margin-top: 5px; margin-bottom: 5px; color: #17462B; font-size: 15px; background-color: #fff }
 .collieBtnMain{ border: 1px solid #17462B; padding: 10px 40px 10px 40px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
 
-.priceWrapper{ width: 700px; margin: 20px 0px 50px 0px; display: flex; justify-content: space-between; align-items: center; }
+.priceWrapper{ width: 700px; margin: 80px 0px 50px 0px; display: flex; justify-content: space-between; align-items: center; }
 .priceDiv{ width: 150px; height:150px;border: 1px solid #17462B; text-align: center; display: flex; justify-content: center; align-items: center; flex-direction: column; }
 .priceDivLabel{ color: #404040 }
 .priceDivPrice{ margin-top: 10px; font-size: 17pt; font-weight: bold  }
@@ -112,6 +83,43 @@ box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,
 $(function(){
 	
 });//ready
+
+function plusCnt(cart_num){
+	
+ 	$.ajax({
+		url:"../plus_cnt.do",
+		type:"POST",
+		data:"param_cart_num="+cart_num,
+		dataType:"JSON",
+		error:function(xhr){
+			alert("에러");
+			console.log(xhr.status+" / "+xhr.statusText);
+		},
+		success:function(jsonObj){
+			alert(jsonObj.flag);
+		}//success
+	});//ajax
+	
+}//plusCnt
+
+function minusCnt(cart_num){
+	
+ 	$.ajax({
+		url:"../minus_cnt.do",
+		type:"POST",
+		data:"param_cart_num="+cart_num,
+		dataType:"JSON",
+		error:function(xhr){
+			alert("에러");
+			console.log(xhr.status+" / "+xhr.statusText);
+		},
+		success:function(jsonObj){
+			alert(jsonObj.flag);
+		}//success
+	});//ajax
+	
+}//minusCnt
+
 </script>
 </head>
 <body style="font-family: NanumBarunGothic;">
@@ -133,13 +141,16 @@ $(function(){
 	<table class="table">
 	  <thead>
 	    <tr>
-	      <th style="width: 50px;text-align: center; color: #5e5e5e">
-	      <div class="checkbox-container"><input type="checkbox"><label for="is-subscription"></label></div>
+	      <th style="width: 50px; text-align: center; vertical-align: middle; color: #5e5e5e">
+	      <div class="checks">
+	      <input type="checkbox" id="selectAll">
+	      <label for="selectAll"><span></span></label>
+	      </div>
 	      </th>
-	      <th style="width: 100px; color: #5e5e5e">전체선택</th>
-	      <th style="text-align: center; color: #5e5e5e">상품정보</th>
-	      <th style="width: 120px; text-align: center; color: #5e5e5e">수량</th>
-	      <th style="width: 120px; text-align: center; color: #5e5e5e">상품금액</th>
+	      <th style="width: 100px; vertical-align: middle; color: #5e5e5e">전체선택</th>
+	      <th style="text-align: center; vertical-align: middle; color: #5e5e5e">상품정보</th>
+	      <th style="width: 120px; text-align: center; vertical-align: middle; color: #5e5e5e">수량</th>
+	      <th style="width: 120px; text-align: center; vertical-align: middle; color: #5e5e5e">상품금액</th>
 	      <th style="width: 50px;"></th>
 	    </tr>
 	  </thead>
@@ -147,7 +158,10 @@ $(function(){
 		<c:forEach var="cart" items="${ cart_list }">
 	    <tr id="tableContent">
 	      <td style="vertical-align: middle; text-align: center;">
-	      	<input type="checkbox" name="cart_num" value="${ cart.cart_num }" style="chbox">
+	      <div class="checks">
+	      	<input type="checkbox" name="cart_num" value="${ cart.cart_num }" id="select${ cart.cart_num }">
+		    <label for="select${ cart.cart_num }"><span></span></label>
+	      </div>
 	      </td>
 	      <td style="vertical-align: middle; text-align: center;">
 	      	<c:out value="${ cart.item_img }"/>
@@ -160,9 +174,13 @@ $(function(){
 	      <td style="vertical-align: middle; text-align: center;">
 	      	<div class="quantityWrap">
 	      	<div class="quantity">
-	      	<button type="button" class="icoBtn"><img src="http://localhost/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px"></button>
+	      	<button type="button" class="icoBtn" onclick="minusCnt(${cart.cart_num})">
+	      	<img src="http://localhost/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px">
+	      	</button>
 	      	<c:out value="${ cart.item_cnt }"/>
-	      	<button type="button" class="icoBtn"><img src="http://localhost/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px"></button>
+	      	<button type="button" class="icoBtn" onclick="plusCnt(${cart.cart_num})">
+	      	<img src="http://localhost/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px">
+	      	</button>
 	      	</div>
 	      	</div>
 	      </td>
@@ -209,6 +227,8 @@ $(function(){
 	<input type="button" value="주문하기" class="collieBtnMain">
 	
 	</div>
+	
+	<div style="height: 200px"></div>
 	
 	</div>
 	

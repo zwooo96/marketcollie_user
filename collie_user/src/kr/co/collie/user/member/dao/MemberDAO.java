@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.member.domain.LoginDomain;
+import kr.co.collie.user.member.vo.FindIdVO;
 import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
 
@@ -45,5 +46,22 @@ public class MemberDAO {
 		ss.close();
 			
 	}//insertMember
+	
+	public String selectMemberId(FindIdVO fidVO) {
+		String id = "";
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		id = ss.selectOne("kr.co.collie.user.mapper.selectMemberId",fidVO);
+		fidVO.setEmail("gildong@gmail.com");
+		fidVO.setName("�۱浿");
+		ss.close();
+		return id;
+	}
+	
+		public static void main(String[] args) {
+			FindIdVO fidVO = new FindIdVO();
+			
+			System.out.println(memDAO.getInstance().selectMemberId(fidVO));
+			
+		}
 	
 }//class
