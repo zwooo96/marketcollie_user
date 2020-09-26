@@ -2,11 +2,13 @@ package kr.co.collie.user.cart.service;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import kr.co.collie.user.cart.dao.CartDAO;
 import kr.co.collie.user.cart.domain.CartGoodsDomain;
 import kr.co.collie.user.cart.vo.CartVO;
+import kr.co.collie.user.cart.vo.ItemCntVO;
 
 public class CartService {
 	
@@ -33,30 +35,31 @@ public class CartService {
 		return list;
 	}//getMyCart
 	
-	public String plusItemCnt(int cartNum) {
+	public String modifyItemCnt(ItemCntVO icVO) {
 		JSONObject json=new JSONObject();
-		json.put("flag","fail");
+		json.put("flag", "fail");
 		
 		CartDAO cDAO=CartDAO.getInstance();
-		int cnt=cDAO.updateItemCntPlus(cartNum);
+		int cnt=cDAO.updateItemCntPlus(icVO);
 		if(cnt==1) {
-			json.put("flag","success");
+			json.put("flag", "success");
 		}
+		//json.put("item_cnt",cDAO.selectItemCnt(icVO.getCartNum()));
 		
 		return json.toJSONString();
-	}//plusItemCnt
+	}//modifyItemCnt
 	
-	public String minusItemCnt(int cartNum) {
+	public String removeSelectedItem(int[] cartNumArr, int memberNum) {
 		JSONObject json=new JSONObject();
 		json.put("flag","fail");
 		
 		CartDAO cDAO=CartDAO.getInstance();
-		int cnt=cDAO.updateItemCntMinus(cartNum);
-		if(cnt==1) {
-			json.put("flag","success");
-		}
+		int cnt=cDAO.deleteSelectedItem(cartNumArr);
+		if(cnt==cartNumArr.length) {
+			json.put("flag", "success");
+		}//end if
 		
 		return json.toJSONString();
-	}//minusItemCnt
+	}//removeSelectedItem
 	
 }//class

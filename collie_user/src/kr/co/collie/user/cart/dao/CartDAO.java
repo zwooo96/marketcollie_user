@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.co.collie.user.cart.domain.CartGoodsDomain;
 import kr.co.collie.user.cart.vo.CartVO;
+import kr.co.collie.user.cart.vo.ItemCntVO;
 import kr.co.collie.user.dao.GetCollieHandler;
 
 public class CartDAO {
@@ -48,24 +49,29 @@ public class CartDAO {
 		return list;
 	}//selectCartGoods
 	
-	public int updateItemCntPlus(int cartNum) {
+	public int updateItemCntPlus(ItemCntVO icVO) {
 		int cnt=0;
 		
 		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
-		cnt=ss.update("updatePlusCnt", cartNum);
-		ss.commit();
+		cnt=ss.update("updateItemCnt", icVO);
+		if(cnt==1) {
+			ss.commit();
+		}//end if
 		ss.close();
 		return cnt;
 	}//updateItemCntPlus
 	
-	public int updateItemCntMinus(int cartNum) {
+	public int deleteSelectedItem(int[] cartNumArr) {
 		int cnt=0;
 		
 		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
-		cnt=ss.update("updateMinusCnt", cartNum);
-		ss.commit();
+		cnt=ss.delete("deleteSelectedItem",cartNumArr);
+		if(cnt==cartNumArr.length) {
+			ss.commit();
+		}//end if
 		ss.close();
+		
 		return cnt;
-	}//updateItemCnt
+	}//deleteSelectedItem
 	
 }//class

@@ -16,16 +16,26 @@
 	values(#{ cart_num }, #{ item_num }, #{ member_num }, #{ item_cnt })
 </insert>
 
-<update id="updatePlusCnt" parameterType="int">
+<!-- 장바구니 조회 시 수량을 변경하는 일 -->
+<update id="updateItemCnt" parameterType="kr.co.collie.user.cart.vo.ItemCntVO">
 	update cart
-	set item_cnt=(select item_cnt from cart where cart_num=#{cart_num})+1
-	where cart_num=#{cart_num}
+	set item_cnt=
+	<if test="flag eq 'minus'">
+	(select item_cnt-1 from cart where cart_num=#{cartNum})
+	</if>
+	<if test="flag eq 'plus'">
+	(select item_cnt+1 from cart where cart_num=#{cartNum})
+	</if>
+	where cart_num=#{cartNum}
 </update>
 
-<update id="updateMinusCnt" parameterType="int">
-	update cart
-	set item_cnt=(select item_cnt from cart where cart_num=#{cart_num})-1
-	where cart_num=#{cart_num}
-</update>
+
+<delete id="deleteSelectedItem">
+	delete from cart
+	where cart_num in
+	<foreach item="cartNum" collection="array" open="(" separator="," close=")">
+	#{cartNum}
+	</foreach>
+</delete>
 
 </mapper>
