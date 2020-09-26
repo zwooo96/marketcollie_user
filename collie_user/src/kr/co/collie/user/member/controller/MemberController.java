@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.service.MemberService;
+import kr.co.collie.user.member.vo.FindIdVO;
 import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
 
@@ -20,7 +22,7 @@ import kr.co.collie.user.member.vo.LoginVO;
 public class MemberController {
 	
 	@RequestMapping(value = "/login_form.do",method = GET)
-	public String login() {
+	public String loginForm() {
 		
 		return "member/login_form";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
 		
@@ -81,6 +83,20 @@ public class MemberController {
 		return json;
 	}//test
 	
+	@RequestMapping(value = "/find/idForm.do",method = GET)
+	public String findIdForm() {
+		
+		
+		return "find/idForm";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
+		
+	}
+	
+	@PostMapping(value = "/find_process.do")
+	public String findId(FindIdVO fidVO,Model model) {
+		MemberService ms = new MemberService();
+		model.addAttribute("user_id",ms.findId(fidVO));
+		return "find/id";
+	}
 	
 
 }//class

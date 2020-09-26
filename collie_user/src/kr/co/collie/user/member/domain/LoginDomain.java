@@ -3,7 +3,7 @@ package kr.co.collie.user.member.domain;
 public class LoginDomain {
 	
 	private int member_num;
-	private String id, name, email, phone, addr, addr_detail, zip_code;
+	private String id, name, email, phone, addr, addr_detail, zipcode;
 	public int getMember_num() {
 		return member_num;
 	}
@@ -46,11 +46,11 @@ public class LoginDomain {
 	public void setAddr_detail(String addr_detail) {
 		this.addr_detail = addr_detail;
 	}
-	public String getZip_code() {
-		return zip_code;
+	public String getZipcode() {
+		return zipcode;
 	}
-	public void setZip_code(String zip_code) {
-		this.zip_code = zip_code;
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 	
 	
