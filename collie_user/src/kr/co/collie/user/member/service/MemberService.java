@@ -2,6 +2,9 @@ package kr.co.collie.user.member.service;
 
 import java.io.IOException;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import kr.co.collie.user.member.dao.MemberDAO;
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.vo.JoinVO;
@@ -30,5 +33,7 @@ public class MemberService {
 		
 		return flag;
 	}//join
+	
+	
 	
 }//class

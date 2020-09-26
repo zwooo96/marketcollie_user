@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.service.MemberService;
@@ -35,14 +37,21 @@ public class MemberController {
 		 
 	}//login
 	
-	@RequestMapping(value="/join_form.do", method = {GET,POST})
-	public String joinForm() {
-		
-		
-		return "member/join_frm";
-	}//
+//	@RequestMapping(value="/join_form.do", method = GET)
+//	public String joinForm() {
+//		
+//		
+//		return "member/join_frm";
+//	}//joinForm
 	
-	@RequestMapping(value="/join_process.do", method= {GET,POST})
+	@RequestMapping(value="/join_form.do", method = GET)
+	public String joinClause() {
+		
+		
+		return "member/join_clause";
+	}//joinForm
+	
+	@RequestMapping(value="/join_process.do", method= POST)
 	public String join(JoinVO jVO, HttpServletRequest request) {
 		MemberService ms = new MemberService();
 		
@@ -60,6 +69,18 @@ public class MemberController {
 		
 		return "member/join";
 	}//join
+	
+	@RequestMapping(value="/join_form_ajax.do", method=RequestMethod.GET)
+	@ResponseBody
+	public String formAjax() {
+		
+		MemberService ms = new MemberService();
+		String json = ms.createJson();
+		
+		
+		return json;
+	}//test
+	
 	
 
 }//class

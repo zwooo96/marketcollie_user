@@ -57,6 +57,7 @@ public class MemberDAO {
 		return id;
 	}
 	
+	
 		public static void main(String[] args) {
 			FindIdVO fidVO = new FindIdVO();
 			
