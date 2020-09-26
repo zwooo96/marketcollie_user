@@ -1,16 +1,25 @@
 package kr.co.collie.user.member.service;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import kr.co.collie.user.member.dao.MemberDAO;
 import kr.co.collie.user.member.domain.LoginDomain;
+import kr.co.collie.user.member.vo.FindIdVO;
 import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
+import kr.co.sist.util.cipher.DataEncrypt;
 public class MemberService {
 	
 	public LoginDomain login(LoginVO loginVO) {
 		LoginDomain loginDomain =  null;
 		MemberDAO memDao = MemberDAO.getInstance();
+		try {
+			loginVO.setPass(DataEncrypt.messageDigest("MD5", loginVO.getPass()));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		loginDomain = memDao.selectLogin(loginVO);
 		return loginDomain;
 	}//login
@@ -30,5 +39,12 @@ public class MemberService {
 		
 		return flag;
 	}//join
+	
+	public String findId(FindIdVO fidVO) {
+		String id = "";
+		MemberDAO mDAO = MemberDAO.getInstance();
+		id =  mDAO.selectMemberId(fidVO);
+		return id;
+	}
 	
 }//class

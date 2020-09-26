@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="kr.co.collie.user.member">
   <select id="selectLogin" resultType="kr.co.collie.user.member.domain.LoginDomain" parameterType="kr.co.collie.user.member.vo.LoginVO">
-    select memberNum,id, name, email, phone, addr, addrDetail, zipCode
+    select member_num,id, name, email, phone, addr, addr_detail, zipcode
     from member
     where id =#{id} and pass=#{pass}
   </select>
@@ -25,12 +25,12 @@
   <select id="selectMemberId" resultType="String" parameterType="kr.co.collie.user.member.vo.FindIdVO">
   	select id
   	from member
-  	where name = # { name} and email = #{ email }
+  	where name=#{name} and email=#{email}
   </select>
   
   <select id="selectMemberPass" resultType="String" parameterType="kr.co.collie.user.member.vo.FindPassVO">
   	select pass
   	from member
-  	where id= #{ id } and name = # { name} and email = #{ email }
+  	where id= #{ id } and name = #{ name} and email = #{ email }
   </select>
 </mapper>

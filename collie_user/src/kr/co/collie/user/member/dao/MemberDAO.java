@@ -30,7 +30,7 @@ public class MemberDAO {
 		LoginDomain logindomain = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
 		
-		logindomain = ss.selectOne("selectLogin",loginVO);
+		logindomain = ss.selectOne("kr.co.collie.user.member.selectLogin",loginVO);
 		ss.close();
 		return logindomain;
 	}//loginDomain
@@ -50,9 +50,9 @@ public class MemberDAO {
 	public String selectMemberId(FindIdVO fidVO) {
 		String id = "";
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		id = ss.selectOne("kr.co.collie.user.mapper.selectMemberId",fidVO);
-		fidVO.setEmail("gildong@gmail.com");
-		fidVO.setName("송길동");
+		id = ss.selectOne("kr.co.collie.user.member.selectMemberId",fidVO);
+//		fidVO.setEmail("gildong@gmail.com");
+//		fidVO.setName("송길동");
 		ss.close();
 		return id;
 	}
