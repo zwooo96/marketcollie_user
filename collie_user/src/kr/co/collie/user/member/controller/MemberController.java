@@ -23,7 +23,7 @@ import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
 import kr.co.collie.user.member.vo.UpdatePassVO;
 
-@SessionAttributes("login_info")
+@SessionAttributes({"user_info","find_pass_info"})
 @Controller
 public class MemberController {
 	
@@ -44,7 +44,7 @@ public class MemberController {
 			url = "member/login_result";
 		} else {
 			url = "redirect:index.do";
-			model.addAttribute("login_info",loginDomain);
+			model.addAttribute("user_info",loginDomain);
 		}
 		return url;
 		 
@@ -99,7 +99,7 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value = "/find_process.do",method = POST)
+	@RequestMapping(value = "/find/find_id_process.do",method = POST)
 	public String findId(FindIdVO fidVO,Model model) {
 		MemberService ms = new MemberService();
 		model.addAttribute("user_id",ms.findId(fidVO));
@@ -113,22 +113,19 @@ public class MemberController {
 	
 	@RequestMapping(value = "/find/find_pass_process.do",method = POST)
 	public String findPass(FindPassVO fpsVO,Model model) {
-		
 		String url="forward:/find/passForm.do";
 		
 		MemberService ms = new MemberService();
 		
-		
-		if(!ms.findPass(fpsVO)) { //true = 틀림
-			
-			model.addAttribute("login_info",fpsVO);
+		if(!ms.findPass(fpsVO)) { //findPass의 결과가 false면 맞음, !ms.findPass == true if문 실행 
+			model.addAttribute("find_pass_info",fpsVO);
 			url="forward:/find/modify_pass_form.do";
 		}
 		
 		return url;
 	}
 	
-	@RequestMapping(value="/find/modify_pass_form.do", method = GET)
+	@RequestMapping(value="/find/modify_pass_form.do", method = POST)
 	public String modifyPassForm() {
 		return "find/modify_pass_form";
 	}
@@ -137,11 +134,12 @@ public class MemberController {
 	public String modifyPass(UpdatePassVO upVO,HttpSession ss,Model model) {
 		MemberService ms = new MemberService();
 		
+		FindPassVO fpsVO=(FindPassVO)ss.getAttribute("find_pass_info");
+		upVO.setId(fpsVO.getId());
 		
-		upVO.setId((String)ss.getAttribute("login_info"));
 		model.addAttribute("update_flag",ms.modifyPass(upVO));
 		
-		return "modify_result";
+		return "find/modify_result";
 	}
 	
 

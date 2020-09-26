@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,12 @@
 <script type="text/javascript">
 $(function(){
 	
+	function goHome() {
+		
+		location.href="main.do";
+		
+	}
+	
 });//ready
 </script>
 </head>
@@ -35,6 +42,13 @@ $(function(){
 	<jsp:include page="../common/header.jsp" />
 	<div id="container">
 	
+	<c:if test="${update_flag eq false }">
+		잠시후 다시 시도 해주세요
+	</c:if>
+	
+	비밀번호 변경이 완료 되었습니다.
+	
+	<input type="button" value="메인으로" onclick="goHome()">	
 	</div>
 	
 	<jsp:include page="../common/footer.jsp" />

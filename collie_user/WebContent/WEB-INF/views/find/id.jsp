@@ -36,7 +36,7 @@ $(function(){
 	<jsp:include page="../common/header.jsp" />
 	<div id="container">
 	<div>
-	<c:if test="${user_id eq null }">
+	<c:if test="${user_id eq true }">
 		입력하신 정보와 일치하는 아이디가 없습니다. 
 		다시 시도해주세요 
 	</c:if>

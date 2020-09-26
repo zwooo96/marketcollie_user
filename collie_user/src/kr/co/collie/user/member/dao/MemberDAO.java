@@ -80,6 +80,7 @@ public class MemberDAO {
 	}
 	
 	public int updateMemberPass(UpdatePassVO upVO) {
+		
 		int cnt=0;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
 		cnt = ss.update("updateMemberPass",upVO);

@@ -38,8 +38,11 @@ $(function(){
 	비밀번호 변경
 	<label>새비밀번호</label>
 	<input type="password" name="newPass">
+	<form action="modify_pass_process.do" method="post">
 	<label>비밀번호확인</label>
 	<input type="password" name="newPass">
+	<button type="submit">입력</button>
+	</form>
 	
 	</div>
 	

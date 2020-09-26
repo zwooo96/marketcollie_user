@@ -37,7 +37,7 @@ $(function(){
 	
 	비밀번호 확인 
 	
-	<form action="modify_pass_form.do" method="post">
+	<form action="find_pass_process.do" method="post">
 	<label>이름</label>
 	<input type="text" name="name">
 	<label>아이디</label>

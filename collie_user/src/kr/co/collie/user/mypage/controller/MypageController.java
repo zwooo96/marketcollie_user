@@ -85,4 +85,5 @@ public class MypageController {
 		return "redirect:mypage/modify_pass_result.jsp";
 	}//checkPassForm
 	
+	
 }//MypageController
