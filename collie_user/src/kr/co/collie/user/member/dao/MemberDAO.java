@@ -57,11 +57,21 @@ public class MemberDAO {
 		return id;
 	}
 	
+	public int dupId(String id) {
+		int dup = 0;
+		
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		dup = ss.selectOne("dupId", id);
+		ss.close();
+				
+		
+		return dup;
+	}//dupId
+	
 	
 		public static void main(String[] args) {
-			FindIdVO fidVO = new FindIdVO();
 			
-			System.out.println(memDAO.getInstance().selectMemberId(fidVO));
+			System.out.println(memDAO.getInstance().dupId("dd"));
 			
 		}
 	

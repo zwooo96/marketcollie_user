@@ -39,18 +39,18 @@ public class MemberController {
 		 
 	}//login
 	
-//	@RequestMapping(value="/join_form.do", method = GET)
-//	public String joinForm() {
-//		
-//		
-//		return "member/join_frm";
-//	}//joinForm
+	@RequestMapping(value="/join_clause.do", method = GET)
+	public String joinForm() {
+		
+		
+		return "member/join_clause";
+	}//joinForm
 	
 	@RequestMapping(value="/join_form.do", method = GET)
 	public String joinClause() {
 		
 		
-		return "member/join_clause";
+		return "member/join_frm";
 	}//joinForm
 	
 	@RequestMapping(value="/join_process.do", method= POST)
@@ -74,13 +74,12 @@ public class MemberController {
 	
 	@RequestMapping(value="/join_form_ajax.do", method=RequestMethod.GET)
 	@ResponseBody
-	public String formAjax() {
+	public int formAjax(String id) {
 		
 		MemberService ms = new MemberService();
 		String json = ms.createJson();
 		
-		
-		return json;
+		return 1;
 	}//test
 	
 	@RequestMapping(value = "/find/idForm.do",method = GET)

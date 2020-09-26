@@ -14,7 +14,7 @@
 	values(seq_mem_num.nextval, #{ id }, #{ pass }, #{ name }, #{ email },#{ phone }, #{ zipcode }, #{ addr }, #{ addr_detail }, #{ ip } )
   </insert>
   
-  <select id="chkId" parameterType="String" resultType="int">
+  <select id="dupId" parameterType="String" resultType="int">
 	select count(*) from member 
 	where id = #{ id }  
   </select>

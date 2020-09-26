@@ -32,20 +32,26 @@ public class MemberService {
 		
 		MemberDAO mDAO = MemberDAO.getInstance();
 		try {
+			jVO.setPass(DataEncrypt.messageDigest("MD5", jVO.getPass()));
 			if(jVO != null) {
 				flag=true;
 				mDAO.insertMember(jVO);
 			}//end if
 		} catch (IOException e) {
 			e.printStackTrace();
+		}catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
 		}//end catch
 		
 		return flag;
 	}//join
+	
 	public String findId(FindIdVO fidVO) {
 		String id = "";
 		MemberDAO mDAO = MemberDAO.getInstance();
 		id =  mDAO.selectMemberId(fidVO);
 		return id;
-	}
+	}//findId
+	
+	
 }//class
