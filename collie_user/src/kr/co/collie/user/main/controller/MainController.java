@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.collie.user.main.domain.CategoryDomain;
@@ -19,7 +18,7 @@ import kr.co.collie.user.member.domain.LoginDomain;
 @Controller
 public class MainController {
 	
-	@RequestMapping(value="/index.do", method=RequestMethod.GET)
+	@RequestMapping(value="/index.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String main(Model model, HttpSession session) {
 		MainService ms = new MainService();
 		List<CategoryDomain> cateList = ms.getCategories();

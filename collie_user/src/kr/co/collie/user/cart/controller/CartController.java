@@ -49,7 +49,7 @@ public class CartController {
 		user_info1.setName("ÀÌÇØ¹Î");
 		user_info1.setEmail("test1@gmail.com");
 		user_info1.setPhone("010-1111-2222");
-		user_info1.setZip_code("54321");
+		user_info1.setZipcode("54321");
 		user_info1.setAddr("¼­¿ïÆ¯º°½Ã ¸¶Æ÷±¸ Ç³¼ººôµù");
 		user_info1.setAddr_detail("2Ãþ ½Ö¿ë°­ºÏ±³À°¼¾ÅÍ");
 		session.setAttribute("user_info", user_info1);

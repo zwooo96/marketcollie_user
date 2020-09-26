@@ -10,15 +10,23 @@
 </script>
 <div id="header">
 	<div id="headerContent">
-<%-- 	<c:if test="${empty cate_list }"> 조회된 카테고리가 없습니다.</c:if> --%>
-
 	<ul class="nav justify-content-end">
-	  <li class="nav-item">
-	    <a class="nav-link active" href="/collie_user/login_form.do" style="color: #000000">로그인</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="/collie_user/join_form.do" style="color: #000000">회원가입</a>
-	  </li>
+		<c:if test="${empty user_info}">
+		  <li class="nav-item">
+		    <a class="nav-link active" href="/collie_user/login_form.do" style="color: #000000">로그인</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="/collie_user/join_form.do" style="color: #000000">회원가입</a>
+		  </li>
+		</c:if>
+		<c:if test="${not empty user_info}">
+			<li class="nav-item">
+			    <a class="nav-link active" href="/collie_user/logout.do" style="color: #000000">로그아웃</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="/collie_user/mypage/memberInfo_form.do" style="color: #000000">마이페이지</a>
+			  </li>
+		</c:if>
 	  <li class="nav-item">
 	    <a class="nav-link" href="/collie_user/qna/form.do" style="color: #000000">고객센터</a>
 	  </li>
@@ -42,7 +50,7 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<c:forEach var="cate" items="${cate_list}">
-						<a class="dropdown-item" href="/collie_user/item/search.do?cate_num=${cate.cate_num}">
+						<a class="dropdown-item" href="/collie_user/item/searchByCate.do?cate_num=${cate.cate_num}">
 							<label><c:out value="${cate.cate_name}"/></label>
 						</a>
 					</c:forEach>

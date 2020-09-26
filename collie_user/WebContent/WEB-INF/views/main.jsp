@@ -38,13 +38,13 @@ $(function(){
 	<div id="mainImg" class="carousel slide" data-ride="carousel">
 	  <div class="carousel-inner">
 	    <div class="carousel-item active" data-interval="3000">
-	      <img src="http://localhost/collie_user/common/images/main_img1.jpg" class="d-block w-100" alt="...">
+	      <img src="/collie_user/common/images/main_img1.jpg" class="d-block w-100">
 	    </div>
 	    <div class="carousel-item" data-interval="3000">
-	      <img src="http://localhost/collie_user/common/images/main_img2.jpg" class="d-block w-100" alt="...">
+	      <img src="/collie_user/common/images/main_img2.jpg" class="d-block w-100">
 	    </div>
 	    <div class="carousel-item" data-interval="3000">
-	      <img src="http://localhost/collie_user/common/images/main_img3.jpg" class="d-block w-100" alt="...">
+	      <img src="/collie_user/common/images/main_img3.jpg" class="d-block w-100">
 	    </div>
 	  </div>
 	  <a class="carousel-control-prev" href="#mainImg" role="button" data-slide="prev">
@@ -61,7 +61,7 @@ $(function(){
 	<div id="containerContentWrap">
 	<div id="containerContent">
 		<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
-			<img src="http://localhost/collie_user/common/images/item_img1.png" class="card-img-top" alt="...">
+			<img src="http://localhost/collie_user/common/images/item_img1.png" class="card-img-top">
 			<div class="card-body">
 			<h6 class="card-title">저탄소 GAP 자몽</h6>
 			<p class="card-text">17,945원</p>
