@@ -90,10 +90,10 @@ public class MemberController {
 		return ms.dupEmailCheck(email);
 	}//test
 	
-	@RequestMapping(value = "/find/idForm.do",method = GET)
+	@RequestMapping(value = "/find/idForm.do",method = GET) 
 	public String findIdForm() {
 		
-		
+		  
 		return "find/idForm";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
 		
 	}
