@@ -74,7 +74,7 @@ $(function(){
 		<div class="login_rel">
 		<a href="find/idForm.do" id="findID" class="link_rel" target="_blank" data-tiara-action-name="아이디찾기_링크">아이디 찾기</a>
 		<span class="txt_bar">|</span>
-		<a href="../find/pass.do" id="findPass" class="link_rel" target="_blank"data-tiara-action-name="비밀번호찾기_링크">비밀번호 찾기</a>
+		<a href="find/passForm.do" id="findPass" class="link_rel" target="_blank"data-tiara-action-name="비밀번호찾기_링크">비밀번호 찾기</a>
 		</div>			
 	</div>
 
