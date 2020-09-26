@@ -76,28 +76,49 @@ public class MemberController {
 		return "member/join";
 	}//join
 	
-	@RequestMapping(value="/join_form_ajax.do", method=RequestMethod.GET)
+	@RequestMapping(value="/id_chk_ajax.do", method=RequestMethod.GET)
 	@ResponseBody
+<<<<<<< HEAD
 	public int formAjax(String id) {
 <<<<<<< HEAD
 		int result=0;
 =======
 >>>>>>> refs/heads/phg
+=======
+	public String dupIdAjax(String id) {
+>>>>>>> refs/heads/phg
 		
 		MemberService ms = new MemberService();
+<<<<<<< HEAD
 		result = ms.dupIdCheck(id);
+=======
+>>>>>>> refs/heads/phg
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return result;
 =======
 		return 1;
 >>>>>>> refs/heads/phg
 	}//test
+=======
+		return ms.dupIdCheck(id);
+	}//dupIdAjax
+>>>>>>> refs/heads/phg
 	
-	@RequestMapping(value = "/find/idForm.do",method = GET)
+	@RequestMapping(value="/email_chk_ajax.do", method=RequestMethod.GET)
+	@ResponseBody
+	public String dupEmailAjax(String email) {
+		
+		MemberService ms = new MemberService();
+		
+		return ms.dupEmailCheck(email);
+	}//dupEmailAjax
+	
+	@RequestMapping(value = "/find/idForm.do",method = GET) 
 	public String findIdForm() {
 		
-		
+		  
 		return "find/idForm";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
 		
 	}

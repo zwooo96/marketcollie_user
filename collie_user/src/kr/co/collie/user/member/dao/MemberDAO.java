@@ -57,21 +57,31 @@ public class MemberDAO {
 		return id;
 	}
 	
-	public int dupId(String id) {
-		int dup = 0;
+	public String dupId(String id) {
+		String rid = "";
 		
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		dup = ss.selectOne("dupId", id);
+		rid = ss.selectOne("dupId", id);
 		ss.close();
-				
 		
-		return dup;
+		return rid;
 	}//dupId
+	
+	public String dupEmail(String email) {
+		String rEmail="";
+		
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		rEmail = ss.selectOne("dupEmail",email);
+		ss.close();
+		
+		return rEmail;
+		
+	}//dupEmail
 	
 	
 		public static void main(String[] args) {
 			
-			System.out.println(memDAO.getInstance().dupId("dd"));
+			System.out.println(memDAO.getInstance().dupEmail("gildong@gmadil.com"));
 			
 		}
 	
