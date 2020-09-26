@@ -49,15 +49,14 @@ $(function(){
 			<div id="containerContent">
 				<div class="row row-cols-1 row-cols-md-3">
 <%-- 					<c:out value="${paging.startNum}" /> / <c:out value="${paging.endNum}" />  --%>
-				
+<%-- 					<c:out value="${paging.totalPage}" /> / <c:out value="${paging.endNum}" /> --%>
 					<c:forEach begin="${paging.startNum}" end="${paging.endNum}" step="1" var="index">
-						<c:set value="${search_result[index - 1]}" var="i" /> 
 						<div class="col mb-4">
 							<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
-								<img src="/collie_user/common/images/item/${i.item_img}" class="card-img-top">
+								<img src="/collie_user/common/images/item/${search_result[index - 1].item_img}" class="card-img-top">
 								<div class="card-body">
-									<h6 class="card-title">${i.item_name}</h6>
-									<p class="card-text">${i.item_price}원</p>
+									<h6 class="card-title">${search_result[index - 1].item_name}</h6>
+									<p class="card-text">${search_result[index - 1].item_price}원</p>
 								</div>
 							</div>
 						</div>
@@ -80,8 +79,8 @@ $(function(){
 				    	</a>
 				    </li>
 			    </c:forEach>
-			    <li class="page-item ${paging.currentPage eq paging.totalPage ? 'disabled':'active'}">
-			      <a class="page-link" href="#" aria-label="Next">
+			    <li class="page-item ${paging.currentPage eq paging.endPage ? 'disabled':'active'}">
+			      <a class="page-link" href="/collie_user/item/searchByCate.do?currentPage=${paging.nextPage}&cate_num=${param.cate_num}" aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			      </a>
 			    </li>

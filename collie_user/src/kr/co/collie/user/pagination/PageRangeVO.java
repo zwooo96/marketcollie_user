@@ -1,10 +1,10 @@
 package kr.co.collie.user.pagination;
 
-public class PaginationDomain {
+public class PageRangeVO {
 	private int currentPage = 1;
 	
 	private int totalCnt; //총 게시물 수
-	private int pageScale = 3; //한 페이지에 5개 목록을 조회
+	private int pageScale = 5; //한 페이지에 5개 목록을 조회
 	
 	private int totalPage; // 총 페이지 수
 	
@@ -21,8 +21,12 @@ public class PaginationDomain {
 	 * 페이지 생성시 총 게시물 수를 입력값으로 받아와 설정한다.
 	 * @param totalCnt
 	 */
-	public PaginationDomain(int totalCnt) {
+	public PageRangeVO(int totalCnt) {
 		this.totalCnt = totalCnt;
+		calcPaging();
+	}
+	
+	private void calcPaging() {
 		totalPage = (int)Math.ceil((double)totalCnt/pageScale);
 		startNum = (currentPage-1)*pageScale+1;
 		endNum=startNum+pageScale-1;
@@ -36,12 +40,7 @@ public class PaginationDomain {
 		if(totalPage < endPage) {
 			endPage = totalPage;
 		}
-		prePage = currentPage - 1;
-		nextPage = currentPage + 1;
-	}
-	
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
+		
 		if( currentPage > pageRange ) {
 			prePage=((currentPage-1)/pageRange)*pageRange;
 		} else {
@@ -53,11 +52,17 @@ public class PaginationDomain {
 			nextPage = currentPage + 1;
 		}
 		
-		int startNum=(currentPage-1)*pageScale+1; //현 페이지 게시물 시작번호
-		int endNum=startNum+pageScale-1; //현 페이지 게시물 끝번호
+		startNum=(currentPage-1)*pageScale+1; //현 페이지 게시물 시작번호
+		endNum=startNum+pageScale-1; //현 페이지 게시물 끝번호
 		if(endNum>totalCnt){
 			endNum=totalCnt;
-		}//end if
+		}
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+		calcPaging();
+		
 	}
 	/**
 	 * 
@@ -66,6 +71,7 @@ public class PaginationDomain {
 	 */
 	public void setPageScale(int pageScale) {
 		this.pageScale = pageScale;
+		calcPaging();
 	}
 	
 	/**
@@ -75,12 +81,8 @@ public class PaginationDomain {
 	 * @param endPage
 	 */
 	public void setEndPage(int endPage) {
-		if(totalPage < endPage) {
-			this.endPage = totalPage; 
-		} else {
-			this.endPage = endPage;
-			nextPage=prePage+pageRange+1;
-		}
+		this.endPage = totalPage;
+		calcPaging();
 	}
 
 	public int getCurrentPage() {

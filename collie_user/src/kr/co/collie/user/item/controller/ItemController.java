@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.collie.user.item.domain.ItemListDomain;
 import kr.co.collie.user.item.service.ItemService;
-import kr.co.collie.user.pagination.PaginationDomain;
+import kr.co.collie.user.pagination.PageRangeVO;
 
-@Controller()
+@Controller
 public class ItemController {
 	
 	@RequestMapping(value="/item/search.do", method=RequestMethod.GET)
@@ -28,8 +28,8 @@ public class ItemController {
 		ItemService iService = new ItemService();
 		List<ItemListDomain> list = iService.getItemList(cate_num);
 		model.addAttribute("search_result", list);
-//		System.out.println("current page >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + currentPage);
-		PaginationDomain pVO = new PaginationDomain(list.size());
+		PageRangeVO pVO = new PageRangeVO(list.size());
+		pVO.setPageScale(6);
 		pVO.setCurrentPage(currentPage);
 		model.addAttribute("paging", pVO);
 		return "item/searchItem_result";
