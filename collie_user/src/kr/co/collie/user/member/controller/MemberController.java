@@ -43,7 +43,7 @@ public class MemberController {
 		if(loginDomain==null) {
 			url = "member/login_result";
 		} else {
-			url = "forward:index.do";
+			url = "redirect:index.do";
 			model.addAttribute("login_info",loginDomain);
 		}
 		return url;
@@ -99,19 +99,19 @@ public class MemberController {
 		
 	}
 	
-	@PostMapping(value = "/find_process.do")
+	@RequestMapping(value = "/find_process.do",method = POST)
 	public String findId(FindIdVO fidVO,Model model) {
 		MemberService ms = new MemberService();
 		model.addAttribute("user_id",ms.findId(fidVO));
 		return "find/id";
 	}
 	
-	@GetMapping(value = "/find/passForm.do")
+	@RequestMapping(value = "/find/passForm.do",method = GET)
 	public String findPassForm() {
 		return "find/passForm";
 	}
 	
-	@PostMapping(value = "/find/find_pass_process.do")
+	@RequestMapping(value = "/find/find_pass_process.do",method = POST)
 	public String findPass(FindPassVO fpsVO,Model model) {
 		
 		String url="forward:/find/passForm.do";
@@ -128,12 +128,12 @@ public class MemberController {
 		return url;
 	}
 	
-	@PostMapping(value="/find/modify_pass_form.do")
+	@RequestMapping(value="/find/modify_pass_form.do", method = GET)
 	public String modifyPassForm() {
 		return "find/modify_pass_form";
 	}
 	
-	@PostMapping(value = "/find/modify_pass_process.do")
+	@RequestMapping(value = "/find/modify_pass_process.do",method = POST)
 	public String modifyPass(UpdatePassVO upVO,HttpSession ss,Model model) {
 		MemberService ms = new MemberService();
 		
