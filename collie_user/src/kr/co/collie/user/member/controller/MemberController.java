@@ -72,14 +72,22 @@ public class MemberController {
 		return "member/join";
 	}//join
 	
-	@RequestMapping(value="/join_form_ajax.do", method=RequestMethod.GET)
+	@RequestMapping(value="/id_chk_ajax.do", method=RequestMethod.GET)
 	@ResponseBody
-	public int formAjax(String id) {
+	public String dupIdAjax(String id) {
 		
 		MemberService ms = new MemberService();
-		String json = ms.createJson();
 		
-		return 1;
+		return ms.dupIdCheck(id);
+	}//test
+	
+	@RequestMapping(value="/email_chk_ajax.do", method=RequestMethod.GET)
+	@ResponseBody
+	public String dupEmailAjax(String email) {
+		
+		MemberService ms = new MemberService();
+		
+		return ms.dupEmailCheck(email);
 	}//test
 	
 	@RequestMapping(value = "/find/idForm.do",method = GET)

@@ -46,6 +46,34 @@ public class MemberService {
 		return flag;
 	}//join
 	
+	public String dupIdCheck(String id) {
+		String rid = "";
+		
+		MemberDAO mDAO = MemberDAO.getInstance();
+		
+		rid=mDAO.dupId(id);
+		
+		JSONObject json=new JSONObject();
+		json.put("id_dup_result", rid != null);
+		
+		return json.toJSONString();
+	}//dupIdCheck
+	
+	public String dupEmailCheck(String email){
+		String rEmail = "";
+		
+		MemberDAO mDAO = MemberDAO.getInstance();
+		
+		rEmail = mDAO.dupEmail(email);
+		
+		JSONObject json = new JSONObject();
+		json.put("email_dup_result", rEmail != null );
+		
+		return json.toJSONString();
+	}//dupEmailCheck
+	
+	
+	
 	public String findId(FindIdVO fidVO) {
 		String id = "";
 		MemberDAO mDAO = MemberDAO.getInstance();
