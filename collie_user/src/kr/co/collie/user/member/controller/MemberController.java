@@ -79,7 +79,7 @@ public class MemberController {
 		MemberService ms = new MemberService();
 		
 		return ms.dupIdCheck(id);
-	}//test
+	}//dupIdAjax
 	
 	@RequestMapping(value="/email_chk_ajax.do", method=RequestMethod.GET)
 	@ResponseBody
@@ -88,7 +88,7 @@ public class MemberController {
 		MemberService ms = new MemberService();
 		
 		return ms.dupEmailCheck(email);
-	}//test
+	}//dupEmailAjax
 	
 	@RequestMapping(value = "/find/idForm.do",method = GET) 
 	public String findIdForm() {
