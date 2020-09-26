@@ -6,6 +6,11 @@ import kr.co.collie.user.mypage.vo.UpdatePassVO;
 
 public class MypageService {
 	
+	/**
+	 * 현재 비밀번호를 확인하는 일
+	 * @param pcVO
+	 * @return
+	 */
 	public boolean getMemberPass(PassCheckVO pcVO) {
 		boolean flag = false;
 		
