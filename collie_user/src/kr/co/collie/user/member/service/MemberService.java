@@ -42,6 +42,17 @@ public class MemberService {
 		
 		return flag;
 	}//join
+	
+	public int dupIdCheck(String id) {
+		int check = 0;
+		
+		MemberDAO mDAO = MemberDAO.getInstance();
+		
+		mDAO.dupId(id);
+		
+		return check;
+	}//dupIdCheck
+	
 	public String findId(FindIdVO fidVO) {
 		String id = "";
 		MemberDAO mDAO = MemberDAO.getInstance();

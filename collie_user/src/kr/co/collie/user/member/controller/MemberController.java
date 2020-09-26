@@ -50,7 +50,7 @@ public class MemberController {
 	public String joinClause() {
 		
 		
-		return "member/join_clause";
+		return "member/join_form";
 	}//joinForm
 	
 	@RequestMapping(value="/join_process.do", method= POST)
@@ -74,13 +74,13 @@ public class MemberController {
 	
 	@RequestMapping(value="/join_form_ajax.do", method=RequestMethod.GET)
 	@ResponseBody
-	public String formAjax() {
+	public int formAjax(String id) {
+		int result=0;
 		
 		MemberService ms = new MemberService();
-		String json = ms.createJson();
+		result = ms.dupIdCheck(id);
 		
-		
-		return json;
+		return result;
 	}//test
 	
 	@RequestMapping(value = "/find/idForm.do",method = GET)
