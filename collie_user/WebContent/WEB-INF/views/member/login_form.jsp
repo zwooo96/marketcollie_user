@@ -56,7 +56,7 @@ $(function(){
 			<input type="text" class="form-control id" id="id" name="id"  placeholder="아이디를 입력하세요 " autofocus="autofocus" tabindex="1"> <br/>
 		</td>
 		<td rowspan="2">
-			<input type="button" class="btn btn-dark loginBtn" value="login" name="loginBtn" id="loginBtn" tabindex="3"><br> 
+			<button id="loginBtn" type="submit" class="btn_comm"  class="btn btn-dark loginBtn" data-tiara-action-name="로그인_버튼" tabindex="3">로그인</button>
 		<td>
 		</tr>		
 		<tr>
@@ -69,13 +69,12 @@ $(function(){
 		</table>
 		<div id="btn">
 			
-			<button id="loginBtn" type="submit" class="btn_comm" data-tiara-action-name="로그인_버튼">로그인</button>
 		</div>	
 	</form>
 		<div class="login_rel">
-		<a href="../find/id.do" id="findID" class="link_rel" target="_blank" data-tiara-action-name="아이디찾기_링크">아이디 찾기</a>
+		<a href="find/idForm.do" id="findID" class="link_rel" target="_blank" data-tiara-action-name="아이디찾기_링크">아이디 찾기</a>
 		<span class="txt_bar">|</span>
-		<a href="../find/pass.do" id="findPass" class="link_rel" target="_blank"data-tiara-action-name="비밀번호찾기_링크">비밀번호 찾기</a>
+		<a href="find/passForm.do" id="findPass" class="link_rel" target="_blank"data-tiara-action-name="비밀번호찾기_링크">비밀번호 찾기</a>
 		</div>			
 	</div>
 

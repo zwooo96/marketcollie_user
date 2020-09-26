@@ -7,8 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.vo.FindIdVO;
+import kr.co.collie.user.member.vo.FindPassVO;
 import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
+import kr.co.collie.user.member.vo.UpdatePassVO;
 
 public class MemberDAO {
 	
@@ -30,7 +32,7 @@ public class MemberDAO {
 		LoginDomain logindomain = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
 		
-		logindomain = ss.selectOne("selectLogin",loginVO);
+		logindomain = ss.selectOne("kr.co.collie.user.member.selectLogin",loginVO);
 		ss.close();
 		return logindomain;
 	}//loginDomain
@@ -50,17 +52,47 @@ public class MemberDAO {
 	public String selectMemberId(FindIdVO fidVO) {
 		String id = "";
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		id = ss.selectOne("kr.co.collie.user.mapper.selectMemberId",fidVO);
-		fidVO.setEmail("gildong@gmail.com");
-		fidVO.setName("송길동");
+		id = ss.selectOne("kr.co.collie.user.member.selectMemberId",fidVO);
+//		fidVO.setEmail("gildong@gmail.com");
+//		fidVO.setName("송길동");
 		ss.close();
 		return id;
 	}
 	
+	
+	public int dupId(String id) {
+		int dup = 0;
+		
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		dup = ss.selectOne("dupId", id);
+		ss.close();
+				
+		
+		return dup;
+	}//dupId
+	
+	public String selectMemberPass(FindPassVO fpsVO) {
+		String pass ="";
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		pass = ss.selectOne("selectMemberPass",fpsVO);//id
+		ss.close();
+		return pass;
+	}
+	
+	public int updateMemberPass(UpdatePassVO upVO) {
+		int cnt=0;
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		cnt = ss.update("updateMemberPass",upVO);
+		if(cnt==1) {
+			ss.commit();
+		}
+		ss.close();
+		return cnt;
+	}
+	
 		public static void main(String[] args) {
-			FindIdVO fidVO = new FindIdVO();
 			
-			System.out.println(memDAO.getInstance().selectMemberId(fidVO));
+			System.out.println(memDAO.getInstance().dupId("dd"));
 			
 		}
 	
