@@ -1,8 +1,11 @@
 package kr.co.collie.user.mypage.service;
 
+import java.security.NoSuchAlgorithmException;
+
 import kr.co.collie.user.mypage.dao.MypageDAO;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
 import kr.co.collie.user.mypage.vo.UpdatePassVO;
+import kr.co.sist.util.cipher.DataEncrypt;
 
 public class MypageService {
 	
@@ -15,6 +18,11 @@ public class MypageService {
 		boolean flag = false;
 		
 		MypageDAO mpDAO = MypageDAO.getInstance();
+		try {
+			pcVO.setPass(DataEncrypt.messageDigest("MD5", pcVO.getPass()));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}//end catch
 		flag = mpDAO.selectMemberPass(pcVO) != 0;
 		
 		return flag;
