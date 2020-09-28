@@ -4,20 +4,26 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.service.MemberService;
 import kr.co.collie.user.member.vo.FindIdVO;
+import kr.co.collie.user.member.vo.FindPassVO;
 import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
+import kr.co.collie.user.member.vo.UpdatePassVO;
 
+@SessionAttributes({"user_info","find_pass_info"})
 @Controller
 public class MemberController {
 	
@@ -33,9 +39,14 @@ public class MemberController {
 	
 		MemberService mems=new MemberService();
 		LoginDomain loginDomain=mems.login(loginVO);
-		model.addAttribute("login_info",loginDomain);
-		
-		return "login_result";
+		String url = "";
+		if(loginDomain==null) {
+			url = "member/login_result";
+		} else {
+			url = "redirect:index.do";
+			model.addAttribute("user_info",loginDomain);
+		}
+		return url;
 		 
 	}//login
 	
@@ -75,11 +86,11 @@ public class MemberController {
 	@RequestMapping(value="/id_chk_ajax.do", method=GET)
 	@ResponseBody
 	public String dupIdAjax(String id) {
-		
+		String result="";
 		MemberService ms = new MemberService();
-		
-		return ms.dupIdCheck(id);
-	}//dupIdAjax
+		result = ms.dupIdCheck(id);
+		return result;
+	}//test
 	
 	@RequestMapping(value="/email_chk_ajax.do", method=GET)
 	@ResponseBody
@@ -93,16 +104,51 @@ public class MemberController {
 	@RequestMapping(value = "/find/idForm.do",method = GET) 
 	public String findIdForm() {
 		
-		  
 		return "find/idForm";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
 		
 	}
 	
-	@PostMapping(value = "/find_process.do")
+	@RequestMapping(value = "/find/find_id_process.do",method = POST)
 	public String findId(FindIdVO fidVO,Model model) {
 		MemberService ms = new MemberService();
 		model.addAttribute("user_id",ms.findId(fidVO));
 		return "find/id";
+	}
+	
+	@RequestMapping(value = "/find/passForm.do",method = GET)
+	public String findPassForm() {
+		return "find/passForm";
+	}
+	
+	@RequestMapping(value = "/find/find_pass_process.do",method = POST)
+	public String findPass(FindPassVO fpsVO,Model model) {
+		String url="forward:/find/passForm.do";
+		
+		MemberService ms = new MemberService();
+		
+		if(!ms.findPass(fpsVO)) { //findPass의 결과가 false면 맞음, !ms.findPass == true if문 실행 
+			model.addAttribute("find_pass_info",fpsVO);
+			url="forward:/find/modify_pass_form.do";
+		}
+		
+		return url;
+	}
+	
+	@RequestMapping(value="/find/modify_pass_form.do", method = POST)
+	public String modifyPassForm() {
+		return "find/modify_pass_form";
+	}
+	
+	@RequestMapping(value = "/find/modify_pass_process.do",method = POST)
+	public String modifyPass(UpdatePassVO upVO,HttpSession ss,Model model) {
+		MemberService ms = new MemberService();
+		
+		FindPassVO fpsVO=(FindPassVO)ss.getAttribute("find_pass_info");
+		upVO.setId(fpsVO.getId());
+		
+		model.addAttribute("update_flag",ms.modifyPass(upVO));
+		
+		return "find/modify_result";
 	}
 	
 

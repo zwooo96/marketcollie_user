@@ -8,8 +8,10 @@ import org.json.simple.JSONObject;
 import kr.co.collie.user.member.dao.MemberDAO;
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.vo.FindIdVO;
+import kr.co.collie.user.member.vo.FindPassVO;
 import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
+import kr.co.collie.user.member.vo.UpdatePassVO;
 import kr.co.sist.util.cipher.DataEncrypt;
 public class MemberService {
 	
@@ -78,5 +80,30 @@ public class MemberService {
 		return id;
 	}//findId
 	
+	public boolean findPass(FindPassVO fpsVO) {
+		boolean flag = false;
+		MemberDAO mDAO = MemberDAO.getInstance();
+		//조회한 아이디가 null이 아니면 true 
+		String pass=mDAO.selectMemberPass(fpsVO);
+		if(pass == null) {//비밀번호 틀림
+			flag= true;
+		}
+		return flag;
+	}
+	
+	public boolean modifyPass(UpdatePassVO upVO) {
+		boolean flag= false;
+		MemberDAO mDAO = MemberDAO.getInstance();
+		try {
+			upVO.setNewPass(DataEncrypt.messageDigest("MD5", upVO.getNewPass()));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		int result = mDAO.updateMemberPass(upVO);
+		if(result != 0) {
+			flag=true;
+		}
+		return flag;
+	}
 	
 }//class

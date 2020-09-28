@@ -21,7 +21,7 @@
 #containerHeader{ display: flex; justify-content: center; align-items: center; flex-direction: column; }
 #containerContentWrapper{ display: flex; justify-content: center; align-items: center; flex-direction: column; }
 #table{ width: 70% }
-#tableContent{ height: 120px; }
+.tableContent{ height: 120px; }
 
 
 table td ,table th{
@@ -82,43 +82,115 @@ border-color: #17462B; }
 <script type="text/javascript">
 $(function(){
 	
+	$("#selectAll").click(function(){ 
+		if($("#selectAll").prop("checked")) { 
+			$("[name='cart_num']").prop("checked",true); 
+		}else{ 
+			$("[name='cart_num']").prop("checked",false); 
+		} 
+	})
+	
+	$("[name='cart_num']").click(function(){ 
+		var len=$("[name='cart_num']").length;
+		if($("[name='cart_num']:checked").length==len){
+			$("#selectAll").prop("checked",true);
+		}else{
+			$("#selectAll").prop("checked",false);
+		}//end else
+	})
+
+	
+	$("#delSelectedItem").click(function(){
+		var chkCnt=$("[name='cart_num']:checked").length;
+		if( chkCnt > 0){
+			var param="";
+			$("[name='cart_num']:checked").each(function(){
+				param+="cart_num="+this.value+"&";
+			})
+			$.ajax({
+				url:"../remove_Item.do",
+				type:"POST",
+				data:param,
+				dataType:"JSON",
+				error:function(xhr){
+					alert("에러");
+					console.log(xhr.status+" / "+xhr.statusText);
+				},
+				success:function(jsonObj){
+			      	if(jsonObj.flag=="success"){
+						$("[name='cart_num']:checked").each(function(){
+							$("#tableContent"+this.value).remove();
+						})
+			      	}//end if
+				}//success
+			});//ajax
+		}else{
+			alert("삭제할 상품을 선택해주세요.")
+		}
+	});//click
+	
 });//ready
 
-function plusCnt(cart_num){
+function modifyCnt(cart_num, item_cnt, item_price,flag){
 	
  	$.ajax({
-		url:"../plus_cnt.do",
+		url:"../modify_cnt.do",
 		type:"POST",
-		data:"param_cart_num="+cart_num,
+		data:"cart_num="+cart_num+"&flag="+flag,
 		dataType:"JSON",
 		error:function(xhr){
 			alert("에러");
 			console.log(xhr.status+" / "+xhr.statusText);
 		},
 		success:function(jsonObj){
-			alert(jsonObj.flag);
+			if(jsonObj.flag=="success"){
+				if(flag=="plus"){
+					item_cnt+=2;
+				}//end if
+				item_cnt-=1;
+				
+				var output="<button type='button' class='icoBtn'";
+				if(item_cnt > 1){
+					output+=' onclick="modifyCnt('+cart_num+','+item_cnt+','+item_price+',\'minus\')"';
+				}//end if
+				output+='>';
+				output+='<img src="/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px">';
+				output+='</button>';
+				
+				output+=item_cnt;
+				
+				output+='<button type="button" class="icoBtn" onclick="modifyCnt('+cart_num+','+item_cnt+','+item_price+',\'plus\')">';
+				output+='<img src="/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px">';
+				output+='</button>';
+				$("#quantity"+cart_num).html(output);
+				$("#itemTotalPrice"+cart_num).html((item_cnt*item_price)+"원");
+			}//end if
+	      	
 		}//success
 	});//ajax
 	
-}//plusCnt
+}//modifyCnt
 
-function minusCnt(cart_num){
-	
- 	$.ajax({
-		url:"../minus_cnt.do",
+function delItem(cart_num){
+  	$.ajax({
+		url:"../remove_Item.do",
 		type:"POST",
-		data:"param_cart_num="+cart_num,
+		data:"cart_num="+cart_num,
 		dataType:"JSON",
 		error:function(xhr){
 			alert("에러");
 			console.log(xhr.status+" / "+xhr.statusText);
 		},
 		success:function(jsonObj){
-			alert(jsonObj.flag);
+	      	if(jsonObj.flag=="success"){
+				$("#tableContent"+cart_num).remove();
+	      	}//end if
 		}//success
 	});//ajax
 	
-}//minusCnt
+}//delItem
+
+
 
 </script>
 </head>
@@ -137,7 +209,7 @@ function minusCnt(cart_num){
 	<div id="containerContentWrapper">
 	
 	<div id="table">
-	<form action="" method="post">
+	<form id="cartListFrm" action="" method="post">
 	<table class="table">
 	  <thead>
 	    <tr>
@@ -156,7 +228,7 @@ function minusCnt(cart_num){
 	  </thead>
 	  <tbody>
 		<c:forEach var="cart" items="${ cart_list }">
-	    <tr id="tableContent">
+	    <tr id="tableContent${ cart.cart_num }" class="tableContent">
 	      <td style="vertical-align: middle; text-align: center;">
 	      <div class="checks">
 	      	<input type="checkbox" name="cart_num" value="${ cart.cart_num }" id="select${ cart.cart_num }">
@@ -173,31 +245,29 @@ function minusCnt(cart_num){
 	      </td>
 	      <td style="vertical-align: middle; text-align: center;">
 	      	<div class="quantityWrap">
-	      	<div class="quantity">
-	      	<button type="button" class="icoBtn" onclick="minusCnt(${cart.cart_num})">
-	      	<img src="http://localhost/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px">
+	      	<div class="quantity" id="quantity${ cart.cart_num }">
+	      	<button type="button" class="icoBtn" onclick="modifyCnt(${cart.cart_num},${ cart.item_cnt },${ cart.item_price },'minus')">
+	      	<img src="/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px">
 	      	</button>
 	      	<c:out value="${ cart.item_cnt }"/>
-	      	<button type="button" class="icoBtn" onclick="plusCnt(${cart.cart_num})">
-	      	<img src="http://localhost/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px">
+	      	<button type="button" class="icoBtn" onclick="modifyCnt(${cart.cart_num},${ cart.item_cnt },${ cart.item_price },'plus')">
+	      	<img src="/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px">
 	      	</button>
 	      	</div>
 	      	</div>
 	      </td>
-	      <td style="vertical-align: middle; text-align: center; font-weight: bold">
+	      <td id="itemTotalPrice${ cart.cart_num }"style="vertical-align: middle; text-align: center; font-weight: bold">
 	      	<c:out value="${ cart.item_price * cart.item_cnt }"/>원
 	      </td>
 	      <td style="vertical-align: middle; text-align: center;">
-	      	<a href="#del">
-	      	<img src="http://localhost/collie_user/cart/cart_x.png" style="width: 10px">
-	      	</a>
+	      	<img src="/collie_user/cart/cart_x.png" onclick="delItem(${cart.cart_num})" style="width: 10px; cursor: pointer;">
 	      </td>
 	    </tr>
 		</c:forEach>
 	  </tbody>
 	</table>
 	</form>
-	<input type="button" class="collieBtn" value="선택삭제">
+	<input type="button" class="collieBtn" value="선택삭제" id="delSelectedItem">
 	</div>
 	
 	<div class="priceWrapper">

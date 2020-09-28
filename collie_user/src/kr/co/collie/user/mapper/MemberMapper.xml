@@ -37,4 +37,11 @@
   	from member
   	where id= #{ id } and name = #{ name} and email = #{ email }
   </select>
+  
+  <select id="updateMemberPass" resultType="int" parameterType="kr.co.collie.user.member.vo.UpdatePassVO">
+  update member
+  set pass=#{newPass}
+  where id=#{id}
+  
+  </select>
 </mapper>

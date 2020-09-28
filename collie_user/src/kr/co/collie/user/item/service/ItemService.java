@@ -14,4 +14,11 @@ public class ItemService {
 		return list;
 	}
 
+	public List<ItemListDomain> getItemList(int cateNum) {
+		List<ItemListDomain> list = null;
+		ItemDAO dDAO = ItemDAO.getInstance();
+		list = dDAO.selectItemList(cateNum);
+		return list;
+	}
+
 }

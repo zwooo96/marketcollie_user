@@ -24,8 +24,17 @@ public class ItemDAO {
 	public List<ItemListDomain> selectSearchList(String keyword) {
 		List<ItemListDomain> list = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		list = ss.selectList("selectSearchItem", keyword);
+		list = ss.selectList("kr.co.collie.user.item.selectSearchItem", keyword);
 		ss.close();
 		return list;
 	}
+
+	public List<ItemListDomain> selectItemList(int cateNum) {
+		List<ItemListDomain> list = null;
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		list = ss.selectList("kr.co.collie.user.item.selectItemList",cateNum);
+		ss.close();
+		return list;
+	}
+	
 }

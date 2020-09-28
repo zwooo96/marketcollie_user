@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import kr.co.collie.user.cart.domain.CartGoodsDomain;
 import kr.co.collie.user.cart.service.CartService;
 import kr.co.collie.user.cart.vo.CartVO;
+import kr.co.collie.user.cart.vo.ItemCntVO;
 import kr.co.collie.user.member.domain.LoginDomain;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -42,14 +43,14 @@ public class CartController {
 	@RequestMapping(value="/cart/view.do", method=GET)
 	public String viewCart(HttpSession session, Model model) {
 		
-		////////////로그인 구현 완료시 구문 삭제////////////////
+		////////////////////로그인 구현 완료시 삭제/////////////////
 		LoginDomain user_info1=new LoginDomain();
 		user_info1.setMember_num(2);
 		user_info1.setId("test1");
 		user_info1.setName("이해민");
 		user_info1.setEmail("test1@gmail.com");
 		user_info1.setPhone("010-1111-2222");
-		user_info1.setZip_code("54321");
+		user_info1.setZipcode("54321");
 		user_info1.setAddr("서울특별시 마포구 풍성빌딩");
 		user_info1.setAddr_detail("2층 쌍용강북교육센터");
 		session.setAttribute("user_info", user_info1);
@@ -65,28 +66,30 @@ public class CartController {
 		return "cart/view_cart";
 	}//viewCart
 	
-	@RequestMapping(value="/plus_cnt.do", method=POST)
+	@RequestMapping(value="/modify_cnt.do", method=POST)
 	@ResponseBody
-	public String plusItemCnt(String param_cart_num) throws NumberFormatException{
+	public String modifyItemCnt(String cart_num, ItemCntVO icVO) throws NumberFormatException{
 		String json=null;
 		
-		int cartNum=Integer.parseInt(param_cart_num);
-		json=new CartService().plusItemCnt(cartNum);
+		icVO.setCartNum(Integer.parseInt(cart_num));
+		json=new CartService().modifyItemCnt(icVO);
 		
 		return json;
 	}//plusItemCnt
 	
-	@RequestMapping(value="/minus_cnt.do", method=POST)
+	@RequestMapping(value="/remove_Item.do", method=POST)
 	@ResponseBody
-	public String minusItemCnt(String param_cart_num) throws NumberFormatException{
+	public String removeSelectedItem(String[] cart_num, HttpSession session) throws NumberFormatException{
 		String json=null;
-		
-		int cartNum=Integer.parseInt(param_cart_num);
-		if(cartNum>1) {
-			json=new CartService().minusItemCnt(cartNum);
-		}//end if
+		int[] cartNumArr=new int[cart_num.length];
+		for(int i=0; i<cart_num.length; i++) {
+			cartNumArr[i]=Integer.parseInt(cart_num[i]);
+		}//end for
+		LoginDomain userInfo=(LoginDomain)session.getAttribute("user_info");
+		json=new CartService().removeSelectedItem(cartNumArr,userInfo.getMember_num());
 		
 		return json;
-	}//minusItemCnt
+	}//plusItemCnt
+	
 	
 }//class

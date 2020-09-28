@@ -2,24 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.collie.user.item">
   
-<!--   <resultMap id="itemListDomain" type="kr.co.collie.user.item.domain.ItemListDomain" > -->
-<!--   	<result column="ITEM_NUM" property="item_num"/> -->
-<!--   	<result column="ITEM_PRICE" property="item_price"/> -->
-<!--   	<result column="ITEM_NAME" property="item_name"/> --> 
-<!--   	<result column="ITEM_IMG" property="item_img"/> -->
-<!--   </resultMap> -->
-     
-<!--   <select id="selectSearchItem"  resultType="itemListDomain" parameterType="String"> -->
-<!--   	select ITEM_NUM, ITEM_PRICE, ITEM_NAME, ITEM_IMG  -->
-<!--   	from ITEM -->
-<!--   	where item_name like '%'||${item_name}||'%' -->
-<!--   </select> -->
-  <select id="selectSearchItem"  resultType="kr.co.collie.user.item.domain.ItemListDomain" parameterType="String">
+  <resultMap id="itemListDomain" type="kr.co.collie.user.item.domain.ItemListDomain" >
+  	<result column="ITEM_NUM" property="item_num"/>
+  	<result column="ITEM_PRICE" property="item_price"/>
+  	<result column="ITEM_NAME" property="item_name"/> 
+  	<result column="ITEM_IMG" property="item_img"/>
+  </resultMap>
+  
+  <select id="selectSearchItem"  resultMap="itemListDomain" parameterType="String">
   	select ITEM_NUM, ITEM_PRICE, ITEM_NAME, ITEM_IMG 
-  	from ITEM 
+  	from ITEM
   	where item_name like '%'||#{item_name}||'%'
-  	
   </select>
   
+  <select id="selectItemList"  resultMap="itemListDomain" parameterType="int">
+  	select ITEM_NUM, ITEM_PRICE, ITEM_NAME, ITEM_IMG 
+  	from ITEM
+  	where cate_num = #{cate_num}
+  </select>
   
 </mapper>
