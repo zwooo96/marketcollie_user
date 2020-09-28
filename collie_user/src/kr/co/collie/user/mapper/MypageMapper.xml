@@ -16,6 +16,30 @@
 		where member_num = #{ member_num }
 	</update>
 	
+	<!-- 정보 가져오기 -->
+	<select id="selectMemberInfo" parameterType="kr.co.collie.user.mypage.vo.PassCheckVO" resultType="kr.co.collie.user.mypage.domain.MemberInfoDomain">
+		select	id, name, email, phone, addr, addr_detail, zipcode
+		from member
+		where member_num = #{ member_num } and pass = #{ pass } 
+	</select>
+
 	
+	      <!-- 개인정보 수정하는 일  -->
+       <update id="updateMember" parameterType="kr.co.collie.user.mypage.vo.ModifyMemberVO" >
+              update member
+              set name= #{ name }, phone = #{ phone } , addr= #{ addr } , zipcode=#{ zipcode }, addr_detail= #{ addr_detail }
+              where id= #{ id }
+       </update>
+
+    <!-- 개인정보 확인하는 일  -->
+       <select id="selectMember" resultType="kr.co.collie.user.mypage.domain.MemberInfoDomain">
+       select id, name, email, phone, addr, addr_detail, zipcode
+       from member
+       </select>
+       
+       <!-- 회원 탈퇴하는 일  -->
+       <update id="">
+              
+       </update>
 	
 </mapper>

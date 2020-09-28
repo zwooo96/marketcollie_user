@@ -138,10 +138,7 @@ $(function(){
 	
 	<div id="container">
 	
-	장바구니
-	<c:forEach var="cart" items="${ cart_list }">
-	<c:out value="${ cart.item_name }"/><br/>
-	</c:forEach>
+	
 	
 	</div>
 	
