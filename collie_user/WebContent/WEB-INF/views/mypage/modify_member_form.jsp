@@ -28,7 +28,33 @@
 $(function(){
 	
 	
+	$("#chkEmail").click(function(){
+			var email = $("#email").val();
+		if(email.length > 3){
+		$.ajax({
+			url : "email_chk_ajax.do",
+			type : "get",
+			data : "email="+email,
+			dataType : "json",
+			error : function( ){
+				alert("errror가 발생했습니다.");
+			},
+			success : function( jsonObj ){
+					if( jsonObj.email_dup_result ){
+						$("#email_chk").html(" 중복된 이메일 입니다. ");
+					}else{
+						$("#email_chk").html(" 사용 가능한 이메일 입니다. ")
+					}//end if
+				}//success
+			});//ajax
+		}//end if
+		});//click
 		
+		$("#joinBtn").click(function(){
+			
+			$("#joinFrm").submit();
+		});//click
+	
 });//ready
 
 function sample4_execDaumPostcode() {
@@ -79,36 +105,22 @@ function sample4_execDaumPostcode() {
 </head>
 <body>
 <div id="wrap">
-	<div id="header">
+
 	<jsp:include page="../common/header.jsp" />
-	</div>
 	
 	<div id="container">
 	
 		<form action="join_process.do" method="post" id="joinFrm">
 		<table >
 		<tr>
-			<td style="width: 50px">아이디</td><td><input type="text" style="width: 200px" name="id" id="id" readonly="readonly" value="${ sessionScope. }"/></td>
-		</tr>
-		<tr >
-			<td colspan="2" id="id_check"></td>
-		</tr>
-		<tr>
-			<td style="width: 100px">비밀번호</td><td><input type="password" style="width: 200px" name="pass" placeholder="비밀번호를 입력해주세요"/></td>
+			<td style="width: 50px">아이디</td><td><input type="text" style="width: 200px" name="id" id="id" readonly="readonly" value="${ id }"/></td>
 		</tr>
 		<tr> 
-			<td style="width: 100px">비밀번호 확인</td><td><input type="password" style="width: 200px" placeholder="비밀번호를 한번 더 입력해주세요"/></td>
+			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" readonly="readonly" value="${ name }"/></td>
 		</tr> 
 		<tr> 
-			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" placeholder="이름을 입력해주세요"/></td>
+			<td style="width: 100px">이메일</td><td><input type="text" style="width: 200px" name="email" id="email" readonly="readonly" value="${ email }"/></td>
 		</tr> 
-		<tr> 
-			<td style="width: 100px">이메일</td><td><input type="text" style="width: 200px" name="email" id="email" placeholder="예:collie@collie.com"/></td>
-			<td><input type="button" id="chkEmail" value="중복확인"/></td>
-		</tr> 
-		<tr >
-			<td colspan="2" id="email_chk"></td>
-		</tr>
 		<tr> 
 			<td style="width: 100px">휴대폰</td><td><input type="text" style="width: 200px" name="phone" placeholder="숫자만 입력해주세요"/></td>
 		</tr> 
@@ -124,7 +136,7 @@ function sample4_execDaumPostcode() {
 		</tr> 
 		</table>
 	<hr>
-	<span><input type="button" value="회원가입" id="joinBtn" /></span>
+	<span><input type="button" value="탈퇴하기" id="removeBtn" /></span><span><input type="button" value="회원정보 수정" id="modifyBtn"></span>
 	</form>
 	</div>
 	

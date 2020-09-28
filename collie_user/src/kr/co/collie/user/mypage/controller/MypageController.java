@@ -3,12 +3,14 @@ package kr.co.collie.user.mypage.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.service.MemberService;
@@ -22,20 +24,51 @@ import kr.co.collie.user.mypage.vo.UpdatePassVO;
 @Controller
 public class MypageController {
 	
-	@RequestMapping(value="/mypage/memberInfo_form.do" , method=POST)
-	public String memberInfoForm(HttpSession session, Model model, PassCheckVO pcVO ) {
+	@RequestMapping(value="/mypage/check_member_form.do", method=GET)
+	public String checkMypageForm() {
+		
+		return "mypage/check_member_form";
+	}//checkPassForm
+	
+	@RequestMapping(value="/mypage/check_member.do", method=POST)
+	public String checkMember(PassCheckVO pcVO, HttpSession session, Model model) {
+		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
+		
+		pcVO.setMember_num(2);
+		MypageService ms = new MypageService();
 		try {
-			LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-			MypageService ms = new MypageService();
-			ld.setMember_num(pcVO.getMember_num());
-			MemberInfoDomain mid = ms.getMemberInfo(pcVO);
-			model.addAttribute("mem_info", mid);
+			boolean flag = ms.getMemberPass(pcVO);
 		} catch(NullPointerException npe) {
-			npe.getStackTrace();
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
 		}//end catch
 		
-		return "mypage/memberinfo";
+		return "forward:/mypage/memberInfo_form.do";
+	}//checkPassForm
+	
+	@RequestMapping(value="/mypage/memberInfo_form.do" , method=POST)
+	public String memberInfoForm() {	
+		
+		return "mypage/modify_member_form";
 	}//memberInfoForm
+	
+	
+	@RequestMapping(value="/mypage/update_member.do", method=POST)
+	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
+		boolean flag = false;
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		mmVO.setId(ld.getId());
+		MypageService ms = new MypageService();
+		flag = ms.modifyMemberInfo(mmVO);
+		
+		
+		return "forward:/mypage/memberInfo_form.do";
+	}//modifyMemberInfo
+	
+	
+	
+	
+	
+	
 	
 	//String id?
 	/**
@@ -86,18 +119,6 @@ public class MypageController {
 		return "mypage/check_pass_form";
 	}//checkPassForm
 	
-	@RequestMapping(value="/mypage/check_member.do", method=GET)
-	public String checkMypageForm(PassCheckVO pcVO, HttpSession session) {
-		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		try {
-		ld.setMember_num(pcVO.getMember_num());
-		}catch( NullPointerException npe ) {
-			npe.getStackTrace();
-		}//end catch
-		
-		return "mypage/check_member_form";
-	}//checkPassForm
-	
 	/**
 	 * 마이페이지 - 비밀번호 변경 : 현재 비밀번호 확인하는 일
 	 * @param pcVO
@@ -146,17 +167,6 @@ public class MypageController {
 		return "redirect:mypage/modify_pass_result.jsp";
 	}//checkPassForm
 	
-	@RequestMapping(value="/mypage/update_member.do")
-	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
-		boolean flag = false;
-		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		
-		MypageService ms = new MypageService();
-		flag = ms.modifyMemberInfo(mmVO);
-		
-		
-		return "redirect:mypage/t";
-	}//modifyMemberInfo
 	
 	
 }//MypageController

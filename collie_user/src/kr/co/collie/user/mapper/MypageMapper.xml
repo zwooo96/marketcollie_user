@@ -38,7 +38,9 @@
        </select>
        
        <!-- 회원 탈퇴하는 일  -->
-       <update id="">
+       <update id="removeMember" parameterType="kr.co.collie.user.mypage.vo.DeleteMemberVO">
+            update member
+            set 
               
        </update>
 	
