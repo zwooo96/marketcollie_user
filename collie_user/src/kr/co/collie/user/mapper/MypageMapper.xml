@@ -16,15 +16,6 @@
 		where member_num = #{ member_num }
 	</update>
 	
-	<!-- 개인정보 수정하는 일  -->
-	<update id="updateMember">
-		update member
-		set name= #{ name }, phone= #{ phone },
-		where  
-	</update>
 	
-	<!-- 회원 탈퇴하는 일  -->
-	<update id="">
-		
-	</update>
+	
 </mapper>

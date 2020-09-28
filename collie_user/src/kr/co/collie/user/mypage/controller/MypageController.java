@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.mypage.service.MypageService;
+import kr.co.collie.user.mypage.vo.ModifyMemberVO;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
 import kr.co.collie.user.mypage.vo.UpdatePassVO;
 

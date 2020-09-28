@@ -44,7 +44,7 @@ public class MemberDAO {
 		ss.insert("insertMember", jVO);
 			
 		ss.commit();
-			
+		
 		ss.close();
 			
 	}//insertMember

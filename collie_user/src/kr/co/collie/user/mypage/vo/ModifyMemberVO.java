@@ -1,7 +1,15 @@
 package kr.co.collie.user.mypage.vo;
 
 public class ModifyMemberVO {
-	private String name, phone, addr, addr_detail, zipCode;
+	private String id, name, phone, addr, addr_detail, zipCode;	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
