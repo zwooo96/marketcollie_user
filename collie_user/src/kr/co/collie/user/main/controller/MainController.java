@@ -28,7 +28,7 @@ public class MainController {
 		Object loginSession = session.getAttribute("user_info") ;
 		if(loginSession != null && loginSession instanceof LoginDomain) {
 			LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-			session.setAttribute("user_info", ld);
+			session.setAttribute("user_info", ld); 
 		}
 		
 		model.addAttribute("cate_list",cateList);
