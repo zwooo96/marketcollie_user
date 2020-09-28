@@ -1,9 +1,14 @@
 package kr.co.collie.user.mypage.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import kr.co.collie.user.dao.GetCollieHandler;
+import kr.co.collie.user.mypage.domain.QnaDetailDomain;
+import kr.co.collie.user.mypage.domain.QnaListDomain;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
+import kr.co.collie.user.mypage.vo.QnaVO;
 import kr.co.collie.user.mypage.vo.UpdatePassVO;
 import oracle.net.aso.s;
 
@@ -46,5 +51,22 @@ public class MypageDAO {
 		
 		return cnt;
 	}//updateMemberPass
+	
+	public List<QnaListDomain> selectQnaList(int mNum){
+		List<QnaListDomain> list = null;
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		list = ss.selectList("selectQnaList");
+		ss.close();
+		
+		return list;
+	}//selectQnaList
+	
+	public QnaDetailDomain selectQnaDetail(QnaVO qVO) {
+		QnaDetailDomain qdd = null;
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		qdd = ss.selectOne("selectQnaDetail",qVO);
+		ss.close();
+		return qdd;
+	}
 	
 }//class

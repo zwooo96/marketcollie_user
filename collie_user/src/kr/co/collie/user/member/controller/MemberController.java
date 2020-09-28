@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.service.MemberService;
@@ -151,5 +153,9 @@ public class MemberController {
 		return "find/modify_result";
 	}
 	
-
+	@RequestMapping(value = "/logout.do")
+	public String logout(SessionStatus ss) {
+		ss.setComplete();
+		return "redirect:index.do";
+	}
 }//class
