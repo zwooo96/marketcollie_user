@@ -35,7 +35,7 @@ public class MypageDAO {
 	}//selectMemberPass
 	
 	/**
-	 * 비밀번호를 변경하는 일
+	 * 비밀번호를 변경하는 일.
 	 * @param upVO
 	 * @return
 	 */

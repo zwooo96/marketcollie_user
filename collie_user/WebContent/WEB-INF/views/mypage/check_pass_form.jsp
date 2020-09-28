@@ -20,7 +20,7 @@
 #qnaBox:hover{ cursor: pointer; }
 #cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
 #contentWrap{ margin-left: 240px }
-#containerSubTitle{ border-bottom: 1px solid #333; margin-top: 30px; padding-bottom: 0px; color: #666666 }
+#containerSubTitle{ border-bottom: 1px solid #17462B; margin-top: 30px; padding-bottom: 0px; color: #666666 }
 #containerContent{ margin-top: 90px }
 #passForm{ width: 620px; margin: 0px auto }
 .col-form-label{ padding-right: 0px; padding-left: 50px }

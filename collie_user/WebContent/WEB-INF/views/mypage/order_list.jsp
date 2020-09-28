@@ -21,14 +21,22 @@
 #cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
 #contentWrap{ margin-left: 240px }
 #containerSubTitle{ border-bottom: 1px solid #17462B; margin-top: 30px; padding-bottom: 0px; color: #666666 }
-#containerContent{ margin-top: 90px }
-#passForm{ width: 820px; margin: 0px auto; padding-left: 70px }
-.col-form-label{ padding-right: 0px }
-#newPass, #newPassConfirm{ width:300px;  padding: 0px; margin-left: 60px }
-hr{ margin-top: 90px }
-.btn-primary{ background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 250px; padding: 15px  }
-.btn-primary:hover, .btn-primary:active, .btn-primary:focus{ background-color: #17462B !important; }
-#btnDiv{ width: 250px; margin: 0px auto }
+#containerContent{ margin-top: 30px }
+#orderTime{ color:#666666; font-weight: bold; }
+.table-borderless{ margin:0px }
+#orderGoods{ border: 1px solid #dee2e6; margin-top: 10px; padding: 10px; padding-left: 20px; padding-right: 20px }
+#goodsTitle{ border-bottom: 1px solid #dee2e6; padding: 0px; padding-top: 10px; padding-bottom: 10px; font-weight: bold }
+.btn-outline-success{ border-color: #17462B !important; color: #17462B !important }
+.btn-outline-success:hover, #btn-outline-success:active, #btn-outline-success:focus { border-color: #17462B !important; background-color: #17462B !important; color:#FFFFFF !important }
+#goodsImg{ padding-left: 0px; width: 10px; padding-top: 20px }
+#goodsThm{ width:60px; height: 75px }
+#orderNum{ }
+#orderNumColumn{ padding-top: 20px; width: 80px; vertical-align: middle; font-size: 14px }
+#orderNumValue{ padding-top: 20px; width:500px; vertical-align: middle; font-size: 14px }
+#orderPrice{}
+#orderPriceColumn{ font-size: 14px }
+#orderPriceValue{ font-size: 14px }
+#goodsBtn{ vertical-align: middle; }
 </style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -37,14 +45,7 @@ hr{ margin-top: 90px }
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	var msg = '${ msg }';
-	if( msg != '' ){
-		alert(msg);
-		location.href = history.back();
-	}//end if
-	$("#btn-primary").click(function(){
-		
-	});
+	
 });//ready
 </script>
 </head>
@@ -58,28 +59,31 @@ $(function(){
 		<jsp:include page="../common/mypage_menu.jsp"/>
 		<div id="contentWrap">
 		<div id="containerTitle">
-			<h4><strong>비밀번호 변경</strong></h4>
+			<h4><strong>주문 내역</strong></h4>
 		</div>
-			<div id="containerSubTitle">
-			</div>
+			<div id="containerSubTitle"></div>
 			<div id="containerContent">
-				<form id="passForm" method="post" action="modify_pass.do">
-				  <div class="form-group row">
-				   	<label for="inputEmail3" class="col-sm-2 col-form-label"><strong>새 비밀번호</strong></label>
-				    <div class="col-sm-10">
-				      <input type="password" class="form-control" id="newPass">
-				    </div>
-				  </div>
-				  <div class="form-group row">
-				   	<label for="inputEmail3" class="col-sm-2 col-form-label"><strong>새 비밀번호 확인</strong></label>
-				    <div class="col-sm-10">
-				      <input type="password" class="form-control" id="newPassConfirm">
-				    </div>
-				  </div>
-				</form>
-				<hr>
-				<div id="btnDiv">
-					<button type="button" class="btn btn-primary">확인</button>
+				<div id="orderTime">2020.05.24 (23시 33분)</div>
+				<div id="orderGoods">
+				<table class="table table-borderless">
+				    <tr>
+				      <td colspan="4" id="goodsTitle">[플라하반] 오트밀 6종 외 1건</td>
+				    </tr>
+				    <tr id="orderNum">
+				      <td rowspan="2" id="goodsImg">
+				      	<img src="http://localhost/collie_user/common/images/item/bread.png" id="goodsThm"/>
+				      </td>
+				      <td id="orderNumColumn">주문번호</td>
+				      <td id="orderNumValue"><strong>138412351</strong></td>
+				      <td rowspan="2" id="goodsBtn">
+				      	<button type="button" class="btn btn-outline-success">상세보기</button>
+				      </td>
+				    </tr>
+				    <tr id="orderPrice">
+				      <td id="orderPriceColumn">결제금액</td>
+				      <td id="orderPriceValue"><strong>10,800원</strong></td>
+				    </tr>
+				</table>
 				</div>
 			</div>
 		</div>
