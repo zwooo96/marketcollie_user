@@ -81,7 +81,7 @@ public class MemberDAO {
 	
 		public static void main(String[] args) {
 			
-			System.out.println(memDAO.getInstance().dupEmail("gildong@gmadil.com"));
+			System.out.println(memDAO.getInstance().dupEmail("gildong@gmail.com"));
 			
 		}
 	

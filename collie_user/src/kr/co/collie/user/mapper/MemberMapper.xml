@@ -15,13 +15,15 @@
   </insert>
   
   <select id="dupId" parameterType="String" resultType="String">
-	select id from member 
+	select id 
+	from member 
 	where id = #{ id }  
   </select>
   
   <select id="dupEmail" parameterType="String" resultType="String">
-	select email from member 
-	where email = #{ email }  
+	select email 
+	from member 
+	where email = #{ email }      
   </select>
   
   <select id="selectMemberId" resultType="String" parameterType="kr.co.collie.user.member.vo.FindIdVO">

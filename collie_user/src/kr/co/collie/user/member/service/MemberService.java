@@ -3,7 +3,6 @@ package kr.co.collie.user.member.service;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import kr.co.collie.user.member.dao.MemberDAO;
@@ -46,21 +45,6 @@ public class MemberService {
 		return flag;
 	}//join
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public int dupIdCheck(String id) {
-		int check = 0;
-		
-		MemberDAO mDAO = MemberDAO.getInstance();
-		
-		mDAO.dupId(id);
-		
-		return check;
-	}//dupIdCheck
-	
-=======
->>>>>>> refs/heads/phg
-=======
 	public String dupIdCheck(String id) {
 		String rid = "";
 		
@@ -81,15 +65,12 @@ public class MemberService {
 		
 		rEmail = mDAO.dupEmail(email);
 		
-		JSONObject json = new JSONObject();
-		json.put("email_dup_result", rEmail != null );
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("email_dup_result", rEmail != null );
 		
-		return json.toJSONString();
+		return jsonObj.toJSONString();
 	}//dupEmailCheck
 	
-	
-	
->>>>>>> refs/heads/phg
 	public String findId(FindIdVO fidVO) {
 		String id = "";
 		MemberDAO mDAO = MemberDAO.getInstance();

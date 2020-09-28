@@ -50,11 +50,7 @@ public class MemberController {
 	public String joinClause() {
 		
 		
-<<<<<<< HEAD
-		return "member/join_form";
-=======
 		return "member/join_frm";
->>>>>>> refs/heads/phg
 	}//joinForm
 	
 	@RequestMapping(value="/join_process.do", method= POST)
@@ -76,37 +72,16 @@ public class MemberController {
 		return "member/join";
 	}//join
 	
-	@RequestMapping(value="/id_chk_ajax.do", method=RequestMethod.GET)
+	@RequestMapping(value="/id_chk_ajax.do", method=GET)
 	@ResponseBody
-<<<<<<< HEAD
-	public int formAjax(String id) {
-<<<<<<< HEAD
-		int result=0;
-=======
->>>>>>> refs/heads/phg
-=======
 	public String dupIdAjax(String id) {
->>>>>>> refs/heads/phg
 		
 		MemberService ms = new MemberService();
-<<<<<<< HEAD
-		result = ms.dupIdCheck(id);
-=======
->>>>>>> refs/heads/phg
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		return result;
-=======
-		return 1;
->>>>>>> refs/heads/phg
-	}//test
-=======
 		return ms.dupIdCheck(id);
 	}//dupIdAjax
->>>>>>> refs/heads/phg
 	
-	@RequestMapping(value="/email_chk_ajax.do", method=RequestMethod.GET)
+	@RequestMapping(value="/email_chk_ajax.do", method=GET)
 	@ResponseBody
 	public String dupEmailAjax(String email) {
 		
