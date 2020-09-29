@@ -24,7 +24,7 @@ public class QnaDAO {
 	public int insertQna(QnaAddVO qaVO) {
 		int cnt=0;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		ss.insert("insertQna",qaVO);
+		cnt = ss.insert("insertQna",qaVO);
 		if(cnt==1) {
 			ss.commit();
 		}

@@ -154,8 +154,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/logout.do")
-	public String logout(SessionStatus ss) {
-		ss.setComplete();
+	public String logout(HttpSession ss) {
+		ss.removeAttribute("user_info");
 		return "redirect:index.do";
 	}
 }//class

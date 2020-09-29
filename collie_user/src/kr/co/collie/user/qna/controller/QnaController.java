@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.qna.service.QnaService;
 import kr.co.collie.user.qna.vo.QnaAddVO;
 
@@ -29,15 +30,16 @@ public class QnaController {
 
 	@RequestMapping(value = "/qna/qna_process.do", method = RequestMethod.POST)
 	public String qnaAdd(QnaAddVO qaVO, HttpSession ss) {
-		String url="forward:/qna/qna_form";
+		String url="/qna/qna_form"; //입력 실패시 form으로 돌아감
+		
 		QnaService qs = new QnaService();
 		
-		String id =(String)ss.getAttribute("user_info");
-		qaVO.setMemeber_num(id);
+		LoginDomain lod = (LoginDomain)ss.getAttribute("user_info");
+		qaVO.setMember_num(lod.getMember_num());
 		
-		if(!qs.addQna(qaVO)) {
+		if(!qs.addQna(qaVO)) { //flag가 true이면 입력 실패 , flag가 false인 경우 입력 성공이므로 if문 실행
 			
-			url="forward:/qna/qna";
+			url="/qna/qna";
 			
 		}
 		

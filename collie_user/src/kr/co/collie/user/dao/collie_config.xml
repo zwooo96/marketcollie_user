@@ -23,5 +23,6 @@
     <mapper resource="kr/co/collie/user/mapper/MemberMapper.xml"/>
     <mapper resource="kr/co/collie/user/mapper/ItemMapper.xml"/>
     <mapper resource="kr/co/collie/user/mapper/MypageMapper.xml"/>
+    <mapper resource="kr/co/collie/user/mapper/QnaMapper.xml"/>
   </mappers>
 </configuration>

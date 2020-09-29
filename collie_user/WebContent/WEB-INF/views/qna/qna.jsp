@@ -37,6 +37,8 @@ $(function(){
 	<div id="container">
 		
 		문의가 등록되었습니다.
+		
+		
 	<a href="javascript:history.back()">뒤로</a>
 	</div>
 	
