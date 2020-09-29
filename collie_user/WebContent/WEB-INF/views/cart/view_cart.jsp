@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,7 +109,7 @@ $(function(){
 				param+="cart_num="+this.value+"&";
 			})
 			$.ajax({
-				url:"../remove_Item.do",
+				url:"remove_Item.do",
 				type:"POST",
 				data:param,
 				dataType:"JSON",
@@ -122,10 +123,25 @@ $(function(){
 							$("#tableContent"+this.value).remove();
 						})
 			      	}//end if
+			      	if($("#cartTable tr").length==1){
+			      		var empty='<tr>';
+			      		empty+='<td colspan="6" style="height: 80px; text-align: center; vertical-align: middle;">장바구니에 담긴 상품이 없습니다.</td>';
+			      		empty+='</tr>';
+			      		$("#cartTable tbody").html(empty);
+			      	}//end if
 				}//success
 			});//ajax
 		}else{
 			alert("삭제할 상품을 선택해주세요.")
+		}
+	});//click
+	
+	$("#orderBtn").click(function() {
+		var chkCnt=$("[name='cart_num']:checked").length;
+		if( chkCnt > 0){
+			$("#cartListFrm").submit();
+		}else{
+			alert("주문할 상품을 선택해주세요.")
 		}
 	});//click
 	
@@ -134,7 +150,7 @@ $(function(){
 function modifyCnt(cart_num, item_cnt, item_price,flag){
 	
  	$.ajax({
-		url:"../modify_cnt.do",
+		url:"modify_cnt.do",
 		type:"POST",
 		data:"cart_num="+cart_num+"&flag="+flag,
 		dataType:"JSON",
@@ -163,7 +179,8 @@ function modifyCnt(cart_num, item_cnt, item_price,flag){
 				output+='<img src="/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px">';
 				output+='</button>';
 				$("#quantity"+cart_num).html(output);
-				$("#itemTotalPrice"+cart_num).html((item_cnt*item_price)+"원");
+				var totalPrice=item_cnt*item_price;
+				$("#itemTotalPrice"+cart_num).html(totalPrice.toLocaleString()+"원");
 			}//end if
 	      	
 		}//success
@@ -173,7 +190,7 @@ function modifyCnt(cart_num, item_cnt, item_price,flag){
 
 function delItem(cart_num){
   	$.ajax({
-		url:"../remove_Item.do",
+		url:"remove_Item.do",
 		type:"POST",
 		data:"cart_num="+cart_num,
 		dataType:"JSON",
@@ -185,12 +202,16 @@ function delItem(cart_num){
 	      	if(jsonObj.flag=="success"){
 				$("#tableContent"+cart_num).remove();
 	      	}//end if
+	      	if($("#cartTable tr").length==1){
+	      		var empty='<tr>';
+	      		empty+='<td colspan="6" style="height: 80px; text-align: center; vertical-align: middle;">장바구니에 담긴 상품이 없습니다.</td>';
+	      		empty+='</tr>';
+	      		$("#cartTable tbody").html(empty);
+	      	}//end if
 		}//success
 	});//ajax
 	
 }//delItem
-
-
 
 </script>
 </head>
@@ -209,13 +230,13 @@ function delItem(cart_num){
 	<div id="containerContentWrapper">
 	
 	<div id="table">
-	<form id="cartListFrm" action="" method="post">
-	<table class="table">
+	<form id="cartListFrm" action="order_form.do" method="post">
+	<table class="table" id="cartTable">
 	  <thead>
 	    <tr>
 	      <th style="width: 50px; text-align: center; vertical-align: middle; color: #5e5e5e">
 	      <div class="checks">
-	      <input type="checkbox" id="selectAll">
+	      <input type="checkbox" id="selectAll" checked="checked">
 	      <label for="selectAll"><span></span></label>
 	      </div>
 	      </th>
@@ -227,11 +248,16 @@ function delItem(cart_num){
 	    </tr>
 	  </thead>
 	  <tbody>
+	  	<c:if test="${ empty cart_list }">
+	  	<tr>
+	  	<td colspan="6" style="height: 80px; text-align: center; vertical-align: middle;">장바구니에 담긴 상품이 없습니다.</td>
+	  	</tr>
+	  	</c:if>
 		<c:forEach var="cart" items="${ cart_list }">
 	    <tr id="tableContent${ cart.cart_num }" class="tableContent">
 	      <td style="vertical-align: middle; text-align: center;">
 	      <div class="checks">
-	      	<input type="checkbox" name="cart_num" value="${ cart.cart_num }" id="select${ cart.cart_num }">
+	      	<input type="checkbox" name="cart_num" value="${ cart.cart_num }" id="select${ cart.cart_num }" checked="checked">
 		    <label for="select${ cart.cart_num }"><span></span></label>
 	      </div>
 	      </td>
@@ -241,12 +267,12 @@ function delItem(cart_num){
 	      <td style="vertical-align: middle;">
 	      	<a href="#${ cart.item_num }" style="font-weight: bold;"><c:out value="${ cart.item_name }"/></a>
 	      	<br/>
-	      	<a style="font-size: 10pt"><c:out value="${ cart.item_price }"/>원</a>
+	      	<a style="font-size: 10pt"><fmt:formatNumber pattern="#,###" value="${ cart.item_price }"/>원</a>
 	      </td>
 	      <td style="vertical-align: middle; text-align: center;">
 	      	<div class="quantityWrap">
 	      	<div class="quantity" id="quantity${ cart.cart_num }">
-	      	<button type="button" class="icoBtn" onclick="modifyCnt(${cart.cart_num},${ cart.item_cnt },${ cart.item_price },'minus')">
+ 	      	<button type="button" class="icoBtn"<c:if test="${ cart.item_cnt>1 }"> onclick="modifyCnt(${cart.cart_num},${ cart.item_cnt },${ cart.item_price },'minus')"</c:if>>
 	      	<img src="/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px">
 	      	</button>
 	      	<c:out value="${ cart.item_cnt }"/>
@@ -257,7 +283,7 @@ function delItem(cart_num){
 	      	</div>
 	      </td>
 	      <td id="itemTotalPrice${ cart.cart_num }"style="vertical-align: middle; text-align: center; font-weight: bold">
-	      	<c:out value="${ cart.item_price * cart.item_cnt }"/>원
+	      	<fmt:formatNumber pattern="#,###" value="${ cart.item_price * cart.item_cnt }"/>원
 	      </td>
 	      <td style="vertical-align: middle; text-align: center;">
 	      	<img src="/collie_user/cart/cart_x.png" onclick="delItem(${cart.cart_num})" style="width: 10px; cursor: pointer;">
@@ -294,7 +320,7 @@ function delItem(cart_num){
 	</div>
 	</div>
 	
-	<input type="button" value="주문하기" class="collieBtnMain">
+	<input type="button" value="주문하기" id="orderBtn" class="collieBtnMain">
 	
 	</div>
 	

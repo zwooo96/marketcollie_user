@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.service.MemberService;
 import kr.co.collie.user.mypage.domain.MemberInfoDomain;
+import kr.co.collie.user.mypage.domain.QnaDetailDomain;
 import kr.co.collie.user.mypage.service.MypageService;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
 import kr.co.collie.user.mypage.vo.MyOrderVO;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
+import kr.co.collie.user.mypage.vo.QnaVO;
 import kr.co.collie.user.mypage.vo.UpdatePassVO;
 
 @Controller
@@ -169,8 +171,32 @@ public class MypageController {
 		MypageService ms = new MypageService();
 		boolean flag = ms.modifyPass(upVO);
 		
-		return "redirect:mypage/modify_pass_result.jsp";
+		return "redirect:modify_pass_result.jsp";
 	}//checkPassForm
+	
+	@RequestMapping(value = "/mypage/qna_list.do",method = {GET,POST})
+	public String qnaList(String mNum,Model model,HttpSession ss) {
+		
+		MypageService ms = new MypageService();
+		model.addAttribute("qna_list",ms.getQnaList(Integer.parseInt(mNum)));
+		
+		return "mypage/qna_list";
+	}
+	@RequestMapping(value = "/mypage/qna_detail.do",method = GET)
+	public String qnaDetail(String qNum, HttpSession session, Model model) throws NumberFormatException {
+		
+		QnaVO qVO=new QnaVO();
+		LoginDomain lDomain=(LoginDomain)session.getAttribute("user_info");
+		qVO.setMember_num(lDomain.getMember_num());
+		qVO.setQna_num(Integer.parseInt(qNum));
+		
+		MypageService ms = new MypageService();
+		QnaDetailDomain qdd=ms.getQnaDetail(qVO);
+		model.addAttribute("qna_data",qdd);
+		
+		return "mypage/qna_detail";
+		
+	}
 	
 	
 	

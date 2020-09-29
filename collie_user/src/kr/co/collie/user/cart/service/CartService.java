@@ -62,4 +62,13 @@ public class CartService {
 		return json.toJSONString();
 	}//removeSelectedItem
 	
+	public List<CartGoodsDomain> getOrderGoods(int[] cartNum){
+		List<CartGoodsDomain> list=null;
+		
+		CartDAO cDAO=CartDAO.getInstance();
+		list=cDAO.selectOrderGoods(cartNum);
+		
+		return list;
+	}//getMyCart
+	
 }//class

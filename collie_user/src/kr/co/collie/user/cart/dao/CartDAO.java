@@ -74,4 +74,14 @@ public class CartDAO {
 		return cnt;
 	}//deleteSelectedItem
 	
+	public List<CartGoodsDomain> selectOrderGoods(int[] cartNum){
+		List<CartGoodsDomain> list=null;
+		
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		list=ss.selectList("selectOrderGoods",cartNum);
+		ss.close();
+		
+		return list;
+	}//selectCartGoods
+	
 }//class
