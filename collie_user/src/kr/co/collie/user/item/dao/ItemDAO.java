@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.item.domain.ItemListDomain;
+import kr.co.collie.user.pagination.RangeVO;
 
 public class ItemDAO {
 	
@@ -20,21 +21,38 @@ public class ItemDAO {
 		}
 		return iDAO;
 	}
-	
-	public List<ItemListDomain> selectSearchList(String keyword) {
+
+	/**
+	 * 
+	 * 카테고리 값을 이용해서 아이템 목록을 가져온다.
+	 * @param rVO
+	 * @return
+	 */
+	public List<ItemListDomain> selectItemList(RangeVO rVO) {
 		List<ItemListDomain> list = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		list = ss.selectList("kr.co.collie.user.item.selectSearchItem", keyword);
+		list = ss.selectList("kr.co.collie.user.item.selectItemList",rVO);
 		ss.close();
 		return list;
 	}
+	
 
-	public List<ItemListDomain> selectItemList(int cateNum) {
-		List<ItemListDomain> list = null;
+
+	public int selectItemListCnt(RangeVO rVO) {
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		list = ss.selectList("kr.co.collie.user.item.selectItemList",cateNum);
+		int cnt = ss.selectOne("kr.co.collie.user.item.selectItemListCnt", rVO);
 		ss.close();
-		return list;
+		return cnt;
+	}
+	
+	public static void main(String[] args) {
+		RangeVO rVO = new RangeVO();
+		rVO.setField_name("item_name");
+		rVO.setField_value("박달재");
+		rVO.setCurrent_page(1);
+		
+//		System.out.println(ItemDAO.getInstance().selectItemList(rVO));
+		System.out.println(ItemDAO.getInstance().selectItemListCnt(rVO));
 	}
 	
 }
