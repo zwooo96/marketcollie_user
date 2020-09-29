@@ -154,7 +154,7 @@ public class MemberController {
         return "find/modify_result";
     }
 
-@RequestMapping(value="/mypage/modify_member_info.do", method=GET)
+    @RequestMapping(value="/mypage/modify_member_info.do", method=GET)
     public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
          
          

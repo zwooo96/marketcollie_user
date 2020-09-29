@@ -4,14 +4,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import kr.co.collie.user.mypage.dao.MypageDAO;
-<<<<<<< HEAD
 import kr.co.collie.user.mypage.domain.MemberInfoDomain;
 import kr.co.collie.user.mypage.vo.DeleteMemberVO;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
-=======
 import kr.co.collie.user.mypage.domain.QnaDetailDomain;
 import kr.co.collie.user.mypage.domain.QnaListDomain;
->>>>>>> branch 'master' of https://github.com/rectangle714/marketcollie_user.git
 import kr.co.collie.user.mypage.vo.PassCheckVO;
 import kr.co.collie.user.mypage.vo.QnaVO;
 import kr.co.collie.user.mypage.vo.UpdatePassVO;
@@ -56,7 +53,6 @@ public class MypageService {
 		return flag;
 	}//modifyPass
 	
-<<<<<<< HEAD
 	/**
 	 * 멤버 정보 가져오기
 	 * @param pcVO
@@ -99,11 +95,6 @@ public class MypageService {
 		
 	}//removeMember
 	
-}//class
-
-
-
-=======
 	public List<QnaListDomain> getQnaList(int mNum){
 		List<QnaListDomain> list = null;
 		MypageDAO mpDAO = MypageDAO.getInstance();
@@ -121,5 +112,7 @@ public class MypageService {
 		return qdd;
 	}//getQnaDetail
 	
-}
->>>>>>> branch 'master' of https://github.com/rectangle714/marketcollie_user.git
+}//class
+
+	
+	

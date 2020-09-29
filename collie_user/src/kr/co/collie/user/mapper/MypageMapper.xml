@@ -44,7 +44,6 @@
             where  member_num = #{ member_num } and pass = #{ pass }   
        </update>
 	
-=======
 	<select id="selectQnaList" parameterType="int" resultType="kr.co.collie.user.mypage.domain.QnaListDomain">
 		select qna_subject,input_date
 		from qna
@@ -56,5 +55,4 @@
 		from qna
 		where member_num=#{member_num} and qna_num=#{qna_num}
 	</select>
->>>>>>> branch 'master' of https://github.com/rectangle714/marketcollie_user.git
 </mapper>
