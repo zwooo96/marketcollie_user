@@ -15,10 +15,33 @@
   	where item_name like '%'||#{item_name}||'%'
   </select>
   
-  <select id="selectItemList"  resultMap="itemListDomain" parameterType="int">
-  	select ITEM_NUM, ITEM_PRICE, ITEM_NAME, ITEM_IMG 
-  	from ITEM
-  	where cate_num = #{cate_num}
+  <select id="selectItemList"  resultMap="itemListDomain" parameterType="kr.co.collie.user.pagination.RangeVO">
+  	select ITEM_NUM, ITEM_PRICE, ITEM_NAME, ITEM_IMG
+	from(
+	  	select ITEM_NUM, ITEM_PRICE, ITEM_NAME, ITEM_IMG, row_number() over(order by item_num) rnum
+	  	from ITEM
+	  	where
+	  	<if test='field_name eq "cate_num".toString()'>
+		  	${field_name} = #{field_value}
+		</if>
+		<if test='field_name eq "item_name".toString()'>
+			${field_name} like '%'||#{field_value}||'%'
+		</if>
+	  	)
+	where rnum between #{start_num} and #{end_num}
+  </select>
+  
+  <select id="selectItemListCnt" resultType="int" parameterType="kr.co.collie.user.pagination.RangeVO">
+	  	select count(*)
+	  	from ITEM
+	  		<where>
+			  	<if test='field_name eq "cate_num".toString()'>
+				  	${field_name} = #{field_value}
+			  	</if>
+				<if test='field_name eq "item_name".toString()'>
+					${field_name} like '%'||#{field_value}||'%'
+				</if>	  	
+	  		</where>
   </select>
   
 </mapper>

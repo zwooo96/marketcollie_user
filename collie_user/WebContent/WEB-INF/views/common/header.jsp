@@ -4,22 +4,27 @@
 <script type="text/javascript">
 	function clickSearchBtn() {
 		if($("#keyword").val().trim().length > 0) {
+			$("#keyword_value").val($("#keyword").val());
 			$("#searchFrm").submit();
 		}
+	}
+	
+	function getCategoryItems(cate_num) {
+		$("#categoryfrm"+cate_num).submit();
 	}
 </script>
 <div id="header">
 	<div id="headerContent">
 	<ul class="nav justify-content-end">
-		<c:if test="${empty user_info}">
+		<c:if test="${empty sessionScope.login_info}">
 		  <li class="nav-item">
 		    <a class="nav-link active" href="/collie_user/login_form.do" style="color: #000000">로그인</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="/collie_user/join_form.do" style="color: #000000">회원가입</a>
+		    <a class="nav-link" href="/collie_user/join_clause.do" style="color: #000000">회원가입</a>
 		  </li>
 		</c:if>
-		<c:if test="${not empty user_info}">
+		<c:if test="${not empty sessionScope.login_info}">
 			<li class="nav-item">
 			    <a class="nav-link active" href="/collie_user/logout.do" style="color: #000000">로그아웃</a>
 			  </li>
@@ -28,7 +33,7 @@
 			  </li>
 		</c:if>
 	  <li class="nav-item">
-	    <a class="nav-link" href="/collie_user/qna/form.do" style="color: #000000">고객센터</a>
+	    <a class="nav-link" href="/collie_user/qna/qna_form.do" style="color: #000000">고객센터</a>
 	  </li>
 	</ul>
 	
@@ -50,16 +55,22 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<c:forEach var="cate" items="${cate_list}">
-						<a class="dropdown-item" href="/collie_user/item/searchByCate.do?cate_num=${cate.cate_num}">
+						<form action="/collie_user/item/getItems.do" id="categoryfrm${cate.cate_num}" method="post">
+						<a class="dropdown-item" href="javascript:getCategoryItems(${cate.cate_num})">
 							<label><c:out value="${cate.cate_name}"/></label>
+							<input type="hidden" name="field_name"  value="cate_num" />
+							<input type="hidden" name="field_value" value="${cate.cate_num}" />
 						</a>
+						</form>
 					</c:forEach>
 				</div>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0" id="searchFrm" action="/collie_user/item/search.do">
+			<form class="form-inline my-2 my-lg-0" id="searchFrm" action="/collie_user/item/getItems.do" method="post">
 				<span class="d-inline-block" tabindex="0" data-place="bottom" data-toggle="tooltip" title="검색어를 입력하세요." id="search_tooltip">
 					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" />
+					<input type="hidden" name="field_name"  value="item_name" />
+					<input type="hidden" name="field_value" id="keyword_value" />
 				</span>
 				<a href="javascript:clickSearchBtn()" id="searchBtn"><img src="/collie_user/common/images/search.png" style="width: 30px; margin-right: 50px"></a>
 			</form>
