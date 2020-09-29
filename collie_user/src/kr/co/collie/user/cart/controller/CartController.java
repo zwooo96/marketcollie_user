@@ -66,7 +66,7 @@ public class CartController {
 		return "cart/view_cart";
 	}//viewCart
 	
-	@RequestMapping(value="/modify_cnt.do", method=POST)
+	@RequestMapping(value="/cart/modify_cnt.do", method=POST)
 	@ResponseBody
 	public String modifyItemCnt(String cart_num, ItemCntVO icVO) throws NumberFormatException{
 		String json=null;
@@ -77,7 +77,7 @@ public class CartController {
 		return json;
 	}//plusItemCnt
 	
-	@RequestMapping(value="/remove_Item.do", method=POST)
+	@RequestMapping(value="/cart/remove_Item.do", method=POST)
 	@ResponseBody
 	public String removeSelectedItem(String[] cart_num, HttpSession session) throws NumberFormatException{
 		String json=null;
@@ -91,5 +91,16 @@ public class CartController {
 		return json;
 	}//plusItemCnt
 	
+	@RequestMapping(value="/cart/order_form.do", method=POST)
+	public String viewOrderForm(String[] cart_num, Model model) {
+		int[] cartNumArr=new int[cart_num.length];
+		for(int i=0; i<cart_num.length; i++) {
+			cartNumArr[i]=Integer.parseInt(cart_num[i]);
+		}//end for
+		List<CartGoodsDomain> list=new CartService().getOrderGoods(cartNumArr);
+		model.addAttribute("cart_list", list);
+		
+		return "cart/order_form";
+	}//viewOrderForm
 	
 }//class
