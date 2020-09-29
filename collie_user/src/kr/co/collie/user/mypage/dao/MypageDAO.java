@@ -83,6 +83,7 @@ public class MypageDAO {
          return cnt;
      }//updateMemberInfo
     
+    
     public int deleteMember(DeleteMemberVO dmVO) {
     	int cnt = 0;
     	
@@ -91,16 +92,16 @@ public class MypageDAO {
     	
     	ss.close();
     	return cnt;
-    }
+    }//deleteMember
      
     
     public static void main(String[] args) {
-		PassCheckVO pcVO = new PassCheckVO();
-    	pcVO.setMember_num(2);
-		pcVO.setPass("tZxnvxlqR1gZHkL3ZnDOug==");
+    	DeleteMemberVO dm = new  DeleteMemberVO();
+    	dm.setMember_num(50);
+		dm.setPass("tZxnvxlqR1gZHkL3ZnDOug==");
     	MypageDAO mDAO = MypageDAO.getInstance();
     	
-    	System.out.println(mDAO.selectMemberInfo(pcVO));
+    	System.out.println(mDAO.deleteMember(dm));
 	}
     
     

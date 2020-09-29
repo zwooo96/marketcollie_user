@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 
 import kr.co.collie.user.mypage.dao.MypageDAO;
 import kr.co.collie.user.mypage.domain.MemberInfoDomain;
+import kr.co.collie.user.mypage.vo.DeleteMemberVO;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
 import kr.co.collie.user.mypage.vo.UpdatePassVO;
@@ -73,6 +74,17 @@ public class MypageService {
 		
 		return flag;
 	}//modifyMemberInfo
+	
+	public boolean removeMember(DeleteMemberVO dmVO) {
+		
+		boolean flag=false;
+		
+		MypageDAO mDAO = MypageDAO.getInstance();
+		flag = mDAO.deleteMember(dmVO)==1;
+		
+		return flag;
+		
+	}//removeMember
 	
 }//class
 

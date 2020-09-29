@@ -27,33 +27,24 @@
 <script type="text/javascript">
 $(function(){
 	
-	
-	$("#chkEmail").click(function(){
-			var email = $("#email").val();
-		if(email.length > 3){
-		$.ajax({
-			url : "email_chk_ajax.do",
-			type : "get",
-			data : "email="+email,
-			dataType : "json",
-			error : function( ){
-				alert("errror가 발생했습니다.");
-			},
-			success : function( jsonObj ){
-					if( jsonObj.email_dup_result ){
-						$("#email_chk").html(" 중복된 이메일 입니다. ");
-					}else{
-						$("#email_chk").html(" 사용 가능한 이메일 입니다. ")
-					}//end if
-				}//success
-			});//ajax
-		}//end if
-		});//click
+	var msg = '${ msg }';
+	if( msg != '' ){
+		alert(msg);
+		location.href = history.back();
+	}//end if
 		
-		$("#joinBtn").click(function(){
+	$("#removeBtn").click(function(){
 			
-			$("#joinFrm").submit();
-		});//click
+		
+			
+	});//click
+	
+	$("#modifyBtn").click(function(){
+		
+		alert("변경되었습니다.");
+		$("#Frm").submit;
+		
+	});//click
 	
 });//ready
 
@@ -100,6 +91,7 @@ function sample4_execDaumPostcode() {
 }
 
 	
+	
 
 </script>
 </head>
@@ -107,19 +99,18 @@ function sample4_execDaumPostcode() {
 <div id="wrap">
 
 	<jsp:include page="../common/header.jsp" />
-	
+	<%  %>
 	<div id="container">
-	
-		<form action="join_process.do" method="post" id="joinFrm">
+		<form action="mypage/update_member.do" method="post" id="Frm">
 		<table >
 		<tr>
-			<td style="width: 50px">아이디</td><td><input type="text" style="width: 200px" name="id" id="id" readonly="readonly" value="${ id }"/></td>
+			<td style="width: 50px">아이디</td><td><input type="text" style="width: 200px" name="id" id="id" /></td>
 		</tr>
 		<tr> 
-			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" readonly="readonly" value="${ name }"/></td>
+			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" /></td>
 		</tr> 
 		<tr> 
-			<td style="width: 100px">이메일</td><td><input type="text" style="width: 200px" name="email" id="email" readonly="readonly" value="${ email }"/></td>
+			<td style="width: 100px">이메일</td><td><input type="text" style="width: 200px" name="email" id="email" /></td>
 		</tr> 
 		<tr> 
 			<td style="width: 100px">휴대폰</td><td><input type="text" style="width: 200px" name="phone" placeholder="숫자만 입력해주세요"/></td>

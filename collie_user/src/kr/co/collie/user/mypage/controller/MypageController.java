@@ -6,6 +6,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ import kr.co.collie.user.mypage.vo.UpdatePassVO;
 @Controller
 public class MypageController {
 	
-	@RequestMapping(value="/mypage/check_member_form.do", method=GET)
+	@RequestMapping(value="/mypage/check_member_form.do", method= GET)
 	public String checkMypageForm() {
 		
 		return "mypage/check_member_form";
@@ -33,8 +34,10 @@ public class MypageController {
 	@RequestMapping(value="/mypage/check_member.do", method=POST)
 	public String checkMember(PassCheckVO pcVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
-		
+		// pcVO.setMember_num(ld.getMember_num());
 		pcVO.setMember_num(2);
+	
+		
 		MypageService ms = new MypageService();
 		try {
 			boolean flag = ms.getMemberPass(pcVO);
@@ -46,7 +49,9 @@ public class MypageController {
 	}//checkPassForm
 	
 	@RequestMapping(value="/mypage/memberInfo_form.do" , method=POST)
-	public String memberInfoForm() {	
+	public String memberInfoForm(HttpSession session) {	
+		
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		
 		return "mypage/modify_member_form";
 	}//memberInfoForm
@@ -56,15 +61,15 @@ public class MypageController {
 	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
 		boolean flag = false;
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		mmVO.setId(ld.getId());
+		
 		MypageService ms = new MypageService();
+		
+		
 		flag = ms.modifyMemberInfo(mmVO);
 		
 		
-		return "forward:/mypage/memberInfo_form.do";
+		return "redirect:mypage/modify_member_result.jsp";
 	}//modifyMemberInfo
-	
-	
 	
 	
 	
