@@ -67,10 +67,6 @@ public class MypageController {
 		return "mypage/modify_member_result.jsp";
 	}//modifyMemberInfo
 	
-	
-	
-	
-	
 	//String id?
 	/**
 	 * 주문내역 목록을 불러오는 일
@@ -191,7 +187,5 @@ public class MypageController {
 		return "mypage/qna_detail";
 		
 	}
-	
-	
 	
 }//MypageController

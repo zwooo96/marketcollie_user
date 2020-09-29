@@ -16,5 +16,5 @@ public class DeleteMemberVO {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	
+	 
 }
