@@ -3,19 +3,13 @@ package kr.co.collie.user.mypage.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.collie.user.member.domain.LoginDomain;
-import kr.co.collie.user.member.service.MemberService;
-import kr.co.collie.user.mypage.domain.MemberInfoDomain;
 import kr.co.collie.user.mypage.domain.QnaDetailDomain;
 import kr.co.collie.user.mypage.service.MypageService;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
@@ -70,7 +64,7 @@ public class MypageController {
 		flag = ms.modifyMemberInfo(mmVO);
 		
 		
-		return "redirect:mypage/modify_member_result.jsp";
+		return "mypage/modify_member_result.jsp";
 	}//modifyMemberInfo
 	
 	
