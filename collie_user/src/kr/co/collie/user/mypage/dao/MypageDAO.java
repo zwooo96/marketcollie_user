@@ -47,6 +47,7 @@ public class MypageDAO {
 	public int updateMemberPass(UpdatePassVO upVO) {
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
 		int cnt = ss.update("kr.co.collie.user.mypage.updateMemberPass", upVO);
+		ss.commit();
 		ss.close();
 		
 		return cnt;

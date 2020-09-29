@@ -30,13 +30,11 @@
 .btn-outline-success:hover, #btn-outline-success:active, #btn-outline-success:focus { border-color: #17462B !important; background-color: #17462B !important; color:#FFFFFF !important }
 #goodsImg{ padding-left: 0px; width: 10px; padding-top: 20px }
 #goodsThm{ width:60px; height: 75px }
-#orderNum{ }
-#orderNumColumn{ padding-top: 20px; width: 80px; vertical-align: middle; font-size: 14px }
-#orderNumValue{ padding-top: 20px; width:500px; vertical-align: middle; font-size: 14px }
-#orderPrice{}
-#orderPriceColumn{ font-size: 14px }
-#orderPriceValue{ font-size: 14px }
-#goodsBtn{ vertical-align: middle; }
+#orderNumColumn{ padding-top: 25px; width: 80px; vertical-align: middle; font-size: 14px }
+#orderNumValue{ padding-top: 25px; width:500px; vertical-align: middle; font-size: 14px }
+#orderPriceColumn{ font-size: 14px; padding-top: 0px }
+#orderPriceValue{ font-size: 14px; padding-top: 0px }
+#goodsBtn{ vertical-align: middle; width:85px; padding-right: 0px }
 </style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -45,7 +43,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	
+	$("#btn").click(function(){
+		location.href = "/collie_user/mypage/order_detail.do";
+	});//click
 });//ready
 </script>
 </head>
@@ -76,7 +76,7 @@ $(function(){
 				      <td id="orderNumColumn">주문번호</td>
 				      <td id="orderNumValue"><strong>138412351</strong></td>
 				      <td rowspan="2" id="goodsBtn">
-				      	<button type="button" class="btn btn-outline-success">상세보기</button>
+				      	<button type="button" class="btn btn-outline-success" id="btn">상세보기</button>
 				      </td>
 				    </tr>
 				    <tr id="orderPrice">

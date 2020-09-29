@@ -41,6 +41,11 @@ public class MypageService {
 		boolean flag = false;
 		
 		MypageDAO mpDAO = MypageDAO.getInstance();
+		try {
+			upVO.setPass(DataEncrypt.messageDigest("MD5", upVO.getPass()));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}//end catch
 		flag = mpDAO.updateMemberPass(upVO)==1;
 		
 		return flag;

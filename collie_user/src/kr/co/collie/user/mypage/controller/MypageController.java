@@ -123,7 +123,7 @@ public class MypageController {
 		MypageService ms = new MypageService();
 		boolean flag = ms.modifyPass(upVO);
 		
-		return "redirect:mypage/modify_pass_result.jsp";
+		return "redirect:modify_pass_result.jsp";
 	}//checkPassForm
 	
 	@RequestMapping(value = "/mypage/qna_list.do",method = {GET,POST})
