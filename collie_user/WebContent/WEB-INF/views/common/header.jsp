@@ -16,7 +16,7 @@
 <div id="header">
 	<div id="headerContent">
 	<ul class="nav justify-content-end">
-		<c:if test="${empty sessionScope.login_info}">
+		<c:if test="${empty user_info}">
 		  <li class="nav-item">
 		    <a class="nav-link active" href="/collie_user/login_form.do" style="color: #000000">로그인</a>
 		  </li>
@@ -24,7 +24,7 @@
 		    <a class="nav-link" href="/collie_user/join_clause.do" style="color: #000000">회원가입</a>
 		  </li>
 		</c:if>
-		<c:if test="${not empty sessionScope.login_info}">
+		<c:if test="${not empty user_info}">
 			<li class="nav-item">
 			    <a class="nav-link active" href="/collie_user/logout.do" style="color: #000000">로그아웃</a>
 			  </li>

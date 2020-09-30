@@ -1,6 +1,11 @@
 package kr.co.collie.user.cart.controller;
 
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -14,11 +19,6 @@ import kr.co.collie.user.cart.service.CartService;
 import kr.co.collie.user.cart.vo.CartVO;
 import kr.co.collie.user.cart.vo.ItemCntVO;
 import kr.co.collie.user.member.domain.LoginDomain;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.util.List;
 
 @SessionAttributes({"item_num", "item_cnt"})
 @Controller
@@ -44,16 +44,16 @@ public class CartController {
 	public String viewCart(HttpSession session, Model model) {
 		
 		////////////////////·Î±×ÀÎ ±¸Çö ¿Ï·á½Ã »èÁ¦/////////////////
-		LoginDomain user_info1=new LoginDomain();
-		user_info1.setMember_num(2);
-		user_info1.setId("test1");
-		user_info1.setName("ÀÌÇØ¹Î");
-		user_info1.setEmail("test1@gmail.com");
-		user_info1.setPhone("010-1111-2222");
-		user_info1.setZipcode("54321");
-		user_info1.setAddr("¼­¿ïÆ¯º°½Ã ¸¶Æ÷±¸ Ç³¼ººôµù");
-		user_info1.setAddr_detail("2Ãþ ½Ö¿ë°­ºÏ±³À°¼¾ÅÍ");
-		session.setAttribute("user_info", user_info1);
+//		LoginDomain user_info1=new LoginDomain();
+//		user_info1.setMember_num(2);
+//		user_info1.setId("test1");
+//		user_info1.setName("ÀÌÇØ¹Î");
+//		user_info1.setEmail("test1@gmail.com");
+//		user_info1.setPhone("010-1111-2222");
+//		user_info1.setZipcode("54321");
+//		user_info1.setAddr("¼­¿ïÆ¯º°½Ã ¸¶Æ÷±¸ Ç³¼ººôµù");
+//		user_info1.setAddr_detail("2Ãþ ½Ö¿ë°­ºÏ±³À°¼¾ÅÍ");
+//		session.setAttribute("user_info", user_info1);
 		///////////////////////////////////////////////////
 		
 		LoginDomain user_info=(LoginDomain)session.getAttribute("user_info");

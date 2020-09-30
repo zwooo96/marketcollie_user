@@ -20,7 +20,7 @@ public class ItemController {
 		List<ItemListDomain> list = iService.getItemList(rVO);
 		model.addAttribute("item_list", list);
 		model.addAttribute("paging", rVO);
-		return "/item/category_item_result";
+		return "/item/search_item_result";
 	}
 	
 	@RequestMapping(value="/item/search.do", method=RequestMethod.POST)
