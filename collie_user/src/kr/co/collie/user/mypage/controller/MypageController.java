@@ -68,44 +68,6 @@ public class MypageController {
 	}//modifyMemberInfo
 	
 	//String id?
-	/**
-	 * 주문내역 목록을 불러오는 일
-	 * @param session
-	 * @param id
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/mypage/order_list.do")
-	public String orderList(HttpSession session, String id, Model model) {
-		
-		return "mypage/order_list";
-	}//orderList
-	
-	/**
-	 * 주문내역 상세를 불러오는 일
-	 * @param moVO
-	 * @param session
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/mypage/order_detail.do")
-	public String orderDetail(MyOrderVO moVO, HttpSession session, Model model) {
-		
-		return "mypage/order_detail";
-	}//orderDetail
-	
-	/**
-	 * 주문내역을 취소하는 일
-	 * @param moVO
-	 * @param session
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/mypage/order_cancel.do")
-	public String cancelOrder(MyOrderVO moVO, HttpSession session, Model model) {
-		
-		return "mypage/order_cancel";
-	}//orderList
 	
 	/**
 	 * 마이페이지 - 비밀번호 변경 : 현재 비밀번호 확인하는 폼
