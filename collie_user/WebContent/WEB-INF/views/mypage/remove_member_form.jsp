@@ -57,7 +57,7 @@ $(function(){
 		<jsp:include page="../common/mypage_menu.jsp"/>
 		<div id="contentWrap">
 		<div id="containerTitle">
-			<h4><strong>개인정보 수정</strong></h4>
+			<h4><strong>비밀번호 변경</strong></h4>
 		</div>
 			<div id="containerSubTitle">
 				<h5><strong>비밀번호 재확인</strong></h5>

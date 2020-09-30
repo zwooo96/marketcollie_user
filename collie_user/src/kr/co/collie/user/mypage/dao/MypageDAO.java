@@ -70,30 +70,34 @@ public class MypageDAO {
          SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
          
          cnt = ss.update("kr.co.collie.user.mypage.updateMember", mmVO);
+         ss.commit();
+         
          ss.close();
          
          return cnt;
      }//updateMemberInfo
     
     
+    /**
+     * È¸¿ø Å»ÅðÇÏ´Â ÀÏ
+     * @param dmVO
+     * @return
+     */
     public int deleteMember(DeleteMemberVO dmVO) {
     	int cnt = 0;
     	
     	SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
     	cnt = ss.update("kr.co.collie.user.mypage.removeMember", dmVO);
     	
+    	ss.commit();
     	ss.close();
     	return cnt;
     }//deleteMember
      
     
     public static void main(String[] args) {
-    	DeleteMemberVO dm = new  DeleteMemberVO();
-    	dm.setMember_num(50);
-		dm.setPass("tZxnvxlqR1gZHkL3ZnDOug==");
-    	MypageDAO mDAO = MypageDAO.getInstance();
     	
-    	System.out.println(mDAO.deleteMember(dm));
+    	
 	}
     
 	/**
@@ -126,5 +130,7 @@ public class MypageDAO {
 		ss.close();
 		return qdd;
 	}
+	
+	
 	
 }//class

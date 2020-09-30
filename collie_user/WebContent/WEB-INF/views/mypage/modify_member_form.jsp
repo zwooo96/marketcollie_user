@@ -35,14 +35,13 @@ $(function(){
 		
 	$("#removeBtn").click(function(){
 			
-		
+		location.href="remove_member_form.do"
 			
 	});//click
 	
 	$("#modifyBtn").click(function(){
 		
-		alert("변경되었습니다.");
-		$("#Frm").submit;
+		$("#Frm").submit();
 		
 	});//click
 	
@@ -101,7 +100,7 @@ function sample4_execDaumPostcode() {
 	<jsp:include page="../common/header.jsp" />
 	<%  %>
 	<div id="container">
-		<form action="mypage/update_member.do" method="post" id="Frm">
+		<form action="update_member.do" method="post" id="Frm">
 		<table >
 		<tr>
 			<td style="width: 50px">아이디</td><td><input type="text" style="width: 200px" name="id" id="id" /></td>

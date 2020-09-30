@@ -79,7 +79,7 @@ public class MypageService {
 		boolean flag = false;
 		
 		MypageDAO mDAO = MypageDAO.getInstance();
-		flag = mDAO.updateMemberInfo(mmVO)==1;
+		flag = mDAO.updateMemberInfo(mmVO)!=0;
 		
 		return flag;
 	}//modifyMemberInfo
@@ -89,7 +89,7 @@ public class MypageService {
 		boolean flag=false;
 		
 		MypageDAO mDAO = MypageDAO.getInstance();
-		flag = mDAO.deleteMember(dmVO)==1;
+		flag = mDAO.deleteMember(dmVO)!=0;
 		
 		return flag;
 		
