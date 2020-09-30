@@ -44,14 +44,14 @@
 	  		</where>
   </select>
   
-  <select id="selectItemDetail" resultType="int" parameterType="kr.co.collie.user.item.domain.ItemDetailDomain">
-  	select  ITEM_STOCK, ITEMP_PRICE, ITEM_NAME, ITEM_UNIT,ITEM_WEIGHT,ITEM_GUIDE,
+  <select id="selectItemDetail" parameterType="int" resultType="kr.co.collie.user.item.domain.ItemDetailDomain">
+  	select  ITEM_STOCK, ITEM_PRICE, ITEM_NAME, ITEM_UNIT,ITEM_WEIGHT,ITEM_GUIDE,
 			ITEM_TITLE, ITEM_SUBTITLE, ITEM_DETAIL, ITEM_IMG
 	from ITEM
-	where ITEM_NUM =#{ITME_NUM}
+	where ITEM_NUM =#{ITEM_NUM}
 	
   </select>
-  <select id="detailImgList" resultType="list" parameterType="String">
+  <select id="detailImgList" resultType="String" parameterType="int">
   	SELECT DETAIL_IMG
   	FROM IMAGE
   	WHERE ITEM_NUM =#{ITEM_NUM}

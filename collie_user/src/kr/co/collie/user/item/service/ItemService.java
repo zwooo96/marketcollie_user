@@ -65,11 +65,12 @@ public class ItemService {
 		return jo.toJSONString();
 	}
 	
-	public ItemDetailDomain viewItemDetail(int iNum) {
+	public ItemDetailDomain viewItemDetail(int item_Num) {
 		ItemDetailDomain idd = null;
 		
 		ItemDAO dDAO = ItemDAO.getInstance();
-		idd = dDAO.selectItemDetail(iNum);
+		idd = dDAO.selectItemDetail(item_Num);
+		idd.setDetailImgList(dDAO.detailImgList(item_Num));
 		return idd;
 	}
 

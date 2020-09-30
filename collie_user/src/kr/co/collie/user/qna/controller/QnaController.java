@@ -29,7 +29,7 @@ public class QnaController {
 	}
 
 	@RequestMapping(value = "/qna/qna_process.do", method = RequestMethod.POST)
-	public String qnaAdd(QnaAddVO qaVO, HttpSession ss) {
+	public String qnaAdd(QnaAddVO qaVO, HttpSession ss) throws NumberFormatException{
 		String url="/qna/qna_form"; //입력 실패시 form으로 돌아감
 		
 		QnaService qs = new QnaService();

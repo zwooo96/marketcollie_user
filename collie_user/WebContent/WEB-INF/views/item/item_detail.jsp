@@ -35,18 +35,24 @@ $(function(){
 	
 	<c:import url="/header.do" />
 	<div id="container">
-	<c:set var="qna" value="${qna_data }"/>
-	<c:if test="${qna_data eq null }">
-		등록된 문의가 없습니다.
-	</c:if>
-	<table>
-	<tr>
-		<td><c:out value="${qna_data.qna_subject }"/></td>
-	</tr>
-	</table>
 	
 	<div id="containerContentWrap">
 	<div id="containerContent">
+	
+	<c:set var="item" value="${item_detail}"/>	
+	<img src="${item.item_img }">
+	<c:out value="${item.item_name}"/><br/>
+	<c:out value="${item.item_price}"/><br/>
+	
+	판매단위 <c:out value="${item.item_unit}"/><br/>
+	중량/용량 <c:out value="${item.item_weight}"/><br/>
+	안내사항 <c:out value="${item.item_guide}"/><br/>
+	재고 <c:out value="${item.item_stock}"/><br/>
+	
+	<c:out value="${item.item_title}"/><br/>
+	<c:out value="${item.item_subtitle}"/><br/>
+	<c:out value="${item.item_detail}"/><br/>
+	
 		
 	</div>
 	</div>

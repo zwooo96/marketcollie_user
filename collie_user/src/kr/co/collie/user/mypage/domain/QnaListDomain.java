@@ -3,7 +3,7 @@ package kr.co.collie.user.mypage.domain;
 public class QnaListDomain {
 	
 	private int qna_num;
-	private String qna_subject, qna_input_date;
+	private String qna_subject, input_date;
 	public int getQna_num() {
 		return qna_num;
 	}
@@ -16,12 +16,11 @@ public class QnaListDomain {
 	public void setQna_subject(String qna_subject) {
 		this.qna_subject = qna_subject;
 	}
-	public String getQna_input_date() {
-		return qna_input_date;
+	public String getInput_date() {
+		return input_date;
 	}
-	public void setQna_input_date(String qna_input_date) {
-		this.qna_input_date = qna_input_date;
+	public void setInput_date(String input_date) {
+		this.input_date = input_date;
 	}
 	
-
 }

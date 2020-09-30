@@ -127,10 +127,10 @@ public class MypageController {
 	}//checkPassForm
 	
 	@RequestMapping(value = "/mypage/qna_list.do",method = {GET,POST})
-	public String qnaList(String mNum,Model model,HttpSession ss) {
-		
+	public String qnaList(Model model,HttpSession ss) {
+		LoginDomain ldd = (LoginDomain)ss.getAttribute("user_info");
 		MypageService ms = new MypageService();
-		model.addAttribute("qna_list",ms.getQnaList(Integer.parseInt(mNum)));
+		model.addAttribute("qna_list",ms.getQnaList(ldd.getMember_num()));
 		
 		return "mypage/qna_list";
 	}
