@@ -4,7 +4,7 @@ public class QnaDetailDomain {
 	
 	private int qna_num;
 	private String qna_subject,qna_content,input_date,
-				reply_content,reply_date;
+				qna_reply,reply_date;
 	public int getQna_num() {
 		return qna_num;
 	}
@@ -29,11 +29,11 @@ public class QnaDetailDomain {
 	public void setInput_date(String input_date) {
 		this.input_date = input_date;
 	}
-	public String getReply_content() {
-		return reply_content;
+	public String getQna_reply() {
+		return qna_reply;
 	}
-	public void setReply_content(String reply_content) {
-		this.reply_content = reply_content;
+	public void setQna_reply(String qna_reply) {
+		this.qna_reply = qna_reply;
 	}
 	public String getReply_date() {
 		return reply_date;

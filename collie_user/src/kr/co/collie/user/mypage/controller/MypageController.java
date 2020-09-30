@@ -152,12 +152,12 @@ public class MypageController {
 		return "mypage/qna_list";
 	}
 	@RequestMapping(value = "/mypage/qna_detail.do",method = GET)
-	public String qnaDetail(String qNum, HttpSession session, Model model) throws NumberFormatException {
+	public String qnaDetail(String qna_num, HttpSession session, Model model) throws NumberFormatException {
 		
 		QnaVO qVO=new QnaVO();
 		LoginDomain lDomain=(LoginDomain)session.getAttribute("user_info");
 		qVO.setMember_num(lDomain.getMember_num());
-		qVO.setQna_num(Integer.parseInt(qNum));
+		qVO.setQna_num(Integer.parseInt(qna_num));
 		
 		MypageService ms = new MypageService();
 		QnaDetailDomain qdd=ms.getQnaDetail(qVO);

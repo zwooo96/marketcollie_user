@@ -51,7 +51,8 @@
 	</select>
 	
 	<select id="selectQnaDetail" parameterType="int" resultType="kr.co.collie.user.mypage.domain.QnaDetailDomain">
-		select qna_num,qna_subject,qna_content,input_date,qna_flag,reply_content,reply_date
+		select qna_num,qna_subject,qna_content, to_char(input_date,'yyyy-mm-dd') input_date,
+				qna_flag,qna_reply, to_char(reply_date,'yyyy-mm-dd') reply_date 
 		from qna
 		where member_num=#{member_num} and qna_num=#{qna_num}
 	</select>
