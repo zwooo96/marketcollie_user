@@ -33,6 +33,13 @@ public class ItemController {
 		return "/item/search_item_json";
 	}
 	
+	@RequestMapping(value = "/item/detail.do",method = {RequestMethod.GET,RequestMethod.POST})
+	public String viewItemDetail(String iNum,Model model) {
+		ItemService iservice = new ItemService();
+		model.addAttribute("item_detail",(iservice.viewItemDetail(Integer.parseInt(iNum))));
+		
+		return "/item/detail";
+	}
 	
 	
 }

@@ -6,6 +6,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import kr.co.collie.user.item.dao.ItemDAO;
+import kr.co.collie.user.item.domain.ItemDetailDomain;
 import kr.co.collie.user.item.domain.ItemListDomain;
 import kr.co.collie.user.pagination.RangeVO;
 
@@ -62,6 +63,14 @@ public class ItemService {
 		}
 		jo.put("item_list", ja);		
 		return jo.toJSONString();
+	}
+	
+	public ItemDetailDomain viewItemDetail(int iNum) {
+		ItemDetailDomain idd = null;
+		
+		ItemDAO dDAO = ItemDAO.getInstance();
+		idd = dDAO.selectItemDetail(iNum);
+		return idd;
 	}
 
 }

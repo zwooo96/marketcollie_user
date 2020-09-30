@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.co.collie.user.dao.GetCollieHandler;
+import kr.co.collie.user.item.domain.ItemDetailDomain;
 import kr.co.collie.user.item.domain.ItemListDomain;
 import kr.co.collie.user.pagination.RangeVO;
 
@@ -43,6 +44,23 @@ public class ItemDAO {
 		int cnt = ss.selectOne("kr.co.collie.user.item.selectItemListCnt", rVO);
 		ss.close();
 		return cnt;
+	}
+	
+	public ItemDetailDomain selectItemDetail(int iNum) {
+		ItemDetailDomain idd = null;
+		SqlSession ss =GetCollieHandler.getInstance().getSqlSession();
+		idd = ss.selectOne("selectItemDetail", iNum);
+		ss.close();
+		
+		return idd;
+	}
+	
+	public List<String> detailImgList(int iNum){
+		List<String> list = null;
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		list = ss.selectList("detailImgList",iNum);
+		ss.close();
+		return list;
 	}
 	
 	public static void main(String[] args) {
