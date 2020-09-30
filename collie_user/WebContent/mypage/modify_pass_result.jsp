@@ -42,7 +42,7 @@ $(function(){
 
 <div id="wrap">
 	
-	<jsp:include page="../WEB-INF/views/common/header.jsp" />
+	<c:import url="/header.do" />
 	
 	<div id="container">
 		<jsp:include page="../WEB-INF/views/common/mypage_menu.jsp"/>

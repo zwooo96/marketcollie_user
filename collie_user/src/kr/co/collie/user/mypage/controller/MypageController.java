@@ -3,7 +3,8 @@ package kr.co.collie.user.mypage.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -11,16 +12,88 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.collie.user.member.domain.LoginDomain;
+import kr.co.collie.user.mypage.domain.OrderListDomain;
 import kr.co.collie.user.mypage.domain.QnaDetailDomain;
-import kr.co.collie.user.mypage.service.MypageService; 
+import kr.co.collie.user.mypage.service.MypageService;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
 import kr.co.collie.user.mypage.vo.MyOrderVO;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
 import kr.co.collie.user.mypage.vo.QnaVO;
 import kr.co.collie.user.mypage.vo.UpdatePassVO;
+import kr.co.collie.user.pagination.RangeVO;
 
 @Controller
 public class MypageController {
+	
+	/**
+	 * 주문내역 목록을 불러오는 일
+	 * @param session
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/mypage/order_list.do")
+	public String orderList(HttpSession session, Model model, RangeVO rVO) {
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		rVO.setField_name("member_num");
+//		rVO.setField_value(ld.getMember_num());
+		rVO.setField_value(1);
+		
+		MypageService ms = new MypageService();
+		List<OrderListDomain> list = ms.getOrderList(rVO);
+		model.addAttribute("order_list", list);
+		model.addAttribute("paging", rVO);
+		
+		return "mypage/order_list";
+	}//orderList
+	
+	
+	/**
+	 * 주문 내역 페이지네이션 - 페이지번호 클릭 시 실행
+	 * @param session
+	 * @param model
+	 * @param rVO
+	 * @return
+	 */
+	public String orderListPaging(HttpSession session, Model model, RangeVO rVO) {
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		rVO.setField_name("member_num");
+//		rVO.setField_value(ld.getMember_num());
+		rVO.setField_value(1);
+		
+		MypageService ms = new MypageService();
+		List<OrderListDomain> list = ms.getOrderList(rVO);
+		String json = ms.orderListJson(list, rVO);
+		model.addAttribute("json", json);
+		
+		return "mypage/order_list";
+	}//orderListPaging
+	
+	/**
+	 * 주문내역 상세를 불러오는 일
+	 * @param moVO
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/mypage/order_detail.do")
+	public String orderDetail(MyOrderVO moVO, HttpSession session, Model model) {
+		
+		return "mypage/order_detail";
+	}//orderDetail
+	
+	/**
+	 * 주문내역을 취소하는 일
+	 * @param moVO
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/mypage/order_cancel.do")
+	public String cancelOrder(MyOrderVO moVO, HttpSession session, Model model) {
+		
+		return "mypage/order_cancel";
+	}//ordercancel
 	
 	@RequestMapping(value="/mypage/check_member_form.do", method= GET)
 	public String checkMypageForm() {
@@ -45,46 +118,30 @@ public class MypageController {
 		return "forward:/mypage/memberInfo_form.do";
 	}//checkPassForm
 	
-	/**
-	 * 변경 정보를 담는 폼
-	 * @return
-	 */
 	@RequestMapping(value="/mypage/memberInfo_form.do" , method=POST)
-	public String memberInfoForm( ) {
+	public String memberInfoForm(HttpSession session) {	
 		
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		
 		return "mypage/modify_member_form";
 	}//memberInfoForm
 	
 	
-	/**
-	 * 멤버 정보 변경하는 일
-	 * @param mmVO
-	 * @param session
-	 * @param model
-	 * @return
-	 */
 	@RequestMapping(value="/mypage/update_member.do", method=POST)
 	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
+		boolean flag = false;
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		
 		
 		MypageService ms = new MypageService();
 		
-		boolean flag = ms.modifyMemberInfo(mmVO);
+		
+		flag = ms.modifyMemberInfo(mmVO);
 		
 		
-		return "forward:modify_member_result.jsp";
+		return "mypage/modify_member_result.jsp";
 	}//modifyMemberInfo
 	
-	@RequestMapping( value="/mypage/remove_member_form.do", method=GET)
-	public String removeMemberInfoForm() {
-			
-		
-		
-		return"forward:remove_member_result.jsp";
-	}//removeMemberInfo
-	
+	//String id?
 	
 	/**
 	 * 마이페이지 - 비밀번호 변경 : 현재 비밀번호 확인하는 폼
@@ -144,20 +201,20 @@ public class MypageController {
 	}//checkPassForm
 	
 	@RequestMapping(value = "/mypage/qna_list.do",method = {GET,POST})
-	public String qnaList(Model model,HttpSession ss) {
-		LoginDomain ldd = (LoginDomain)ss.getAttribute("user_info");
+	public String qnaList(String mNum,Model model,HttpSession ss) {
+		
 		MypageService ms = new MypageService();
-		model.addAttribute("qna_list",ms.getQnaList(ldd.getMember_num()));
+		model.addAttribute("qna_list",ms.getQnaList(Integer.parseInt(mNum)));
 		
 		return "mypage/qna_list";
 	}
 	@RequestMapping(value = "/mypage/qna_detail.do",method = GET)
-	public String qnaDetail(String qna_num, HttpSession session, Model model) throws NumberFormatException {
+	public String qnaDetail(String qNum, HttpSession session, Model model) throws NumberFormatException {
 		
 		QnaVO qVO=new QnaVO();
 		LoginDomain lDomain=(LoginDomain)session.getAttribute("user_info");
 		qVO.setMember_num(lDomain.getMember_num());
-		qVO.setQna_num(Integer.parseInt(qna_num));
+		qVO.setQna_num(Integer.parseInt(qNum));
 		
 		MypageService ms = new MypageService();
 		QnaDetailDomain qdd=ms.getQnaDetail(qVO);

@@ -53,7 +53,7 @@ $(function(){
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<c:import url="/header.do" />
 	
 	<div id="container">
 		<jsp:include page="../common/mypage_menu.jsp"/>
@@ -63,25 +63,27 @@ $(function(){
 		</div>
 			<div id="containerSubTitle"></div>
 			<div id="containerContent">
-				<div id="orderTime">2020.05.24 (23시 33분)</div>
+				<div id="orderTime">
+					${ order_list[0].input_date }
+				</div>
 				<div id="orderGoods">
 				<table class="table table-borderless">
 				    <tr>
-				      <td colspan="4" id="goodsTitle">[플라하반] 오트밀 6종 외 1건</td>
+				      <td colspan="4" id="goodsTitle">${ order_list[0].item_name }</td>
 				    </tr>
 				    <tr id="orderNum">
 				      <td rowspan="2" id="goodsImg">
 				      	<img src="http://localhost/collie_user/common/images/item/bread.png" id="goodsThm"/>
 				      </td>
 				      <td id="orderNumColumn">주문번호</td>
-				      <td id="orderNumValue"><strong>138412351</strong></td>
+				      <td id="orderNumValue"><strong>${ order_list[0].order_num }</strong></td>
 				      <td rowspan="2" id="goodsBtn">
 				      	<button type="button" class="btn btn-outline-success" id="btn">상세보기</button>
 				      </td>
 				    </tr>
 				    <tr id="orderPrice">
 				      <td id="orderPriceColumn">결제금액</td>
-				      <td id="orderPriceValue"><strong>10,800원</strong></td>
+				      <td id="orderPriceValue"><strong>${ order_list[0].total_price }원</strong></td>
 				    </tr>
 				</table>
 				</div>
