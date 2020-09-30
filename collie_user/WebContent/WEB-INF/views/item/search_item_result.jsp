@@ -33,6 +33,9 @@ $(function(){
 	
 });//ready
 
+function showDetailImage(item_num) {
+	   location.href="item_detail.do?item_num="+item_num;
+}
 
 function movePage(field_name, field_value, target_page) {
 // 	console.log("field_name : " + field_name + " / field_value" + field_value);
@@ -51,7 +54,7 @@ function movePage(field_name, field_value, target_page) {
 			var output = '<div class="row row-cols-1 row-cols-md-3">';
 			$.each(jo.item_list, function(idx, item) {
 				output += '<div class="col mb-3">';
-				output +=	 '<div class="card">';
+				output +=	 '<div class="card" onclick="showDetailImage('+item.item_num+')">';
 				output += 		'<img src="/collie_user/common/images/item/'+item.item_img+'" class="card-img-top">';
 				output += 		'<div class="card-body">';
 				output += 			'<h6 class="card-title">'+item.item_name+'</h6>';
@@ -117,7 +120,7 @@ function movePage(field_name, field_value, target_page) {
 					<div class="row row-cols-1 row-cols-md-3">
 						<c:forEach begin="${paging.start_num}" end="${paging.end_num}" step="1" var="index">
 							<div class="col mb-3">
-								<div class="card">
+								<div class="card"  onclick="showDetailImage(${item_list[index - 1].item_num})">
 									<img src="/collie_user/common/images/item/${item_list[index - 1].item_img}" class="card-img-top">
 									<div class="card-body">
 										<h6 class="card-title">${item_list[index - 1].item_name}</h6>
