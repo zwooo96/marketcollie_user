@@ -70,7 +70,6 @@ $(function(){
 	
 	<div id="container">
 	가입성공!
-	<c:out value="${ param.name }"/>
 
 	</div>
 	<div id="footer">

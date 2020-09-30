@@ -76,6 +76,102 @@ $(function(){
 		
 		$("#joinBtn").click(function(){
 			
+			if($("#id").val().trim()==""){
+				alert("아이디를 입력해 주세요");
+				$("#id").focus();
+				return;
+			}
+			
+			if($("#pass").val().trim()==""){
+				alert("비밀번호를 입력해주세요");
+				$("#pass").focus();
+				return;
+			}
+			
+		      if($("#pass").val().replace(/[0-9A-Za-z]/g, "") != ""){
+		          alert("비밀번호는 숫자 또는 영문(대,소문자)만 가능합니다.");
+		          $("#pass").val("");
+		          return;
+		       }
+		      
+		      if($("#passCheck").val().trim()==""){
+					alert("비밀번호 확인칸을 입력해주세요");
+					$("#passCheck").focus();
+					return;
+				}
+				
+					var pass = ($("#pass").val());
+					var passCheck = ($("#passCheck").val());
+					
+				if(pass!=passCheck){
+					alert("비밀번호화 비밀번호확인이 일치하지 않습니다.");
+					return;
+				}
+		      
+		      if($("#name").val().trim()==""){
+					alert("이름을 입력해주세요");
+					$("#name").focus();
+					return;
+				}
+		      
+		      if($("#name").val().replace(/[ㄱ-힣]/g, "") != ""){
+		          alert("이름은 한글만 가능합니다");
+		          $("#name").val("");
+		          return;
+		       }
+		
+			if($("#email").val().trim()==""){
+				alert("이메일을 입력해주세요");
+				$("#email").focus();
+				return;
+			}
+			
+			if($("#phone1").val().trim()==""){
+				alert("연락처를 입력해주세요");
+				return;
+			}
+			
+			if($("#phone2").val().trim()==""){
+				alert("연락처를 입력해주세요");
+				return;
+			}
+			
+			if($("#phone3").val().trim()==""){
+				alert("연락처를 입력해주세요");
+				return;
+			}
+			
+			if($("#phone1").val().replace(/[0-9]/g, "") != ""){
+		          alert("연락처는 숫자만 입력 가능합니다.");
+		          $("#phone1").val("");
+		          return;
+		       }
+			
+			if($("#phone2").val().replace(/[0-9]/g, "") != ""){
+		          alert("연락처는 숫자만 입력 가능합니다.");
+		          $("#phone2").val("");
+		          return;
+		       }
+			
+			if($("#phone3").val().replace(/[0-9]/g, "") != ""){
+		          alert("연락처는 숫자만 입력 가능합니다.");
+		          $("#phone3").val("");
+		          return;
+		       }
+			
+			if($("#addr").val().trim()==""){
+				alert("주소를 입력해 주세요");
+				$("#addr").focus();
+				return;
+			}
+			
+			if($("#addr_detail").val().trim()==""){
+				alert("상세주소를 입력해 주세요");
+				$("#addr_detail").focus();
+				return;
+			}
+			
+			
 			$("#joinFrm").submit();
 		});//click
 	
@@ -145,13 +241,13 @@ function sample4_execDaumPostcode() {
 			<td colspan="2" id="id_check"></td>
 		</tr>
 		<tr>
-			<td style="width: 100px">비밀번호</td><td><input type="password" style="width: 200px" name="pass" placeholder="비밀번호를 입력해주세요"/></td>
+			<td style="width: 100px">비밀번호</td><td><input type="password" style="width: 200px" id="pass" name="pass" maxlength="5" placeholder="비밀번호를 입력해주세요"/></td>
 		</tr>
 		<tr> 
-			<td style="width: 100px">비밀번호 확인</td><td><input type="password" style="width: 200px" placeholder="비밀번호를 한번 더 입력해주세요"/></td>
+			<td style="width: 100px">비밀번호 확인</td><td><input type="password" style="width: 200px" id="passCheck" placeholder="비밀번호를 한번 더 입력해주세요"/></td>
 		</tr> 
 		<tr> 
-			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" placeholder="이름을 입력해주세요"/></td>
+			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" id="name" placeholder="이름을 입력해주세요"/></td>
 		</tr> 
 		<tr> 
 			<td style="width: 100px">이메일</td><td><input type="text" style="width: 200px" name="email" id="email" placeholder="예:collie@collie.com"/></td>
@@ -161,17 +257,20 @@ function sample4_execDaumPostcode() {
 			<td colspan="2" id="email_chk"></td>
 		</tr>
 		<tr> 
-			<td style="width: 100px">휴대폰</td><td><input type="text" style="width: 200px" name="phone" placeholder="숫자만 입력해주세요"/></td>
+			<td style="width: 100px">휴대폰</td>
+			<td style="width: 30px"><input type="text" style="width: 60px" id="phone1" name="phone1"/></td>
+			<td style="width: 30px"><input type="text" style="width: 60px" id="phone2" name="phone2"/></td>
+			<td style="width: 30px"><input type="text" style="width: 60px" id="phone3" name="phone3"/></td>
 		</tr> 
 		<tr>
 			<td style="width: 100px">우편번호</td><td><input type="text" style="width: 200px" name="zipcode" id="zipcode" placeholder="우편번호" readonly="readonly"/></td>
 			<td><input type="button" value="주소검색"  onclick="sample4_execDaumPostcode()" style="width: 80px" id="zipBtn" name="zipBtn"/></td>
 		</tr> 
 		<tr> 
-			<td style="width: 100px">주소</td><td><input type="text" style="width: 200px" name="addr" id="addr"/></td>
+			<td style="width: 100px">주소</td><td><input type="text" style="width: 200px" name="addr" id="addr" readonly="readonly"/></td>
 		</tr> 
 		<tr> 
-			<td style="width: 100px">상세주소</td><td><input type="text" style="width: 200px" name="addr_detail"/></td>
+			<td style="width: 100px">상세주소</td><td><input type="text" style="width: 200px" name="addr_detail" id="addr_detail"/></td>
 		</tr> 
 		</table>
 	<hr>

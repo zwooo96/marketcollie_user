@@ -75,7 +75,7 @@ public class MemberController {
         jVO.setPass(request.getParameter("pass"));
         jVO.setName(request.getParameter("name"));
         jVO.setEmail(request.getParameter("email"));
-        jVO.setPhone(request.getParameter("phone"));
+        jVO.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));
          jVO.setZipcode(request.getParameter("zipcode"));
         jVO.setAddr(request.getParameter("addr"));
          jVO.setAddr_detail(request.getParameter("addr_detail"));
