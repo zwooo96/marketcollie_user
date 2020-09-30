@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.mypage.domain.QnaDetailDomain;
-import kr.co.collie.user.mypage.service.MypageService;
+import kr.co.collie.user.mypage.service.MypageService; 
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
 import kr.co.collie.user.mypage.vo.MyOrderVO;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
