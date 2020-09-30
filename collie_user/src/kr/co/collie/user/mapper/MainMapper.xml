@@ -8,4 +8,13 @@
   	from category
   </select>
   
+  <select id="selectNewItemList" resultType="kr.co.collie.user.main.domain.NewItemDomain">
+  	select item_num, item_name, item_price, item_img
+  	from item
+  	where input_date >
+			( select add_months(sysdate, -1) beforeMonth
+  				from dual
+			)
+  </select>
+  
 </mapper>

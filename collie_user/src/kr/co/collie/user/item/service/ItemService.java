@@ -56,7 +56,7 @@ public class ItemService {
 		for(ItemListDomain item : list) {
 			jsonTemp = new JSONObject();
 			jsonTemp.put("item_num", item.getItem_num());
-			jsonTemp.put("item_name", item.getItem_name().replace("[", "").replace("]", ""));
+			jsonTemp.put("item_name", item.getItem_name());
 			jsonTemp.put("item_price", item.getItem_price());
 			jsonTemp.put("item_img", item.getItem_img());
 			ja.add(jsonTemp);
@@ -65,11 +65,12 @@ public class ItemService {
 		return jo.toJSONString();
 	}
 	
-	public ItemDetailDomain viewItemDetail(int iNum) {
+	public ItemDetailDomain viewItemDetail(int item_Num) {
 		ItemDetailDomain idd = null;
 		
 		ItemDAO dDAO = ItemDAO.getInstance();
-		idd = dDAO.selectItemDetail(iNum);
+		idd = dDAO.selectItemDetail(item_Num);
+		idd.setDetailImgList(dDAO.detailImgList(item_Num));
 		return idd;
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.collie.user.main.dao.MainDAO;
 import kr.co.collie.user.main.domain.CategoryDomain;
+import kr.co.collie.user.main.domain.NewItemDomain;
 
 public class MainService {
 	
@@ -15,6 +16,13 @@ public class MainService {
 		List<CategoryDomain> list = null;
 		MainDAO mDAO = MainDAO.getInstance();
 		list = mDAO.selectCategoryList();
+		return list;
+	}
+
+	public List<NewItemDomain> getNewItems() {
+		List<NewItemDomain> list = null;
+		MainDAO mDAO = MainDAO.getInstance();
+		list = mDAO.selectNewItems();
 		return list;
 	}
 	

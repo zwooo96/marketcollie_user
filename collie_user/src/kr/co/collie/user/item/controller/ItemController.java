@@ -33,12 +33,13 @@ public class ItemController {
 		return "/item/search_item_json";
 	}
 	
-	@RequestMapping(value = "/item/detail.do",method = {RequestMethod.GET,RequestMethod.POST})
-	public String viewItemDetail(String iNum,Model model) {
+	@RequestMapping(value = "/item/item_detail.do",method = {RequestMethod.GET,RequestMethod.POST})
+	public String viewItemDetail(String item_num,Model model) throws NumberFormatException {
 		ItemService iservice = new ItemService();
-		model.addAttribute("item_detail",(iservice.viewItemDetail(Integer.parseInt(iNum))));
 		
-		return "/item/detail";
+		model.addAttribute("item_detail",(iservice.viewItemDetail(Integer.parseInt(item_num))));
+		
+		return "/item/item_detail";
 	}
 	
 	

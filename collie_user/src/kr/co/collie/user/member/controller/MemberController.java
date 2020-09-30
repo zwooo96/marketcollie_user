@@ -166,6 +166,6 @@ public class MemberController {
 	@RequestMapping(value = "/logout.do")
 	public String logout(SessionStatus ss) {
 		ss.setComplete();
-		return "forward:index.do";
+		return "redirect:index.do";
 	}
 }//class

@@ -2,45 +2,44 @@ package kr.co.collie.user.main.domain;
 
 public class NewItemDomain {
 	
-	private int itemNum;
+	private int item_num;
 	
-	private String name;
+	private String item_name;
 	
-	private String imagePath;
+	private String item_img;
 	
-	private int price;
+	private int item_price;
 
-	public int getItemNum() {
-		return itemNum;
+	public int getItem_num() {
+		return item_num;
 	}
 
-	public void setItemNum(int itemNum) {
-		this.itemNum = itemNum;
+	public void setItem_num(int item_num) {
+		this.item_num = item_num;
 	}
 
-	public String getName() {
-		return name;
+	public String getItem_name() {
+		return item_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	public String getItem_img() {
+		return item_img;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setItem_img(String item_img) {
+		this.item_img = item_img;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getItem_price() {
+		return item_price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setItem_price(int item_price) {
+		this.item_price = item_price;
 	}
-
 	
 }

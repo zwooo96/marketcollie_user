@@ -46,19 +46,19 @@ public class ItemDAO {
 		return cnt;
 	}
 	
-	public ItemDetailDomain selectItemDetail(int iNum) {
+	public ItemDetailDomain selectItemDetail(int item_Num) {
 		ItemDetailDomain idd = null;
 		SqlSession ss =GetCollieHandler.getInstance().getSqlSession();
-		idd = ss.selectOne("selectItemDetail", iNum);
+		idd = ss.selectOne("selectItemDetail", item_Num);
 		ss.close();
 		
 		return idd;
 	}
 	
-	public List<String> detailImgList(int iNum){
+	public List<String> detailImgList(int item_Num){
 		List<String> list = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		list = ss.selectList("detailImgList",iNum);
+		list = ss.selectList("detailImgList",item_Num);
 		ss.close();
 		return list;
 	}

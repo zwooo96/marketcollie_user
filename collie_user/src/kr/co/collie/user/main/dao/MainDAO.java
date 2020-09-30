@@ -1,16 +1,13 @@
 package kr.co.collie.user.main.dao;
 
-import java.io.IOException;
-import java.io.Reader;
 import java.util.List;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.main.domain.CategoryDomain;
+import kr.co.collie.user.main.domain.NewItemDomain;
 
 public class MainDAO {
 
@@ -41,6 +38,19 @@ public class MainDAO {
 		ss.close();
 		return cateList;
 	}
-	
 
+
+	public List<NewItemDomain> selectNewItems() {
+		List<NewItemDomain> newItemList = null;
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		newItemList = ss.selectList("selectNewItemList");
+		ss.close();
+		return newItemList;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(MainDAO.getInstance().selectNewItems());
+	}
+	
+	
 }

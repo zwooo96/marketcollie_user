@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ItemDetailDomain {
 	
-	private int item_stock, itemp_price;
+	private int item_stock, item_price;
 	private String item_name, item_unit,item_weight,item_guide,
 			item_title, item_subtitle, item_detail, item_img;
 
@@ -18,12 +18,12 @@ public class ItemDetailDomain {
 		this.item_stock = item_stock;
 	}
 
-	public int getItemp_price() {
-		return itemp_price;
+	public int getItem_price() {
+		return item_price;
 	}
 
-	public void setItemp_price(int itemp_price) {
-		this.itemp_price = itemp_price;
+	public void setItem_price(int item_price) {
+		this.item_price = item_price;
 	}
 
 	public String getItem_name() {
@@ -97,5 +97,6 @@ public class ItemDetailDomain {
 	public void setDetailImgList(List<String> detailImgList) {
 		this.detailImgList = detailImgList;
 	}
+
 	
 }

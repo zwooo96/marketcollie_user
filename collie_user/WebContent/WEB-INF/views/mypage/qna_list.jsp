@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,11 +33,41 @@ $(function(){
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<c:import url="/header.do" />
 	<div id="container">
-
 	
+	
+	<div id="containerContentWrap">
+	<div id="containerContent">
+	<table>
+	 <thead>
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성일</th>
+		</tr>
+	 </thead>
+	 <tbody>
+		<c:if test="${ empty qna_list }">
+			<tr>
+				<td colspan="3">등록된 문의가 없습니다.</td>
+			</tr>
+		</c:if>
+
+		<c:forEach begin="1" end="${qna_list.size()}" var="idx">
+			<tr>
+				<td><c:out value="${idx }"/>
+				<td><a href="qna_detail.do?qna_num=${qna_list[idx-1].qna_num}"><c:out value="${qna_list[idx-1].qna_subject }"/></a></td>
+				<td><c:out value="${qna_list[idx-1].input_date }"/></td>
+			</tr>
+		</c:forEach>
+	 </tbody>
+	</table>
+		
 	</div>
+	</div>
+	</div>
+
 	
 	<jsp:include page="../common/footer.jsp" />
 	

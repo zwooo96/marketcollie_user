@@ -95,10 +95,10 @@ public class MypageService {
 		
 	}//removeMember
 	
-	public List<QnaListDomain> getQnaList(int mNum){
+	public List<QnaListDomain> getQnaList(int member_num){
 		List<QnaListDomain> list = null;
 		MypageDAO mpDAO = MypageDAO.getInstance();
-		list = mpDAO.selectQnaList(mNum);
+		list = mpDAO.selectQnaList(member_num);
 		return list;
 	}//getQnaList
 	

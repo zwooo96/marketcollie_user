@@ -9,7 +9,7 @@
 <style type="text/css">
 #wrap{ min-height: 940px; margin: 0px auto; }
 #container{ min-height: 600px;}
-#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
+#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center;  flex-direction: column;}
 #containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
 
 </style>
@@ -33,7 +33,6 @@ $(function(){
 
 <div id="wrap">
 	
-<%-- 	<jsp:include page="common/header.jsp" /> --%>
 	<c:import url="/header.do" />
 	<div id="container">
 	
@@ -58,37 +57,22 @@ $(function(){
 	    <span class="sr-only">Next</span>
 	  </a>
 	</div>
-	
-	
 	<div id="containerContentWrap">
+		<div id="contentSubtitle">신제품ㅃ빠바바ㅏㅂ밤</div>
 	<div id="containerContent">
-		<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
-			<img src="http://localhost/collie_user/common/images/item_img1.png" class="card-img-top">
-			<div class="card-body">
-			<h6 class="card-title">저탄소 GAP 자몽</h6>
-			<p class="card-text">17,945원</p>
-			</div>
-		</div>
-		<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px;; ">
-			<img src="http://localhost/collie_user/common/images/item_img2.png" class="card-img-top" alt="...">
-			<div class="card-body">
-			<h6 class="card-title">[말랑카우] 유기농 요거트</h6>
-			<p class="card-text">6,900원</p>
-			</div>
-		</div>
-		<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
-			<img src="http://localhost/collie_user/common/images/item_img3.png" class="card-img-top" alt="...">
-			<div class="card-body">
-			<h6 class="card-title">[365] 수제 살라미 소세지</h6>
-			<p class="card-text">7,110원</p>
-			</div>
-		</div>
-		<div class="card" style="width: 18rem; margin: 20px 10px 20px 10px; ">
-			<img src="http://localhost/collie_user/common/images/item_img4.png" class="card-img-top" alt="...">
-			<div class="card-body">
-			<h6 class="card-title">[BAAM] 오븐에 구운 베이글</h6>
-			<p class="card-text">4,880원</p>
-			</div>
+	
+		<div class="row row-cols-1 row-cols-md-4">
+			<c:forEach items="${new_item_list }" var="newItemList">
+				<div class="col mb-4">
+					<div class="card">
+						<img src="http://localhost/collie_user/common/images/item/${newItemList.item_img}" class="card-img-top">
+						<div class="card-body">
+							<h6 class="card-title">${newItemList.item_name}</h6>
+							<p class="card-text">${newItemList.item_price}원</p>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	</div>
