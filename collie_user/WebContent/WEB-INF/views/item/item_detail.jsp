@@ -9,9 +9,13 @@
 <style type="text/css">
 #wrap{ min-height: 940px; margin: 0px auto; }
 #container{ min-height: 600px;}
-#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
-#containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
-
+#containerContent{ width: 70%; display: flex; flex-direction:column; margin:0 auto;}
+.itemwrap{display: flex; flex-direction:row; align-items: center; }
+.imgdiv{width:30vw; height:400vh;}
+.infodiv{width:60vw; height:200vh  }
+.item_description {
+	
+}
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -36,27 +40,31 @@ $(function(){
 	<c:import url="/header.do" />
 	<div id="container">
 	
-	<div id="containerContentWrap">
-	<div id="containerContent">
-	
-	<c:set var="item" value="${item_detail}"/>	
-	<img src="${item.item_img }">
-	<c:out value="${item.item_name}"/><br/>
-	<c:out value="${item.item_price}"/><br/>
-	
-	판매단위 <c:out value="${item.item_unit}"/><br/>
-	중량/용량 <c:out value="${item.item_weight}"/><br/>
-	안내사항 <c:out value="${item.item_guide}"/><br/>
-	재고 <c:out value="${item.item_stock}"/><br/>
-	
-	<c:out value="${item.item_title}"/><br/>
-	<c:out value="${item.item_subtitle}"/><br/>
-	<c:out value="${item.item_detail}"/><br/>
-	
+		<div id="containerContent">
+			<div id="itemwrap" class="itemwrap">
+				<c:set var="item" value="${item_detail}"/>	
+				<img src="http://localhost/collie_user/common/images/item/${item.item_img }">
+				<!-- 우측의 설명 -->
+				<div id="infodiv"> <!-- 이 div에 padding 잘 주면 옆에 띄우는거 할수잇을거얌!! 고마어1!서윗 전 그럼 이만...감자하빈다  -->
+					<c:out value="${item.item_name}"/><br/>
+					<c:out value="${item.item_price}"/><br/>
+					
+					판매단위 <c:out value="${item.item_unit}"/><br/>
+					중량/용량 <c:out value="${item.item_weight}"/><br/>
+					안내사항 <c:out value="${item.item_guide}"/><br/>
+					재고 <c:out value="${item.item_stock}"/><br/>
+				</div>
+			</div>
+			
+			<!-- 하단의 설명 -->
+			<div class="item_description">
+				<c:out value="${item.item_title}"/><br/>
+				<c:out value="${item.item_subtitle}"/><br/>
+				<c:out value="${item.item_detail}"/><br/>
+			</div>
+		</div>
 		
-	</div>
-	</div>
-	</div>
+	</div> <!-- container end -->
 
 	
 	<jsp:include page="../common/footer.jsp" />

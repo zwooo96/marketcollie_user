@@ -35,18 +35,34 @@ $(function(){
 	
 	<c:import url="/header.do" />
 	<div id="container">
-	<c:set var="qna" value="${qna_data }"/>
-	<c:if test="${qna_data eq null }">
-		등록된 문의가 없습니다.
-	</c:if>
-	<table>
-	<tr>
-		<td><c:out value="${qna_data.qna_subject }"/></td>
-	</tr>
-	</table>
+	
 	
 	<div id="containerContentWrap">
 	<div id="containerContent">
+	<table>
+	 <thead>
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성일</th>
+		</tr>
+	 </thead>
+	 <tbody>
+		<c:if test="${ empty qna_list }">
+			<tr>
+				<td colspan="3">등록된 문의가 없습니다.</td>
+			</tr>
+		</c:if>
+
+		<c:forEach begin="1" end="${qna_list.size()}" var="idx">
+			<tr>
+				<td><c:out value="${idx }"/>
+				<td><a href="qna_detail.do?qna_num=${qna_list[idx-1].qna_num}"><c:out value="${qna_list[idx-1].qna_subject }"/></a></td>
+				<td><c:out value="${qna_list[idx-1].input_date }"/></td>
+			</tr>
+		</c:forEach>
+	 </tbody>
+	</table>
 		
 	</div>
 	</div>

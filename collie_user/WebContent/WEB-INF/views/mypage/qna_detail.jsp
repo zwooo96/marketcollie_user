@@ -38,6 +38,21 @@ $(function(){
 	
 	<div id="containerContentWrap">
 	<div id="containerContent">
+	
+	<table>
+	 <thead>
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성일</th>
+		</tr>
+	 </thead>
+	 <tbody>
+		
+	 </tbody>
+	</table>
+		
+	
 		
 	</div>
 	</div>
