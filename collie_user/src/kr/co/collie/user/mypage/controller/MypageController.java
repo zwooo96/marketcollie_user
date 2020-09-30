@@ -32,7 +32,7 @@ public class MypageController {
 	public String checkMember(PassCheckVO pcVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
 		// pcVO.setMember_num(ld.getMember_num());
-		pcVO.setMember_num(2);
+		pcVO.setMember_num(ld.getMember_num());
 	
 		
 		MypageService ms = new MypageService();
@@ -50,7 +50,8 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage/memberInfo_form.do" , method=POST)
-	public String memberInfoForm( ) {
+	public String memberInfoForm(  ) {
+		
 		
 		
 		return "mypage/modify_member_form";
@@ -68,7 +69,6 @@ public class MypageController {
 	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		
-		
 		MypageService ms = new MypageService();
 		
 		boolean flag = ms.modifyMemberInfo(mmVO);
@@ -78,12 +78,29 @@ public class MypageController {
 	}//modifyMemberInfo
 	
 	@RequestMapping( value="/mypage/remove_member_form.do", method=GET)
-	public String removeMemberInfoForm() {
-			
+	public String removeMemberInfoForm( PassCheckVO pcVO, HttpSession session, Model model) {
+		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
+		// pcVO.setMember_num(ld.getMember_num());
+		pcVO.setMember_num(ld.getMember_num());
+	
 		
+		MypageService ms = new MypageService();
+		try {
+			boolean flag = ms.getMemberPass(pcVO);
+		} catch(NullPointerException npe) {
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+		}//end catch
 		
 		return"forward:remove_member_result.jsp";
 	}//removeMemberInfo
+	
+	@RequestMapping(value="", method = POST)
+	public String removeMemberInfo() {
+		
+		
+		return "mypage/remove_member_form";
+	}
+	
 	
 	
 	/**

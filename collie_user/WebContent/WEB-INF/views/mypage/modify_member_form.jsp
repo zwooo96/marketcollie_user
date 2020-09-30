@@ -103,13 +103,13 @@ function sample4_execDaumPostcode() {
 		<form action="update_member.do" method="post" id="Frm">
 		<table >
 		<tr>
-			<td style="width: 50px">아이디</td><td><input type="text" style="width: 200px" name="id" id="id" /></td>
+			<td style="width: 50px">아이디</td><td><input type="text" style="width: 200px" name="id" readonly="readonly" value="${ user_info.id }" /></td>
 		</tr>
 		<tr> 
-			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" /></td>
+			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" readonly="readonly" value="${ user_info.name }" /></td>
 		</tr> 
 		<tr> 
-			<td style="width: 100px">이메일</td><td><input type="text" style="width: 200px" name="email" id="email" /></td>
+			<td style="width: 100px">이메일</td><td><input type="text" style="width: 200px" name="email" id="email" readonly="readonly" value="${ user_info.email }" /></td>
 		</tr> 
 		<tr> 
 			<td style="width: 100px">휴대폰</td><td><input type="text" style="width: 200px" name="phone" placeholder="숫자만 입력해주세요"/></td>

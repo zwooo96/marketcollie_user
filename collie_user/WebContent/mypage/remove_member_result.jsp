@@ -35,6 +35,13 @@ hr{ margin-top: 90px }
 <script type="text/javascript">
 $(function(){
 	
+	var msg = '${ msg }';
+	if( msg != '' ){
+		alert(msg);
+		location.href = history.back();
+	}//end if
+		
+	
 });//ready
 </script>
 </head>
