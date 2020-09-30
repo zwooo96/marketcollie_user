@@ -1,5 +1,6 @@
 package kr.co.collie.user.cart.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import kr.co.collie.user.cart.domain.CartGoodsDomain;
 import kr.co.collie.user.cart.vo.CartVO;
 import kr.co.collie.user.cart.vo.ItemCntVO;
+import kr.co.collie.user.cart.vo.OrderVO;
 import kr.co.collie.user.dao.GetCollieHandler;
 
 public class CartDAO {
@@ -83,5 +85,22 @@ public class CartDAO {
 		
 		return list;
 	}//selectCartGoods
+	
+	public void insertOrderItem(OrderVO oVO) throws SQLException {
+		
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		ss.insert("insertOrderItem",oVO);
+		ss.commit();
+		ss.close();
+		
+	}//insertOrderItem
+	
+	public int selectOrderNum(int memberNum) {
+		int orderNum=0;
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		orderNum=ss.selectOne("selectOrderNum",memberNum);
+		ss.close();
+		return orderNum;
+	}//selectOrderNum
 	
 }//class

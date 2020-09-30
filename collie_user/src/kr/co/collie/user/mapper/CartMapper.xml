@@ -48,4 +48,33 @@
 	</foreach>
 </select>
 
+
+<insert id="insertOrderItem" parameterType="kr.co.collie.user.cart.vo.OrderVO">
+insert all
+into order_form(ORDER_NUM, MEMBER_NUM, TOTAL_PRICE, PAYMENT)
+values(seq_order_num.nextval, #{member_num}, #{total_price}, #{payment})
+
+into destination(ORDER_NUM, RECEIVE_NAME, RECEIVE_PHONE, RECEIVE_ZIPCODE, RECEIVE_ADDR, RECEIVE_ADDR_DETAIL)
+values(seq_order_num.currval, #{receive_name}, #{receive_phone}, #{receive_zipcode}, #{receive_addr}, #{receive_addr_detail} )
+
+into payment(ORDER_NUM, CARD_NUM, CARD_BANK, CARD_EXPIRATION)
+values(seq_order_num.currval, #{card_num}, #{card_bank}, to_date(#{card_expiration},'MM/YY'))
+
+<foreach item="cart_num" collection="cart_num">
+into order_item( order_num, item_num, item_cnt )
+values( seq_order_num.currval,
+		(select item_num from cart where cart_num = #{cart_num}),
+		(select item_cnt from cart where cart_num = #{cart_num}) )
+</foreach>
+select 1 from dual
+</insert>
+
+<select id="selectOrderNum" parameterType="int" resultType="int">
+select order_num
+from(select order_num, row_number() over(order by order_num desc) rnum
+		from order_form
+		where member_num = #{member_num})
+where rnum=1
+</select>
+
 </mapper>

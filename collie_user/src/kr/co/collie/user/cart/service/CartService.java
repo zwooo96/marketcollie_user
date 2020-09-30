@@ -1,5 +1,6 @@
 package kr.co.collie.user.cart.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -9,6 +10,7 @@ import kr.co.collie.user.cart.dao.CartDAO;
 import kr.co.collie.user.cart.domain.CartGoodsDomain;
 import kr.co.collie.user.cart.vo.CartVO;
 import kr.co.collie.user.cart.vo.ItemCntVO;
+import kr.co.collie.user.cart.vo.OrderVO;
 
 public class CartService {
 	
@@ -70,5 +72,16 @@ public class CartService {
 		
 		return list;
 	}//getMyCart
+	
+	public int orderItem(OrderVO oVO)  throws SQLException {
+		int orderNum=0;
+		
+		CartDAO cDAO=CartDAO.getInstance();
+		cDAO.insertOrderItem(oVO);
+		orderNum=cDAO.selectOrderNum(oVO.getMember_num());
+		cDAO.deleteSelectedItem(oVO.getCart_num());
+		
+		return orderNum;
+	}//orderItem
 	
 }//class

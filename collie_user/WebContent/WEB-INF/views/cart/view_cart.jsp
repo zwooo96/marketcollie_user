@@ -253,7 +253,9 @@ function delItem(cart_num){
 	  	<td colspan="6" style="height: 80px; text-align: center; vertical-align: middle;">장바구니에 담긴 상품이 없습니다.</td>
 	  	</tr>
 	  	</c:if>
+	  	<c:set var="totalCnt" value="0"/>
 		<c:forEach var="cart" items="${ cart_list }">
+		<c:set var="totalCnt" value="${ totalCnt + cart.item_price * cart.item_cnt }"/>
 	    <tr id="tableContent${ cart.cart_num }" class="tableContent">
 	      <td style="vertical-align: middle; text-align: center;">
 	      <div class="checks">
@@ -301,21 +303,21 @@ function delItem(cart_num){
 	<div class="priceDiv">
 	<div class="priceDivLabel">상품금액</div>
 	<div class="priceDivPrice">
-	<c:out value="${ item_price }"/>17000원
+	<fmt:formatNumber pattern="#,###" value="${ totalCnt }"/>원
 	</div>
 	</div>
 	+
 	<div class="priceDiv">
 	<div class="priceDivLabel">배송비</div>
 	<div class="priceDivPrice">
-	2500원
+	2,500원
 	</div>
 	</div>
 	=
 	<div class="priceDiv">
 	<div class="priceDivLabel">결제예정금액</div>
 	<div class="priceDivPrice">
-	<c:out value="${ item_price }"/>17000원
+	<fmt:formatNumber pattern="#,###" value="${ totalCnt+2500 }"/>원
 	</div>
 	</div>
 	</div>

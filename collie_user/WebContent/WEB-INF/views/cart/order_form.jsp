@@ -76,11 +76,73 @@ border-color: #17462B; }
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<!-- Daum API -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 $(function(){
 	
+	var phone="${ user_info.phone }";
+	var phoneSplit=phone.split("-");
+	for(var i in phoneSplit){
+		$("#receive_phone"+i).val(phoneSplit[i]);
+	}
 	
 });//ready
+
+
+/* 우편번호 Daum API 사용 */
+function sample4_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+           // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+           var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+           var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+           // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+           // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+           if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+               extraRoadAddr += data.bname;
+           }
+           // 건물명이 있고, 공동주택일 경우 추가한다.
+           if(data.buildingName !== '' && data.apartment === 'Y'){
+              extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+           }
+           // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+           if(extraRoadAddr !== ''){
+               extraRoadAddr = ' (' + extraRoadAddr + ')';
+           }
+           // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+           if(fullRoadAddr !== ''){
+               fullRoadAddr += extraRoadAddr;
+           }
+
+           // 우편번호와 주소 정보를 해당 필드에 넣는다.
+           
+           document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
+           document.getElementById('addr').value = fullRoadAddr;
+       }
+    }).open();
+}
+
+function orderItem(){
+	
+	
+	
+	var phone=$("#receive_phone0").val()+"-"+$("#receive_phone1").val()+"-"+$("#receive_phone2").val();
+	var cardNum=$("#card_num1").val()+"-"+$("#card_num2").val()+"-"+$("#card_num3").val()+"-"+$("#card_num4").val();
+	var cardExp=$("#card_exp_mm").val()+"/"+$("#card_exp_yy").val();
+	
+	var hidParam='<input type="hidden" name="receive_phone" value="'+phone+'">';
+	hidParam+='<input type="hidden" name="card_num" value="'+cardNum+'">';
+	hidParam+='<input type="hidden" name="card_expiration" value="'+cardExp+'">';
+	
+	$("#hidDiv").html(hidParam);
+	$("#orderForm").submit();
+	
+}//orderItem
 
 </script>
 </head>
@@ -97,8 +159,8 @@ $(function(){
 	</div>
 
 	<div>
-	<form action="" method="post" id="orderForm" class="orderForm">
-	
+	<form action="order.do" method="post" id="orderForm" class="orderForm">
+	<div id="hidDiv"></div>
 	<div class="containerTitle">
 	상품정보
 	</div>
@@ -113,6 +175,8 @@ $(function(){
 	  </thead>
 	  <tbody>
 		<c:forEach var="cart" items="${ cart_list }">
+		<c:set var="totalCnt"/>
+		<c:set var="totalCnt" value="${ totalCnt + cart.item_price * cart.item_cnt }"/>
 	    <tr id="tableContent${ cart.cart_num }" class="tableContent">
 	      <td style="vertical-align: middle; text-align: center;">
 	      	<c:out value="${ cart.item_img }"/>
@@ -173,12 +237,16 @@ $(function(){
 	      </td>
 	      <td style="vertical-align: middle;">
 	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_name" value="${ user_info.name }" class="collieText"/></div>
-	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_phone" value="${ user_info.phone }" class="collieText"/></div>
-	      	<div style="margin: 10px 0px 10px 0px">
-	      	<input type="text" name="receive_zipcode" value="${ user_info.zipcode }" class="collieText" readonly="readonly"/>
-	      	<input type="button" value="우편번호 검색" class="collieBtn">
+	      	<div style="margin: 10px 0px 10px 0px; width: 300px; display: flex; justify-content: space-between; align-items: center;">
+	      		<input type="text" name="receive_phone0" id="receive_phone0" class="collieText" style="width: 80px;"/>-
+	      		<input type="text" name="receive_phone1" id="receive_phone1" class="collieText" style="width: 80px;"/>-
+	      		<input type="text" name="receive_phone2" id="receive_phone2" class="collieText" style="width: 80px;"/>
 	      	</div>
-	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_addr" value="${ user_info.addr }"  class="collieText" readonly="readonly"/></div>
+	      	<div style="margin: 10px 0px 10px 0px">
+	      	<input type="text" name="receive_zipcode" id="zipcode" value="${ user_info.zipcode }" class="collieText" readonly="readonly"/>
+	      	<input type="button" value="우편번호 검색" class="collieBtn" onclick="sample4_execDaumPostcode()">
+	      	</div>
+	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_addr" id="addr" value="${ user_info.addr }"  class="collieText" readonly="readonly"/></div>
 	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_addr_detail" value="${ user_info.addr_detail }"  class="collieText"/></div>
 	      </td>
 	    </tr>
@@ -189,6 +257,7 @@ $(function(){
 	
 	<div class="containerTitle">
 	결제수단 - 일반결제 (신용카드)
+	<input type="hidden" name="payment" value="card"/>
 	</div>
 	<div class="paymentWrap">
 	<div id="table">
@@ -203,21 +272,24 @@ $(function(){
 	      <td style="vertical-align: middle;">
 	      	<div style="margin: 10px 0px 10px 0px">
 	      		<select name="card_bank" class="collieText">
-	      			<option value="국민">KB국민</option>
-	      			<option value="우리">우리</option>
-	      			<option value="신한">신한</option>
+	      			<option value="국민" class="collieText">KB국민</option>
+	      			<option value="우리" class="collieText">우리</option>
+	      			<option value="신한" class="collieText">신한</option>
+	      			<option value="삼성" class="collieText">삼성</option>
+	      			<option value="롯데" class="collieText">롯데</option>
+	      			<option value="현대" class="collieText">현대</option>
 	      		</select>
 	      	</div>
-	      	<div style="margin: 10px 0px 10px 0px">
-	      		<input type="text" name="card_num1" placeholder="4자리" class="collieText" style="width: 50px; margin-right: 10px"/>
-	      		<input type="text" name="card_num2" placeholder="4자리" class="collieText" style="width: 50px; margin-right: 10px"/>
-	      		<input type="text" name="card_num3" placeholder="4자리" class="collieText" style="width: 50px; margin-right: 10px"/>
-	      		<input type="text" name="card_num4" placeholder="4자리" class="collieText" style="width: 50px; margin-right: 10px"/>
+	      	<div style="margin: 10px 0px 10px 0px; width: 300px; display: flex; justify-content: space-between; align-items: center;">
+	      		<input type="text" name="card_num1" id="card_num1" placeholder="4자리" class="collieText" style="width: 50px;"/>
+	      		<input type="text" name="card_num2" id="card_num2" placeholder="4자리" class="collieText" style="width: 50px;"/>
+	      		<input type="text" name="card_num3" id="card_num3" placeholder="4자리" class="collieText" style="width: 50px;"/>
+	      		<input type="text" name="card_num4" id="card_num4" placeholder="4자리" class="collieText" style="width: 50px;"/>
 	      		<input type="text" placeholder="CVC" class="collieText" style="width: 50px"/>
 	      	</div>
 	      	<div style="margin: 10px 0px 10px 0px">
-	      	<input type="text" name="card_exp_mm" placeholder="MM" class="collieText" style="width: 50px; margin-right: 10px"/>
-	      	<input type="text" name="card_exp_yy" placeholder="YY" class="collieText" style="width: 50px; margin-right: 10px"/>
+	      	<input type="text" name="card_exp_mm" id="card_exp_mm" placeholder="MM" class="collieText" style="width: 50px; margin-right: 10px"/>
+	      	<input type="text" name="card_exp_yy" id="card_exp_yy" placeholder="YY" class="collieText" style="width: 50px; margin-right: 10px"/>
 	      	</div>
 	      	<div style="margin: 10px 0px 10px 0px">
 	      	<input type="text" class="collieText" style="width: 50px; margin-right: 10px"/> **
@@ -229,7 +301,9 @@ $(function(){
 	<div class="payInfoWrap">
 	<div class="payInfo">
 	<div style="width: 120px; margin-left: 15px">상품금액</div>
-	<div style="width: 120px; text-align: right; margin-right: 15px">190,000원</div>
+	<div style="width: 120px; text-align: right; margin-right: 15px">
+	<fmt:formatNumber pattern="#,###" value="${ totalCnt }"/>원
+	</div>
 	</div>
 	<div class="payInfo">
 	<div style="width: 120px; margin-left: 15px">배송비</div>
@@ -237,7 +311,10 @@ $(function(){
 	</div>
 	<div class="payInfo">
 	<div style="width: 120px; margin-left: 15px">최종 결제 금액</div>
-	<div style="width: 120px; text-align: right; margin-right: 15px">192,500원</div>
+	<div style="width: 120px; text-align: right; margin-right: 15px">
+	<fmt:formatNumber pattern="#,###" value="${ totalCnt+2500 }"/>원
+	<input type="hidden" name="total_price" value="${ totalCnt+2500 }"/>
+	</div>
 	</div>
 	</div>
 	</div>
@@ -260,7 +337,7 @@ $(function(){
 	</table>
 	</div>
 	
-	<input type="button" value="결제하기" class="collieBtnMain">
+	<input type="button" value="결제하기" class="collieBtnMain" onclick="orderItem()">
 	
 	
 	</form>
