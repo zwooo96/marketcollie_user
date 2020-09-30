@@ -79,10 +79,10 @@ public class MypageController {
 	
 	@RequestMapping( value="/mypage/remove_member_form.do", method=GET)
 	public String removeMemberInfoForm() {
+			
 		
 		
-		
-		return"mypage/remove_member_form";
+		return"forward:remove_member_result.jsp";
 	}//removeMemberInfo
 	
 	
