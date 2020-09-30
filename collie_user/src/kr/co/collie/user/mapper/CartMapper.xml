@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.collie.user.cart">
+<!-- 장바구니를 조회하는 일 -->
+<select id="selectCartGoods" parameterType="int" resultType="kr.co.collie.user.cart.domain.CartGoodsDomain">
+	select c.cart_num, c.item_num, c.item_cnt, i.item_name, i.item_img, i.item_price
+	from cart c, item i
+	where c.item_num=i.item_num and c.member_num=#{ member_num }
+</select>
+
+<!-- 장바구니에 상품을 추가하는 일 -->
+<insert id="insertCart" parameterType="kr.co.collie.user.cart.vo.CartVO">
+	insert into cart(cart_num, item_num, member_num, item_cnt)
+	values(#{ cart_num }, #{ item_num }, #{ member_num }, #{ item_cnt })
+</insert>
+
+<!-- 장바구니 조회 시 수량을 변경하는 일 -->
+<update id="updateItemCnt" parameterType="kr.co.collie.user.cart.vo.ItemCntVO">
+	update cart
+	set item_cnt=
+	<if test="flag eq 'minus'">
+	(select item_cnt-1 from cart where cart_num=#{cartNum})
+	</if>
+	<if test="flag eq 'plus'">
+	(select item_cnt+1 from cart where cart_num=#{cartNum})
+	</if>
+	where cart_num=#{cartNum}
+</update>
+
+<!-- 장바구니에서 상품 삭제 -->
+<delete id="deleteSelectedItem">
+	delete from cart
+	where cart_num in
+	<foreach item="cartNum" collection="array" open="(" separator="," close=")">
+	#{cartNum}
+	</foreach>
+</delete>
+
+<!-- 장바구니에서 선택된 주문할 상품 조회 -->
+<select id="selectOrderGoods" parameterType="int" resultType="kr.co.collie.user.cart.domain.CartGoodsDomain">
+	select c.cart_num, c.item_num, c.item_cnt, i.item_name, i.item_img, i.item_price
+	from cart c, item i
+	where c.item_num=i.item_num and c.cart_num in
+	<foreach item="cartNum" collection="array" open="(" separator="," close=")">
+	#{cartNum}
+	</foreach>
+</select>
+
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="kr.co.collie.user.member">
+  <select id="selectLogin" resultType="kr.co.collie.user.member.domain.LoginDomain" parameterType="kr.co.collie.user.member.vo.LoginVO">
+    select member_num,id, name, email, phone, addr, addr_detail, zipcode
+    from member
+    where id =#{id} and pass=#{pass}
+  </select>
+  
+  <insert id ="insertMember" parameterType="kr.co.collie.user.member.vo.JoinVO">
+	insert into member(MEMBER_NUM, ID, PASS, NAME, EMAIL, PHONE, ZIPCODE, ADDR, ADDR_DETAIL, IP)
+	values(seq_mem_num.nextval, #{ id }, #{ pass }, #{ name }, #{ email },#{ phone }, #{ zipcode }, #{ addr }, #{ addr_detail }, #{ ip } )
+  </insert>
+  
+  <select id="dupId" parameterType="String" resultType="String">
+	select id 
+	from member 
+	where id = #{ id }  
+  </select>
+  
+  <select id="dupEmail" parameterType="String" resultType="String">
+	select email 
+	from member 
+	where email = #{ email }      
+  </select>
+  
+  <select id="selectMemberId" resultType="String" parameterType="kr.co.collie.user.member.vo.FindIdVO">
+  	select id
+  	from member
+  	where name=#{name} and email=#{email}
+  </select>
+  
+  <select id="selectMemberPass" resultType="String" parameterType="kr.co.collie.user.member.vo.FindPassVO">
+  	select pass
+  	from member
+  	where id= #{ id } and name = #{ name} and email = #{ email }
+  </select>
+  
+  <select id="updateMemberPass" resultType="int" parameterType="kr.co.collie.user.member.vo.UpdatePassVO">
+  update member
+  set pass=#{newPass}
+  where id=#{id}
+  
+  </select>
+</mapper>

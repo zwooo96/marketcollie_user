@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.collie.user.mypage">
+
+	<!-- 현재 비밀번호를 확인하는 일 : 세션의 아이디와 사용자가 입력한 비밀번호를 받아 일치하는 회원이 있는지 조회 -->
+	<select id="selectMemberPass" parameterType="kr.co.collie.user.mypage.vo.PassCheckVO" resultType="int">
+		select member_num
+		from member
+		where member_num = #{ member_num } and pass = #{ pass }
+	</select>
+	
+	<!-- 비밀번호를 변경하는 일 -->
+	<update id="updateMemberPass" parameterType="kr.co.collie.user.mypage.vo.UpdatePassVO">
+		update member
+		set pass = #{ pass }
+		where member_num = #{ member_num }
+	</update>
+	
+	<!-- 정보 가져오기 -->
+	<select id="selectMemberInfo" parameterType="kr.co.collie.user.mypage.vo.PassCheckVO" resultType="kr.co.collie.user.mypage.domain.MemberInfoDomain">
+		select	id, name, email, phone, addr, addr_detail, zipcode
+		from member
+		where member_num = #{ member_num } and pass = #{ pass } 
+	</select>
+
+	
+	      <!-- 개인정보 수정하는 일  -->
+       <update id="updateMember" parameterType="kr.co.collie.user.mypage.vo.ModifyMemberVO" >
+              update member
+              set name= #{ name }, phone = #{ phone } , addr= #{ addr } , zipcode=#{ zipcode }, addr_detail= #{ addr_detail }
+              where id= #{ id }
+       </update>
+
+    <!-- 개인정보 확인하는 일  -->
+       <select id="selectMember" resultType="kr.co.collie.user.mypage.domain.MemberInfoDomain">
+       select id, name, email, phone, addr, addr_detail, zipcode
+       from member
+       </select>
+       
+       <!-- 회원 탈퇴하는 일  -->
+       <update id="removeMember" parameterType="kr.co.collie.user.mypage.vo.DeleteMemberVO">
+            update member
+            set  member_flag = 'N'
+            where  member_num = #{ member_num } and pass = #{ pass }   
+       </update>
+	
+	<select id="selectQnaList" parameterType="int" resultType="kr.co.collie.user.mypage.domain.QnaListDomain">
+		select qna_subject,input_date
+		from qna
+		where member_num =#{member_num}
+	</select>
+	
+	<select id="selectQnaDetail" parameterType="kr.co.collie.user.mypage.vo.QnaVO" resultType="kr.co.collie.user.mypage.domain.QnaDetailDomain">
+		select qna_num,qna_subject,qna_content,input_date,qna_flag,reply_content,reply_date;
+		from qna
+		where member_num=#{member_num} and qna_num=#{qna_num}
+	</select>
+</mapper>
