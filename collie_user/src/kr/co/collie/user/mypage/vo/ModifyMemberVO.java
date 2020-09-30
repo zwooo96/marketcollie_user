@@ -1,7 +1,7 @@
 package kr.co.collie.user.mypage.vo;
 
 public class ModifyMemberVO {
-	private String id, name, phone, addr, addr_detail, zipCode;	
+	private String id, name, phone, addr, addr_detail, zipcode;
 
 	public String getId() {
 		return id;
@@ -43,12 +43,12 @@ public class ModifyMemberVO {
 		this.addr_detail = addr_detail;
 	}
 
-	public String getZipCode() {
-		return zipCode;
+	public String getZipcode() {
+		return zipcode;
 	}
 
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-	
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}	
+
 }//ModifyMemberVO

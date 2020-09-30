@@ -3,6 +3,7 @@ package kr.co.collie.user.mypage.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -44,30 +45,46 @@ public class MypageController {
 		return "forward:/mypage/memberInfo_form.do";
 	}//checkPassForm
 	
+	/**
+	 * 변경 정보를 담는 폼
+	 * @return
+	 */
 	@RequestMapping(value="/mypage/memberInfo_form.do" , method=POST)
-	public String memberInfoForm(HttpSession session) {	
+	public String memberInfoForm( ) {
 		
-		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		
 		return "mypage/modify_member_form";
 	}//memberInfoForm
 	
 	
+	/**
+	 * 멤버 정보 변경하는 일
+	 * @param mmVO
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/mypage/update_member.do", method=POST)
 	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
-		boolean flag = false;
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		
 		
 		MypageService ms = new MypageService();
 		
+		boolean flag = ms.modifyMemberInfo(mmVO);
 		
-		flag = ms.modifyMemberInfo(mmVO);
 		
-		
-		return "mypage/modify_member_result.jsp";
+		return "forward:modify_member_result.jsp";
 	}//modifyMemberInfo
 	
-	//String id?
+	@RequestMapping( value="/mypage/remove_member_form.do", method=GET)
+	public String removeMemberInfoForm() {
+			
+		
+		
+		return"forward:remove_member_result.jsp";
+	}//removeMemberInfo
+	
 	
 	/**
 	 * 마이페이지 - 비밀번호 변경 : 현재 비밀번호 확인하는 폼

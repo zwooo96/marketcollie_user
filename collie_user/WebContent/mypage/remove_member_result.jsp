@@ -20,11 +20,8 @@
 #qnaBox:hover{ cursor: pointer; }
 #cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
 #contentWrap{ margin-left: 240px }
-#containerSubTitle{ border-bottom: 1px solid #333; margin-top: 30px; padding-bottom: 0px; color: #666666 }
-#containerContent{ margin-top: 90px }
-#passForm{ width: 620px; margin: 0px auto }
-.col-form-label{ padding-right: 0px; padding-left: 50px }
-#pass{ width:300px;  padding: 0px; margin-left: 60px }
+#containerSubTitle{ border-bottom: 1px solid #17462B; margin-top: 30px; padding-bottom: 0px; color: #666666 }
+#containerContent{ margin-top: 90px; text-align: center; }
 hr{ margin-top: 90px }
 .btn-primary{ background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 250px; padding: 15px  }
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus{ background-color: #17462B !important; }
@@ -37,13 +34,7 @@ hr{ margin-top: 90px }
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	$("#btn").click(function(){
-		if( $("#pass").val() == "" ){
-			alert("비밀번호를 입력해주세요.");
-			return;
-		}//end if
-		$("#passForm").submit();
-	});
+	
 });//ready
 </script>
 </head>
@@ -51,36 +42,27 @@ $(function(){
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<jsp:include page="../WEB-INF/views/common/header.jsp" />
 	
 	<div id="container">
-		<jsp:include page="../common/mypage_menu.jsp"/>
+		<jsp:include page="../WEB-INF/views/common/mypage_menu.jsp"/>
 		<div id="contentWrap">
 		<div id="containerTitle">
 			<h4><strong>개인정보 수정</strong></h4>
 		</div>
 			<div id="containerSubTitle">
-				<h5><strong>비밀번호 재확인</strong></h5>
-				<h6>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인해주세요.</h6>
 			</div>
 			<div id="containerContent">
-				<form id="passForm" method="post" action="check_member.do">
-				  <div class="form-group row">
-				   	<label for="inputEmail3" class="col-sm-2 col-form-label"><strong>비밀번호</strong></label>
-				    <div class="col-sm-10">
-				      <input type="password" class="form-control" id="pass" name="pass">
-				    </div>
-				  </div>
-				</form>
+				<h4><strong>비밀번호가 변경되었습니다.</strong></h4>
 				<hr>
 				<div id="btnDiv">
-					<button type="button" class="btn btn-primary" id="btn">확인</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='/collie_user/index.do'">메인으로</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<jsp:include page="../common/footer.jsp" />
+	<jsp:include page="../WEB-INF/views/common/footer.jsp" />
 	
 </div>
 

@@ -69,7 +69,7 @@ $(function(){
 	
 	<div id="container">
 	멤버 바꾸기 성공
-	
+	${ modifyFlag }
 	</div>
 	
 	

@@ -29,12 +29,14 @@
 			    <a class="nav-link active" href="/collie_user/logout.do" style="color: #000000">로그아웃</a>
 			  </li>
 			  <li class="nav-item">
-			    <a class="nav-link" href="/collie_user/mypage/memberInfo_form.do" style="color: #000000">마이페이지</a>
-			  </li>
+			    <a class="nav-link" href="/collie_user/mypage/check_member_form.do" style="color: #000000">마이페이지</a>
+		 </li>
 		</c:if>
 	  <li class="nav-item">
 	    <a class="nav-link" href="/collie_user/qna/qna_form.do" style="color: #000000">고객센터</a>
 	  </li>
+		
+	
 	</ul>
 	
 	<div id="logoWrap">
