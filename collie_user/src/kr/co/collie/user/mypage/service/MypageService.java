@@ -174,16 +174,25 @@ public class MypageService {
 		return list;
 	}//getQnaList
 	
-	
-	public QnaDetailDomain getQnaDetail(QnaVO qVO) {
-		QnaDetailDomain qdd = null;
+
+	public String getQnaDetail(QnaVO qVO) {
+		JSONObject json=new JSONObject();
 		
 		MypageDAO mpDAO = MypageDAO.getInstance();
-		qdd=mpDAO.selectQnaDetail(qVO);
+		QnaDetailDomain qdd=mpDAO.selectQnaDetail(qVO);
 		
-		return qdd;
+		String flag="fail";
+		if(qdd!=null) {
+			flag="success";
+		}//end if
+		
+		json.put("flag", flag);
+		json.put("qna_content", qdd.getQna_content());
+		json.put("qna_reply", qdd.getQna_reply());
+		json.put("reply_date", qdd.getReply_date());
+		
+		return json.toJSONString();
 	}//getQnaDetail
-	
 }//class
 
 	
