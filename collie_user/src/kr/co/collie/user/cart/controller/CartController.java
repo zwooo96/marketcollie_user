@@ -45,19 +45,6 @@ public class CartController {
 	@RequestMapping(value="/cart/view.do", method=GET)
 	public String viewCart(HttpSession session, Model model) {
 		
-		////////////////////로그인 구현 완료시 삭제/////////////////
-		LoginDomain user_info1=new LoginDomain();
-		user_info1.setMember_num(2);
-		user_info1.setId("test1");
-		user_info1.setName("이해민");
-		user_info1.setEmail("test1@gmail.com");
-		user_info1.setPhone("010-1111-2222");
-		user_info1.setZipcode("54321");
-		user_info1.setAddr("서울특별시 마포구 풍성빌딩");
-		user_info1.setAddr_detail("2층 쌍용강북교육센터");
-		session.setAttribute("user_info", user_info1);
-		///////////////////////////////////////////////////
-		
 		LoginDomain user_info=(LoginDomain)session.getAttribute("user_info");
 		
 		if( user_info!=null && user_info.getMember_num()!=0 ){
