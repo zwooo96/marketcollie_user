@@ -40,7 +40,6 @@ $(function(){
 		alert(msg);
 		location.href = history.back();
 	}//end if
-		
 	
 });//ready
 </script>
@@ -49,10 +48,10 @@ $(function(){
 
 <div id="wrap">
 	
-	<jsp:include page="../WEB-INF/views/common/header.jsp" />
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	
 	<div id="container">
-		<jsp:include page="../WEB-INF/views/common/mypage_menu.jsp"/>
+		<jsp:include page="/WEB-INF/views/common/mypage_menu.jsp"/>
 		<div id="contentWrap">
 		<div id="containerTitle">
 			<h4><strong>개인정보 수정</strong></h4>
@@ -60,7 +59,7 @@ $(function(){
 			<div id="containerSubTitle">
 			</div>
 			<div id="containerContent">
-				<h4><strong>비밀번호가 변경되었습니다.</strong></h4>
+				<h4><strong>회원탈퇴 되었습니다.</strong>${ param.pass }, ${ user_info.member_num }</h4>
 				<hr>
 				<div id="btnDiv">
 					<button type="button" class="btn btn-primary" onclick="location.href='/collie_user/index.do'">메인으로</button>
@@ -69,7 +68,7 @@ $(function(){
 		</div>
 	</div>
 	
-	<jsp:include page="../WEB-INF/views/common/footer.jsp" />
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
 </div>
 

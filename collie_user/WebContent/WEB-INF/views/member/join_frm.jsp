@@ -7,12 +7,12 @@
 <link rel="stylesheet" type="text/css" href="http://211.238.142.36/jsp_prj/common/css/main.css">
 <title>Insert title here</title>
 <style type="text/css">
-	#wrap{ width:900px; height:900px; margin:0px auto; }
+	#wrap{ width:900px; height:1200px; margin:0px auto; }
 	#header{ width:900px; height:180px; }
 	#headerTop{ width:900px; height:140px; position:relative; background:#FFFFFF url("http://211.238.142.36/jsp_prj/common/images/header_bg.png") }
 	#mainText{ font-family: 고딕,godic,Sans-Serif; font-size:30px; font-weight:bold; width:140px; height:50px; margin:0px auto; padding-top:20px; }
 	#naviBar{ width:900px; height:60px; margin-top:10px }
-	#container{ width: 900px; height:600px; position:relative; }
+	#container{ width: 900px; height:800px; position:relative; margin-top: 30px}
 	#footer{ width: 900px; height:120px; position:relative; }
 	#footerLogo{ width:170px; height:60px; margin-left:10px; margin-top:10px; }
 	#footerContent{ width:700px; height:100px; margin-left:600px; margin-top:10px; font-family:고딕,godic; font-size:14px; text-align: right; margin-right:20px;}
@@ -230,55 +230,86 @@ function sample4_execDaumPostcode() {
 	</div>
 	
 	<div id="container">
+	<div style="margin: 0 auto">
+	<div style="border-bottom: 3px solid #333; text-align: center; font-size: 35px">회원가입</div>
+	<div></div>
 	
-		<form action="join_process.do" method="post" id="joinFrm">
-		<table >
-		<tr>
-			<td style="width: 50px">아이디</td><td><input type="text" style="width: 200px" name="id" id="id" placeholder="6자이상의 영문 혹은 영문 숫자를 조합"/></td>
-			<td><input type="button" id="chkId" value="중복확인"/></td>
-		</tr>
-		<tr >
-			<td colspan="2" id="id_check"></td>
-		</tr>
-		<tr>
-			<td style="width: 100px">비밀번호</td><td><input type="password" style="width: 200px" id="pass" name="pass" maxlength="5" placeholder="비밀번호를 입력해주세요"/></td>
-		</tr>
-		<tr> 
-			<td style="width: 100px">비밀번호 확인</td><td><input type="password" style="width: 200px" id="passCheck" placeholder="비밀번호를 한번 더 입력해주세요"/></td>
-		</tr> 
-		<tr> 
-			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" id="name" placeholder="이름을 입력해주세요"/></td>
-		</tr> 
-		<tr> 
-			<td style="width: 100px">이메일</td><td><input type="text" style="width: 200px" name="email" id="email" placeholder="예:collie@collie.com"/></td>
-			<td><input type="button" id="chkEmail" value="중복확인"/></td>
-		</tr> 
-		<tr >
-			<td colspan="2" id="email_chk"></td>
-		</tr>
-		<tr> 
-			<td style="width: 100px">휴대폰</td>
-			<td style="width: 30px"><input type="text" style="width: 60px" id="phone1" name="phone1"/></td>
-			<td style="width: 30px"><input type="text" style="width: 60px" id="phone2" name="phone2"/></td>
-			<td style="width: 30px"><input type="text" style="width: 60px" id="phone3" name="phone3"/></td>
-		</tr> 
-		<tr>
-			<td style="width: 100px">우편번호</td><td><input type="text" style="width: 200px" name="zipcode" id="zipcode" placeholder="우편번호" readonly="readonly"/></td>
-			<td><input type="button" value="주소검색"  onclick="sample4_execDaumPostcode()" style="width: 80px" id="zipBtn" name="zipBtn"/></td>
-		</tr> 
-		<tr> 
-			<td style="width: 100px">주소</td><td><input type="text" style="width: 200px" name="addr" id="addr" readonly="readonly"/></td>
-		</tr> 
-		<tr> 
-			<td style="width: 100px">상세주소</td><td><input type="text" style="width: 200px" name="addr_detail" id="addr_detail"/></td>
-		</tr> 
-		</table>
-	<hr>
-	<span><input type="button" value="회원가입" id="joinBtn" /></span>
-	</form>
-	</div>
 	
+	<form action="join_process.do" method="post" id="joinFrm">
+		<div class="form-row" style="margin-top: 20px">
+		    <div class="form-group col-md-6">
+		      <label for="inputEmail4">아이디</label>
+		      <input type="email" class="form-control" name="id" id="id" placeholder="6자이상의 영문 혹은 영문 숫자를 조합">
+		    </div>
+		    <input type="button" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black; " id="chkId" value="중복확인"/>
+	    </div>
+	    <div id="id_check"> </div>
+	    <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">비밀번호</label>
+		      <input type="password" class="form-control" id="pass" name="pass" maxlength="10" placeholder="비밀번호를 입력해주세요">
+		    </div>
+	  	</div>
+	    <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">비밀번호 확인</label>
+		      <input type="password" class="form-control" id="passCheck" placeholder="비밀번호를 한번 더 입력해주세요" maxlength="10" >
+		    </div>
+	  	</div>
+	    <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">이름</label>
+		      <input type="email" class="form-control" name="name" id="name" placeholder="이름을 입력해주세요">
+		    </div>
+	  	</div>
+	    <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">이메일</label>
+		      <input type="email" class="form-control" name="email" id="email" placeholder="예:collie@collie.com">
+		    </div>
+		    <input type="button" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black;" id="chkEmail" value="중복확인"/>
+	  	</div>
+	  	<div id="email_chk"></div>
+		 <label for="inputPassword4">휴대전화</label><br/>
+	  	<div class="form-inline">
+		  	<div class="form-group">
+				<input type="email" class="form-control" style="width: 80px" maxlength="3"  id="phone1" name="phone1">
+			</div>
+		  	<div class="form-group">
+				<label for="email">&nbsp;-&nbsp;</label>
+				<input type="email" class="form-control"  style="width: 100px" id="phone2" maxlength="4" name="phone2">
+			</div>
+		  	<div class="form-group">
+				<label for="email">&nbsp;-&nbsp;</label>
+				<input type="email" class="form-control" style="width: 100px"  id="phone3" maxlength="4" name="phone3">
+			</div>
+	  	</div>
+	  	<br/>
+	  	<div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">우편번호</label>
+		      <input type="email" class="form-control" name="zipcode" id="zipcode" placeholder="우편번호" readonly="readonly">
+		    </div>
+		    <input type="button" value="주소검색"  onclick="sample4_execDaumPostcode()" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black;" id="zipBtn" name="zipBtn"/>
+	  	</div>
+		<div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">주소</label>
+		      <input type="email" class="form-control" name="addr" id="addr" readonly="readonly">
+		    </div>
+	  	</div>
+	  	<div class="form-row" style="border-bottom: 3px solid #333">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">상세주소</label>
+		      <input type="email" class="form-control" name="addr_detail" id="addr_detail">
+		    </div>
+	  	</div>
+	    <div style="text-align: center ; margin-top: 30px"><button type="submit" class="btn btn-primary" style="zoom:1.2; background-color: white; color: black; border-color: black;" value="회원가입" id="joinBtn">회원가입</button></div>
+	  </form>
+  	</div>
 	</div>
+</div>
+
 	<div id="footer">
 		<jsp:include page="../common/footer.jsp" />
 	</div>

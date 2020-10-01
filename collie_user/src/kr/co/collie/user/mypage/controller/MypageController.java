@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.mypage.domain.QnaDetailDomain;
-import kr.co.collie.user.mypage.service.MypageService; 
+import kr.co.collie.user.mypage.service.MypageService;
+import kr.co.collie.user.mypage.vo.DeleteMemberVO;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
 import kr.co.collie.user.mypage.vo.MyOrderVO;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
@@ -77,28 +78,41 @@ public class MypageController {
 		return "forward:modify_member_result.jsp";
 	}//modifyMemberInfo
 	
+	/** È¸¿ø Å»Åð¸¦ À§ÇÑ Æû
+	 * @param pcVO
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping( value="/mypage/remove_member_form.do", method=GET)
-	public String removeMemberInfoForm( PassCheckVO pcVO, HttpSession session, Model model) {
-		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
-		// pcVO.setMember_num(ld.getMember_num());
-		pcVO.setMember_num(ld.getMember_num());
+	public String removeMemberInfoForm( ) {
+		
+		
+		return"mypage/remove_member_form";
+	}//removeMemberInfo
+	
+	/** È¸¿ø Å»Åð
+	 * @param pcVO
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/mypage/remove_member.do", method = POST)
+	public String removeMemberInfo( DeleteMemberVO dmVO, HttpSession session, PassCheckVO pcVO, Model model) {
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		dmVO.setMember_num(ld.getMember_num());
 	
 		
 		MypageService ms = new MypageService();
+		boolean deleteFlag = ms.removeMember(dmVO);
 		try {
-			boolean flag = ms.getMemberPass(pcVO);
+			boolean passFlag = ms.getMemberPass(pcVO);
 		} catch(NullPointerException npe) {
 			model.addAttribute("msg", "ºñ¹Ð¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
 		}//end catch
 		
-		return"forward:remove_member_result.jsp";
-	}//removeMemberInfo
-	
-	@RequestMapping(value="", method = POST)
-	public String removeMemberInfo() {
 		
-		
-		return "mypage/remove_member_form";
+		return "mypage/remove_member_result";
 	}
 	
 	

@@ -41,7 +41,7 @@
        <update id="removeMember" parameterType="kr.co.collie.user.mypage.vo.DeleteMemberVO">
             update member
             set  member_flag = 'N'
-            where  member_num = #{ member_num } and pass = #{ pass }   
+            where  member_num = #{ member_num } and pass=#{ pass }
        </update>
 	
 	<select id="selectQnaList" parameterType="int" resultType="kr.co.collie.user.mypage.domain.QnaListDomain">

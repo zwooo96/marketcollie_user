@@ -42,8 +42,9 @@ $(function(){
 			alert("비밀번호를 입력해주세요.");
 			return;
 		}//end if
-		$("#passForm").submit();
+		$("#removeForm").submit();
 	});
+	
 });//ready
 </script>
 </head>
@@ -64,7 +65,7 @@ $(function(){
 				<h6>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인해주세요.</h6>
 			</div>
 			<div id="containerContent">
-				<form id="passForm" method="post" action="check_member.do">
+				<form id="removeForm" method="post" action="remove_member.do">
 				  <div class="form-group row">
 				  <span style="margin-left: 250px; margin-bottom: 30px"><strong>회원 탈퇴</strong></span><br/>
 				  <div style="margin-bottom: 50px; ">안내고객님께서 회원 탈퇴를 원하신다니 저희 쇼핑몰의 서비스가 많이 부족하고 

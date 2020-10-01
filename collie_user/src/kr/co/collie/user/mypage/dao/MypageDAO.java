@@ -90,15 +90,12 @@ public class MypageDAO {
     	cnt = ss.update("kr.co.collie.user.mypage.removeMember", dmVO);
     	
     	ss.commit();
+    	
     	ss.close();
+    	
     	return cnt;
     }//deleteMember
      
-    
-    public static void main(String[] args) {
-    	
-    	
-	}
     
 	/**
 	 * 비밀번호를 변경하는 일.
@@ -113,6 +110,10 @@ public class MypageDAO {
 		
 		return cnt;
 	}//updateMemberPass
+	
+	  public static void main(String[] args) {
+		  
+		}
 	
 	public List<QnaListDomain> selectQnaList(int member_num){
 		List<QnaListDomain> list = null;
