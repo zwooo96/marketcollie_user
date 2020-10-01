@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -129,7 +130,200 @@ function sample4_execDaumPostcode() {
 
 function orderItem(){
 	
+	if($("#receive_name").val().trim()==""){
+		alert("받는분을 입력해주세요");
+		$("#receive_name").focus();
+		return;
+	}//end if
 	
+	if($("#receive_name").val().replace(/[ㄱ-힣A-Za-z]/g, "") != ""){
+		alert("받는분은 한글 또는 영문(대,소문자)만 입력 가능합니다.");
+		$("#receive_name").val("");
+		$("#receive_name").focus();
+		return;
+	}//end if
+	
+	if($("#receive_phone0").val().trim()==""){
+		alert("전화번호를 입력해주세요");
+		$("#receive_phone0").focus();
+		return;
+	}//end if
+	
+	if($("#receive_phone0").val().replace(/[0-9]/g, "") != ""){
+		alert("전화번호는 숫자만 입력 가능합니다.");
+		$("#receive_phone0").val("");
+		$("#receive_phone0").focus();
+		return;
+	}//end if
+	
+	if($("#receive_phone1").val().trim()==""){
+		alert("전화번호를 입력해주세요");
+		$("#receive_phone1").focus();
+		return;
+	}//end if
+	
+	if($("#receive_phone1").val().replace(/[0-9]/g, "") != ""){
+		alert("전화번호는 숫자만 입력 가능합니다.");
+		$("#receive_phone1").val("");
+		$("#receive_phone1").focus();
+		return;
+	}//end if
+	
+	if($("#receive_phone2").val().trim()==""){
+		alert("전화번호를 입력해주세요");
+		$("#receive_phone2").focus();
+		return;
+	}//end if
+	
+	if($("#receive_phone2").val().replace(/[0-9]/g, "") != ""){
+		alert("전화번호는 숫자만 입력 가능합니다.");
+		$("#receive_phone2").val("");
+		$("#receive_phone2").focus();
+		return;
+	}//end if
+	
+	if($("#zipcode").val().trim()==""){
+		alert("우편번호를 입력해주세요");
+		$("#zipcode").focus();
+		return;
+	}//end if
+	
+	if($("#zipcode").val().replace(/[0-9]/g, "") != ""){
+		alert("우편번호는 숫자만 입력 가능합니다.");
+		$("#zipcode").val("");
+		$("#zipcode").focus();
+		return;
+	}//end if
+	
+	if($("#addr").val().trim()==""){
+		alert("주소를 입력해주세요");
+		$("#addr").focus();
+		return;
+	}//end if
+	
+	if($("#addr").val().replace(/[ㄱ-힣A-Za-z0-9]/g, "") != ""){
+		alert("주소는 한글, 영문, 숫자만 입력 가능합니다.");
+		$("#addr").val("");
+		$("#addr").focus();
+		return;
+	}//end if
+	
+	if($("#addr_detail").val().trim()==""){
+		alert("상세주소를 입력해주세요");
+		$("#addr_detail").focus();
+		return;
+	}//end if
+	
+	if($("#addr_detail").val().replace(/[ㄱ-힣A-Za-z0-9]/g, "") != ""){
+		alert("상세주소는 한글, 영문, 숫자만 입력 가능합니다.");
+		$("#addr_detail").val("");
+		$("#addr_detail").focus();
+		return;
+	}//end if
+	
+	if($("#card_num1").val().trim()==""){
+		alert("카드번호를 입력해주세요");
+		$("#card_num1").focus();
+		return;
+	}//end if
+	
+	if($("#card_num1").val().replace(/[0-9]/g, "") != ""){
+		alert("카드번호는 숫자만 입력 가능합니다.");
+		$("#card_num1").val("");
+		$("#card_num1").focus();
+		return;
+	}//end if
+	
+	if($("#card_num2").val().trim()==""){
+		alert("카드번호를 입력해주세요");
+		$("#card_num2").focus();
+		return;
+	}//end if
+	
+	if($("#card_num2").val().replace(/[0-9]/g, "") != ""){
+		alert("카드번호는 숫자만 입력 가능합니다.");
+		$("#card_num2").val("");
+		$("#card_num2").focus();
+		return;
+	}//end if
+	
+	if($("#card_num3").val().trim()==""){
+		alert("카드번호를 입력해주세요");
+		$("#card_num3").focus();
+		return;
+	}//end if
+	
+	if($("#card_num3").val().replace(/[0-9]/g, "") != ""){
+		alert("카드번호는 숫자만 입력 가능합니다.");
+		$("#card_num3").val("");
+		$("#card_num3").focus();
+		return;
+	}//end if
+	
+	if($("#card_num4").val().trim()==""){
+		alert("카드번호를 입력해주세요");
+		$("#card_num4").focus();
+		return;
+	}//end if
+	
+	if($("#card_num4").val().replace(/[0-9]/g, "") != ""){
+		alert("카드번호는 숫자만 입력 가능합니다.");
+		$("#card_num4").val("");
+		$("#card_num4").focus();
+		return;
+	}//end if
+	
+	if($("#cvc").val().trim()==""){
+		alert("CVC를 입력해주세요");
+		$("#cvc").focus();
+		return;
+	}//end if
+	
+	if($("#cvc").val().replace(/[0-9]/g, "") != ""){
+		alert("CVC는 숫자만 입력 가능합니다.");
+		$("#cvc").val("");
+		$("#cvc").focus();
+		return;
+	}//end if
+	
+	if($("#card_exp_mm").val().trim()==""){
+		alert("카드 유효기간을 입력해주세요");
+		$("#card_exp_mm").focus();
+		return;
+	}//end if
+	
+	if($("#card_exp_mm").val().replace(/[0-9]/g, "") != ""){
+		alert("카드 유효기간은 숫자만 입력 가능합니다.");
+		$("#card_exp_mm").val("");
+		$("#card_exp_mm").focus();
+		return;
+	}//end if
+	
+	if($("#card_exp_yy").val().trim()==""){
+		alert("카드 유효기간을 입력해주세요");
+		$("#card_exp_yy").focus();
+		return;
+	}//end if
+	
+	if($("#card_exp_yy").val().replace(/[0-9]/g, "") != ""){
+		alert("카드 유효기간은 숫자만 입력 가능합니다.");
+		$("#card_exp_yy").val("");
+		$("#card_exp_yy").focus();
+		return;
+	}//end if
+	
+	if($("#card_pass").val().trim()==""){
+		alert("카드 비밀번호를 입력해주세요");
+		$("#card_pass").focus();
+		return;
+	}//end if
+	
+	if($("#card_pass").val().replace(/[0-9]/g, "") != ""){
+		alert("카드 비밀번호는 숫자만 입력 가능합니다.");
+		$("#card_pass").val("");
+		$("#card_pass").focus();
+		return;
+	}//end if
 	
 	var phone=$("#receive_phone0").val()+"-"+$("#receive_phone1").val()+"-"+$("#receive_phone2").val();
 	var cardNum=$("#card_num1").val()+"-"+$("#card_num2").val()+"-"+$("#card_num3").val()+"-"+$("#card_num4").val();
@@ -150,7 +344,7 @@ function orderItem(){
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<c:import url="/header.do" />
 	
 	<div id="container">
 	<div id="containerHeader">
@@ -236,18 +430,18 @@ function orderItem(){
 	      	<div style="margin: 12px 0px 18px 0px">상세주소</div>
 	      </td>
 	      <td style="vertical-align: middle;">
-	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_name" value="${ user_info.name }" class="collieText"/></div>
+	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_name" id="receive_name" value="${ user_info.name }" class="collieText"/></div>
 	      	<div style="margin: 10px 0px 10px 0px; width: 300px; display: flex; justify-content: space-between; align-items: center;">
-	      		<input type="text" name="receive_phone0" id="receive_phone0" class="collieText" style="width: 80px;"/>-
-	      		<input type="text" name="receive_phone1" id="receive_phone1" class="collieText" style="width: 80px;"/>-
-	      		<input type="text" name="receive_phone2" id="receive_phone2" class="collieText" style="width: 80px;"/>
+	      		<input type="text" name="receive_phone0" id="receive_phone0" class="collieText" maxlength="3" style="width: 80px;"/>-
+	      		<input type="text" name="receive_phone1" id="receive_phone1" class="collieText" maxlength="4" style="width: 80px;"/>-
+	      		<input type="text" name="receive_phone2" id="receive_phone2" class="collieText" maxlength="4" style="width: 80px;"/>
 	      	</div>
 	      	<div style="margin: 10px 0px 10px 0px">
 	      	<input type="text" name="receive_zipcode" id="zipcode" value="${ user_info.zipcode }" class="collieText" readonly="readonly"/>
 	      	<input type="button" value="우편번호 검색" class="collieBtn" onclick="sample4_execDaumPostcode()">
 	      	</div>
 	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_addr" id="addr" value="${ user_info.addr }"  class="collieText" readonly="readonly"/></div>
-	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_addr_detail" value="${ user_info.addr_detail }"  class="collieText"/></div>
+	      	<div style="margin: 10px 0px 10px 0px"><input type="text" name="receive_addr_detail" id="addr_detail" value="${ user_info.addr_detail }"  class="collieText"/></div>
 	      </td>
 	    </tr>
 	</table>
@@ -281,18 +475,18 @@ function orderItem(){
 	      		</select>
 	      	</div>
 	      	<div style="margin: 10px 0px 10px 0px; width: 300px; display: flex; justify-content: space-between; align-items: center;">
-	      		<input type="text" name="card_num1" id="card_num1" placeholder="4자리" class="collieText" style="width: 50px;"/>
-	      		<input type="text" name="card_num2" id="card_num2" placeholder="4자리" class="collieText" style="width: 50px;"/>
-	      		<input type="text" name="card_num3" id="card_num3" placeholder="4자리" class="collieText" style="width: 50px;"/>
-	      		<input type="text" name="card_num4" id="card_num4" placeholder="4자리" class="collieText" style="width: 50px;"/>
-	      		<input type="text" placeholder="CVC" class="collieText" style="width: 50px"/>
+	      		<input type="text" name="card_num1" id="card_num1" placeholder="4자리" class="collieText" maxlength="4" style="width: 50px;"/>
+	      		<input type="text" name="card_num2" id="card_num2" placeholder="4자리" class="collieText" maxlength="4" style="width: 50px;"/>
+	      		<input type="text" name="card_num3" id="card_num3" placeholder="4자리" class="collieText" maxlength="4" style="width: 50px;"/>
+	      		<input type="text" name="card_num4" id="card_num4" placeholder="4자리" class="collieText" maxlength="4" style="width: 50px;"/>
+	      		<input type="text" placeholder="CVC" id="cvc" class="collieText" maxlength="3" style="width: 50px"/>
 	      	</div>
 	      	<div style="margin: 10px 0px 10px 0px">
-	      	<input type="text" name="card_exp_mm" id="card_exp_mm" placeholder="MM" class="collieText" style="width: 50px; margin-right: 10px"/>
-	      	<input type="text" name="card_exp_yy" id="card_exp_yy" placeholder="YY" class="collieText" style="width: 50px; margin-right: 10px"/>
+	      	<input type="text" name="card_exp_mm" id="card_exp_mm" placeholder="MM" class="collieText" maxlength="2" style="width: 50px; margin-right: 10px"/>
+	      	<input type="text" name="card_exp_yy" id="card_exp_yy" placeholder="YY" class="collieText" maxlength="2" style="width: 50px; margin-right: 10px"/>
 	      	</div>
 	      	<div style="margin: 10px 0px 10px 0px">
-	      	<input type="text" class="collieText" style="width: 50px; margin-right: 10px"/> **
+	      	<input type="text" id="card_pass" class="collieText" maxlength="2" style="width: 50px; margin-right: 10px"/> **
 	      	</div>
 	      </td>
 	    </tr>

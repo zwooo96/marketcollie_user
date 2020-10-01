@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import kr.co.collie.user.item.dao.ItemDAO;
 import kr.co.collie.user.item.domain.ItemDetailDomain;
 import kr.co.collie.user.item.domain.ItemListDomain;
+import kr.co.collie.user.item.domain.ItemQnaDomain;
 import kr.co.collie.user.pagination.RangeVO;
 
 public class ItemService {
@@ -73,5 +74,13 @@ public class ItemService {
 		idd.setDetailImgList(dDAO.detailImgList(item_Num));
 		return idd;
 	}
-
+	
+	
+	public List<ItemQnaDomain> getItemQnaList(int itemNum){
+		List<ItemQnaDomain> list=null;
+		
+		ItemDAO iDAO=ItemDAO.getInstance();
+		
+		return list;
+	}//getItemQnaList
 }

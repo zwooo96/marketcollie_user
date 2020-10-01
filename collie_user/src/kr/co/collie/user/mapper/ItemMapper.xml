@@ -57,4 +57,11 @@
   	WHERE ITEM_NUM =#{ITEM_NUM}
   </select>
   
+  
+   <select id="selectItemQnaList" parameterType="int" resultType="kr.co.collie.user.item.domain.ItemQnaDomain">
+  	select iq.item_qna_num, iq.item_qna_subject, iq.item_qna_flag, iq.input_date, m.id
+	from item_qna iq, member m
+	where iq.member_num=m.member_num and iq.item_num=1
+  </select>
+  
 </mapper>

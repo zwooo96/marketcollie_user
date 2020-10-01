@@ -89,6 +89,7 @@ $(function(){
 		}else{ 
 			$("[name='cart_num']").prop("checked",false); 
 		} 
+		modifyTotalPrice();
 	})
 	
 	$("[name='cart_num']").click(function(){ 
@@ -98,7 +99,8 @@ $(function(){
 		}else{
 			$("#selectAll").prop("checked",false);
 		}//end else
-	})
+		modifyTotalPrice();
+	});//click
 
 	
 	$("#delSelectedItem").click(function(){
@@ -129,6 +131,7 @@ $(function(){
 			      		empty+='</tr>';
 			      		$("#cartTable tbody").html(empty);
 			      	}//end if
+			      	modifyTotalPrice();
 				}//success
 			});//ajax
 		}else{
@@ -180,7 +183,12 @@ function modifyCnt(cart_num, item_cnt, item_price,flag){
 				output+='</button>';
 				$("#quantity"+cart_num).html(output);
 				var totalPrice=item_cnt*item_price;
-				$("#itemTotalPrice"+cart_num).html(totalPrice.toLocaleString()+"원");
+				
+				var priceDiv='<input type="hidden" id="perItemPrice'+cart_num+'" value="'+totalPrice+'"/>';
+				priceDiv+=totalPrice.toLocaleString()+"원";
+				$("#perItemTotalPrice"+cart_num).html(priceDiv);
+				
+				modifyTotalPrice();
 			}//end if
 	      	
 		}//success
@@ -208,10 +216,21 @@ function delItem(cart_num){
 	      		empty+='</tr>';
 	      		$("#cartTable tbody").html(empty);
 	      	}//end if
+	      	modifyTotalPrice();
 		}//success
 	});//ajax
 	
 }//delItem
+
+function modifyTotalPrice(){
+	var itemTotalPrice=0;
+	$("[name='cart_num']:checked").each(function(){
+		itemTotalPrice+= ($("#perItemPrice"+this.value).val())*1;
+	})
+
+	$("#itemTotalPrice").html(itemTotalPrice.toLocaleString()+"원");
+	$("#totalPayPrice").html((itemTotalPrice+2500).toLocaleString()+"원");
+}//modifyTotalPrice
 
 </script>
 </head>
@@ -219,7 +238,7 @@ function delItem(cart_num){
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<c:import url="/header.do" />
 	
 	<div id="container">
 	<div id="containerHeader">
@@ -284,7 +303,8 @@ function delItem(cart_num){
 	      	</div>
 	      	</div>
 	      </td>
-	      <td id="itemTotalPrice${ cart.cart_num }"style="vertical-align: middle; text-align: center; font-weight: bold">
+	      <td id="perItemTotalPrice${ cart.cart_num }"style="vertical-align: middle; text-align: center; font-weight: bold">
+	      	<input type="hidden" id="perItemPrice${ cart.cart_num }" value="${ cart.item_price * cart.item_cnt }"/>
 	      	<fmt:formatNumber pattern="#,###" value="${ cart.item_price * cart.item_cnt }"/>원
 	      </td>
 	      <td style="vertical-align: middle; text-align: center;">
@@ -302,7 +322,7 @@ function delItem(cart_num){
 	
 	<div class="priceDiv">
 	<div class="priceDivLabel">상품금액</div>
-	<div class="priceDivPrice">
+	<div class="priceDivPrice" id="itemTotalPrice">
 	<fmt:formatNumber pattern="#,###" value="${ totalCnt }"/>원
 	</div>
 	</div>
@@ -316,7 +336,7 @@ function delItem(cart_num){
 	=
 	<div class="priceDiv">
 	<div class="priceDivLabel">결제예정금액</div>
-	<div class="priceDivPrice">
+	<div class="priceDivPrice" id="totalPayPrice">
 	<fmt:formatNumber pattern="#,###" value="${ totalCnt+2500 }"/>원
 	</div>
 	</div>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.collie.user.item.domain.ItemListDomain;
+import kr.co.collie.user.item.domain.ItemQnaDomain;
 import kr.co.collie.user.item.service.ItemService;
 import kr.co.collie.user.pagination.RangeVO;
 
@@ -42,5 +43,15 @@ public class ItemController {
 		return "/item/item_detail";
 	}
 	
+	@RequestMapping(value="/item_qna_list.do", method=RequestMethod.GET)
+	public String viewItemQnaList(Model model) throws NumberFormatException {
+		System.out.println("====dk 잠만 빌드 안된거아냐!??!!??!!?=========================================viewItemQnaList 이거 호출하는데좀 찾아줘요");
+		int item_num=1;
+		List<ItemQnaDomain> list=new ItemService().getItemQnaList(item_num);
+		
+		model.addAttribute("qna_list", list);
+		
+		return "item/item_qna";
+	}//viewItemQnaDetail
 	
 }
