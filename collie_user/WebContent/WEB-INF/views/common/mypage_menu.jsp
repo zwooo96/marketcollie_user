@@ -7,7 +7,7 @@
 	<table class="table table-bordered">
     	<tr><td onclick="location.href='order_list.do'">주문 내역</td></tr>
     	<tr><td onclick="location.href='qna_list.do'">문의 내역</td></tr>
-    	<tr><td onclick="location.href='memberinfo_form.do'">개인정보 수정</td></tr>
+    	<tr><td onclick="location.href='check_member_form.do'">개인정보 수정</td></tr>
     	<tr><td onclick="location.href='check_pass_form.do'">비밀번호 변경</td></tr>
     </table>
     <div id="qnaBox" onclick="location.href='../qna/form.do'">

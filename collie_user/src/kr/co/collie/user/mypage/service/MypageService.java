@@ -8,9 +8,11 @@ import org.json.simple.JSONObject;
 
 import kr.co.collie.user.mypage.dao.MypageDAO;
 import kr.co.collie.user.mypage.domain.MemberInfoDomain;
+import kr.co.collie.user.mypage.domain.OrderDetailDomain;
 import kr.co.collie.user.mypage.domain.OrderListDomain;
 import kr.co.collie.user.mypage.vo.DeleteMemberVO;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
+import kr.co.collie.user.mypage.vo.MyOrderVO;
 import kr.co.collie.user.mypage.domain.QnaDetailDomain;
 import kr.co.collie.user.mypage.domain.QnaListDomain;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
@@ -32,7 +34,8 @@ public class MypageService {
 		MypageDAO mDAO = MypageDAO.getInstance();
 		int totalCnt = getOrderListCnt(rVO);
 		rVO.setTotal_cnt(totalCnt);
-		rVO.setPage_scale(3);
+		//rVO.setPage_scale(3);
+		rVO.setPage_scale(2);
 		rVO.calcPaging();
 		list = mDAO.selectOrderList(rVO);
 		
@@ -85,6 +88,34 @@ public class MypageService {
 		
 		return jo.toJSONString();
 	}//orderListJson
+	
+	/**
+	 * 주문 내역 상세페이지를 불러오는 일
+	 * @param order_num
+	 * @return
+	 */
+	public OrderDetailDomain getOrderDetail(MyOrderVO moVO) {
+		OrderDetailDomain odd = null;
+		
+		MypageDAO mDAO = MypageDAO.getInstance();
+		odd = mDAO.selectOrderDetail(moVO);
+		
+		return odd;
+	}//getOrderDetail
+	
+	/**
+	 * 주문내역을 취소하는 일
+	 * @param moVO
+	 * @return
+	 */
+	public boolean cancelOrder(MyOrderVO moVO) {
+		boolean flag = false;
+		
+		MypageDAO mDAO = MypageDAO.getInstance();
+		flag = mDAO.deleteOrder(moVO)==1;
+		
+		return flag;
+	}//cancelOrder
 	
 	
 	/**

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.collie.user.member.domain.LoginDomain;
+import kr.co.collie.user.mypage.domain.OrderDetailDomain;
 import kr.co.collie.user.mypage.domain.OrderListDomain;
 import kr.co.collie.user.mypage.domain.QnaDetailDomain;
 import kr.co.collie.user.mypage.service.MypageService;
@@ -35,7 +36,7 @@ public class MypageController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/mypage/order_list.do")
+	@RequestMapping(value="/mypage/order_list.do", method = GET)
 	public String orderList(HttpSession session, Model model, RangeVO rVO) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		rVO.setField_name("member_num");
@@ -58,6 +59,7 @@ public class MypageController {
 	 * @param rVO
 	 * @return
 	 */
+	@RequestMapping(value="/mypage/order_list_page", method = GET)
 	public String orderListPaging(HttpSession session, Model model, RangeVO rVO) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		rVO.setField_name("member_num");
@@ -69,18 +71,28 @@ public class MypageController {
 		String json = ms.orderListJson(list, rVO);
 		model.addAttribute("json", json);
 		
-		return "mypage/order_list";
+		return "mypage/order_list_json";
 	}//orderListPaging
 	
 	/**
-	 * 주문내역 상세를 불러오는 일
+	 * 주문 내역 상세페이지를 불러오는 일
 	 * @param moVO
 	 * @param session
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/mypage/order_detail.do")
+	@RequestMapping(value="/mypage/order_detail.do", method=GET)
 	public String orderDetail(MyOrderVO moVO, HttpSession session, Model model) {
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+//		moVO.setMember_num(ld.getMember_num());
+		moVO.setMember_num(1);
+		
+		MypageService ms = new MypageService();
+		OrderDetailDomain odd = ms.getOrderDetail(moVO);
+		
+		model.addAttribute("order_detail", odd);
+//		model.addAttribute("user_name", ld.getName());
+		model.addAttribute("user_name", "송길동");
 		
 		return "mypage/order_detail";
 	}//orderDetail
@@ -92,11 +104,18 @@ public class MypageController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/mypage/order_cancel.do")
+	@RequestMapping(value="/mypage/order_cancel.do", method=GET)
 	public String cancelOrder(MyOrderVO moVO, HttpSession session, Model model) {
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+//		moVO.setMember_num(ld.getMember_num());
+		moVO.setMember_num(1);
 		
-		return "mypage/order_cancel";
-	}//ordercancel
+		MypageService ms = new MypageService();
+		boolean flag = ms.cancelOrder(moVO);
+		model.addAttribute("cancelFlag", flag);
+		
+		return "mypage/order_list";
+	}//cancelOrder
 	
 	@RequestMapping(value="/mypage/check_member_form.do", method= GET)
 	public String checkMypageForm() {
@@ -146,7 +165,6 @@ public class MypageController {
 		return "mypage/modify_member_result.jsp";
 	}//modifyMemberInfo
 	
-	//String id?
 	/** 회원 탈퇴를 위한 폼
 	 * @param pcVO
 	 * @param session

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
 
 <style type="text/css">
-#container{ width: 70%; margin: 0px auto; min-height: 700px; margin-top:50px; }
+#container{ width: 70%; margin: 0px auto; min-height: 900px; margin-top:50px; }
 #containerMenu{ width: 200px; float: left; }
 #menuTitle{ text-align: center; }
 .table-bordered{ width: 200px; text-align: left; margin-top: 30px; color: #666666; font-size: 15px; }
@@ -21,22 +23,25 @@
 #cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
 #contentWrap{ margin-left: 240px }
 #containerSubTitle{ border-bottom: 1px solid #17462B; margin-top: 40px; padding-bottom: 0px; color: #666666 }
-
 #oneGoods{ border-bottom: 1px solid #DCDBDE }
 #goodsImg{ width: 100px; padding-left: 30px }
 #goodsThm{ width:80px; height: 100px }
 #goodsInfo{ vertical-align: middle; font-weight: bold }
 #goodsTitle{ font-size: 17px; color:#333 }
 #goodsTitle:hover{ font-size: 17px; text-decoration: none; }
-#goodsPrice{ font-size: 16px }
+#goodsPrice{ font-size: 16px; padding-left: 2px }
 #goodsCnt{ color:#666666; font-size: 15px; margin-left: 5px }
-
 .btn-outline-success{ border-color: #17462B !important; color: #17462B !important }
 .btn-outline-success:hover, #btn-outline-success:active, #btn-outline-success:focus { border-color: #17462B !important; background-color: #FFFFFF !important; color:#17462B !important }
-#orderBtn{ text-align: center; margin-top:30px }
-#cancelBtn{ margin-left:20px }
-
-#goodsBtn{ vertical-align: middle; width:85px; padding-right: 0px }
+#orderBtn{ text-align: center; margin-top:50px }
+#searchBtn{ width: 250px; padding: 15px }
+#cancelBtn{ margin-left:20px; width: 250px; padding: 15px }
+#Info{ margin-top: 100px }
+#payInfo, #orderInfo, #receiveInfo{ color:#666666; border-bottom: 2px solid #17462B; padding-left: 0px; padding-bottom: 5px; width: 1100px  }
+.infoColumn{ font-size: 15px; font-weight: bold; width: 250px }
+.infoValue{ color:#4C4C4C; font-size: 14px }
+.lastColumn{ border-bottom: 1px solid #DCDBDE }
+#receiveWrap{ margin-bottom: 200px }
 </style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -45,8 +50,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	$("#btn").click(function(){
-		location.href = "/collie_user/mypage/order_detail.do";
+	$("#cancelBtn").click(function(){
+		if( confirm("해당 주문을 정말 취소하시겠습니까?") ){
+			location.href = "order_cancel.do";
+		}//end if
 	});//click
 });//ready
 </script>
@@ -64,26 +71,96 @@ $(function(){
 			<h4><strong>주문 내역</strong></h4>
 		</div>
 			<div id="containerSubTitle">
-				<h5><strong>주문번호 315874351</strong></h5>
+				<h5><strong>주문번호 ${ param.order_num }</strong></h5>
 			</div>
 			<div id="containerContent">
+			<div id="foreachWrap">
+			<c:forEach var="odd" items="${ order_detail.getOrderItemList() }">
 				<div id="orderGoods">
 				    <table class="table table-borderless">
 					    <tr id="oneGoods">
 					      	<td id="goodsImg">
-					      		<a href="#void"><img src="http://localhost/collie_user/common/images/item/bread.png" id="goodsThm" /></a>
+					      		<a href="http://localhost/collie_user/item/item_detail.do?item_num=${ odd.item_num }"><img src="http://localhost/collie_user/common/images/item/${ odd.item_img }" id="goodsThm" /></a>
 					      	</td>
 					      	<td id="goodsInfo">
-					      		<div><a href="#void" id="goodsTitle">[KF365] DOLE 실속 바나나 1.1kg</a></div>
-					      		<span id="goodsPrice">2,850원</span>
-					      		<span id="goodsCnt">1개 구매</span>
+					      		<div><a href="http://localhost/collie_user/item/item_detail.do?item_num=${ odd.item_num }" id="goodsTitle">${ odd.item_name }</a></div>
+					      		<span id="goodsPrice"><fmt:formatNumber value="${ odd.item_price }" pattern="#,###"/>원</span>
+					      		<span id="goodsCnt">${ odd.item_cnt }개 구매</span>
 					      	</td>
 					      </tr>
 					</table>
 				</div>
+			</c:forEach>
+				</div>
 				<div id="orderBtn">
 					<button id="searchBtn" type="button" class="btn btn-outline-success">배송 현황 조회</button>
 					<button id="cancelBtn" type="button" class="btn btn-outline-success">전체 상품 주문 취소</button>
+				</div>
+				<div id="Info">
+				<div id="payWrap">
+				<table class="table table-borderless">
+				    <tr><td colspan="2" id="payInfo"><h5><strong>결제 정보</strong></h5></td></tr>	
+				    <tr>
+				      <td class="infoColumn">총 상품금액</td>
+				      <td class="infoValue"><fmt:formatNumber value="${ order_detail.total_price }" pattern="#,###"/>원</td>
+					</tr>	
+				    <tr>
+				      <td class="infoColumn">배송비</td>
+				      <td class="infoValue">2,500원</td>
+					</tr>	
+				    <tr>
+				      <td class="infoColumn">결제금액</td>
+				      <td class="infoValue">
+				      <c:set var="order_price" value="${ order_detail.total_price + 2500 }"/>
+				      <fmt:formatNumber value="${ order_detail.total_price }" pattern="#,###"/>원
+				      </td>
+					</tr>	
+				    <tr class="lastColumn">
+				      <td class="infoColumn">결제방법</td>
+				      <td class="infoValue">신용카드<td>
+					</tr>	
+				</table>		
+				</div>
+				<div id="orderWrap">
+				<table class="table table-borderless">
+				    <tr><td colspan="2" id="orderInfo"><h5><strong>주문 정보</strong></h5></td></tr>	
+				    <tr>
+				      <td class="infoColumn">주문번호</td>
+				      <td class="infoValue">${ param.order_num }</td>
+					</tr>	
+				    <tr>
+				      <td class="infoColumn">주문자명</td>
+				      <td class="infoValue">${ user_name }</td>
+					</tr>	
+				    <tr class="lastColumn">
+				      <td class="infoColumn">주문일시</td>
+				      <td class="infoValue">${ fn:substring(order_detail.input_date, 0, 19) }</td>
+					</tr>	
+				</table>		
+				</div>
+				<div id="receiveWrap">
+				<table class="table table-borderless">
+				    <tr><td colspan="2" id="receiveInfo"><h5><strong>배송 정보</strong></h5></td></tr>	
+				    <tr>
+				      <td class="infoColumn">받는 분</td>
+				      <td class="infoValue">${ order_detail.receive_name }</td>
+					</tr>	
+				    <tr>
+				      <td class="infoColumn">받는 분 핸드폰</td>
+				      <td class="infoValue">
+				      ${ fn:substring(order_detail.receive_phone, 0, 3) }-****-${ fn:substring(order_detail.receive_phone, 9, 13) }
+				      </td>
+					</tr>	
+				    <tr>
+				      <td class="infoColumn">우편번호</td>
+				      <td class="infoValue">${ order_detail.receive_zipcode }</td>
+					</tr>	
+				    <tr class="lastColumn">
+				      <td class="infoColumn">주소</td>
+				      <td class="infoValue">${ order_detail.receive_addr }&nbsp;${ order_detail.receive_addr_detail }</td>
+					</tr>	
+				</table>		
+				</div>
 				</div>
 			</div>
 		</div>

@@ -16,8 +16,41 @@
 	<select id="selectOrderListCnt" resultType="int" parameterType="kr.co.collie.user.pagination.RangeVO">
 		select count(*)
 		from order_form
-		where ${field_name} = #{field_value}
+		where ${ field_name } = #{ field_value }
 	</select>
+	
+	<!-- 주문 내역 상세페이지를 불러오는 일 -->
+	<resultMap id="selectOrderDetail" type="kr.co.collie.user.mypage.domain.OrderDetailDomain">
+		<result property="total_price" column="TOTAL_PRICE"/>
+		<result property="input_date" column="INPUT_DATE"/>
+		<result property="card_num" column="CARD_NUM"/>
+		<result property="card_bank" column="CARD_BANK"/>
+		<result property="receive_name" column="RECEIVE_NAME"/>
+		<result property="receive_phone" column="RECEIVE_PHONE"/>
+		<result property="receive_addr" column="RECEIVE_ADDR"/>
+		<result property="receive_addr_detail" column="RECEIVE_ADDR_DETAIL"/>
+		<result property="receive_zipcode" column="RECEIVE_ZIPCODE"/>
+		<collection property="orderItemList" column="{member_num=MEMBER_NUM, order_num=ORDER_NUM}" javaType="java.util.ArrayList" ofType="kr.co.collie.user.mypage.domain.OrderItemDomain" select="selectOrderItem"/>
+	</resultMap>
+	<select id="selectOrderInfo" parameterType="kr.co.collie.user.mypage.vo.MyOrderVO" resultMap="selectOrderDetail">
+		select f.total_price, f.input_date, p.card_num, p.card_bank, d.receive_name, d.receive_phone, d.receive_addr, d.receive_addr_detail, d.receive_zipcode, f.member_num, f.order_num
+		from order_form f, payment p, destination d, member m
+		where (p.order_num=f.order_num and d.order_num=f.order_num and f.member_num=m.member_num)
+					and f.member_num = #{ member_num } and f.order_num = #{ order_num }
+	</select>
+	<!-- 주문 내역 상세페이지에 속한 List<OrderItemDomain> 불러오는 일 -->
+	<select id="selectOrderItem" parameterType="java.util.Map" resultType="kr.co.collie.user.mypage.domain.OrderItemDomain">
+		select i.item_name, i.item_img, i.item_price, oi.item_cnt, i.item_num
+		from item i, order_item oi, order_form f
+		where (oi.item_num=i.item_num and oi.order_num=f.order_num)
+					and f.member_num = #{ member_num } and f.order_num = #{ order_num }
+	</select>
+	
+	<!-- 주문내역을 취소하는 일 -->
+	<delete id="deleteOrder" parameterType="kr.co.collie.user.mypage.vo.MyOrderVO">
+		delete from order_form
+		where member_num = #{ member_num } and order_num = #{ order_num }
+	</delete>
 	
 	<!-- 현재 비밀번호를 확인하는 일 : 세션의 아이디와 사용자가 입력한 비밀번호를 받아 일치하는 회원이 있는지 조회 -->
 	<select id="selectMemberPass" parameterType="kr.co.collie.user.mypage.vo.PassCheckVO" resultType="int">

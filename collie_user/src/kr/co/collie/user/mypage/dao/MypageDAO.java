@@ -6,11 +6,13 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.mypage.domain.MemberInfoDomain;
+import kr.co.collie.user.mypage.domain.OrderDetailDomain;
 import kr.co.collie.user.mypage.domain.OrderListDomain;
 import kr.co.collie.user.mypage.domain.QnaDetailDomain;
 import kr.co.collie.user.mypage.domain.QnaListDomain;
 import kr.co.collie.user.mypage.vo.DeleteMemberVO;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
+import kr.co.collie.user.mypage.vo.MyOrderVO;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
 import kr.co.collie.user.mypage.vo.QnaVO;
 import kr.co.collie.user.mypage.vo.UpdatePassVO;
@@ -58,6 +60,37 @@ public class MypageDAO {
     	
     	return cnt;
     }//selectOrderListCnt
+
+    /**
+     * 주문 내역 상세페이지를 불러오는 일
+     * @param order_num
+     * @return
+     */
+    public OrderDetailDomain selectOrderDetail(MyOrderVO moVO) {
+    	OrderDetailDomain odd = null;
+    	
+    	SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+    	odd = ss.selectOne("kr.co.collie.user.mypage.selectOrderInfo", moVO);
+    	ss.close();
+    	
+    	return odd;
+    }//selectOrderDetail
+    
+    /**
+     * 주문내역을 취소하는 일
+     * @param moVO
+     * @return
+     */
+    public int deleteOrder(MyOrderVO moVO) {
+    	int cnt = 0;
+    	
+    	SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+    	ss.delete("kr.co.collie.user.mypage.deleteOrder", moVO);
+    	ss.commit();
+    	ss.close();
+    	
+    	return cnt;
+    }//deleteOrder
 
      
      /**
