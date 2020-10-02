@@ -4,6 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -67,11 +68,11 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage/update_member.do", method=POST)
-	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
+	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model, HttpServletRequest request) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		
 		MypageService ms = new MypageService();
-		
+		mmVO.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));
 		boolean flag = ms.modifyMemberInfo(mmVO);
 		
 		

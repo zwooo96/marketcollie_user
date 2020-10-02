@@ -7,15 +7,22 @@
 <link rel="stylesheet" type="text/css" href="http://211.238.142.36/jsp_prj/common/css/main.css">
 <title>Insert title here</title>
 <style type="text/css">
-	#wrap{ width:900px; height:900px; margin:0px auto; }
-	#header{ width:900px; height:180px; }
-	#headerTop{ width:900px; height:140px; position:relative; background:#FFFFFF url("http://211.238.142.36/jsp_prj/common/images/header_bg.png") }
-	#mainText{ font-family: 고딕,godic,Sans-Serif; font-size:30px; font-weight:bold; width:140px; height:50px; margin:0px auto; padding-top:20px; }
-	#naviBar{ width:900px; height:60px; margin-top:10px }
-	#container{ width: 900px; height:600px; position:relative; }
-	#footer{ width: 900px; height:120px; position:relative; }
-	#footerLogo{ width:170px; height:60px; margin-left:10px; margin-top:10px; }
-	#footerContent{ width:700px; height:100px; margin-left:600px; margin-top:10px; font-family:고딕,godic; font-size:14px; text-align: right; margin-right:20px;}
+	#container{ width: 70%; margin: 0px auto; 900px; margin-top:50px; }
+	#containerMenu{ width: 200px; float: left; }
+	#menuTitle{ text-align: center; }
+	.table-bordered{ width: 200px; text-align: left; margin-top: 30px; color: #666666; font-size: 15px; }
+	.table-bordered td:hover{ background-color: #F7F7F7; color: #17462B }
+	.table-bordered td{ cursor: pointer; }
+	#qnaBox{ background-color: #F7F7F7; color: #666666; padding: 10px; font-size: 13px; padding-left: 20px }
+	#qnaBox:hover{ cursor: pointer; }
+	#cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
+	#contentWrap{ margin-left: 240px }
+	#containerSubTitle{ border-bottom: 1px solid #17462B; margin-top: 30px; padding-bottom: 0px; color: #666666 }
+	#containerContent{ margin-top: 90px; text-align: center; }
+	hr{ margin-top: 90px }
+	.btn-primary{ background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 250px; padding: 15px  }
+	.btn-primary:hover, .btn-primary:active, .btn-primary:focus{ background-color: #17462B !important; }
+	#btnDiv{ width: 250px; margin: 0px auto }
 </style>  
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -88,52 +95,87 @@ function sample4_execDaumPostcode() {
        }
     }).open();
 }
-
-	
-	
-
 </script>
 </head>
+
+<body style="font-family: nanumbarungothic">
+
 <body>
 <div id="wrap">
 
-	<jsp:include page="../common/header.jsp" />
-	<%  %>
-	<div id="container">
-		<form action="update_member.do" method="post" id="Frm">
-		<table >
-		<tr>
-			<td style="width: 50px">아이디</td><td><input type="text" style="width: 200px" name="id" readonly="readonly" value="${ user_info.id }" /></td>
-		</tr>
-		<tr> 
-			<td style="width: 100px">이름</td><td><input type="text" style="width: 200px" name="name" readonly="readonly" value="${ user_info.name }" /></td>
-		</tr> 
-		<tr> 
-			<td style="width: 100px">이메일</td><td><input type="text" style="width: 200px" name="email" id="email" readonly="readonly" value="${ user_info.email }" /></td>
-		</tr> 
-		<tr> 
-			<td style="width: 100px">휴대폰</td><td><input type="text" style="width: 200px" name="phone" placeholder="숫자만 입력해주세요"/></td>
-		</tr> 
-		<tr>
-			<td style="width: 100px">우편번호</td><td><input type="text" style="width: 200px" name="zipcode" id="zipcode" placeholder="우편번호" readonly="readonly"/></td>
-			<td><input type="button" value="주소검색"  onclick="sample4_execDaumPostcode()" style="width: 80px" id="zipBtn" name="zipBtn"/></td>
-		</tr> 
-		<tr> 
-			<td style="width: 100px">주소</td><td><input type="text" style="width: 200px" name="addr" id="addr"/></td>
-		</tr> 
-		<tr> 
-			<td style="width: 100px">상세주소</td><td><input type="text" style="width: 200px" name="addr_detail"/></td>
-		</tr> 
-		</table>
-	<hr>
-	<span><input type="button" value="탈퇴하기" id="removeBtn" /></span><span><input type="button" value="회원정보 수정" id="modifyBtn"></span>
-	</form>
-	</div>
+		<jsp:include page="../common/header.jsp" />
 	
+	<div id="container">
+		<jsp:include page="../common/mypage_menu.jsp" />
+		<div id="contentWrap">
+		<div id="containerTitle">
+			<h4><strong>개인정보 변경</strong></h4>
+		</div>
+			<div id="containerSubTitle">
+			</div>
+			<div id="containerContent">
+	<form action="update_member.do" method="post" id="Frm">
+		<div class="form-row" style="margin-top: 10px">
+		    <div class="form-group col-md-6">
+		      <label for="inputEmail4">아이디</label>
+		      <input type="email" class="form-control" name="id" id="id" value="${ user_info.id }">
+		    </div>
+	    </div>
+	    <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">이름</label>
+		      <input type="email" class="form-control" name="name" id="name" value="${ user_info.name }" >
+		    </div>
+	  	</div>
+	    <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">이메일</label>
+		      <input type="email" class="form-control" name="email" id="email" readonly="readonly" value="${ user_info.email }">
+		    </div>
+	  	</div>
+	  	<div id="email_chk"></div>
+		 <label for="inputPassword4">휴대전화</label><br/>
+	  	<div class="form-inline">
+		  	<div class="form-group">
+				<input type="email" class="form-control" style="width: 80px" maxlength="3"  id="phone1" name="phone1">
+			</div>
+		  	<div class="form-group">
+				<label for="email">&nbsp;-&nbsp;</label>
+				<input type="email" class="form-control"  style="width: 100px" id="phone2" maxlength="4" name="phone2">
+			</div>
+		  	<div class="form-group">
+				<label for="email">&nbsp;-&nbsp;</label>
+				<input type="email" class="form-control" style="width: 100px"  id="phone3" maxlength="4" name="phone3">
+			</div>
+	  	</div>
+	  	<br/>
+	  	<div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">우편번호</label>
+		      <input type="email" class="form-control" name="zipcode" id="zipcode" placeholder="우편번호" readonly="readonly">
+		    </div>
+		    <input type="button" value="주소검색"  onclick="sample4_execDaumPostcode()" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black;" id="zipBtn" name="zipBtn"/>
+	  	</div>
+		<div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">주소</label>
+		      <input type="email" class="form-control" name="addr" id="addr" readonly="readonly">
+		    </div>
+	  	</div>
+	  	<div class="form-row" style="border-bottom: 3px solid #333">
+		    <div class="form-group col-md-6">
+		      <label for="inputPassword4">상세주소</label>
+		      <input type="email" class="form-control" name="addr_detail" id="addr_detail">
+		    </div>
+	  	</div>
+	  	<span><input type="button" value="탈퇴하기" id="removeBtn" style="zoom:1.2; background-color: white; color: black; border-color: black;" /></span>
+	  	<span><input type="button" value="회원정보 수정" id="modifyBtn" style="zoom:1.2; background-color: white; color: black; border-color: black;"></span>
+	  </form>
+  	</div>
 	</div>
-	<div id="footer">
-		<jsp:include page="../common/footer.jsp" />
-	</div>
+			</div>
+				<jsp:include page="../common/footer.jsp" />
+		</div>
 	
 </body>
 </html>
