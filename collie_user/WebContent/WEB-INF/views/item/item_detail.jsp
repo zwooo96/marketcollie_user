@@ -64,6 +64,12 @@ $(function(){
 			</div>
 		</div>
 		
+		
+		<div id="itemQnaWrap">
+		<c:import url="/item_qna_list.do"/>
+		</div>
+		
+		
 	</div> <!-- container end -->
 
 	

@@ -2,7 +2,7 @@ package kr.co.collie.user.cart.vo;
 
 public class OrderVO {
 	private int member_num, total_price;
-	private int[] item_num, item_cnt, cart_num;
+	private int[] cart_num;
 	private String receive_name, receive_phone, receive_zipcode, receive_addr, receive_addr_detail, 
 				payment, card_num, card_bank, card_expiration;
 	public int getMember_num() {
@@ -16,18 +16,6 @@ public class OrderVO {
 	}
 	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
-	}
-	public int[] getItem_num() {
-		return item_num;
-	}
-	public void setItem_num(int[] item_num) {
-		this.item_num = item_num;
-	}
-	public int[] getItem_cnt() {
-		return item_cnt;
-	}
-	public void setItem_cnt(int[] item_cnt) {
-		this.item_cnt = item_cnt;
 	}
 	public int[] getCart_num() {
 		return cart_num;

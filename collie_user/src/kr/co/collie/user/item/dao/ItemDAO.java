@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.item.domain.ItemDetailDomain;
 import kr.co.collie.user.item.domain.ItemListDomain;
+import kr.co.collie.user.item.domain.ItemQnaDomain;
 import kr.co.collie.user.pagination.RangeVO;
 
 public class ItemDAO {
@@ -72,5 +73,15 @@ public class ItemDAO {
 //		System.out.println(ItemDAO.getInstance().selectItemList(rVO));
 		System.out.println(ItemDAO.getInstance().selectItemListCnt(rVO));
 	}
+	
+	public List<ItemQnaDomain> selectItemQnaList(int itemNum){
+		List<ItemQnaDomain> list=null;
+		
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		list=ss.selectList("selectItemQnaList",itemNum);
+		ss.close();
+		
+		return list;
+	}//selectItemQnaList
 	
 }

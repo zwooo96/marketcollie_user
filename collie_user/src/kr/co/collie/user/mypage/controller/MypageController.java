@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.mypage.domain.OrderListDomain;
@@ -243,26 +244,26 @@ public class MypageController {
 	}//checkPassForm
 	
 	@RequestMapping(value = "/mypage/qna_list.do",method = {GET,POST})
-	public String qnaList(String mNum,Model model,HttpSession ss) {
-		
+	public String qnaList(Model model,HttpSession ss) {
+		LoginDomain ldd = (LoginDomain)ss.getAttribute("user_info");
 		MypageService ms = new MypageService();
-		model.addAttribute("qna_list",ms.getQnaList(Integer.parseInt(mNum)));
+		model.addAttribute("qna_list",ms.getQnaList(ldd.getMember_num()));
 		
 		return "mypage/qna_list";
 	}
-	@RequestMapping(value = "/mypage/qna_detail.do",method = GET)
-	public String qnaDetail(String qNum, HttpSession session, Model model) throws NumberFormatException {
+	
+	@RequestMapping(value = "/mypage/qna_detail.do",method = GET, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String qnaDetail(QnaVO qVO, HttpSession session) throws NumberFormatException {
+		String json="";
 		
-		QnaVO qVO=new QnaVO();
 		LoginDomain lDomain=(LoginDomain)session.getAttribute("user_info");
 		qVO.setMember_num(lDomain.getMember_num());
-		qVO.setQna_num(Integer.parseInt(qNum));
 		
 		MypageService ms = new MypageService();
-		QnaDetailDomain qdd=ms.getQnaDetail(qVO);
-		model.addAttribute("qna_data",qdd);
+		json=ms.getQnaDetail(qVO);
 		
-		return "mypage/qna_detail";
+		return json;
 		
 	}
 	

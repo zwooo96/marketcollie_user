@@ -142,7 +142,7 @@ public class MypageDAO {
 	public List<QnaListDomain> selectQnaList(int member_num){
 		List<QnaListDomain> list = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		list = ss.selectList("selectQnaList");
+		list = ss.selectList("selectQnaList",member_num);
 		ss.close();
 		
 		return list;
