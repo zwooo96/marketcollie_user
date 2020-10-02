@@ -163,7 +163,7 @@ public class MypageService {
 	 * @return
 	 */
 	public boolean removeMember(DeleteMemberVO dmVO) {
-		
+		  
 		boolean flag = false;
 		
 		MypageDAO mDAO = MypageDAO.getInstance();
