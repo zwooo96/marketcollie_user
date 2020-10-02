@@ -1,33 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="http://211.238.142.36/jsp_prj/common/css/main.css">
-<title>Insert title here</title>
-<style type="text/css">
-	#container{ width: 70%; margin: 0px auto; 900px; margin-top:50px; }
-	#containerMenu{ width: 200px; float: left; }
-	#menuTitle{ text-align: center; }
-	.table-bordered{ width: 200px; text-align: left; margin-top: 30px; color: #666666; font-size: 15px; }
-	.table-bordered td:hover{ background-color: #F7F7F7; color: #17462B }
-	.table-bordered td{ cursor: pointer; }
-	#qnaBox{ background-color: #F7F7F7; color: #666666; padding: 10px; font-size: 13px; padding-left: 20px }
-	#qnaBox:hover{ cursor: pointer; }
-	#cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
-	#contentWrap{ margin-left: 240px }
-	#containerSubTitle{ border-bottom: 1px solid #17462B; margin-top: 30px; padding-bottom: 0px; color: #666666 }
-	#containerContent{ margin-top: 90px; text-align: center; }
-	hr{ margin-top: 90px }
-	.btn-primary{ background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 250px; padding: 15px  }
-	.btn-primary:hover, .btn-primary:active, .btn-primary:focus{ background-color: #17462B !important; }
-	#btnDiv{ width: 250px; margin: 0px auto }
-</style>  
+<title>마켓콜리</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
 
+<style type="text/css">
+#container{ width: 70%; margin: 0px auto; min-height: 700px; margin-top:50px; }
+#containerMenu{ width: 200px; float: left; }
+#menuTitle{ text-align: center; }
+.table-bordered{ width: 200px; text-align: left; margin-top: 30px; color: #666666; font-size: 15px; }
+.table-bordered td:hover{ background-color: #F7F7F7; color: #17462B }
+.table-bordered td{ cursor: pointer; }
+#qnaBox{ background-color: #F7F7F7; color: #666666; padding: 10px; font-size: 13px; padding-left: 20px }
+#qnaBox:hover{ cursor: pointer; }
+#cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
+#contentWrap{ margin-left: 240px }
+#containerSubTitle{ border-bottom: 1px solid #333; margin-top: 30px; padding-bottom: 0px; color: #666666 }
+#containerContent{ margin-top: 25px;  }
+#passForm{ width: 620px; margin: 0px auto }
+.col-form-label{ padding-right: 0px; padding-left: 50px }
+#pass{ width:300px;  padding: 0px; margin-left: 60px }
+hr{ margin-top: 90px }
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{ background-color: #17462B !important; }
+#btnDiv{ width: 250px; margin: 0px auto }
+</style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -47,6 +51,51 @@ $(function(){
 	});//click
 	
 	$("#modifyBtn").click(function(){
+		
+		if($("#phone1").val().trim()==""){
+			alert("연락처를 입력해주세요");
+			return;
+		}
+		
+		if($("#phone2").val().trim()==""){
+			alert("연락처를 입력해주세요");
+			return;
+		}
+		
+		if($("#phone3").val().trim()==""){
+			alert("연락처를 입력해주세요");
+			return;
+		}
+		
+		if($("#phone1").val().replace(/[0-9]/g, "") != ""){
+	          alert("연락처는 숫자만 입력 가능합니다.");
+	          $("#phone1").val("");
+	          return;
+	       }
+		
+		if($("#phone2").val().replace(/[0-9]/g, "") != ""){
+	          alert("연락처는 숫자만 입력 가능합니다.");
+	          $("#phone2").val("");
+	          return;
+	       }
+		
+		if($("#phone3").val().replace(/[0-9]/g, "") != ""){
+	          alert("연락처는 숫자만 입력 가능합니다.");
+	          $("#phone3").val("");
+	          return;
+	       }
+		
+		if($("#addr").val().trim()==""){
+			alert("주소를 입력해 주세요");
+			$("#addr").focus();
+			return;
+		}
+		
+		if($("#addr_detail").val().trim()==""){
+			alert("상세주소를 입력해 주세요");
+			$("#addr_detail").focus();
+			return;
+		}
 		
 		$("#Frm").submit();
 		
@@ -97,85 +146,87 @@ function sample4_execDaumPostcode() {
 }
 </script>
 </head>
-
 <body style="font-family: nanumbarungothic">
 
-<body>
 <div id="wrap">
-
-		<jsp:include page="../common/header.jsp" />
+	
+	<jsp:include page="../common/header.jsp" />
 	
 	<div id="container">
-		<jsp:include page="../common/mypage_menu.jsp" />
+		<jsp:include page="../common/mypage_menu.jsp"/>
 		<div id="contentWrap">
 		<div id="containerTitle">
-			<h4><strong>개인정보 변경</strong></h4>
+			<h4><strong>개인정보 수정</strong></h4>
 		</div>
 			<div id="containerSubTitle">
+				<h5><strong>비밀번호 재확인</strong></h5>
+				<h6>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인해주세요.</h6>
 			</div>
 			<div id="containerContent">
-	<form action="update_member.do" method="post" id="Frm">
-		<div class="form-row" style="margin-top: 10px">
-		    <div class="form-group col-md-6">
-		      <label for="inputEmail4">아이디</label>
-		      <input type="email" class="form-control" name="id" id="id" value="${ user_info.id }">
-		    </div>
-	    </div>
-	    <div class="form-row">
-		    <div class="form-group col-md-6">
-		      <label for="inputPassword4">이름</label>
-		      <input type="email" class="form-control" name="name" id="name" value="${ user_info.name }" >
-		    </div>
-	  	</div>
-	    <div class="form-row">
-		    <div class="form-group col-md-6">
-		      <label for="inputPassword4">이메일</label>
-		      <input type="email" class="form-control" name="email" id="email" readonly="readonly" value="${ user_info.email }">
-		    </div>
-	  	</div>
-	  	<div id="email_chk"></div>
-		 <label for="inputPassword4">휴대전화</label><br/>
-	  	<div class="form-inline">
-		  	<div class="form-group">
-				<input type="email" class="form-control" style="width: 80px" maxlength="3"  id="phone1" name="phone1">
-			</div>
-		  	<div class="form-group">
-				<label for="email">&nbsp;-&nbsp;</label>
-				<input type="email" class="form-control"  style="width: 100px" id="phone2" maxlength="4" name="phone2">
-			</div>
-		  	<div class="form-group">
-				<label for="email">&nbsp;-&nbsp;</label>
-				<input type="email" class="form-control" style="width: 100px"  id="phone3" maxlength="4" name="phone3">
-			</div>
-	  	</div>
-	  	<br/>
-	  	<div class="form-row">
+			<form action="update_member.do" method="post" id="Frm">
+	  		<div class="form-inline">
+		 	 	<div class="form-group mb-2">
+			    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="아이디">
+			  </div>
+			  <div class="form-group mx-sm-3 mb-2">
+			    <input type="email" class="form-control" id="id" name="id" value="${ user_info.id }" readonly="readonly">
+			  </div>
+			  </div>
+			  <div class="form-inline">
+		 	 	<div class="form-group mb-2">
+			    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="이름">
+			  </div>
+			  <div class="form-group mx-sm-3 mb-2">
+			    <input type="email" class="form-control" id="name" name="name" value="${ user_info.name }" readonly="readonly">
+			  </div>
+			  </div>
+			  <div class="form-inline">
+		 	 	<div class="form-group mb-2">
+			    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="이메일">
+			  </div>
+			  <div class="form-group mx-sm-3 mb-2">
+			    <input type="email" class="form-control" id="inputPassword2" value="${ user_info.email }"  readonly="readonly">
+			  </div>
+			  </div>
+			  <div class="form-inline">
+		 	 	<div class="form-group mb-2">
+			    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="휴대폰">
+			  </div>
+			  <div class="form-group mx-sm-3 mb-2">
+			    <input type="email" class="form-control" name="phone1" id="phone1" maxlength="3" style="width: 80px"/>&nbsp;-&nbsp;
+			    <input type="email" class="form-control" name="phone2" id="phone2" maxlength="4" style="width: 100px"/>&nbsp;-&nbsp;
+			    <input type="email" class="form-control" name="phone3" id="phone3" maxlength="4" style="width: 100px"/>
+			  </div>
+			  </div>
+			  <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">우편번호</label>
-		      <input type="email" class="form-control" name="zipcode" id="zipcode" placeholder="우편번호" readonly="readonly">
+		      <input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="우편번호" readonly="readonly">
 		    </div>
 		    <input type="button" value="주소검색"  onclick="sample4_execDaumPostcode()" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black;" id="zipBtn" name="zipBtn"/>
-	  	</div>
-		<div class="form-row">
-		    <div class="form-group col-md-6">
-		      <label for="inputPassword4">주소</label>
-		      <input type="email" class="form-control" name="addr" id="addr" readonly="readonly">
-		    </div>
-	  	</div>
-	  	<div class="form-row" style="border-bottom: 3px solid #333">
-		    <div class="form-group col-md-6">
-		      <label for="inputPassword4">상세주소</label>
-		      <input type="email" class="form-control" name="addr_detail" id="addr_detail">
-		    </div>
-	  	</div>
-	  	<span><input type="button" value="탈퇴하기" id="removeBtn" style="zoom:1.2; background-color: white; color: black; border-color: black;" /></span>
-	  	<span><input type="button" value="회원정보 수정" id="modifyBtn" style="zoom:1.2; background-color: white; color: black; border-color: black;"></span>
-	  </form>
-  	</div>
-	</div>
+	  		</div>
+	  		<div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="inputPassword4">주소</label>
+			      <input type="email" class="form-control" name="addr" id="addr" readonly="readonly">
+			    </div>
+	  		</div>
+	  		<div class="form-row" style="border-bottom: 3px solid #333;">
+		    <div class="form-group col-md-6" style="margin-bottom: 40px">
+			      <label for="inputPassword4">상세주소</label>
+			      <input type="email" class="form-control" name="addr_detail" id="addr_detail">
+			    </div>
+		  	</div>
+				<div style="margin-left: 350px;">
+					<input type="button"  value="탈퇴하기" id="removeBtn"  style="background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 150px; padding: 15px; color: white" />
+					 <input type="button" value="회원정보 수정" id="modifyBtn" style="background-color: #17462B; margin-left:150px ; border-color: #17462B; margin-top:20px; margin:0px auto; width: 150px; padding: 15px; color: white">
+				</div> 
+		    </form>
+				</div>
 			</div>
-				<jsp:include page="../common/footer.jsp" />
 		</div>
-	
+	<jsp:include page="../common/footer.jsp" />
+	</div>
+
 </body>
-</html>
+</html>	

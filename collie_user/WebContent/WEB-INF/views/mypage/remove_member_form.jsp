@@ -61,6 +61,8 @@ $(function(){
 			<h4><strong>개인정보 수정</strong></h4>
 		</div>
 			<div id="containerSubTitle">
+				<h5><strong>비밀번호 재확인</strong></h5>
+				<h6>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인해주세요.</h6>
 			</div>
 			<div id="containerContent">
 				

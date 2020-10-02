@@ -243,7 +243,7 @@ function sample4_execDaumPostcode() {
 		    </div>
 		    <input type="button" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black; " id="chkId" value="중복확인"/>
 	    </div>
-	    <div id="id_check"> </div>
+	    <div id="id_check" style="color: red;"> </div>
 	    <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">비밀번호</label>
@@ -269,7 +269,7 @@ function sample4_execDaumPostcode() {
 		    </div>
 		    <input type="button" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black;" id="chkEmail" value="중복확인"/>
 	  	</div>
-	  	<div id="email_chk"></div>
+	  	<div id="email_chk" style="color: red"></div>
 		 <label for="inputPassword4">휴대전화</label><br/>
 	  	<div class="form-inline">
 		  	<div class="form-group">
@@ -304,7 +304,7 @@ function sample4_execDaumPostcode() {
 		      <input type="email" class="form-control" name="addr_detail" id="addr_detail">
 		    </div>
 	  	</div>
-	    <div style="text-align: center ; margin-top: 30px"><button type="submit" class="btn btn-primary" style="zoom:1.2; background-color: white; color: black; border-color: black;" value="회원가입" id="joinBtn">회원가입</button></div>
+	    <div style="text-align: center ; margin-top: 30px"><button type="button" class="btn btn-primary" style="zoom:1.2; background-color: white; color: black; border-color: black;" value="회원가입" id="joinBtn">회원가입</button></div>
 	  </form>
   	</div>
 	</div>

@@ -59,7 +59,7 @@ $(function(){
 			<div id="containerSubTitle">
 			</div>
 			<div id="containerContent">
-				<h4><strong>회원탈퇴 되었습니다.</strong>${ param.pass }, ${ user_info.member_num }</h4>
+				<h4><strong>회원탈퇴 되었습니다.</strong></h4>
 				<hr>
 				<div id="btnDiv">
 					<button type="button" class="btn btn-primary" onclick="location.href='/collie_user/index.do'">메인으로</button>

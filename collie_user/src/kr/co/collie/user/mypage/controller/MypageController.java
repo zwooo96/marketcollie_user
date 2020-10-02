@@ -73,6 +73,7 @@ public class MypageController {
 		
 		MypageService ms = new MypageService();
 		mmVO.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));
+		
 		boolean flag = ms.modifyMemberInfo(mmVO);
 		
 		

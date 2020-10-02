@@ -237,11 +237,12 @@ function sample4_execDaumPostcode() {
 			<div id="containerSubTitle">
 			</div>
 			<div id="containerContent" >
-				<div style="text-align: center; height:500px; margin-top: 200px; font-size: 40px">
+				<div style="text-align: center; height:500px; margin-top: 150px; font-size: 40px">
 				<strong>회원가입을 축하드립니다!</strong>
-				<br/><br/>
+				<div style="margin-top: 150px">
 				<button type="button" class="btn btn-primary" onclick="location.href='/collie_user/login_form.do'" style="background-color: white; color: black; border-color: black; height: 70px; width: 180px">로그인</button>
 				<button type="button" class="btn btn-primary" onclick="location.href='/collie_user/index.do'" style="background-color: white; color: black; border-color: black; height: 70px; width: 180px">메인으로</button>
+				</div>
 				</div>
 				<div id="btnDiv">
 					
