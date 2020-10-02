@@ -152,16 +152,30 @@ public class MypageService {
 		
 		MypageDAO mDAO = MypageDAO.getInstance();
 		flag = mDAO.updateMemberInfo(mmVO)==1;
+		flag = mDAO.updateMemberInfo(mmVO) != 0;
 		
 		return flag;
 	}//modifyMemberInfo
 	
+	/**
+	 * È¸¿ø Å»Åð
+	 * @param dmVO
+	 * @return
+	 */
 	public boolean removeMember(DeleteMemberVO dmVO) {
 		
-		boolean flag=false;
+		boolean flag = false;
 		
 		MypageDAO mDAO = MypageDAO.getInstance();
 		flag = mDAO.deleteMember(dmVO)==1;
+		MypageDAO mpDAO = MypageDAO.getInstance();
+		try {
+			dmVO.setPass(DataEncrypt.messageDigest("MD5", dmVO.getPass()));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}//end catch
+		
+		flag = mpDAO.deleteMember(dmVO)!=0;
 		
 		return flag;
 		

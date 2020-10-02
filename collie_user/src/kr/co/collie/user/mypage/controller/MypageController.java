@@ -5,6 +5,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.mypage.domain.OrderListDomain;
 import kr.co.collie.user.mypage.domain.QnaDetailDomain;
 import kr.co.collie.user.mypage.service.MypageService;
+import kr.co.collie.user.mypage.vo.DeleteMemberVO;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
 import kr.co.collie.user.mypage.vo.MyOrderVO;
 import kr.co.collie.user.mypage.vo.PassCheckVO;
@@ -105,7 +107,7 @@ public class MypageController {
 	public String checkMember(PassCheckVO pcVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
 		// pcVO.setMember_num(ld.getMember_num());
-		pcVO.setMember_num(2);
+		pcVO.setMember_num(ld.getMember_num());
 	
 		
 		MypageService ms = new MypageService();
@@ -121,6 +123,7 @@ public class MypageController {
 	@RequestMapping(value="/mypage/memberInfo_form.do" , method=POST)
 	public String memberInfoForm(HttpSession session) {	
 		
+		
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		
 		return "mypage/modify_member_form";
@@ -128,11 +131,12 @@ public class MypageController {
 	
 	
 	@RequestMapping(value="/mypage/update_member.do", method=POST)
-	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
+	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model, HttpServletRequest request) {
 		boolean flag = false;
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		
 		MypageService ms = new MypageService();
+		mmVO.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));
 		
 		
 		flag = ms.modifyMemberInfo(mmVO);
@@ -142,6 +146,44 @@ public class MypageController {
 	}//modifyMemberInfo
 	
 	//String id?
+	/** 회원 탈퇴를 위한 폼
+	 * @param pcVO
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping( value="/mypage/remove_member_form.do", method=GET)
+	public String removeMemberInfoForm( ) {
+		
+		
+		return"mypage/remove_member_form";
+	}//removeMemberInfo
+	
+	/** 회원 탈퇴
+	 * @param pcVO
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/mypage/remove_member.do", method = POST)
+	public String removeMemberInfo( DeleteMemberVO dmVO, HttpSession session, PassCheckVO pcVO, Model model) {
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		dmVO.setMember_num(ld.getMember_num());
+	
+		
+		MypageService ms = new MypageService();
+		boolean deleteFlag = ms.removeMember(dmVO);
+		try {
+			boolean passFlag = ms.getMemberPass(pcVO);
+		} catch(NullPointerException npe) {
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+		}//end catch
+		
+		
+		return "mypage/remove_member_result";
+	}
+	
+	
 	
 	/**
 	 * 마이페이지 - 비밀번호 변경 : 현재 비밀번호 확인하는 폼

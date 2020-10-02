@@ -42,8 +42,9 @@ $(function(){
 			alert("비밀번호를 입력해주세요.");
 			return;
 		}//end if
-		$("#passForm").submit();
+		$("#removeForm").submit();
 	});
+	
 });//ready
 </script>
 </head>
@@ -64,14 +65,16 @@ $(function(){
 				<h6>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인해주세요.</h6>
 			</div>
 			<div id="containerContent">
-				<form id="passForm" method="post" action="check_member.do">
-				  <div class="form-group row">
-				  <span style="margin-left: 250px; margin-bottom: 30px"><strong>회원 탈퇴</strong></span><br/>
-				  <div style="margin-bottom: 50px; ">안내고객님께서 회원 탈퇴를 원하신다니 저희 쇼핑몰의 서비스가 많이 부족하고 
-				  미흡했나 봅니다. 불편하셨던 점이나 불편사항을 알려주시면 적극 반영해서 고객님의 불편함을 해결해 드리도록 노력하겠습니다.
+				
+				  <div style="margin-left: 390px; margin-bottom: 30px; font-size: 40px"><strong>회원 탈퇴 안내</strong></div><br/>
+				  <div style="margin-bottom: 50px; margin-left:280px; height=400px; width: 500px; font-size: 17px">안내고객님께서 회원 탈퇴를 원하신다니 저희 쇼핑몰의 서비스가 많이 부족하고 
+				  미흡했나 봅니다. 불편하셨던 점이나 불편사항을 알려주시면 적극 반영해서 고객님의 불편함을 해결해 드리도록 노력하겠습니다.<br/><br/>
 				  아울러 회원 탈퇴시 아래 사항을 숙지하시기 바랍니다.
 				회원 탈퇴 시 고객님의 정보는 상품 반품 및 A/S를 위해 전자상거래 등에서의 소비자 보호에 관한 법률에 의거한 고객정보 보호정책에 따라 관리 됩니다.
 				</div>
+				<br/>
+				<form id="removeForm" method="post" action="remove_member.do">
+				<div class="form-group row" style="margin-left: 180px ">
 				   	<label for="inputEmail3" class="col-sm-2 col-form-label"><strong>비밀번호 재확인</strong></label>
 				    <div class="col-sm-10">
 				      <input type="password" class="form-control" id="pass" name="pass">
@@ -84,10 +87,8 @@ $(function(){
 				</div>
 			</div>
 		</div>
-	</div>
-	
 	<jsp:include page="../common/footer.jsp" />
-	
+	</div>
 </div>
 
 </body>
