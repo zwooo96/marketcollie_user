@@ -34,7 +34,8 @@ public class CartDAO {
 		int cnt = 0;
 		
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		cnt = ss.insert("insertCart", cVO);
+		cnt = ss.insert("kr.co.collie.user.cart.insertCart", cVO);
+		ss.commit();
 		ss.close();
 		
 		return cnt;

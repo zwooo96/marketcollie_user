@@ -37,8 +37,14 @@ public class CartController {
 		CartService cs = new CartService();
 		cs.addCart(cVO);
 		
-		//장바구니로 이동할 것인지 상품상세에 계속 남아있을 것인지 결정할 수 있도록 해야함
-		//일단 장바구니로 보내기
+//		//장바구니로 이동할 것인지 상품상세에 계속 남아있을 것인지 결정할 수 있도록 해야함
+//		if( "t".equals(move_flag) ) {
+//			String url = "cart/view.do";
+//		}//end if
+//		if( "f".equals(move_flag) ) {
+//			String url = "item/item_detail.do?item_num="+item_num;
+//		}//end if
+		
 		return "forward:cart/view.do";
 	}//addCart
 	

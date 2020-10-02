@@ -40,8 +40,7 @@ public class MypageController {
 	public String orderList(HttpSession session, Model model, RangeVO rVO) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		rVO.setField_name("member_num");
-//		rVO.setField_value(ld.getMember_num());
-		rVO.setField_value(1);
+		rVO.setField_value(ld.getMember_num());
 		
 		MypageService ms = new MypageService();
 		List<OrderListDomain> list = ms.getOrderList(rVO);
@@ -59,12 +58,11 @@ public class MypageController {
 	 * @param rVO
 	 * @return
 	 */
-	@RequestMapping(value="/mypage/order_list_page", method = GET)
+	@RequestMapping(value="/mypage/order_list_page.do", method = GET)
 	public String orderListPaging(HttpSession session, Model model, RangeVO rVO) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		rVO.setField_name("member_num");
-//		rVO.setField_value(ld.getMember_num());
-		rVO.setField_value(1);
+		rVO.setField_value(ld.getMember_num());
 		
 		MypageService ms = new MypageService();
 		List<OrderListDomain> list = ms.getOrderList(rVO);
@@ -84,15 +82,13 @@ public class MypageController {
 	@RequestMapping(value="/mypage/order_detail.do", method=GET)
 	public String orderDetail(MyOrderVO moVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-//		moVO.setMember_num(ld.getMember_num());
-		moVO.setMember_num(1);
+		moVO.setMember_num(ld.getMember_num());
 		
 		MypageService ms = new MypageService();
 		OrderDetailDomain odd = ms.getOrderDetail(moVO);
 		
 		model.addAttribute("order_detail", odd);
-//		model.addAttribute("user_name", ld.getName());
-		model.addAttribute("user_name", "송길동");
+		model.addAttribute("user_name", ld.getName());
 		
 		return "mypage/order_detail";
 	}//orderDetail
@@ -107,8 +103,7 @@ public class MypageController {
 	@RequestMapping(value="/mypage/order_cancel.do", method=GET)
 	public String cancelOrder(MyOrderVO moVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-//		moVO.setMember_num(ld.getMember_num());
-		moVO.setMember_num(1);
+		moVO.setMember_num(ld.getMember_num());
 		
 		MypageService ms = new MypageService();
 		boolean flag = ms.cancelOrder(moVO);
@@ -222,8 +217,7 @@ public class MypageController {
 	@RequestMapping(value="/mypage/check_pass.do", method=POST)
 	public String checkPass(PassCheckVO pcVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
-		//pcVO.setMember_num(ld.getMember_num());
-		pcVO.setMember_num(1); ///////////////////////////////////////// 임시값
+		pcVO.setMember_num(ld.getMember_num());
 		
 		MypageService ms = new MypageService();
 		try {
@@ -252,8 +246,7 @@ public class MypageController {
 	@RequestMapping(value="/mypage/modify_pass.do", method=POST)
 	public String modifyPass(UpdatePassVO upVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
-		//upVO.setMember_num(ld.getMember_num());
-		upVO.setMember_num(1); /////////////////////////임시값
+		upVO.setMember_num(ld.getMember_num());
 		
 		MypageService ms = new MypageService();
 		boolean flag = ms.modifyPass(upVO);

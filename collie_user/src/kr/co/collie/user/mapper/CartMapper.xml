@@ -13,7 +13,7 @@
 <!-- 장바구니에 상품을 추가하는 일 -->
 <insert id="insertCart" parameterType="kr.co.collie.user.cart.vo.CartVO">
 	insert into cart(cart_num, item_num, member_num, item_cnt)
-	values(#{ cart_num }, #{ item_num }, #{ member_num }, #{ item_cnt })
+	values(seq_cart_num.nextval, #{ item_num }, #{ member_num }, #{ item_cnt })
 </insert>
 
 <!-- 장바구니 조회 시 수량을 변경하는 일 -->

@@ -34,8 +34,7 @@ public class MypageService {
 		MypageDAO mDAO = MypageDAO.getInstance();
 		int totalCnt = getOrderListCnt(rVO);
 		rVO.setTotal_cnt(totalCnt);
-		//rVO.setPage_scale(3);
-		rVO.setPage_scale(2);
+		rVO.setPage_scale(3);
 		rVO.calcPaging();
 		list = mDAO.selectOrderList(rVO);
 		

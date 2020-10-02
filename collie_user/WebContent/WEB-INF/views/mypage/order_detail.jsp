@@ -50,12 +50,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	$("#cancelBtn").click(function(){
-		if( confirm("해당 주문을 정말 취소하시겠습니까?") ){
-			location.href = "order_cancel.do";
-		}//end if
-	});//click
 });//ready
+
+function cancelOrder(order_num){
+	if( confirm("해당 주문을 취소하시겠습니까?") ){
+		location.href = "order_cancel.do?order_num="+order_num;
+	}//end if
+}//cancelOrder
+
 </script>
 </head>
 <body style="font-family: nanumbarungothic">
@@ -94,7 +96,7 @@ $(function(){
 				</div>
 				<div id="orderBtn">
 					<button id="searchBtn" type="button" class="btn btn-outline-success">배송 현황 조회</button>
-					<button id="cancelBtn" type="button" class="btn btn-outline-success">전체 상품 주문 취소</button>
+					<button id="cancelBtn" type="button" class="btn btn-outline-success" onclick="cancelOrder(${ param.order_num });">전체 상품 주문 취소</button>
 				</div>
 				<div id="Info">
 				<div id="payWrap">
@@ -112,7 +114,7 @@ $(function(){
 				      <td class="infoColumn">결제금액</td>
 				      <td class="infoValue">
 				      <c:set var="order_price" value="${ order_detail.total_price + 2500 }"/>
-				      <fmt:formatNumber value="${ order_detail.total_price }" pattern="#,###"/>원
+				      <fmt:formatNumber value="${ order_price }" pattern="#,###"/>원
 				      </td>
 					</tr>	
 				    <tr class="lastColumn">
