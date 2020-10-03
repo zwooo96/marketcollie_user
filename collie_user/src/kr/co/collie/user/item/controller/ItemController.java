@@ -17,6 +17,7 @@ import kr.co.collie.user.item.service.ItemService;
 import kr.co.collie.user.item.vo.ReviewDetailVO;
 import kr.co.collie.user.item.vo.ReviewFlagVO;
 import kr.co.collie.user.item.vo.ReviewVO;
+import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.pagination.RangeVO;
 
 @Controller
@@ -106,6 +107,9 @@ public class ItemController {
 	@RequestMapping(value="/item/review_form.do", method=RequestMethod.GET)
 	public String reviewForm(HttpSession session, ReviewFlagVO rfVO, Model model) {
 		boolean flag = false;
+		
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		rfVO.setMember_num(ld.getMember_num());
 
 		ItemService is = new ItemService();
 		//리뷰를 작성할 권한이 있는지(상품을 구매했는지) 확인
@@ -120,12 +124,15 @@ public class ItemController {
 	 * @param rVO
 	 * @return
 	 */
-	@RequestMapping(value="/item/review_write.do", method=RequestMethod.GET)
-	public String addReview(ReviewVO rVO) {
+	@RequestMapping(value="/item/review_write.do", method=RequestMethod.POST)
+	public String addReview(ReviewVO rVO, HttpSession session, int item_num) {
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		rVO.setMember_num(ld.getMember_num());
+		
 		ItemService is = new ItemService();
 		is.addReview(rVO);
 		
-		return "item/review_list";
+		return "redirect:/item/item_detail.do?item_num="+item_num;
 	}//addReview
 	
 	@RequestMapping(value="/item_qna_list.do", method=RequestMethod.GET)

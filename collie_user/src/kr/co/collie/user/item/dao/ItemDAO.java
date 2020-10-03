@@ -77,7 +77,7 @@ public class ItemDAO {
 		List<ReviewDomain> list = null;
 		
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		ss.selectList("kr.co.collie.user.item.selectReviewList", rVO);
+		list = ss.selectList("kr.co.collie.user.item.selectReviewList", rVO);
 		ss.close();
 		
 		return list;
@@ -107,7 +107,7 @@ public class ItemDAO {
 		String review_content = null;
 		
 		SqlSession ss= GetCollieHandler.getInstance().getSqlSession();
-		ss.selectOne("kr.co.collie.user.item.selectReviewDetail", rdVO);
+		review_content = ss.selectOne("kr.co.collie.user.item.selectReviewDetail", rdVO);
 		ss.close();
 		
 		return review_content;
@@ -119,9 +119,16 @@ public class ItemDAO {
 	 * @return
 	 */
 	public String selectReviewFlag(ReviewFlagVO rfVO) {
-		String string = "";
-		///////////////////////////// 작성해야함 ///////////////////////////
-		return string;
+		String flag = "N";
+		
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		int cnt = ss.selectOne("kr.co.collie.user.item.selectReviewFlag", rfVO);
+		if( cnt == 1 ) {
+			flag = "Y";
+		}//end if
+		ss.close();
+		
+		return flag;
 	}//selectReviewFlag
 	
 	/**
@@ -133,7 +140,7 @@ public class ItemDAO {
 		int cnt = 0;
 		
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		ss.insert("kr.co.collie.user.item.insertReview", rVO);
+		cnt = ss.insert("kr.co.collie.user.item.insertReview", rVO);
 		ss.commit();
 		ss.close();
 		
@@ -151,14 +158,11 @@ public class ItemDAO {
 	}//selectItemQnaList
 	
 	public static void main(String[] args) {
-		RangeVO rVO = new RangeVO();
-		rVO.setField_name("item_num");
-		rVO.setField_value(1);
-		rVO.setStart_num(1);
-		rVO.setEnd_num(2);
-		rVO.setCurrent_page(1);
+		ReviewFlagVO rfVO = new ReviewFlagVO();
+		rfVO.setItem_num(1);
+		rfVO.setMember_num(1);
 		
-		System.out.println(ItemDAO.getInstance().selectReviewList(rVO));
+		System.out.println(ItemDAO.getInstance().selectReviewFlag(rfVO));
 	}
 	
 }
