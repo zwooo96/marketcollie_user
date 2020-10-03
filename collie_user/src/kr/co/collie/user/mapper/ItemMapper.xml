@@ -94,10 +94,20 @@
 	values (seq_review_num.nextval, #{ item_num }, #{ member_num }, #{ review_subject }, #{ review_content })
   </insert>
   
-   <select id="selectItemQnaList" parameterType="int" resultType="kr.co.collie.user.item.domain.ItemQnaDomain">
-  	select iq.item_qna_num, iq.item_qna_subject, iq.item_qna_flag, iq.input_date, m.id
-	from item_qna iq, member m
-	where iq.member_num=m.member_num and iq.item_num=1
+  <!-- 문의 리스트를 조회하는 일 -->
+   <select id="selectItemQnaList" parameterType="kr.co.collie.user.item.vo.ItemQnaListVO" resultType="kr.co.collie.user.item.domain.ItemQnaDomain">
+	select idx, item_qna_num, item_qna_subject, item_qna_flag, to_char(input_date, 'yyyy-mm-dd') input_date, id
+	from(select row_number() over(order by item_qna_num desc) idx, iq.item_qna_num, iq.item_qna_subject, iq.item_qna_flag, iq.input_date, m.id
+			from item_qna iq, member m
+			where iq.member_num=m.member_num and iq.item_num=#{ item_num })
+	where idx between #{ start_num } and #{ end_num }
+  </select>
+   
+   <!-- 문의 상세내역을 조회하는 일 -->
+  <select id="selectItemQnaDetail" parameterType="int" resultType="kr.co.collie.user.item.domain.ItemQnaDetailDomain">
+  	select item_qna_content, item_qna_reply, to_char(reply_date, 'yyyy-mm-dd') reply_date
+  	from item_qna
+  	where item_qna_num=#{item_qna_num}
   </select>
   
 </mapper>

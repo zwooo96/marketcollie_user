@@ -14,6 +14,7 @@ import kr.co.collie.user.item.domain.ItemListDomain;
 import kr.co.collie.user.item.domain.ItemQnaDomain;
 import kr.co.collie.user.item.domain.ReviewDomain;
 import kr.co.collie.user.item.service.ItemService;
+import kr.co.collie.user.item.vo.ItemQnaListVO;
 import kr.co.collie.user.item.vo.ReviewDetailVO;
 import kr.co.collie.user.item.vo.ReviewFlagVO;
 import kr.co.collie.user.item.vo.ReviewVO;
@@ -135,15 +136,31 @@ public class ItemController {
 		return "redirect:/item/item_detail.do?item_num="+item_num;
 	}//addReview
 	
-	@RequestMapping(value="/item_qna_list.do", method=RequestMethod.GET)
-	public String viewItemQnaList(Model model) throws NumberFormatException {
-		System.out.println("====dk 잠만 빌드 안된거아냐!??!!??!!?=========================================viewItemQnaList 이거 호출하는데좀 찾아줘요");
-		int item_num=1;
-		List<ItemQnaDomain> list=new ItemService().getItemQnaList(item_num);
+	@RequestMapping(value="/item/item_qna_list.do", method=RequestMethod.GET)
+	public String viewItemQnaList(ItemQnaListVO iqlVO, String current_page, Model model) throws NumberFormatException {
 		
+		if(current_page==null) {
+			current_page="1";
+		}//end if
+		int currentPage=Integer.parseInt(current_page);
+		
+		iqlVO.setStart_num( (currentPage-1)*5+1 );
+		iqlVO.setEnd_num( iqlVO.getStart_num()+5-1 );
+		
+		List<ItemQnaDomain> list=new ItemService().getItemQnaList(iqlVO);
 		model.addAttribute("qna_list", list);
 		
 		return "item/item_qna";
-	}//viewItemQnaDetail
+	}//viewItemQnaList
+	
+	@RequestMapping(value="/item/item_qna_detail.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String getItemQnaDetail(int item_qna_num) throws NumberFormatException {
+		String json=null;
+		
+		json=new ItemService().getItemQnaDetail(item_qna_num);
+		
+		return json;
+	}//getItemQnaDetail
 	
 }

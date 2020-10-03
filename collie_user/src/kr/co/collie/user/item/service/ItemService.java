@@ -8,8 +8,10 @@ import org.json.simple.JSONObject;
 import kr.co.collie.user.item.dao.ItemDAO;
 import kr.co.collie.user.item.domain.ItemDetailDomain;
 import kr.co.collie.user.item.domain.ItemListDomain;
+import kr.co.collie.user.item.domain.ItemQnaDetailDomain;
 import kr.co.collie.user.item.domain.ItemQnaDomain;
 import kr.co.collie.user.item.domain.ReviewDomain;
+import kr.co.collie.user.item.vo.ItemQnaListVO;
 import kr.co.collie.user.item.vo.ReviewDetailVO;
 import kr.co.collie.user.item.vo.ReviewFlagVO;
 import kr.co.collie.user.item.vo.ReviewVO;
@@ -186,11 +188,29 @@ public class ItemService {
 		return flag;
 	}//addReview
 	
-	public List<ItemQnaDomain> getItemQnaList(int itemNum){
+	public List<ItemQnaDomain> getItemQnaList(ItemQnaListVO iqlVO){
 		List<ItemQnaDomain> list=null;
 		
 		ItemDAO iDAO=ItemDAO.getInstance();
+		list=iDAO.selectItemQnaList(iqlVO);
 		
 		return list;
 	}//getItemQnaList
+	
+	public String getItemQnaDetail(int itemQnaNum) {
+		JSONObject json=new JSONObject();
+		
+		ItemQnaDetailDomain iqdDomain=ItemDAO.getInstance().selectItemQnaDetail(itemQnaNum);
+		
+		String flag="fail";
+		if(iqdDomain!=null) {
+			flag="success";
+			json.put("item_qna_content", iqdDomain.getItem_qna_content());
+			json.put("item_qna_reply", iqdDomain.item_qna_reply);
+			json.put("reply_date", iqdDomain.reply_date);
+		}//end if
+		json.put("flag", flag);
+		
+		return json.toString();
+	}//getItemQnaDetail
 }

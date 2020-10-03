@@ -7,8 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.item.domain.ItemDetailDomain;
 import kr.co.collie.user.item.domain.ItemListDomain;
+import kr.co.collie.user.item.domain.ItemQnaDetailDomain;
 import kr.co.collie.user.item.domain.ItemQnaDomain;
 import kr.co.collie.user.item.domain.ReviewDomain;
+import kr.co.collie.user.item.vo.ItemQnaListVO;
 import kr.co.collie.user.item.vo.ReviewDetailVO;
 import kr.co.collie.user.item.vo.ReviewFlagVO;
 import kr.co.collie.user.item.vo.ReviewVO;
@@ -147,15 +149,26 @@ public class ItemDAO {
 		return cnt;
 	}//insertReview
 	
-	public List<ItemQnaDomain> selectItemQnaList(int itemNum){
+	public List<ItemQnaDomain> selectItemQnaList(ItemQnaListVO iqlVO){
 		List<ItemQnaDomain> list=null;
 		
 		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
-		list=ss.selectList("selectItemQnaList",itemNum);
+		list=ss.selectList("selectItemQnaList",iqlVO);
 		ss.close();
 		
 		return list;
 	}//selectItemQnaList
+	
+	
+	public ItemQnaDetailDomain selectItemQnaDetail(int itemQnaNum) {
+		ItemQnaDetailDomain iqdDomain=null;
+		
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		iqdDomain=ss.selectOne("selectItemQnaDetail", itemQnaNum);
+		ss.close();
+		
+		return iqdDomain;
+	}//selectItemQnaDetail
 	
 	public static void main(String[] args) {
 		ReviewFlagVO rfVO = new ReviewFlagVO();

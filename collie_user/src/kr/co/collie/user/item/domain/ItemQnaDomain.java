@@ -1,9 +1,14 @@
 package kr.co.collie.user.item.domain;
 
 public class ItemQnaDomain {
-	int item_qna_num;
+	int idx, item_qna_num;
 	String id, item_qna_subject, item_qna_flag, input_date;
-	
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
 	public int getItem_qna_num() {
 		return item_qna_num;
 	}
