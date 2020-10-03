@@ -83,7 +83,7 @@ public class MypageService {
 			joTemp.put("input_date", item.getInput_date());
 			ja.add(joTemp);
 		}//end for
-		jo.put("item_list", ja);
+		jo.put("order_list", ja);
 		
 		return jo.toJSONString();
 	}//orderListJson

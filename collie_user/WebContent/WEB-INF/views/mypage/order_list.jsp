@@ -58,9 +58,10 @@ function getOrderDetail(order_num) {
 
 function movePage(target_page){
 	$.ajax({
-		url : 'order_list_page.do?current_page='+target_page,
-		type : 'GET',
-		dataType : 'json',
+		url : "order_list_page.do",
+		type : "GET",
+		data : "current_page="+target_page,
+		dataType : "JSON",
 		error : function(xhr){
 			alert("error : " + xhr.status + " / " + xhr.statusText);
 		},
@@ -70,7 +71,14 @@ function movePage(target_page){
 			$.each(jo.order_list, function(idx, list){
 				output += '<div id="containerContent">';
 				output += '<div id="orderTime">';
-				output += '';
+				
+				var year = list.input_date.substr(0,4);
+				var month = list.input_date.substr(5,2);
+				var day = list.input_date.substr(8,2);
+				var hour = list.input_date.substr(11,2);
+				var minute = list.input_date.substr(14,2);
+				output += year + '.' + month + '.' + day + ' (' + hour + '시 ' + minute + '분)';
+					
 				output += '</div>';
 				output += '<div id="orderGoods">';
 				output += '<table class="table table-borderless">';
@@ -85,7 +93,10 @@ function movePage(target_page){
 				output += '<tr id="orderPrice">';
 				output += '<td id="orderPriceColumn">결제금액</td>';
 				output += '<td id="orderPriceValue"><strong>';
-				output += '';
+				
+				var total_price = list.total_price;
+				output += total_price.toLocaleString();
+				
 				output += '원</strong></td>';
 				output += '</tr></table></div></div>';
 			});//each
