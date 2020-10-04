@@ -13,7 +13,18 @@
 .itemwrap{display: flex; flex-direction:row; align-items: center; }
 .imgdiv{width:30vw; height:400vh;}
 .infodiv{width:60vw; height:200vh  }
-.item_description {
+.item_description {}
+
+/* ==================리뷰=================== */
+#reviewTitleWrap{ margin-top: 100px; margin-bottom: 20px; display: flex; justify-content: center; flex-direction: column; align-items: center }
+#reviewTitleColumn{ width: 70%; font-weight: bold; font-size: 20pt }
+#reviewTitleValue{ width: 70%; margin-top: 20px; color: #bebebe; font-size: 9pt }
+#reviewDiv{ display: flex; justify-content: center }
+#reviewBtn{ background-color: #17462B !important; border-color: #17462B !important; margin-top: 20px; width: 100px; padding: 5px !important; font-size: 14px }
+#reviewBtn:hover, #reviewBtn:active, #reviewBtn:focus{ background-color: #17462B !important; font-size: 14px }
+#reviewBtnWrap{ width: 100px; float: right; margin-right: 310px }
+#reviewPagination{ margin-top: 80px; clear: both; }
+/* ==================리뷰=================== */
 
 /* ==================아이템문의=================== */
 .itemQnaDiv{ display: flex; justify-content: center }
@@ -33,8 +44,6 @@
 }
 /* ==================아이템문의=================== */
 
-
-}
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -51,6 +60,117 @@ $(function(){
 	
 });//ready
 
+/* ===============================리뷰================================= */
+function reviewToggle(review_num){
+	if($("#reviewTr"+review_num).length == 1 && $("#reviewContentTr"+review_num).length == 0 ){
+		openReview(review_num);
+	}else{
+		closeReview(review_num);
+	}//end else
+}//reviewToggle
+
+function openReview(review_num){
+	var item_num = location.search.slice(-1);
+  	$.ajax({
+		url:"review_detail.do",
+		type:"GET",
+		data:"item_num="+item_num+"&review_num="+review_num,
+		dataType:"JSON",
+		error:function(xhr){
+			alert("error : " + xhr.status + " / " + xhr.statusText);
+		},
+		success:function(jsonObj){
+				var contentTr ='<tr id="reviewContentTr'+review_num+'" class="tableContent">';
+				contentTr += '<td class="tabTd"></td>';
+				contentTr += '<td colspan="3" class="tabTd" style="text-align: left">';
+				contentTr+='<strong>'
+				contentTr += jsonObj.review_content;
+				contentTr+='</strong>'
+				contentTr += '</td>';
+				contentTr += '</tr>';
+				$("#reviewTr"+review_num).after(contentTr);
+		}//success
+	});//ajax
+}//openReview
+
+function closeReview(review_num){
+	$("#reviewContentTr"+review_num).remove();
+}//closeReview
+
+////////////////////////////수정 필요 (후기 쓸 권한 확인)
+function writeReview(item_num) {
+	location.href="review_form.do?item_num="+item_num;
+}//writeReview
+
+function moveReviewPage(field_value, target_page){
+	var param = "field_name=item_num&field_value="+field_value+"&current_page="+target_page;
+	var item_num = location.search.slice(-1);
+	$.ajax({
+		url : "review_list_page.do?"+param,
+		type : "GET",
+		dataType : "JSON",
+		error : function(xhr){
+			alert("error : " + xhr.status + " / " + xhr.statusText);
+		},
+		success : function(jo){
+			//리뷰 목록 표시 HTML
+			var output = '<table class="tab">';
+			output += '<thead>';
+			output += '<tr class="titleTab">';
+			output += '<th class="tabTh" style="width: 50px">번호</th>';
+			output += '<th class="tabTh">제목</th>';
+			output += '<th class="tabTh" style="width: 150px">아이디</th>';
+			output += '<th class="tabTh" style="width: 150px">작성일</th></tr>';
+			output += '</thead>';
+			output += '<tbody>';
+			$.each(jo.review_list, function(idx, list){
+				output += '<tr id="reviewTr'+list.review_num+'" class="tableContent" onclick="reviewToggle('+list.review_num+')">';
+				output += '<td class="tabTd">' + list.review_num + '</td>';
+				output += '<td class="tabTd">' + list.review_subject + '</td>';
+				output += '<td class="tabTd">' + list.id + '</td>';
+				output += '<td class="tabTd">';
+				output += list.input_date.substring(0,10);
+				output += '</td></tr>';
+			});//each
+			output += '</tbody></table>';
+			$("#reviewDiv").html(output);
+
+			//페이지네이션 표시 HTML
+			output = '<nav aria-label="Page navigation example">';
+			output += '<ul class="pagination justify-content-center">';
+	
+			var disableOption = 'disabled';
+			if(jo.pre_page > 0) {
+				disableOption = 'active';
+			}
+			output += '<li class="page-item '+disableOption+'">';
+			output += '<a class="page-link" onclick="moveReviewPage('+item_num+','+jo.pre_page+');" aria-label="Previous">';
+			output += '<span aria-hidden="true">&laquo;</span>';
+			output += '</a>';
+			output += '</li>';
+			for(var i = jo.start_page; i <= jo.end_page; i++) {
+				output +='<li class="page-item">';
+				output += '<a class="page-link" onclick="moveReviewPage('+item_num+','+i+');">';
+				output += (i+'</a>');
+				output += '</li>';
+			}
+			
+			var disableOption = 'active';
+			if(target_page == jo.end_page) {
+				disableOption = 'disabled';
+			}
+			output += '<li class="page-item '+disableOption+'">';
+			output += '<a class="page-link"  onclick="moveReviewPage('+item_num+','+jo.next_page+');"aria-label="Next">';
+			output += '<span aria-hidden="true">&raquo;</span>';
+			output += '</a>';
+			output += '</li>';
+			output += '</ul>';
+			output += '</nav>';
+			$("#reviewPagination").html(output);			
+		}//success
+	});//ajax
+}//moveReviewPage
+/* ===============================리뷰================================= */
 
 /* ===============================아이템문의================================= */
 
@@ -152,6 +272,9 @@ function delReply(item_qna_num){
 			</div>
 		</div>
 		
+		<div id="reviewWrap">
+		<c:import url="/item/review_list.do"/>
+		</div>
 		
 		<div id="itemQnaWrap">
 		<c:import url="/item/item_qna_list.do"/>

@@ -1,52 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-#wrap{ min-height: 940px; margin: 0px auto; }
-#container{ min-height: 600px;}
-#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
-#containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-</style>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-<link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
-
-<!-- Google CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-<script type="text/javascript">
-$(function(){
-	
-});//ready
-</script>
-</head>
-<body style="font-family: nanumbarungothic">
-
-<div id="wrap">
-	
-	<c:import url="/header.do" />
-	<div id="container">
-	
-	<div id="containerContentWrap">
-	<div id="containerContent">
-		
+<div id="reviewTitleWrap">
+	<div id="reviewTitleColumn">
+		<hr>
+		상품후기
 	</div>
+	<div id="reviewTitleValue">
+		상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br/>
+		배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 1:1문의에 남겨주세요.
 	</div>
-	</div>
-
-	
-	<jsp:include page="../common/footer.jsp" />
-	
 </div>
 
-</body>
-</html>
+<div id="reviewDiv">
+	 <table class="tab">
+	  <thead>
+		<tr class="titleTab">
+			<th class="tabTh" style="width: 50px">번호</th>
+			<th class="tabTh">제목</th>
+			<th class="tabTh" style="width: 150px">아이디</th>
+			<th class="tabTh" style="width: 150px">작성일</th>
+		</tr>
+	 </thead>
+	<tbody>
+		<c:if test="${ empty review_list }">
+		<tr>
+			<td colspan="4">상품 후기가 없습니다.</td>
+		</tr>
+		</c:if>
+		<c:forEach var="review" items="${ review_list }">
+			<input type="hidden" name="review_num" value="${ review.review_num }"/>
+			<tr id="reviewTr${ review.review_num }" class="tableContent" onclick="reviewToggle(${ review.review_num });">
+				<td class="tabTd">${ review.review_num }</td>
+				<td class="tabTd">${ review.review_subject }</td>
+				<td class="tabTd">${ review.id }</td>
+				<td class="tabTd">${ fn:substring(review.input_date,0,10) }</td>
+			</tr>
+		</c:forEach>
+	 </tbody>
+	</table>
+</div>
+<div id="reviewBtnWrap">
+	<button type="button" class="btn btn-primary" id="reviewBtn" onclick="writeReview(${ param.item_num });">후기쓰기</button>
+</div>
+<div id="reviewPaginationWrap">
+	<c:if test="${ not empty review_list }">
+	<div id="reviewPagination">
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-center">
+		    <li class="page-item ${paging.pre_page eq '0' ? 'disabled':'active'}">
+			 	<a class="page-link" onclick="moveReviewPage(${paging.field_value}, ${paging.pre_page});" aria-label="Previous">
+		        	<span aria-hidden="true">&laquo;</span>
+		      	</a>
+		    </li>
+		    <c:forEach begin="${paging.start_page}" end="${paging.end_page}" step="1" var="cnt" >
+			    <li class="page-item">
+			    	<a class="page-link" onclick="moveReviewPage(${paging.field_value}, ${cnt});">
+			    		<c:out value="${cnt}" />
+			    	</a>
+			    </li>
+		    </c:forEach>
+		    <li class="page-item ${paging.current_page eq paging.end_page ? 'disabled':'active'}">
+		      <a class="page-link"  onclick="moveReviewPage(${paging.field_value}, ${paging.next_page});" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+	</div>
+	</c:if>
+</div>

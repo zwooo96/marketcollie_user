@@ -136,7 +136,7 @@ public class ItemService {
 			jsonTemp = new JSONObject();
 			jsonTemp.put("review_num", review.getReview_num());
 			jsonTemp.put("review_subject", review.getReview_subject());
-			jsonTemp.put("name", review.getName());
+			jsonTemp.put("id", review.getId());
 			jsonTemp.put("input_date", review.getInput_date());
 			ja.add(jsonTemp);
 		}

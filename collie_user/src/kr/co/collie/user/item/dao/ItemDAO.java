@@ -171,11 +171,11 @@ public class ItemDAO {
 	}//selectItemQnaDetail
 	
 	public static void main(String[] args) {
-		ReviewFlagVO rfVO = new ReviewFlagVO();
-		rfVO.setItem_num(1);
-		rfVO.setMember_num(1);
+		ReviewDetailVO rdVO = new ReviewDetailVO();
+		rdVO.setItem_num(1);
+		rdVO.setReview_num(66);
 		
-		System.out.println(ItemDAO.getInstance().selectReviewFlag(rfVO));
+		System.out.println(ItemDAO.getInstance().selectReviewDetail(rdVO));
 	}
 	
 }

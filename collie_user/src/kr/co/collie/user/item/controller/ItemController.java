@@ -59,11 +59,23 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping(value="/item/review_list.do", method=RequestMethod.GET)
-	public String getReviewList(RangeVO rVO, Model model) {
+	public String getReviewList(HttpSession session, ReviewFlagVO rfVO, RangeVO rVO, Model model) {
 		List<ReviewDomain> list = null;
 		ItemService is = new ItemService();
+		rVO.setField_name("item_num");
+		rVO.setField_value(rfVO.getItem_num());
 		list = is.getReviewList(rVO);
 		model.addAttribute("review_list", list);
+		model.addAttribute("paging", rVO);
+		
+		if( (LoginDomain)session.getAttribute("user_info") != null ) {
+			boolean flag = false;
+			LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+			rfVO.setMember_num(ld.getMember_num());
+			//리뷰를 작성할 권한이 있는지(상품을 구매했는지) 확인
+			flag = is.getReviewFlag(rfVO);
+			model.addAttribute("buyFlag", flag);
+		}//end if
 		
 		return "item/review_list";
 	}//getReviewList
@@ -78,6 +90,8 @@ public class ItemController {
 	public String reviewListPaging(RangeVO rVO, Model model) {
 		ItemService is = new ItemService();
 		List<ReviewDomain> list = is.getReviewList(rVO);
+		rVO.setField_name("item_num");
+		rVO.setField_value(rVO.getField_value());
 		String json = is.reviewListJson(list, rVO);
 		model.addAttribute("json", json);
 		
@@ -89,14 +103,13 @@ public class ItemController {
 	 * @param rdVO
 	 * @return
 	 */
-	@RequestMapping(value="/item/review_detail.do", method=RequestMethod.GET)
+	@RequestMapping(value="/item/review_detail.do", method=RequestMethod.GET, produces="application/json;charset=UTF-8" )
 	@ResponseBody
-	public String viewReviewDetail(ReviewDetailVO rdVO, Model model) {
+	public String viewReviewDetail(ReviewDetailVO rdVO) {
 		ItemService is = new ItemService();
 		String json = is.viewReviewDetail(rdVO);
-		model.addAttribute("json", json);
 		
-		return "item/review_detail_json";
+		return json;
 	}//viewReviewDetail
 	
 	/**
@@ -106,17 +119,7 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping(value="/item/review_form.do", method=RequestMethod.GET)
-	public String reviewForm(HttpSession session, ReviewFlagVO rfVO, Model model) {
-		boolean flag = false;
-		
-		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		rfVO.setMember_num(ld.getMember_num());
-
-		ItemService is = new ItemService();
-		//리뷰를 작성할 권한이 있는지(상품을 구매했는지) 확인
-		flag = is.getReviewFlag(rfVO);
-		model.addAttribute("buyFlag", flag);
-		
+	public String reviewForm() {
 		return "item/review_form";
 	}//reviewForm
 	

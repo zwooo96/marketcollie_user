@@ -2,7 +2,7 @@ package kr.co.collie.user.item.domain;
 
 public class ReviewDomain {
 	private int review_num;
-	private String review_subject, name, input_date;
+	private String review_subject, id, input_date;
 	
 	public int getReview_num() {
 		return review_num;
@@ -10,8 +10,8 @@ public class ReviewDomain {
 	public String getReview_subject() {
 		return review_subject;
 	}
-	public String getName() {
-		return name;
+	public String getId() {
+		return id;
 	}
 	public String getInput_date() {
 		return input_date;
@@ -22,8 +22,8 @@ public class ReviewDomain {
 	public void setReview_subject(String review_subject) {
 		this.review_subject = review_subject;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public void setInput_date(String input_date) {
 		this.input_date = input_date;

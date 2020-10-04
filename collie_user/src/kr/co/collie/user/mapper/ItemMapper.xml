@@ -59,8 +59,8 @@
   
   <!-- 리뷰 목록을 조회하는 일 : field_name = item_num -->
   <select id="selectReviewList" parameterType="kr.co.collie.user.pagination.RangeVO" resultType="kr.co.collie.user.item.domain.ReviewDomain">
-	select review_num, review_subject, name, input_date
-	from(select r.review_num, r.review_subject, m.name, r.input_date, row_number() over(order by r.review_num desc) rnum
+	select review_num, review_subject, id, input_date
+	from(select r.review_num, r.review_subject, m.id, r.input_date, row_number() over(order by r.review_num desc) rnum
 			from review r, member m
 			where r.member_num=m.member_num and ${ field_name } = #{ field_value })
 	where rnum between #{ start_num } and #{ end_num }
