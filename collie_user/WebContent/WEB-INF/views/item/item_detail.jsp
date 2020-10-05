@@ -105,11 +105,6 @@ function closeReview(review_num){
 	$("#reviewContentTr"+review_num).remove();
 }//closeReview
 
-////////////////////////////수정 필요 (후기 쓸 권한 확인)
-function writeReview(item_num) {
-	location.href="review_form.do?item_num="+item_num;
-}//writeReview
-
 function moveReviewPage(field_value, target_page){
 	var param = "field_name=item_num&field_value="+field_value+"&current_page="+target_page;
 	var item_num = location.search.slice(-1);
