@@ -140,7 +140,7 @@ public class MypageController {
 		
 		
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		
+		 
 		return "mypage/modify_member_form";
 	}//memberInfoForm
 	
@@ -157,7 +157,7 @@ public class MypageController {
 		flag = ms.modifyMemberInfo(mmVO);
 		
 		
-		return "mypage/modify_member_result.jsp";
+		return "forward:modify_member_result.jsp";
 	}//modifyMemberInfo
 	
 	/** 회원 탈퇴를 위한 폼
@@ -166,7 +166,7 @@ public class MypageController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping( value="/mypage/remove_member_form.do", method=GET)
+	@RequestMapping( value="/mypage/remove_member_form.do", method=GET )
 	public String removeMemberInfoForm( ) {
 		
 		
@@ -187,14 +187,16 @@ public class MypageController {
 		
 		MypageService ms = new MypageService();
 		boolean deleteFlag = ms.removeMember(dmVO);
+		
 		try {
 			boolean passFlag = ms.getMemberPass(pcVO);
 		} catch(NullPointerException npe) {
 			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
 		}//end catch
 		
+		session.removeAttribute("user_info");
 		
-		return "mypage/remove_member_result";
+		return "redirect:remove_member_result.jsp";
 	}
 	
 	
@@ -226,7 +228,7 @@ public class MypageController {
 			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
 		}//end catch
 		
-		return "forward:/mypage/modify_pass_form.do";
+		return "redirect:modify_pass_form.jsp";
 	}//checkPassForm
 	
 	/**

@@ -135,6 +135,8 @@ public class MypageDAO {
          SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
          
          cnt = ss.update("kr.co.collie.user.mypage.updateMember", mmVO);
+         ss.commit();
+         
          ss.close();
          
          return cnt;
@@ -156,6 +158,15 @@ public class MypageDAO {
      
     
     public static void main(String[] args) {
+    	ModifyMemberVO mm = new ModifyMemberVO();
+    	mm.setAddr("서울");
+    	mm.setId("test2");
+    	mm.setName("강동길");
+    	mm.setPhone("1111");
+    	mm.setZipcode("12345");
+    	mm.setAddr_detail("dsada");
+    	
+    	System.out.println(MypageDAO.getInstance().updateMemberInfo(mm));
 	}
     
 	/**

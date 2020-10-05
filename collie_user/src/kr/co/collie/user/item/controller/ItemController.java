@@ -15,6 +15,7 @@ import kr.co.collie.user.item.domain.ItemQnaDomain;
 import kr.co.collie.user.item.domain.ReviewDomain;
 import kr.co.collie.user.item.service.ItemService;
 import kr.co.collie.user.item.vo.ItemQnaListVO;
+import kr.co.collie.user.item.vo.ItemQnaVO;
 import kr.co.collie.user.item.vo.ReviewDetailVO;
 import kr.co.collie.user.item.vo.ReviewFlagVO;
 import kr.co.collie.user.item.vo.ReviewVO;
@@ -147,14 +148,40 @@ public class ItemController {
 		}//end if
 		int currentPage=Integer.parseInt(current_page);
 		
-		iqlVO.setStart_num( (currentPage-1)*5+1 );
-		iqlVO.setEnd_num( iqlVO.getStart_num()+5-1 );
+		ItemService is=new ItemService();
 		
-		List<ItemQnaDomain> list=new ItemService().getItemQnaList(iqlVO);
+		int totalCnt=is.getItemQnaCnt(iqlVO.getItem_num());
+		RangeVO rVO=new RangeVO();
+		rVO.setTotal_cnt(totalCnt);
+		rVO.setCurrent_page(currentPage);
+		rVO.calcPaging();
+		
+		iqlVO.setStart_num( rVO.getStart_num() );
+		iqlVO.setEnd_num( rVO.getEnd_num() );
+		
+		List<ItemQnaDomain> list=is.getItemQnaList(iqlVO);
 		model.addAttribute("qna_list", list);
+		
+		model.addAttribute("paging", rVO);
 		
 		return "item/item_qna";
 	}//viewItemQnaList
+	
+	@RequestMapping(value="/item/item_qna_move_page.do", method=RequestMethod.POST,  produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String viewItemQnaMovePage(ItemQnaListVO iqlVO, String current_page) throws NumberFormatException {
+		String json=null;
+		
+		if(current_page==null) {
+			current_page="1";
+		}//end if
+		int currentPage=Integer.parseInt(current_page);
+
+		ItemService is=new ItemService();
+		json=is.getItemQnaMovePage(iqlVO, currentPage);
+		
+		return json;
+	}//viewItemQnaMovePage
 	
 	@RequestMapping(value="/item/item_qna_detail.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -165,5 +192,28 @@ public class ItemController {
 		
 		return json;
 	}//getItemQnaDetail
+	
+	@RequestMapping(value="/item/item_qna_add_form.do", method=RequestMethod.POST)
+	public String viewItemQnaForm(int item_num, HttpSession session) throws NumberFormatException {
+		
+		
+		return "item/item_qna_form";
+	}//addItemQna
+	
+	@RequestMapping(value="/item/qna_add_process.do", method=RequestMethod.POST)
+	public String addItemQna(ItemQnaVO iqVO, HttpSession session) throws NumberFormatException {
+		String url="redirect:/item/item_detail.do?item_num="+iqVO.getItem_num()+"&item_qna_flag=true";
+		
+		LoginDomain ld=(LoginDomain)session.getAttribute("user_info");
+		iqVO.setMember_num(ld.getMember_num());
+		
+		boolean flag=new ItemService().addItemQna(iqVO);
+		
+		if(!flag) {
+			url="redirect:/item/item_detail.do?item_num="+iqVO.getItem_num()+"&item_qna_flag=false";
+		}//end if
+		
+		return url;
+	}//addItemQna
 	
 }
