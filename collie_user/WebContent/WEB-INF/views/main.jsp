@@ -9,9 +9,9 @@
 <style type="text/css">
 #wrap{ min-height: 940px; margin: 0px auto; }
 #container{ min-height: 600px;}
-#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center;  flex-direction: column;}
-#containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
-
+#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
+#containerContent{ width: 70%; display: flex; align-items: center; }
+.contentSubtitle{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; color:#17462B; font-size:4rem; font-weight: bold;}
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -33,7 +33,7 @@ $(function(){
 
 <div id="wrap">
 	
-	<c:import url="/header.do" />
+	<c:import url="/header.do" /> 
 	<div id="container">
 	
 	<div id="mainImg" class="carousel slide" data-ride="carousel">
@@ -57,8 +57,8 @@ $(function(){
 	    <span class="sr-only">Next</span>
 	  </a>
 	</div>
+	<div class="contentSubtitle">NEW!</div> 
 	<div id="containerContentWrap">
-		<div id="contentSubtitle">신제품ㅃ빠바바ㅏㅂ밤</div>
 	<div id="containerContent">
 	
 		<div class="row row-cols-1 row-cols-md-4">
