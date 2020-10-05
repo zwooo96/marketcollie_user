@@ -1,5 +1,6 @@
 package kr.co.collie.user.item.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +12,7 @@ import kr.co.collie.user.item.domain.ItemQnaDetailDomain;
 import kr.co.collie.user.item.domain.ItemQnaDomain;
 import kr.co.collie.user.item.domain.ReviewDomain;
 import kr.co.collie.user.item.vo.ItemQnaListVO;
+import kr.co.collie.user.item.vo.ItemQnaVO;
 import kr.co.collie.user.item.vo.ReviewDetailVO;
 import kr.co.collie.user.item.vo.ReviewFlagVO;
 import kr.co.collie.user.item.vo.ReviewVO;
@@ -169,6 +171,25 @@ public class ItemDAO {
 		
 		return iqdDomain;
 	}//selectItemQnaDetail
+	
+	public int selectItemQnaCnt(int itemNum) {
+		int cnt=0;
+		
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		cnt=ss.selectOne("selectItemQnaCnt",itemNum);
+		ss.close();
+		
+		return cnt;
+	}//selectItemQnaCnt
+	
+	public void insertItemQna(ItemQnaVO iqVO) throws SQLException {
+		
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		ss.insert("insertItemQna",iqVO);
+		ss.commit();
+		ss.close();
+		
+	}//insertItemQna
 	
 	public static void main(String[] args) {
 		ReviewDetailVO rdVO = new ReviewDetailVO();

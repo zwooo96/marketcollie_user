@@ -42,6 +42,12 @@
     border-bottom: 2px solid #bebebe !important;
     padding: 20px 0px 20px 0px;
 }
+
+
+.itemQnaBtnDivWrap{ display: flex; justify-content: center; }
+.itemQnaBtnDiv{ width: 70%; display: flex; justify-content: flex-end; }
+.collieBtnMain{ width: 130px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 20px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
+.paginationDiv{ margin-top: 50px }
 /* ==================아이템문의=================== */
 
 </style>
@@ -172,72 +178,6 @@ function moveReviewPage(field_value, target_page){
 }//moveReviewPage
 /* ===============================리뷰================================= */
 
-/* ===============================아이템문의================================= */
-
-function qnaToggle(item_qna_num){
-	
-	if($("#qnaContentTr"+item_qna_num).length==1){
-		delReply(item_qna_num);
-	}else{
-		addReply(item_qna_num);
-	}//else
-	
-}//toggleReply
-
-function addReply(item_qna_num){
-	
-  	$.ajax({
-		url:"item_qna_detail.do",
-		type:"POST",
-		data:"item_qna_num="+item_qna_num,
-		dataType:"JSON",
-		error:function(xhr){
-			alert("에러");
-			console.log(xhr.status+" / "+xhr.statusText);
-		},
-		success:function(jsonObj){
-			if(jsonObj.flag=="success"){
-				
-				var contentTr='<tr id="qnaContentTr'+item_qna_num+'" class="tableContent">';
-				contentTr+='<td class="tabTd"></td>';
-				contentTr+='<td colspan="3" class="tabTd" style="text-align: left">';
-				contentTr+='<strong>'
-				contentTr+=jsonObj.item_qna_content;
-				contentTr+='</strong>'
-				contentTr+='</td>';
-				contentTr+='<td class="tabTd"></td>';
-				contentTr+='</tr>';
-				$("#itemQnaTr"+item_qna_num).after(contentTr);
-				
-				if(jsonObj.item_qna_reply!=null){
-					var replyTr='<tr id="qnaReplyTr'+item_qna_num+'" class="tableContent">';
-					replyTr+='<td class="tabTd"></td>';
-					replyTr+='<td colspan="3" class="tabTd" style="text-align: left">';
-					replyTr+=' RE : ';
-					replyTr+=jsonObj.item_qna_reply;
-					replyTr+='</td>';
-					replyTr+='<td class="tabTd">';
-					replyTr+=jsonObj.reply_date;
-					replyTr+='</td>';
-					replyTr+='</tr>';
-					$("#qnaContentTr"+item_qna_num).after(replyTr);
-				}//end if
-				
-			}//end if
-		}//success
-	});//ajax
-	
-}//addReply
-
-function delReply(item_qna_num){
-	$("#qnaContentTr"+item_qna_num).remove();
-	
-	if( $("#qnaReplyTr"+item_qna_num).length==1 ){
-		$("#qnaReplyTr"+item_qna_num).remove();
-	}//end if
-}
-
-/* ===============================아이템문의================================= */
 
 </script>
 </head>

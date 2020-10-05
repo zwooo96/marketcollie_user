@@ -94,7 +94,7 @@
 	values (seq_review_num.nextval, #{ item_num }, #{ member_num }, #{ review_subject }, #{ review_content })
   </insert>
   
-  <!-- 문의 리스트를 조회하는 일 -->
+    <!-- 문의 리스트를 조회하는 일 -->
    <select id="selectItemQnaList" parameterType="kr.co.collie.user.item.vo.ItemQnaListVO" resultType="kr.co.collie.user.item.domain.ItemQnaDomain">
 	select idx, item_qna_num, item_qna_subject, item_qna_flag, to_char(input_date, 'yyyy-mm-dd') input_date, id
 	from(select row_number() over(order by item_qna_num desc) idx, iq.item_qna_num, iq.item_qna_subject, iq.item_qna_flag, iq.input_date, m.id
@@ -109,5 +109,16 @@
   	from item_qna
   	where item_qna_num=#{item_qna_num}
   </select>
+  
+  <select id="selectItemQnaCnt" parameterType="int" resultType="int">
+  	select count(*)
+  	from item_qna
+  	where item_num=#{ itemNum }
+  </select>
+  
+  <insert id="insertItemQna" parameterType="kr.co.collie.user.item.vo.ItemQnaVO">
+  	insert into item_qna(ITEM_QNA_NUM, ITEM_NUM, MEMBER_NUM, ITEM_QNA_SUBJECT, ITEM_QNA_CONTENT)
+	values(seq_item_qna_num.nextval, #{ item_num }, #{ member_num }, #{ item_qna_subject }, #{ item_qna_content })
+  </insert>
   
 </mapper>
