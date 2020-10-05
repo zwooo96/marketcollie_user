@@ -104,7 +104,7 @@ function cancelOrder(order_num){
 				    <tr><td colspan="2" id="payInfo"><h5><strong>결제 정보</strong></h5></td></tr>	
 				    <tr>
 				      <td class="infoColumn">총 상품금액</td>
-				      <td class="infoValue"><fmt:formatNumber value="${ order_detail.total_price }" pattern="#,###"/>원</td>
+				      <td class="infoValue"><fmt:formatNumber value="${ order_detail.total_price - 2500 }" pattern="#,###"/>원</td>
 					</tr>	
 				    <tr>
 				      <td class="infoColumn">배송비</td>
@@ -113,7 +113,7 @@ function cancelOrder(order_num){
 				    <tr>
 				      <td class="infoColumn">결제금액</td>
 				      <td class="infoValue">
-				      <c:set var="order_price" value="${ order_detail.total_price + 2500 }"/>
+				      <c:set var="order_price" value="${ order_detail.total_price }"/>
 				      <fmt:formatNumber value="${ order_price }" pattern="#,###"/>원
 				      </td>
 					</tr>	

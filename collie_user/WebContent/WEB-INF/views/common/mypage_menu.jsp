@@ -3,14 +3,13 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="containerMenu">
 	<div id="menuTitle"><h3><strong>마이페이지</strong></h3></div>
-	<!-- ///////////////////////////클릭 시 색 변경되도록 수정해야함////////////////////////////// -->
 	<table class="table table-bordered">
     	<tr><td onclick="location.href='order_list.do'">주문 내역</td></tr>
     	<tr><td onclick="location.href='qna_list.do'">문의 내역</td></tr>
     	<tr><td onclick="location.href='check_member_form.do'">개인정보 수정</td></tr>
     	<tr><td onclick="location.href='check_pass_form.do'">비밀번호 변경</td></tr>
     </table>
-    <div id="qnaBox" onclick="location.href='../qna/form.do'">
+    <div id="qnaBox" onclick="location.href='../qna/qna_form.do'">
     	<strong>도움이 필요하신가요?</strong><br/>
     	1:1 문의하기
     </div>

@@ -5,10 +5,13 @@
 	<!-- 주문 내역 목록을 불러오는 일 : field_name = member_num -->
 	<select id="selectOrderList" parameterType="kr.co.collie.user.pagination.RangeVO" resultType="kr.co.collie.user.mypage.domain.OrderListDomain">
 		select order_num, total_price, item_name, item_img, input_date
-		from(select f.order_num, f.total_price, i.item_name, i.item_img, f.input_date, row_number() over(order by f.order_num desc) rnum
+		from(select f.order_num, f.total_price, LISTAGG(i.item_name, ',')WITHIN GROUP(ORDER BY i.item_name)item_name,
+						LISTAGG(i.item_img, ',')WITHIN GROUP(ORDER BY i.item_name)item_img, f.input_date,
+						row_number() over(order by f.order_num desc) rnum
 				from order_form f, item i, order_item oi
-				where (oi.order_num = f.order_num and oi.item_num = i.item_num)
-							and ${ field_name } = #{ field_value })
+				where oi.order_num = f.order_num and oi.item_num = i.item_num
+							and ${ field_name } = #{ field_value }
+				group by f.order_num, f.total_price, f.input_date)
 		where rnum between #{ start_num } and #{ end_num }
 	</select>
 	
