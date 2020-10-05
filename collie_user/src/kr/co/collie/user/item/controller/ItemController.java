@@ -195,8 +195,7 @@ public class ItemController {
 	}//getItemQnaDetail
 	
 	@RequestMapping(value="/item/item_qna_add_form.do", method=RequestMethod.POST)
-	public String viewItemQnaForm(int item_num, HttpSession session) throws NumberFormatException {
-		
+	public String viewItemQnaForm() throws NumberFormatException {
 		
 		return "item/item_qna_form";
 	}//addItemQna

@@ -14,13 +14,14 @@
 #containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
 #containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
 .reviewColumn{ background-color: #F7F7F7; color: #747674; text-align: center; width: 100px; font-size: 14px; }
-#reviewForm{ width: 1000px }
+#addItemQnaForm{ width: 1000px }
 td{ vertical-align: middle !important; }
 .form-control{ font-size: 14px !important; resize: none }
 .form-control::placeholder{ font-size: 14px }
 .btn-primary{ background-color: #17462B !important; border-color: #17462B !important; margin:0px auto; margin-top: 20px; width: 200px; padding: 15px !important  }
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus{ background-color: #17462B !important; }
 #btnDiv{ width: 200px; margin: 0px auto }
+.table{ width: 70% }
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">

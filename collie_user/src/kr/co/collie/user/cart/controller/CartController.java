@@ -22,7 +22,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import java.sql.SQLException;
 import java.util.List;
 
-@SessionAttributes({"item_num", "item_cnt"})
 @Controller
 public class CartController {
 	
@@ -104,16 +103,18 @@ public class CartController {
 		int orderNum=0;
 		
 		LoginDomain lDomain=(LoginDomain)session.getAttribute("user_info");
-		oVO.setMember_num(lDomain.getMember_num());
-		
-		try {
-			orderNum=new CartService().orderItem(oVO);
-		} catch (SQLException e) {
-			url="err/order_err";
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("order_num", orderNum);
+		if( lDomain!=null && lDomain.getMember_num()!=0 ){
+			oVO.setMember_num(lDomain.getMember_num());
+			
+			try {
+				orderNum=new CartService().orderItem(oVO);
+			} catch (SQLException e) {
+				url="err/order_err";
+				e.printStackTrace();
+			}
+			
+			model.addAttribute("order_num", orderNum);
+		}//end if
 		
 		return url;
 	}//order

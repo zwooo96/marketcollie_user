@@ -16,8 +16,6 @@ $(function(){
 
 
 function qnaMovePage(item_num, cur_page){
-	alert(cur_page)
-	
   	$.ajax({
 		url:"item_qna_move_page.do",
 		type:"POST",
