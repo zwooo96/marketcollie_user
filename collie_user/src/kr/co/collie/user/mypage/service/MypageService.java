@@ -181,7 +181,6 @@ public class MypageService {
 		boolean flag = false;
 		
 		MypageDAO mDAO = MypageDAO.getInstance();
-		flag = mDAO.updateMemberInfo(mmVO)==1;
 		flag = mDAO.updateMemberInfo(mmVO) != 0;
 		
 		return flag;
