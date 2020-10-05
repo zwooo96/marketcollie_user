@@ -17,12 +17,14 @@
 #containerHeader{ height: 250px; display: flex; justify-content: center; align-items: center; flex-direction: column; }
 #containerHeaderTitle{ font-size: 30pt; }
 #containerHeaderContent{ font-size: 12pt; color: #bebebe }
-
+.active {cursor:pointer;}
 </style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
-
+<link rel="stylesheet" type="text/css" href="../common/css/common.css">
+<style type="text/css">
+.page-item.active .page-link {background-color:#17462B; border-color:#17462B;}
+</style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
@@ -38,11 +40,10 @@ function showDetailImage(item_num) {
 }
 
 function movePage(field_name, field_value, target_page) {
-// 	console.log("field_name : " + field_name + " / field_value" + field_value);
 	var param = 'field_name='+field_name+'&field_value='+field_value+'&current_page='+target_page;
 	
 	$.ajax({
-		url:'/collie_user/item/search.do?'+param,
+		url:'search.do?'+param,
 		type:'POST',
 		dataType:'json',
   		error:function(xhr) {
@@ -54,8 +55,8 @@ function movePage(field_name, field_value, target_page) {
 			var output = '<div class="row row-cols-1 row-cols-md-3">';
 			$.each(jo.item_list, function(idx, item) {
 				output += '<div class="col mb-3">';
-				output +=	 '<div class="card" onclick="showDetailImage('+item.item_num+')">';
-				output += 		'<img src="/collie_user/common/images/item/'+item.item_img+'" class="card-img-top">';
+				output +=	 '<div class="card" onclick="showDetailImage('+item.item_num+')" style="cursor:pointer;">';
+				output += 		'<img src="../common/images/item/'+item.item_img+'" class="card-img-top">';
 				output += 		'<div class="card-body">';
 				output += 			'<h6 class="card-title">'+item.item_name+'</h6>';
 				output += 			'<p class="card-text">'+item.item_price+'원</p>';
@@ -79,13 +80,18 @@ function movePage(field_name, field_value, target_page) {
 			output += '</a>';
 			output += '</li>';
 			for(var i = jo.start_page; i <= jo.end_page; i++) {
-				output +='<li class="page-item">';
+				disableOption = 'disabled';
+				console.log("현재 페이지 : " + jo.current_page);
+				if(jo.current_page != i) {
+					disableOption = 'active';
+				}
+				output +='<li class="page-item '+disableOption+'">';
 				output += '<a class="page-link" onclick="movePage(\'${paging.field_name}\',\'${paging.field_value}\','+i+');">';
 				output += (i+'</a>');
 				output += '</li>';
 			}
 			
-			var disableOption = 'active';
+			disableOption = 'active';
 			if(target_page == jo.end_page) {
 				disableOption = 'disabled';
 			}
@@ -120,8 +126,8 @@ function movePage(field_name, field_value, target_page) {
 					<div class="row row-cols-1 row-cols-md-3">
 						<c:forEach begin="${paging.start_num}" end="${paging.end_num}" step="1" var="index">
 							<div class="col mb-3">
-								<div class="card"  onclick="showDetailImage(${item_list[index - 1].item_num})">
-									<img src="/collie_user/common/images/item/${item_list[index - 1].item_img}" class="card-img-top">
+								<div class="card"  onclick="showDetailImage(${item_list[index - 1].item_num})" style="cursor:pointer;">
+									<img src="../common/images/item/${item_list[index - 1].item_img}" class="card-img-top">
 									<div class="card-body">
 										<h6 class="card-title">${item_list[index - 1].item_name}</h6>
 										<p class="card-text">${item_list[index - 1].item_price}원</p>
@@ -142,7 +148,7 @@ function movePage(field_name, field_value, target_page) {
 			      	</a>
 			    </li>
 			    <c:forEach begin="${paging.start_page}" end="${paging.end_page}" step="1" var="cnt" >
-				    <li class="page-item">
+				    <li class="page-item ${paging.current_page eq cnt ? 'disabled':'active'}" >
 				    	<a class="page-link" onclick="movePage('${paging.field_name}','${paging.field_value}',${cnt});">
 				    		<c:out value="${cnt}" />
 				    	</a>

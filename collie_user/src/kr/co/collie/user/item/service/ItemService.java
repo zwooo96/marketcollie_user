@@ -59,6 +59,7 @@ public class ItemService {
 		jo.put("end_page", rVO.getEnd_page());
 		jo.put("pre_page", rVO.getPre_page());
 		jo.put("next_page", rVO.getNext_page());
+		jo.put("current_page", rVO.getCurrent_page());
 		
 		JSONArray ja = new JSONArray();
 		JSONObject jsonTemp = null;
