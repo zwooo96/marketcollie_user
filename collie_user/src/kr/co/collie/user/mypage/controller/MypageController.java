@@ -140,7 +140,7 @@ public class MypageController {
 		
 		
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		
+		 
 		return "mypage/modify_member_form";
 	}//memberInfoForm
 	
