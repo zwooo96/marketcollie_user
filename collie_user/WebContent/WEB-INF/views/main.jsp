@@ -57,7 +57,7 @@ $(function(){
 	    <span class="sr-only">Next</span>
 	  </a>
 	</div>
-	<div class="contentSubtitle">NEW!</div>
+	<div class="contentSubtitle">NEW!</div> 
 	<div id="containerContentWrap">
 	<div id="containerContent">
 	
