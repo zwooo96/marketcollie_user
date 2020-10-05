@@ -36,11 +36,13 @@
 .tabTh{
     border-top: 2px solid #17462B !important;
     border-bottom: 2px solid #bebebe !important;
+    font-size: 14px;
 }
 .tabTd{
     border-top: 2px solid #17462B !important;
     border-bottom: 2px solid #bebebe !important;
     padding: 20px 0px 20px 0px;
+    font-size: 14px
 }
 
 

@@ -5,9 +5,11 @@
 $(function(){
 	
 	$("#itemQnaBtn").click(function(){
-		
-		$("#qnaAddFrm").submit();
-		
+		if(${ not empty sessionScope.user_info }){
+			$("#qnaAddFrm").submit();
+		}else{
+			alert("로그인 후 작성 가능합니다.");
+		}//end else
 	})//click
 	
 });//ready
@@ -19,7 +21,7 @@ function qnaMovePage(item_num, cur_page){
   	$.ajax({
 		url:"item_qna_move_page.do",
 		type:"POST",
-		data:"item_num="+item_num+"&cur_page="+cur_page,
+		data:"item_num="+item_num+"&current_page="+cur_page,
 		dataType:"JSON",
 		error:function(xhr){
 			alert("에러");
@@ -56,10 +58,10 @@ function qnaMovePage(item_num, cur_page){
 				var page='<nav aria-label="Page navigation example">';
 				page+='<ul class="pagination justify-content-center">';
 				var pre="active";
-				var preOnclick="";
-				if(jsonObj.pre_page==0){
+				var preOnclick='onclick="qnaMovePage('+item_num+','+jsonObj.pre_page+')" ';
+				if(jsonObj.pre_page<=0){
 					pre="disabled"
-					preOnclick='onclick="qnaMovePage('+item_num+','+jsonObj.pre_page+')" ';
+					preOnclick="";
 				}//end if
 				page+='<li class="page-item '+pre+'">';
 				page+='<a class="page-link"'+preOnclick+' aria-label="Previous">';
@@ -67,28 +69,26 @@ function qnaMovePage(item_num, cur_page){
 				page+='</a>';
 				page+='</li>';
 				
-				var cur="";
 				var curOnclick="";
 				for(var i=jsonObj.start_page; i<jsonObj.end_page+1; i++){
-					cur="active";
-					curOnclick="";
+					curOnclick='onclick="qnaMovePage('+item_num+','+i+')" ';
 					if(jsonObj.current_page==i){
 						cur="disabled"
-						curOnclick='onclick="qnaMovePage('+item_num+','+i+')" ';
+						curOnclick="";
 					}//end if
-					page+='<li class="page-item '+cur+'">';
+					page+='<li class="page-item">';
 					page+='<a class="page-link"'+curOnclick+'>';
 					page+=i;
 					page+='</a>';
 					page+='</li>';
 				}//end for
 				var next="active";
-				var nextOnclick="";
-				if(jsonObj.current_page==jsonObj.total_page){
+				var nextOnclick='onclick="qnaMovePage('+item_num+','+jsonObj.next_page+')" ';
+				if(cur_page>=jsonObj.total_page){
 					next="disabled"
-					nextOnclick='onclick="qnaMovePage('+item_num+','+jsonObj.pre_page+')" ';
+					nextOnclick="";
 				}//end if
-				page+='<li class="page-item '+next+'}">';
+				page+='<li class="page-item '+next+'">';
 				page+='<a class="page-link" '+nextOnclick+'aria-label="Next">';
 				page+='<span aria-hidden="true">&raquo;</span>';
 				page+='</a>';
@@ -233,6 +233,7 @@ function delReply(item_qna_num){
 </div>
 
 <form id="qnaAddFrm" action="item_qna_add_form.do" method="post">
+<input type="hidden" name="user_info" id="user_info" value="${ user_info }"/>
 <input type="hidden" name="item_num" value="${ param.item_num }"/>
 </form>
 <div class="itemQnaBtnDivWrap">
@@ -246,13 +247,13 @@ function delReply(item_qna_num){
 <div id="pagination">
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
-	    <li class="page-item ${paging.pre_page eq '0' ? 'disabled':'active'}">
+	    <li class="page-item ${paging.pre_page <= 0 ? 'disabled':'active'}">
 		 	<a class="page-link"<c:if test="${ paging.pre_page ne '0'}">onclick="qnaMovePage(${ param.item_num },${paging.pre_page})"</c:if> aria-label="Previous">
 	        	<span aria-hidden="true">&laquo;</span>
 	      	</a>
 	    </li>
 	    <c:forEach begin="${paging.start_page}" end="${paging.end_page}" step="1" var="cur_page" >
-		    <li class="page-item ${paging.current_page eq cur_page ? 'disabled':'active'}">
+		    <li class="page-item">
 		    	<a class="page-link"<c:if test="${paging.current_page ne cur_page}"> onclick="qnaMovePage(${ param.item_num },${cur_page})"</c:if>>
 		    		<c:out value="${cur_page}" />
 		    	</a>

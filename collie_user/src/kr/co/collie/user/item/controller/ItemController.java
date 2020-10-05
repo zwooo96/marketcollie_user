@@ -154,6 +154,7 @@ public class ItemController {
 		RangeVO rVO=new RangeVO();
 		rVO.setTotal_cnt(totalCnt);
 		rVO.setCurrent_page(currentPage);
+		rVO.setPage_scale(1);
 		rVO.calcPaging();
 		
 		iqlVO.setStart_num( rVO.getStart_num() );
