@@ -28,7 +28,7 @@ $(function(){
 	
 });//ready
 
-function showDetailImage(item_num) {
+function showDetailImage(item_num) { 
 	   location.href="item/item_detail.do?item_num="+item_num;
 }
 
