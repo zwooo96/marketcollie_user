@@ -27,6 +27,11 @@
 $(function(){
 	
 });//ready
+
+function showDetailImage(item_num) {
+	   location.href="item/item_detail.do?item_num="+item_num;
+}
+
 </script>
 </head>
 <body style="font-family: nanumbarungothic">
@@ -64,7 +69,7 @@ $(function(){
 		<div class="row row-cols-1 row-cols-md-4">
 			<c:forEach items="${new_item_list }" var="newItemList">
 				<div class="col mb-4">
-					<div class="card">
+					<div class="card" onclick="showDetailImage(${newItemList.item_num});" style="cursor:pointer;">
 						<img src="http://localhost/collie_user/common/images/item/${newItemList.item_img}" class="card-img-top">
 						<div class="card-body">
 							<h6 class="card-title">${newItemList.item_name}</h6>
