@@ -64,7 +64,7 @@ function showDetailImage(item_num) {
 	</div>
 	<div class="contentSubtitle">NEW!</div> 
 	<div id="containerContentWrap">
-	<div id="containerContent">
+	<div id="containerContent"> 
 	
 		<div class="row row-cols-1 row-cols-md-4">
 			<c:forEach items="${new_item_list }" var="newItemList">
