@@ -33,7 +33,7 @@ $(function(){
 
 <div id="wrap">
 	
-	<c:import url="/header.do" />
+	<c:import url="/header.do" /> 
 	<div id="container">
 	
 	<div id="mainImg" class="carousel slide" data-ride="carousel">
