@@ -6,7 +6,7 @@
   <select id="selectLogin" resultType="kr.co.collie.user.member.domain.LoginDomain" parameterType="kr.co.collie.user.member.vo.LoginVO">
     select member_num,id, name, email, phone, addr, addr_detail, zipcode
     from member
-    where id =#{id} and pass=#{pass}
+    where id =#{id} and pass=#{pass} and member_flag='Y'
   </select>
   
   <insert id ="insertMember" parameterType="kr.co.collie.user.member.vo.JoinVO">

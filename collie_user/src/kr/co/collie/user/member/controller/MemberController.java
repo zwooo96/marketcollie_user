@@ -71,14 +71,9 @@ public class MemberController {
     public String join(JoinVO jVO, HttpServletRequest request) {
         MemberService ms = new MemberService();
         
-        jVO.setId(request.getParameter("id"));
-        jVO.setPass(request.getParameter("pass"));
-        jVO.setName(request.getParameter("name"));
-        jVO.setEmail(request.getParameter("email"));
+        String selectEmail=request.getParameter("email2");
+        jVO.setEmail(request.getParameter("email")+"@"+selectEmail);
         jVO.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));
-         jVO.setZipcode(request.getParameter("zipcode"));
-        jVO.setAddr(request.getParameter("addr"));
-         jVO.setAddr_detail(request.getParameter("addr_detail"));
         jVO.setIp(request.getRemoteAddr());
         
         ms.join(jVO);
