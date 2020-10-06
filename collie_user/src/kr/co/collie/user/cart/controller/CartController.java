@@ -31,20 +31,13 @@ public class CartController {
 	 * @param cVO
 	 * @return
 	 */
-	@RequestMapping(value="/item/cart.do", method=GET)
-	public String addCart(HttpSession session, CartVO cVO) {
+	@RequestMapping(value="/item/cart.do", method=POST)
+	@ResponseBody
+	public void addCart(HttpSession session, CartVO cVO) {
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		cVO.setMember_num(ld.getMember_num());
 		CartService cs = new CartService();
 		cs.addCart(cVO);
-		
-//		//장바구니로 이동할 것인지 상품상세에 계속 남아있을 것인지 결정할 수 있도록 해야함
-//		if( "t".equals(move_flag) ) {
-//			String url = "cart/view.do";
-//		}//end if
-//		if( "f".equals(move_flag) ) {
-//			String url = "item/item_detail.do?item_num="+item_num;
-//		}//end if
-		
-		return "forward:cart/view.do";
 	}//addCart
 	
 	@RequestMapping(value="/cart/view.do", method=GET)

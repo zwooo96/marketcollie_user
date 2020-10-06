@@ -65,7 +65,22 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	
+	$("#addCartBtn").click(function(){
+		var param = $("form[name=addCartForm]").serialize();
+		$.ajax({
+			url : "cart.do",
+			type : "POST",
+			data : param,
+			error : function(xhr){
+				alert("error : " + xhr.status + " / " + xhr.statusText);
+			},
+			success : function(data){
+				if( confirm("상품을 장바구니에 담았습니다. 장바구니로 이동하시겠습니까?") ){
+					location.href = "../cart/view.do";
+				}//end if
+			}//success
+		});//ajax
+	});//click		
 });//ready
 
 /* ===============================리뷰================================= */
@@ -201,6 +216,15 @@ function moveReviewPage(field_value, target_page){
 				</div>
 			</div>
 			
+			<!-- 장바구니 담기 : item_cnt의 value에 구매하려는 상품 개수의 값을 넣어주세요!! -->
+			<div>
+			<form id="addCartForm" name="addCartForm">
+				<input type="hidden" name="item_num" value="${ param.item_num }"/>
+				<input type="hidden" name="item_cnt" value="1"/>
+			</form>
+			<input type="button" id="addCartBtn" value="장바구니 담기" class="collieBtnMain"/>
+			</div>		
+							
 			<!-- 하단의 설명 -->
 			<div class="item_description">
 				<c:out value="${item.item_title}"/><br/>
