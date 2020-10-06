@@ -37,21 +37,22 @@ public class MemberController {
         
     }
     
-    @RequestMapping(value = "/login_process.do",method = POST)
-    public String login(LoginVO loginVO, Model model) {
-    
-        MemberService mems=new MemberService();
-        LoginDomain loginDomain=mems.login(loginVO);
-        String url = "";
-        if(loginDomain==null) {
-             url = "member/login_result";
-        } else {
-             url = "redirect:index.do";
-             model.addAttribute("user_info",loginDomain);
-        }
-        return url;
-        
-    }//login
+	  @RequestMapping(value = "/login_process.do",method = POST)
+	    public String login(LoginVO loginVO, Model model) {
+	    
+	        MemberService mems=new MemberService();
+	        LoginDomain loginDomain=mems.login(loginVO);
+	        String url = "";
+	        if(loginDomain==null) {
+	             url = "member/login_form";
+	             model.addAttribute("login_flag","fail");
+	        } else {
+	             url = "redirect:index.do";
+	             model.addAttribute("user_info",loginDomain);
+	        }
+	        return url;
+	        
+	    }//login
     
     @RequestMapping(value="/join_clause.do", method = GET)
     public String joinForm() {

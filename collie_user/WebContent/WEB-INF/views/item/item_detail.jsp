@@ -8,12 +8,129 @@
 <title>Insert title here</title>
 <style type="text/css">
 #wrap{ min-height: 940px; margin: 0px auto; }
-#container{ min-height: 600px;}
+#container{ min-height: 600px; border-top: 1px solid #f4f4f4;}
 #containerContent{ width: 70%; display: flex; flex-direction:column; margin:0 auto;}
-.itemwrap{display: flex; flex-direction:row; align-items: center; }
+.itemwrap{display: flex; flex-direction:row; align-items: center; margin:0 auto; min-width: 700px}
 .imgdiv{width:30vw; height:400vh;}
-.infodiv{width:60vw; height:200vh  }
-.item_description {}
+#infoDiv{float: right;
+    width: 660px;
+    margin-top: 29px;
+    padding: 0px 10px 100px 10px; }
+#boder{padding-top: 10px}
+
+.item_description {
+	padding: 20px 40px 20px 40px;
+	font-size: 18px;
+    line-height: 32px;
+    color: #373737;
+	
+}
+.thum{padding: 20px 0px 0px 0px;
+}
+.thum img{width: 430px}
+.goods_name{float: right;
+    width: 560px;
+}
+.item_name{display: block;
+    padding-right: 10px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 34px;
+    word-break: break-all;
+    }
+.price{
+	font-weight: 700;
+    font-size: 28px;
+    line-height: 50px;
+    letter-spacing: -.5px;
+    word-break: break-all;
+}
+.goods_info{
+	float: right;
+    width: 560px;
+    margin-top: 10px;
+    padding-bottom: 19px;
+    border-top: 1px solid #f4f4f4;}
+    
+.goods_price .won{
+    padding: 0 7px 0 2px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 30px;
+    vertical-align: 2px;
+}
+dl {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+dd{
+word-break: break-all;
+}
+.tit_item{
+	float: left;
+    width: 150px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #666;
+    line-height: 20px;
+    letter-spacing: -.5px
+}
+.tit{
+	float: left;
+    width: 150px;
+    font-size: 17px;
+    color: #666;
+    line-height: 25px;
+    font-weight: 700;
+}
+
+.word{
+	margin-top: 28px;
+}
+.inp{
+	float: left;
+    width: 41px;
+    height: 24px;
+    padding: 0 0 2px;
+    border: 0;
+    background-color: #fff;
+    font-size: 14px;
+    color: #000;
+    line-height: 18px;
+    text-align: center;
+}
+.btn{
+	overflow: hidden;
+    position: relative;
+    float: left;
+    width: 22px;
+    height: 22px;
+    border: 0;
+    background: #f6f7f7;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+}
+.btn:after .btn:before{
+	content: "";
+    position: absolute;
+    left: 6px;
+    top: 10px;
+    width: 10px;
+    height: 2px;
+    background-color: #5f0080;
+}
+.up{
+    float: right;
+    border-left: 1px solid #dddfe1
+
+}
+
+#addBtn{text-align: center;
+}
 
 /* ==================리뷰=================== */
 #reviewTitleWrap{ margin-top: 100px; margin-bottom: 20px; display: flex; justify-content: center; flex-direction: column; align-items: center }
@@ -48,7 +165,7 @@
 
 .itemQnaBtnDivWrap{ display: flex; justify-content: center; }
 .itemQnaBtnDiv{ width: 70%; display: flex; justify-content: flex-end; }
-.collieBtnMain{ width: 130px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 20px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
+.collieBtnMain{ width: 240px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 20px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
 .paginationDiv{ margin-top: 50px }
 /* ==================아이템문의=================== */
 
@@ -203,21 +320,52 @@ function moveReviewPage(field_value, target_page){
 		<div id="containerContent">
 			<div id="itemwrap" class="itemwrap">
 				<c:set var="item" value="${item_detail}"/>	
+				<div class="thum">
 				<img src="http://localhost/collie_user/common/images/item/${item.item_img }">
+				</div>
 				<!-- 우측의 설명 -->
-				<div id="infodiv"> <!-- 이 div에 padding 잘 주면 옆에 띄우는거 할수잇을거얌!! 고마어1!서윗 전 그럼 이만...감자하빈다  -->
-					<c:out value="${item.item_name}"/><br/>
-					<c:out value="${item.item_price}"/><br/>
+				<div id="infoDiv"> 
+					<p class="goods_name">
+						<span class="item_name"><c:out value="${item.item_name}"/></span>
+					</p>
+					<p class="goods_name">
+						<span class="price"><c:out value="${item.item_price}"/></span>
+						<span class="won">원</span>
+					</p>
+					<div class="goods_info">
+					<dl id="boder">
+						<dt class="tit">판매단위 </dt>
+						<dd><c:out value="${item.item_unit}"/></dd>
+					</dl>
+					<dl>
+						<dt class="tit">중량/용량</dt>
+						<dd><c:out value="${item.item_weight}"/></dd>
+					</dl>
+					<dl>
+						<dt class="tit">안내사항 </dt>
+						<dd><c:out value="${item.item_guide}"/></dd>
+					</dl>
+					<dl>
+						<dt class="tit">재고</dt>
+						<dd><c:out value="${item.item_stock}"/>개<br/></dd>
+					</dl>
 					
-					판매단위 <c:out value="${item.item_unit}"/><br/>
-					중량/용량 <c:out value="${item.item_weight}"/><br/>
-					안내사항 <c:out value="${item.item_guide}"/><br/>
-					재고 <c:out value="${item.item_stock}"/><br/>
+						<span class="tit tit_item">구매수량</span>
+						<span class="count">
+							<button type="button" class="btn down"></button>
+							<input type="number" readonly="readonly" onfocus="this.blur()" class="inp">
+							<button type="button" class="btn up"></button>
+						</span>
+						
+						<span class="price">
+							<span class="dc_price"></span>
+						</span>
+					</div>	
 				</div>
 			</div>
 			
 			<!-- 장바구니 담기 : item_cnt의 value에 구매하려는 상품 개수의 값을 넣어주세요!! -->
-			<div>
+			<div id="addBtn">
 			<form id="addCartForm" name="addCartForm">
 				<input type="hidden" name="item_num" value="${ param.item_num }"/>
 				<input type="hidden" name="item_cnt" value="1"/>
@@ -227,10 +375,15 @@ function moveReviewPage(field_value, target_page){
 							
 			<!-- 하단의 설명 -->
 			<div class="item_description">
-				<c:out value="${item.item_title}"/><br/>
-				<c:out value="${item.item_subtitle}"/><br/>
+			
+			<h3 style="text-align: center"><small><c:out value="${item.item_title}"/><br/></small>
+				<c:out value="${item.item_subtitle}"/><br/></h3>
+				
+			<p class="word">
 				<c:out value="${item.item_detail}"/><br/>
+			</p>
 			</div>
+		</div>
 		</div>
 		
 		<div id="reviewWrap">

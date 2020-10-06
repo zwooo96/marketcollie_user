@@ -256,13 +256,48 @@ public class MypageController {
 		return "redirect:modify_pass_result.jsp";
 	}//checkPassForm
 	
+	/**
+	 * 문의 내역이 처음 불릴때 호출되는 method
+	 * @param model
+	 * @param ss
+	 * @return
+	 */
 	@RequestMapping(value = "/mypage/qna_list.do",method = {GET,POST})
 	public String qnaList(Model model,HttpSession ss) {
 		LoginDomain ldd = (LoginDomain)ss.getAttribute("user_info");
+		int member_num=ldd.getMember_num();
 		MypageService ms = new MypageService();
-		model.addAttribute("qna_list",ms.getQnaList(ldd.getMember_num()));
+		
+		RangeVO rVO=new RangeVO();
+		rVO.setField_name("member_num");
+		rVO.setField_value(member_num);
+		rVO.setTotal_cnt(ms.getQnaTotlCnt(member_num));
+		rVO.calcPaging();
+		
+		model.addAttribute("qna_list",ms.getQnaList(rVO));
+		model.addAttribute("paging", rVO);
 		
 		return "mypage/qna_list";
+	}
+	
+	/**
+	 * 페이지를 눌렀을때 호출되는 method
+	 * @param model
+	 * @param ss
+	 * @return
+	 */
+	@RequestMapping(value = "/mypage/qna_list_move_page.do",method = POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String moveQnaListPage(int current_page, Model model,HttpSession ss) throws NumberFormatException {
+		String json=null;
+		
+		LoginDomain ldd = (LoginDomain)ss.getAttribute("user_info");
+		int member_num=ldd.getMember_num();
+		
+		MypageService ms = new MypageService();
+		json=ms.moveQnaListPage(member_num, current_page);
+		
+		return json;
 	}
 	
 	@RequestMapping(value = "/mypage/qna_detail.do",method = GET, produces = "application/json;charset=UTF-8")

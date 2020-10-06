@@ -5,13 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마켓콜리</title>
 <style type="text/css">
 #wrap{ min-height: 940px; margin: 0px auto; }
 #container{ min-height: 600px;}
 #containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
 #containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
+#title{text-align: center; margin-top:80px; margin-bottom: 30px}
 
+.frmWarp{display: flex; justify-content: center; margin-top: 80px}
+#btnDiv{margin-top: 50px; text-align: center;}
+.collieBtnMain{ width: 340px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -26,6 +30,12 @@
 <script type="text/javascript">
 $(function(){
 	
+	$("#homeBtn").click(function() {
+		
+		location.href="../index.do";
+		
+	});//click
+	
 });//ready
 </script>
 </head>
@@ -35,19 +45,25 @@ $(function(){
 	
 	<jsp:include page="../common/header.jsp" />
 	<div id="container">
-	<div>
+	<div id="frmWarp">
 	<c:if test="${user_id eq true }">
-		입력하신 정보와 일치하는 아이디가 없습니다. 
-		다시 시도해주세요 
+	<h4 id="title">	입력하신 정보와 일치하는 아이디가 없습니다. 
+		다시 시도해주세요 </h4>
+	
+		<div id="btnDiv">
+			<input type="button" value="메인으로" id="homeBtn" class="collieBtnMain">	
+		</div>
 	</c:if>
 	</div>
-	<div>
-		${param.name}님의 아이디는 
+		<div id="frmWarp">
+	<h4 id="title">${param.name}님의 아이디는 
 	
-		<c:out value="${user_id }"/>입니다.	
-	</div>
+		<c:out value="${user_id }"/>입니다.</h4>
 
-	<a href="javascript:history.back()">뒤로</a>
+		<div id="btnDiv">
+			<input type="button" value="메인으로" id="homeBtn" class="collieBtnMain">	
+		</div>
+		</div>
 	</div>
 	
 	<jsp:include page="../common/footer.jsp" />

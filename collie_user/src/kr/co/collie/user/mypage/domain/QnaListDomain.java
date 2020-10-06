@@ -2,8 +2,16 @@ package kr.co.collie.user.mypage.domain;
 
 public class QnaListDomain {
 	
-	private int qna_num;
+	private int idx,qna_num;
 	private String qna_subject,qna_flag,input_date;
+	
+	
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
 	public int getQna_num() {
 		return qna_num;
 	}
