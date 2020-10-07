@@ -291,7 +291,9 @@ $(function(){
 	
 		if(document.joinFrm.selectEmail.options[document.joinFrm.selectEmail.selectedIndex].value == '0'){
 	
-		 document.joinFrm.email2.disabled = true;
+		// document.joinFrm.email2.disabled = true;
+		
+		 document.joinFrm.email2.readOnly = true;
 	
 		 document.joinFrm.email2.value = "";
 	
@@ -299,7 +301,9 @@ $(function(){
 	
 		if(document.joinFrm.selectEmail.options[document.joinFrm.selectEmail.selectedIndex].value == '9'){
 	
-		 document.joinFrm.email2.disabled = false;
+		// document.joinFrm.email2.disabled = false;
+		
+		 document.joinFrm.email2.readOnly = false;
 	
 		 document.joinFrm.email2.value = "";
 	
@@ -307,13 +311,14 @@ $(function(){
 	
 		} else{
 	
-		 document.joinFrm.email2.disabled = true;
+		// document.joinFrm.email2.disabled = true;
+		
+		 document.joinFrm.email2.readOnly = true;
 	
 		 document.joinFrm.email2.value = document.joinFrm.selectEmail.options[document.joinFrm.selectEmail.selectedIndex].value;
 	
 		}
 		
-		console.log("submit 이후 값 >>>>>>>>>>>>>>>> "+document.joinFrm.email2.value);
 		
 	}
 
@@ -409,7 +414,7 @@ function sample4_execDaumPostcode() {
 		      <input type="text" class="form-control" name="email" id="email" placeholder="이메일을 입력해주세요">&nbsp;@&nbsp;
 		     </div>
 		     <div class="form-group">
-		      <input type="text" class="form-control" name="email2" id="email2" disabled >
+		      <input type="text" class="form-control" name="email2" id="email2" readonly="readonly" >
 		     </div>
 		     <div class="form-group">
 			<select id="selectEmail" name="selectEmail" class="form-control" onchange="email_change()">
