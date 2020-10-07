@@ -139,7 +139,6 @@ public class MypageController {
 	public String memberInfoForm(HttpSession session) {	
 		
 		
-		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		 
 		return "mypage/modify_member_form";
 	}//memberInfoForm
@@ -148,7 +147,6 @@ public class MypageController {
 	@RequestMapping(value="/mypage/update_member.do", method=POST)
 	public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model, HttpServletRequest request) {
 		boolean flag = false;
-		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		
 		MypageService ms = new MypageService();
 		mmVO.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));
