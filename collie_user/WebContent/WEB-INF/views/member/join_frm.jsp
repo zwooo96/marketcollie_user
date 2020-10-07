@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="http://211.238.142.36/jsp_prj/common/css/main.css">
 <title>Insert title here</title>
 <style type="text/css">
-	#wrap{ width:900px; height:1200px; margin:0px auto; }
+	#wrap{ width:900px; min-height:1200px; margin:0px auto; }
 	#header{ width:900px; height:180px; }
 	#headerTop{ width:900px; height:140px; position:relative; background:#FFFFFF url("http://211.238.142.36/jsp_prj/common/images/header_bg.png") }
 	#mainText{ font-family: 고딕,godic,Sans-Serif; font-size:30px; font-weight:bold; width:140px; height:50px; margin:0px auto; padding-top:20px; }
@@ -29,7 +29,7 @@ $(function(){
 	
 	$("#chkId").click(function(){
 		var id = $("#id").val();
-	  if( id.length > 6 ){
+	  if( id.length > 5 ){
 			$.ajax({
 				url : "id_chk_ajax.do",
 				type : 'get',
@@ -42,18 +42,29 @@ $(function(){
 					
 					if ( json.id_dup_result ) {
 							// 아이디가 중복되는 문구
-							$("#id_check").html("중복된아이디");
+							$("#id_check").html("중복된 아이디 입니다.");
+							$("#dupId_check").html("<input type='hidden' value='off' id='dupId_chk'/>")
 						}else{
-							// 아이디가 중복되는 문구
-							$("#id_check").html("사용 가능한 아이디 입니다. ");
+ 							$("#id_check").html("사용 가능한 아이디 입니다. ");
+							$("#dupId_check").html("<input type='hidden' value='on' id='dupId_chk'/>")
 						}//end if
 					}//success
 				});//ajax
-	}//end if
+				
+	}else if( id.length < 6 && id.length > 0 ){
+		$("#id_check").html("아이디는 6자 이상만 가능합니다.");
+	}else if($("#id").val().trim()==""){
+		$("#id_check").html("아이디는 필수 정보입니다.");
+	}
 	});//click
 	
+	$("#id").focusout(function(){
+		$("#dupId_check").html("<input type='hidden' value='off' id='dupId_chk'/>")
+	})//focusout
+	
+	
 	$("#chkEmail").click(function(){
-			var email = $("#email").val();
+			var email = $("#email").val()+"@"+$("#email2").val();
 		if(email.length > 3){
 		$.ajax({
 			url : "email_chk_ajax.do",
@@ -66,116 +77,250 @@ $(function(){
 			success : function( jsonObj ){
 					if( jsonObj.email_dup_result ){
 						$("#email_chk").html(" 중복된 이메일 입니다. ");
+						$("#dupEmail_check").html("<input type='hidden' value='off' id='dupEmail_chk'/>");
 					}else{
-						$("#email_chk").html(" 사용 가능한 이메일 입니다. ")
+						$("#email_chk").html(" 사용 가능한 이메일 입니다. ");
+						$("#dupEmail_check").html("<input type='hidden' value='on' id='dupEmail_chk'/>");
 					}//end if
 				}//success
 			});//ajax
+		}else if($("#email").val().trim()==""){
+			$("#email_chk").html("이메일은 필수 정보입니다. ");
+			$("#dupEmail_check").html("<input type='hidden' value='off' id='dupEmail_chk'/>");
+		}else if($("#selectEmail").val().trim()==""){
+			$("#email_chk").html("이메일은 필수 정보입니다. ");
+			$("#dupEmail_check").html("<input type='hidden' value='off' id='dupEmail_chk'/>");
 		}//end if
 		});//click
+		
+		$("#email").focusout(function(){
+			$("#dupEmail_check").html("<input type='hidden' value='off' id='dupEmail_chk'/>");
+		})//focusout
+		
 		
 		$("#joinBtn").click(function(){
 			
 			if($("#id").val().trim()==""){
-				alert("아이디를 입력해 주세요");
+				$("#id_check").html("아이디는 필수 정보입니다.");
 				$("#id").focus();
 				return;
-			}
+			}else{
+				$("#id_check").html("");
+			}//end if
+			
+			if($("#id").val().length < 6 && $("#id").val().length > 0){
+				$("#id_check").html("아이디는 6자 이상만 가능합니다.");
+				$("#id").focus();
+				return;
+			}else{
+				$("#id_check").html("");
+			}//end if
 			
 			if($("#pass").val().trim()==""){
-				alert("비밀번호를 입력해주세요");
+				document.getElementById('checkPwd').style.color = "red";
+				$("#checkPwd").html("비밀번호는 필수 정보입니다.");
 				$("#pass").focus();
 				return;
-			}
+			}else{
+				$("#checkPwd").html("");
+			}//end if
 			
 		      if($("#pass").val().replace(/[0-9A-Za-z]/g, "") != ""){
-		          alert("비밀번호는 숫자 또는 영문(대,소문자)만 가능합니다.");
-		          $("#pass").val("");
+		    	  document.getElementById('checkPwd').style.color = "red";
+		    	  $("#checkPwd").html("비밀번호는 숫자 또는 영문(대,소문자)만 가능합니다.");
+		          $("#pass").focus();
 		          return;
-		       }
+		       }else{
+					$("#checkPwd").html("");
+				}//end if
 		      
 		      if($("#passCheck").val().trim()==""){
-					alert("비밀번호 확인칸을 입력해주세요");
+		    	  document.getElementById('checkPwd').style.color = "red";
+		    	  $("#checkPwd").html("비밀번호 확인칸을 입력해주세요");
 					$("#passCheck").focus();
 					return;
-				}
+				}else{
+					$("#checkPwd").html("");
+				}//end if
 				
 					var pass = ($("#pass").val());
 					var passCheck = ($("#passCheck").val());
 					
 				if(pass!=passCheck){
-					alert("비밀번호화 비밀번호확인이 일치하지 않습니다.");
+					 document.getElementById('checkPwd').style.color = "red";
+					 document.getElementById('checkPwd').innerHTML = "동일한 비밀번호를 입력하세요.";
+					$("#passCheck").focus();
 					return;
-				}
+				}else{
+					$("#checkPwd").html("");
+				}//end if
 		      
 		      if($("#name").val().trim()==""){
-					alert("이름을 입력해주세요");
+		    	  $("#nameCheck").html("이름을 입력해주세요");
 					$("#name").focus();
 					return;
-				}
+				}else{
+					$("#nameCheck").html("");
+				}//end if
 		      
 		      if($("#name").val().replace(/[ㄱ-힣]/g, "") != ""){
-		          alert("이름은 한글만 가능합니다");
+		    	  $("#nameCheck").html("이름은 한글만 입력 가능합니다.");
 		          $("#name").val("");
+		          $("#name").focus();
 		          return;
-		       }
+		       }else{
+					$("#nameCheck").html("");
+				}//end if
 		
 			if($("#email").val().trim()==""){
-				alert("이메일을 입력해주세요");
+				$("#email_chk").html(" 이메일은 필수 정보입니다. ");
+				$("#dupEmail_check").html("<input type='hidden' value='off' id='dupEmail_chk'/>");
 				$("#email").focus();
 				return;
-			}
+			}else{
+				$("#email_chk").html("");
+			}//end if
+			
+			if($("#selectEmail").val().trim() == ""){
+				$("#email_chk").html(" 이메일은 필수 정보입니다. ");
+				$("#dupEmail_check").html("<input type='hidden' value='off' id='dupEmail_chk'/>");
+				$("#email").focus();
+				return;
+			}else{
+				$("#email_chk").html("");
+			}//end if
 			
 			if($("#phone1").val().trim()==""){
-				alert("연락처를 입력해주세요");
+				$("#phoneCheck").html("연락처를 입력해주세요.");
+				$("#phone1").focus();
 				return;
-			}
+			}else{
+				$("#phoneCheck").html("");
+			}//end if
 			
 			if($("#phone2").val().trim()==""){
-				alert("연락처를 입력해주세요");
+				$("#phoneCheck").html("연락처를 입력해주세요.");
+				$("#phone2").focus();
 				return;
-			}
+			}else{
+				$("#phoneCheck").html("");
+			}//end if
 			
 			if($("#phone3").val().trim()==""){
-				alert("연락처를 입력해주세요");
+				$("#phoneCheck").html("연락처를 입력해주세요.");
+				$("#phone3").focus();
 				return;
-			}
+			}else{
+				$("#phoneCheck").html("");
+			}//end if
 			
 			if($("#phone1").val().replace(/[0-9]/g, "") != ""){
-		          alert("연락처는 숫자만 입력 가능합니다.");
+				$("#phoneCheck").html("연락처는 숫자만 입력 가능합니다.");
+				$("#phone1").focus();
 		          $("#phone1").val("");
 		          return;
-		       }
+		       }else{
+					$("#phoneCheck").html("");
+				}//end if
 			
 			if($("#phone2").val().replace(/[0-9]/g, "") != ""){
-		          alert("연락처는 숫자만 입력 가능합니다.");
+				$("#phoneCheck").html("연락처는 숫자만 입력 가능합니다.");
+				$("#phone1").focus();
 		          $("#phone2").val("");
 		          return;
-		       }
+		       }else{
+					$("#phoneCheck").html("");
+				}//end if
 			
 			if($("#phone3").val().replace(/[0-9]/g, "") != ""){
-		          alert("연락처는 숫자만 입력 가능합니다.");
+				$("#phoneCheck").html("연락처는 숫자만 입력 가능합니다.");
+				$("#phone1").focus();
 		          $("#phone3").val("");
 		          return;
-		       }
+		       }else{
+					$("#phoneCheck").html("");
+				}//end if
 			
 			if($("#addr").val().trim()==""){
-				alert("주소를 입력해 주세요");
+				$("#addrCheck").html("주소는 필수 정보 입니다.");
 				$("#addr").focus();
+				return;
+			}else{
+				$("#addrCheck").html("");
+			}//end if
+			
+			if($("#addr_detail").val().trim()==""){
+				$("#addrCheck").html("주소는 필수 정보 입니다.");
+				$("#addr_detail").focus();
+				return;
+			}else{
+				$("#addrCheck").html("");
+			}//end if
+			
+			if($("#dupId_chk").val()=="off"){
+				$("#id").focus();
 				return;
 			}
 			
-			if($("#addr_detail").val().trim()==""){
-				alert("상세주소를 입력해 주세요");
-				$("#addr_detail").focus();
+			if($("#dupEmail_chk").val()=="off"){
+				$("#email").focus();
 				return;
 			}
 			
 			
 			$("#joinFrm").submit();
 		});//click
-	
+		
 });//ready
+
+	function checkPwd(){
+		var pass1 = $("#pass").val();
+		var pass2 = $("#passCheck").val();
+		
+		if(pass1 != pass2){
+			   document.getElementById('checkPwd').style.color = "red";
+			   document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요.";
+		 }else{
+			   document.getElementById('checkPwd').style.color = "black";
+			   document.getElementById('checkPwd').innerHTML = "";
+		 }
+		 
+	}//chkPwd
+
+	function email_change(){
+	
+		if(document.joinFrm.selectEmail.options[document.joinFrm.selectEmail.selectedIndex].value == '0'){
+	
+		// document.joinFrm.email2.disabled = true;
+		
+		 document.joinFrm.email2.readOnly = true;
+	
+		 document.joinFrm.email2.value = "";
+	
+		}
+	
+		if(document.joinFrm.selectEmail.options[document.joinFrm.selectEmail.selectedIndex].value == '9'){
+	
+		// document.joinFrm.email2.disabled = false;
+		
+		 document.joinFrm.email2.readOnly = false;
+	
+		 document.joinFrm.email2.value = "";
+	
+		 document.joinFrm.email2.focus();
+	
+		} else{
+	
+		// document.joinFrm.email2.disabled = true;
+		
+		 document.joinFrm.email2.readOnly = true;
+	
+		 document.joinFrm.email2.value = document.joinFrm.selectEmail.options[document.joinFrm.selectEmail.selectedIndex].value;
+	
+		}
+		
+		
+	}
 
 function sample4_execDaumPostcode() {
     new daum.Postcode({
@@ -219,8 +364,6 @@ function sample4_execDaumPostcode() {
     }).open();
 }
 
-	
-
 </script>
 </head>
 <body>
@@ -235,7 +378,7 @@ function sample4_execDaumPostcode() {
 	<div></div>
 	
 	
-	<form action="join_process.do" method="post" id="joinFrm">
+	<form action="join_process.do" method="post" id="joinFrm" name="joinFrm">
 		<div class="form-row" style="margin-top: 20px">
 		    <div class="form-group col-md-6">
 		      <label for="inputEmail4">아이디</label>
@@ -244,6 +387,7 @@ function sample4_execDaumPostcode() {
 		    <input type="button" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black; " id="chkId" value="중복확인"/>
 	    </div>
 	    <div id="id_check" style="color: red;"> </div>
+	    <div id="dupId_check"></div>
 	    <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">비밀번호</label>
@@ -253,23 +397,42 @@ function sample4_execDaumPostcode() {
 	    <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">비밀번호 확인</label>
-		      <input type="password" class="form-control" id="passCheck" placeholder="비밀번호를 한번 더 입력해주세요" maxlength="10" >
+		      <input type="password" class="form-control" id="passCheck" name="passCheck" onchange="checkPwd()" placeholder="비밀번호를 한번 더 입력해주세요" maxlength="10" />
 		    </div>
 	  	</div>
+	  	 <div id="checkPwd"></div>
 	    <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">이름</label>
 		      <input type="email" class="form-control" name="name" id="name" placeholder="이름을 입력해주세요">
 		    </div>
 	  	</div>
-	    <div class="form-row">
-		    <div class="form-group col-md-6">
-		      <label for="inputPassword4">이메일</label>
-		      <input type="email" class="form-control" name="email" id="email" placeholder="예:collie@collie.com">
+	  	<div id="nameCheck" style="color: red;"> </div>
+		 <label for="inputPassword4">이메일</label><br/>
+		    <div class="form-inline">
+		   	 <div class="form-group">
+		      <input type="text" class="form-control" name="email" id="email" placeholder="이메일을 입력해주세요">&nbsp;@&nbsp;
+		     </div>
+		     <div class="form-group">
+		      <input type="text" class="form-control" name="email2" id="email2" readonly="readonly" >
+		     </div>
+		     <div class="form-group">
+			<select id="selectEmail" name="selectEmail" class="form-control" onchange="email_change()">
+			    <option value="0">메일선택</option>
+			    <option value="naver.com">naver.com</option>
+			    <option value="daum.net">daum.com</option>
+			    <option value="gmail.com">gmail.com</option>
+			    <option value="nate.com">nate.com</option>
+			    <option value="9">직접입력</option>
+			</select>
 		    </div>
-		    <input type="button" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black;" id="chkEmail" value="중복확인"/>
+		    <div class="form-group">
+		   	 <input type="button" style="height:36px; margin-left: 10px; background-color: white; color: black;" id="chkEmail" value="중복확인"/>
+		    </div>
 	  	</div>
 	  	<div id="email_chk" style="color: red"></div>
+	  	<div id="dupEmail_check"></div>
+	  	
 		 <label for="inputPassword4">휴대전화</label><br/>
 	  	<div class="form-inline">
 		  	<div class="form-group">
@@ -284,6 +447,7 @@ function sample4_execDaumPostcode() {
 				<input type="email" class="form-control" style="width: 100px"  id="phone3" maxlength="4" name="phone3">
 			</div>
 	  	</div>
+	  	<div id="phoneCheck" style="color: red;"> </div>
 	  	<br/>
 	  	<div class="form-row">
 		    <div class="form-group col-md-6">
@@ -304,6 +468,7 @@ function sample4_execDaumPostcode() {
 		      <input type="email" class="form-control" name="addr_detail" id="addr_detail">
 		    </div>
 	  	</div>
+	  	<div id="addrCheck" style="color: red;"> </div>
 	    <div style="text-align: center ; margin-top: 30px"><button type="button" class="btn btn-primary" style="zoom:1.2; background-color: white; color: black; border-color: black;" value="회원가입" id="joinBtn">회원가입</button></div>
 	  </form>
   	</div>

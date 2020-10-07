@@ -8,14 +8,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.member.service.MemberService;
@@ -71,6 +67,7 @@ public class MemberController {
     public String join(JoinVO jVO, HttpServletRequest request) {
         MemberService ms = new MemberService();
         
+        jVO.setEmail(request.getParameter("email")+"@"+request.getParameter("email2"));
         jVO.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));
         jVO.setIp(request.getRemoteAddr());
         

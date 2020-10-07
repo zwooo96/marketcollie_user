@@ -218,13 +218,14 @@ function sample4_execDaumPostcode() {
 			    </div>
 		  	</div>
 				<div style="margin-left: 350px;">
-					<input type="button"  value="탈퇴하기" id="removeBtn"  style="background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 150px; padding: 15px; color: white" />
-					 <input type="button" value="회원정보 수정" id="modifyBtn" style="background-color: #17462B; margin-left:150px ; border-color: #17462B; margin-top:20px; margin:0px auto; width: 150px; padding: 15px; color: white">
+					<input type="button"  class="btn-primary" value="탈퇴하기" id="removeBtn"  style="background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 150px; padding: 15px; color: white" />
+					 <input type="button" class="btn-primary" value="회원정보 수정" id="modifyBtn" style="background-color: #17462B; border-color: #17462B; margin-left:150px ; margin-top:20px; margin:0px auto; width: 150px; padding: 15px; color: white">
 				</div> 
 		    </form>
 				</div>
 			</div>
 		</div>
+		
 	<jsp:include page="../common/footer.jsp" />
 	</div>
 
