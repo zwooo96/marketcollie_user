@@ -183,10 +183,20 @@ public class MypageDAO {
 		return cnt;
 	}//updateMemberPass
 	
-	public List<QnaListDomain> selectQnaList(int member_num){
+	public int selectQnaTotalCnt(int memberNum) {
+		int cnt=0;
+		
+		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();
+		cnt=ss.selectOne("selectQnaTotalCnt", memberNum);
+		ss.close();
+		
+		return cnt;
+	}//selectQnaTotalCnt
+	
+	public List<QnaListDomain> selectQnaList(RangeVO rVO){
 		List<QnaListDomain> list = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		list = ss.selectList("selectQnaList",member_num);
+		list = ss.selectList("selectQnaList",rVO);
 		ss.close();
 		
 		return list;

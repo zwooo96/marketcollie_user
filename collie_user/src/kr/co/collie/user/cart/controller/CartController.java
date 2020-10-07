@@ -22,7 +22,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import java.sql.SQLException;
 import java.util.List;
 
-@SessionAttributes({"item_num", "item_cnt"})
 @Controller
 public class CartController {
 	
@@ -32,20 +31,13 @@ public class CartController {
 	 * @param cVO
 	 * @return
 	 */
-	@RequestMapping(value="/item/cart.do", method=GET)
-	public String addCart(HttpSession session, CartVO cVO) {
+	@RequestMapping(value="/item/cart.do", method=POST)
+	@ResponseBody
+	public void addCart(HttpSession session, CartVO cVO) {
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		cVO.setMember_num(ld.getMember_num());
 		CartService cs = new CartService();
 		cs.addCart(cVO);
-		
-//		//장바구니로 이동할 것인지 상품상세에 계속 남아있을 것인지 결정할 수 있도록 해야함
-//		if( "t".equals(move_flag) ) {
-//			String url = "cart/view.do";
-//		}//end if
-//		if( "f".equals(move_flag) ) {
-//			String url = "item/item_detail.do?item_num="+item_num;
-//		}//end if
-		
-		return "forward:cart/view.do";
 	}//addCart
 	
 	@RequestMapping(value="/cart/view.do", method=GET)
@@ -104,16 +96,18 @@ public class CartController {
 		int orderNum=0;
 		
 		LoginDomain lDomain=(LoginDomain)session.getAttribute("user_info");
-		oVO.setMember_num(lDomain.getMember_num());
-		
-		try {
-			orderNum=new CartService().orderItem(oVO);
-		} catch (SQLException e) {
-			url="err/order_err";
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("order_num", orderNum);
+		if( lDomain!=null && lDomain.getMember_num()!=0 ){
+			oVO.setMember_num(lDomain.getMember_num());
+			
+			try {
+				orderNum=new CartService().orderItem(oVO);
+			} catch (SQLException e) {
+				url="err/order_err";
+				e.printStackTrace();
+			}
+			
+			model.addAttribute("order_num", orderNum);
+		}//end if
 		
 		return url;
 	}//order

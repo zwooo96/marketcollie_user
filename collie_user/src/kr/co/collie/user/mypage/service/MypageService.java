@@ -210,12 +210,68 @@ public class MypageService {
 		
 	}//removeMember
 	
-	public List<QnaListDomain> getQnaList(int member_num){
-		List<QnaListDomain> list = null;
+	public int getQnaTotlCnt(int member_num) {
+		int cnt=0;
+		
 		MypageDAO mpDAO = MypageDAO.getInstance();
-		list = mpDAO.selectQnaList(member_num);
+		cnt=mpDAO.selectQnaTotalCnt(member_num);
+		
+		return cnt;
+	}//getQnaTotalCnt
+	
+	public List<QnaListDomain> getQnaList(RangeVO rVO){
+		List<QnaListDomain> list = null;
+		
+		MypageDAO mpDAO = MypageDAO.getInstance();
+		list = mpDAO.selectQnaList(rVO);
+		
 		return list;
 	}//getQnaList
+	
+	public String moveQnaListPage(int member_num, int current_page) {
+		JSONObject json=new JSONObject();
+		List<QnaListDomain> list = null;
+		
+		MypageDAO mpDAO = MypageDAO.getInstance();
+		
+		RangeVO rVO=new RangeVO();
+		rVO.setField_name("member_num");
+		rVO.setField_value(member_num);
+		rVO.setCurrent_page(current_page);
+		rVO.setTotal_cnt(mpDAO.selectQnaTotalCnt(member_num));
+		rVO.calcPaging();
+		
+		list = mpDAO.selectQnaList(rVO);
+		String flag="fail";
+		if(list!=null) {
+			flag="success";
+			JSONArray jsonArr=new JSONArray();
+			JSONObject jsonObj=null;
+			for(int i=0; i<list.size(); i++) {
+				//idx, qna_num;
+				//qna_subject,qna_flag,input_date;
+				jsonObj=new JSONObject();
+				jsonObj.put("idx", list.get(i).getIdx());
+				jsonObj.put("qna_num", list.get(i).getQna_num());
+				jsonObj.put("qna_subject", list.get(i).getQna_subject());
+				jsonObj.put("qna_flag", list.get(i).getQna_flag());
+				jsonObj.put("input_date", list.get(i).getInput_date());
+				jsonArr.add(jsonObj);
+			}//end for
+			json.put("qna_list", jsonArr);
+			
+			json.put("pre_page", rVO.getPre_page());
+			json.put("start_page", rVO.getStart_page());
+			json.put("end_page", rVO.getEnd_page());
+			json.put("current_page", rVO.getCurrent_page());
+			json.put("total_page", rVO.getTotal_page());
+			json.put("next_page", rVO.getNext_page());
+		}//end if
+		json.put("flag", flag);
+		
+		
+		return json.toJSONString();
+	}//moveQnaListPage
 	
 
 	public String getQnaDetail(QnaVO qVO) {

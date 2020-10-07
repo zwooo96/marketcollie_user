@@ -5,13 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마켓콜리</title>
 <style type="text/css">
-#wrap{ min-height: 940px; margin: 0px auto; }
-#container{ min-height: 600px;}
-#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
-#containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
-.qnaBtn{width: 100px; height: 100px; margin-left: 25px; margin-bottom: 25px}
+#wrap{ min-height: 1240px; margin: 0px auto; }
+#container{ min-height: 800px;}
+
+#titwrap{display: flex; justify-content: center; }
+#title{text-align: center;}
+#address{text-align: right; }
+.frmWarp{ display: flex; justify-content: center; min-height: 600px}
+
+
+.form{font-size: 15px; height: 50px; margin-bottom: 50px}
+
+#btnDiv{margin-top: 300px; margin-bottom:30px; align-items: center; text-align: center;}
+.collieBtnMain{width: 140px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
 
 </style>
 
@@ -35,17 +43,29 @@ $(function(){
 <div id="wrap">
 	
 	<c:import url="/header.do" />
-	<div id="container">
-		1:1문의 <br/>
-		email : collie@gmail.com
-		<form action="qna_process.do" method="post">
-		<label>제목</label><br/>
-			<input type="text" name="qna_subject"><br/>
-		<label>내용</label><br/>
-			<textarea name="qna_content" cols="50" rows="10"></textarea><br/>
-			<button type="submit" style="widows: 100px" id="qnaBtn">등록</button>
-	</form>
 	
+	<div id="container">
+	
+		<div class="frmWarp">
+			<form action="qna_process.do" method="post">
+				<div class="inputBox">
+						<h3 id="title">1:1문의</h3><br/>
+						<h6 id="address"> email : collie@gmail.com</h6><br/>
+					<div class="form">
+					<label>제목</label><br/>
+						<input type="text" name="qna_subject" class="form-control" style="height: 50px"><br/>
+					</div>
+					<div class="form">
+					<label>내용</label><br/>
+						<textarea name="qna_content" class="form-control" cols="50" rows="10"></textarea><br/>
+					</div>
+					
+				</div>
+					<div id="btnDiv">
+						<button type="button" style="widows: 100px" id="qnaBtn" class="collieBtnMain">등록</button>
+					</div>
+			</form>
+		</div>
 	</div>
 	
 	<jsp:include page="../common/footer.jsp" />

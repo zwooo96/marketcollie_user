@@ -1,5 +1,6 @@
 package kr.co.collie.user.item.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -12,6 +13,7 @@ import kr.co.collie.user.item.domain.ItemQnaDetailDomain;
 import kr.co.collie.user.item.domain.ItemQnaDomain;
 import kr.co.collie.user.item.domain.ReviewDomain;
 import kr.co.collie.user.item.vo.ItemQnaListVO;
+import kr.co.collie.user.item.vo.ItemQnaVO;
 import kr.co.collie.user.item.vo.ReviewDetailVO;
 import kr.co.collie.user.item.vo.ReviewFlagVO;
 import kr.co.collie.user.item.vo.ReviewVO;
@@ -57,6 +59,7 @@ public class ItemService {
 		jo.put("end_page", rVO.getEnd_page());
 		jo.put("pre_page", rVO.getPre_page());
 		jo.put("next_page", rVO.getNext_page());
+		jo.put("current_page", rVO.getCurrent_page());
 		
 		JSONArray ja = new JSONArray();
 		JSONObject jsonTemp = null;
@@ -197,6 +200,53 @@ public class ItemService {
 		return list;
 	}//getItemQnaList
 	
+	public String getItemQnaMovePage(ItemQnaListVO iqlVO, int currentPage){
+		JSONObject json=new JSONObject();
+		
+		ItemDAO iDAO=ItemDAO.getInstance();
+		
+		int totalCnt=iDAO.selectItemQnaCnt(iqlVO.getItem_num());
+		RangeVO rVO=new RangeVO();
+		rVO.setTotal_cnt(totalCnt);
+		rVO.setCurrent_page(currentPage);
+		rVO.setPage_scale(1);
+		rVO.calcPaging();
+		
+		iqlVO.setStart_num( rVO.getStart_num() );
+		iqlVO.setEnd_num( rVO.getEnd_num() );
+		List<ItemQnaDomain> list=iDAO.selectItemQnaList(iqlVO);
+		
+		String flag="fail";
+		if(list!=null) {
+			flag="success";
+			
+			JSONArray jsonArr=new JSONArray();
+			JSONObject jsonObj=null;
+			for(int i=0; i<list.size(); i++) {
+				jsonObj=new JSONObject();
+				jsonObj.put("idx", list.get(i).getIdx());
+				jsonObj.put("item_qna_num", list.get(i).getItem_qna_num());
+				jsonObj.put("id", list.get(i).getId());
+				jsonObj.put("item_qna_subject", list.get(i).getItem_qna_subject());
+				jsonObj.put("item_qna_flag", list.get(i).getItem_qna_flag());
+				jsonObj.put("input_date", list.get(i).getInput_date());
+				jsonArr.add(jsonObj);
+			}//end for
+			json.put("qna_list", jsonArr);
+			
+			json.put("current_page",rVO.getCurrent_page());
+			json.put("pre_page",rVO.getPre_page());
+			json.put("next_page",rVO.getNext_page());
+			json.put("start_page",rVO.getStart_page());
+			json.put("end_page",rVO.getEnd_page());
+			json.put("total_page",rVO.getTotal_page());
+		}//end if
+		json.put("flag", flag);
+		
+		
+		return json.toJSONString();
+	}//getItemQnaList
+	
 	public String getItemQnaDetail(int itemQnaNum) {
 		JSONObject json=new JSONObject();
 		
@@ -213,4 +263,25 @@ public class ItemService {
 		
 		return json.toString();
 	}//getItemQnaDetail
+	
+	public int getItemQnaCnt(int itemNum) {
+		int cnt=0;
+		
+		cnt=ItemDAO.getInstance().selectItemQnaCnt(itemNum);
+		
+		return cnt;
+	}//getItemQnaCnt
+	
+	public boolean addItemQna(ItemQnaVO iqVO) {
+		boolean flag=false;
+		
+		try {
+			ItemDAO.getInstance().insertItemQna(iqVO);
+			flag=true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}//end catch
+		
+		return flag;
+	}//addItemQna
 }

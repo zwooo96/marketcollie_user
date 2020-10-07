@@ -80,6 +80,12 @@ border-color: #17462B; }
 <!-- Daum API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
+
+if(${ empty sessionScope.user_info }){
+	alert("로그인 후 이용 가능합니다.");
+	location.href="index.do";
+}//end else
+
 $(function(){
 	
 	var phone="${ user_info.phone }";

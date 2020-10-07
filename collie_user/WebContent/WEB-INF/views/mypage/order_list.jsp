@@ -82,10 +82,23 @@ function movePage(target_page){
 				output += '</div>';
 				output += '<div id="orderGoods">';
 				output += '<table class="table table-borderless">';
-				output += '<tr><td colspan="4" id="goodsTitle">'+ list.item_name + '</td></tr>';
+				
+				if( list.item_name.search(',') > 0 ){
+					var otherOrder = list.item_name.split(',').length-1;
+					output += '<tr><td colspan="4" id="goodsTitle">'+ list.item_name.split(',')[0] + ' 외 ' + otherOrder +'건</td></tr>';
+				}else{
+					output += '<tr><td colspan="4" id="goodsTitle">'+ list.item_name + '</td></tr>';
+				}//end else
+				
 				output += '<tr id="orderNum">';
 				output += '<td rowspan="2" id="goodsImg">';
-				output += '<img src="http://localhost/collie_user/common/images/item/'+list.item_img+'" id="goodsThm"/></td>';
+				
+				if( list.item_name.search(',') > 0 ){
+					output += '<img src="http://localhost/collie_user/common/images/item/'+list.item_img.split(',')[0]+'" id="goodsThm"/></td>';
+				}else{
+					output += '<img src="http://localhost/collie_user/common/images/item/'+list.item_img+'" id="goodsThm"/></td>';
+				}//end else
+				
 				output += '<td id="orderNumColumn">주문번호</td>';
 				output += '<td id="orderNumValue"><strong>' + list.order_num + '</strong></td>';
 				output += '<td rowspan="2" id="goodsBtn">';
@@ -94,7 +107,7 @@ function movePage(target_page){
 				output += '<td id="orderPriceColumn">결제금액</td>';
 				output += '<td id="orderPriceValue"><strong>';
 				
-				var total_price = list.total_price;
+				var total_price = list.total_price + 2500;
 				output += total_price.toLocaleString();
 				
 				output += '원</strong></td>';
@@ -169,12 +182,20 @@ function movePage(target_page){
 				</div>
 				<div id="orderGoods">
 				<table class="table table-borderless">
-				    <tr>
-				      <td colspan="4" id="goodsTitle">${ old.item_name }</td>
-				    </tr>
+					<c:if test="${ not fn:contains(old.item_name, ',') }">
+					    <tr><td colspan="4" id="goodsTitle">${ old.item_name }</td></tr>
+					</c:if>
+					<c:if test="${ fn:contains(old.item_name, ',') }">
+					    <tr><td colspan="4" id="goodsTitle">${ fn:split(old.item_name, ',')[0] } 외 ${ fn:length(fn:split(old.item_name, ','))-1 }건</td></tr>
+					</c:if>
 				    <tr id="orderNum">
 				      <td rowspan="2" id="goodsImg">
-				      	<img src="http://localhost/collie_user/common/images/item/${ old.item_img }" id="goodsThm"/>
+						<c:if test="${ not fn:contains(old.item_name, ',') }">
+					      	<img src="http://localhost/collie_user/common/images/item/${ old.item_img }" id="goodsThm"/>
+						</c:if>
+						<c:if test="${ fn:contains(old.item_name, ',') }">
+					      	<img src="http://localhost/collie_user/common/images/item/${ fn:split(old.item_img, ',')[0] }" id="goodsThm"/>
+						</c:if>
 				      </td>
 				      <td id="orderNumColumn">주문번호</td>
 				      <td id="orderNumValue"><strong>${ old.order_num }</strong></td>
@@ -184,7 +205,7 @@ function movePage(target_page){
 				    </tr>
 				    <tr id="orderPrice">
 				      <td id="orderPriceColumn">결제금액</td>
-				      <td id="orderPriceValue"><strong><fmt:formatNumber value="${ old.total_price }" pattern="#,###"/>원</strong></td>
+				      <td id="orderPriceValue"><strong><fmt:formatNumber value="${ old.total_price + 2500 }" pattern="#,###"/>원</strong></td>
 				    </tr>
 				</table>
 				</div>

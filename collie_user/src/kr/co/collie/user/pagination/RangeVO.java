@@ -126,6 +126,14 @@ public class RangeVO {
 	public void setNext_page(int next_page) {
 		this.next_page = next_page;
 	}
+	
+	public int getTotal_page() {
+		return total_page;
+	}
+
+	public void setTotal_page(int total_page) {
+		this.total_page = total_page;
+	}
 
 	public void calcPaging() {
 		

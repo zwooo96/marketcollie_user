@@ -4,19 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-#wrap{ min-height: 940px; margin: 0px auto; }
-#container{ min-height: 600px;}
-#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
-#containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
+<title>마켓콜리</title>
 
-</style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
 
+<style type="text/css">
+#wrap{ min-height: 940px; margin: 0px auto; }
+#container{ min-height: 600px;}
+
+#findDiv{width: 100%; min-height: 500px; margin-top: 20px}
+#title{text-align: center; margin-bottom: 30px}
+
+.frmWarp{display: flex; justify-content: center;}
+.form{font-size: 15px; height: 90px;}
+
+#btnDiv{margin-top: 20px}
+.collieBtnMain{ width: 340px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
+</style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
@@ -27,29 +34,41 @@ $(function(){
 	
 });//ready
 </script>
+
+
 </head>
 <body style="font-family: nanumbarungothic">
 
 <div id="wrap">
 	
 	<jsp:include page="../common/header.jsp" />
+	
 	<div id="container">
-	
-	비밀번호 확인 
-	
-	<form action="find_pass_process.do" method="post">
-	<label>이름</label>
-	<input type="text" name="name">
-	<label>아이디</label>
-	<input type="text" name="id">
-	<label>이메일</label>
-	<input type="text" name="email">
-	<button type="submit" style="widows: 100px" id="loginBtn">찾기</button>
-	</form>
-	
-	
+		<div id="findDiv">
+		<h3 id="title">비밀번호 찾기</h3>
+		
+		<div class="frmWarp">
+			<form action="find_pass_process.do" method="post">
+				<div class="form">
+					<label>이름</label><br/>
+						<input type="text" class="form-control" name="name" style="height: 50px"><br/>
+					</div>
+					<div class="form">
+					<label>아이디</label><br/>
+						<input type="text" class="form-control" name="id" style="height: 50px"><br/>
+					</div>
+					<div class="form">
+					<label>이메일</label><br/>
+						<input type="text" class="form-control" name="email" style="height: 50px"><br/>
+					</div>
+				
+				<div id="btnDiv">
+					<button type="submit" style="widows: 100px" id="loginBtn" class="collieBtnMain">찾기</button>
+				</div>
+			</form>
+		</div>
 	</div>
-	
+ </div>	
 	<jsp:include page="../common/footer.jsp" />
 	
 </div>

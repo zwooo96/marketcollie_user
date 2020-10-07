@@ -2,6 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript">
+function writeReview(item_num) {
+	var buyFlag = '<c:out value="${ buyFlag }"/>';
+	if( buyFlag == 'false' ){
+		alert("상품을 구입하신 분만 후기 작성이 가능합니다.");
+		return;
+	}//end if
+	location.href="review_form.do?item_num="+item_num;
+}//writeReview
+</script>
 
 <div id="reviewTitleWrap">
 	<div id="reviewTitleColumn">

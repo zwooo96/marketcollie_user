@@ -9,8 +9,11 @@
 <style type="text/css">
 #wrap{ min-height: 940px; margin: 0px auto; }
 #container{ min-height: 600px;}
-#containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
-#containerContent{ width: 70%; display: flex; align-items: center; justify-content: space-between; }
+
+#msgWarp{margin-top: 80px; display: flex; justify-content: center;}
+
+#btnDiv{margin-top: 20px; align-items: center;}
+.collieBtnMain{ width: 140px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
 
 </style>
 
@@ -27,6 +30,13 @@
 $(function(){
 	
 });//ready
+	
+	$("#goHome").click(function() {
+		
+		location.href="index.do";
+		
+	});//click
+
 </script>
 </head>
 <body style="font-family: nanumbarungothic">
@@ -36,10 +46,13 @@ $(function(){
 	<c:import url="/header.do" />
 	<div id="container">
 		
-		문의가 등록되었습니다.
+	<div class="msgWarp">
+	<h3>문의가 등록되었습니다.</h3>
+	</div>	
 		
-		
-	<a href="javascript:history.back()">뒤로</a>
+	<div id="btnDiv">
+		<button type="button" class="collieBtnMain" onclick="goHome()">메인으로</button>
+	</div>	
 	</div>
 	
 	<jsp:include page="../common/footer.jsp" />

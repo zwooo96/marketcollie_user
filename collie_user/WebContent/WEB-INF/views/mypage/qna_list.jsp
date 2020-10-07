@@ -18,19 +18,12 @@
 .table-bordered{ width: 200px; text-align: left; margin-top: 30px; color: #666666; font-size: 15px; }
 .table-bordered td:hover{ background-color: #F7F7F7; color: #17462B }
 .table-bordered td{ cursor: pointer; }
-#qnaBox{ background-color: #F7F7F7; color: #666666; padding: 10px; font-size: 13px; padding-left: 20px }
-#qnaBox:hover{ cursor: pointer; }
-#cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
 #contentWrap{ margin-left: 240px }
 #containerSubTitle{ border-bottom: 1px solid #333; margin-top: 30px; padding-bottom: 0px; color: #666666 }
 #containerContent{ margin-top: 90px; display:flex; align-items: center; justify-content: center;}
 #passForm{ width: 620px; margin: 0px auto }
 .col-form-label{ padding-right: 0px; padding-left: 50px }
-#pass{ width:300px;  padding: 0px; margin-left: 60px }
 hr{ margin-top: 90px }
-.btn-primary{ background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 250px; padding: 15px  }
-.btn-primary:hover, .btn-primary:active, .btn-primary:focus{ background-color: #17462B !important; }
-#btnDiv{ width: 250px; margin: 0px auto }
 
 .qnaTab{ width: 90% }
 .tableContent{ text-align: center; }
@@ -40,13 +33,22 @@ hr{ margin-top: 90px }
     border-top: 2px solid #17462B !important;
     border-bottom: 2px solid #bebebe !important;
 }
+.qnaSubTd{
+    border-top: 2px solid #17462B !important;
+    border-bottom: 2px solid #bebebe !important;
+    padding: 30px 0px 30px 0px;
+    cursor: pointer;
+}
+
 .qnaTabTd{
     border-top: 2px solid #17462B !important;
     border-bottom: 2px solid #bebebe !important;
     padding: 30px 0px 30px 0px;
+    cursor: pointer; 
 }
-a, a:hover{ color: #000000; text-decoration: none }
 
+a, a:hover{ color: #000000; text-decoration: none }
+.pagination{ margin-left: 180px; margin-top: 30px; }
 
 </style>
 <!-- Google CDN -->
@@ -58,6 +60,112 @@ a, a:hover{ color: #000000; text-decoration: none }
 $(function(){
 	
 });//ready
+
+function qnaMovePage(cur_page){
+    $.ajax({
+     url:"qna_list_move_page.do",
+     type:"POST",
+     data:"current_page="+cur_page,
+     dataType:"JSON",
+     error:function(xhr){
+        alert("에러");
+        console.log(xhr.status+" / "+xhr.statusText);
+     },
+     success:function(jsonObj){
+        if(jsonObj.flag=="success"){
+           
+           var table='<table class="qnaTab">';
+           table+='<thead>';
+           table+='<tr class="titleTab">';
+           table+='<th class="qnaTabTh" style="width: 50px">번호</th>';
+           table+='<th class="qnaTabTh">제목</th>';
+           table+='<th class="qnaTabTh" style="width: 100px">답변유무</th>';
+           table+='<th class="qnaTabTh" style="width: 150px">작성일</th>';
+           table+='</tr>';
+           table+='</thead>';
+           table+='<tbody>';
+           
+           $.each(jsonObj.qna_list,function(i, json){
+              table+='<tr id="qnaTr'+json.qna_num+'" class="tableContent" onclick="toggleReply('+json.qna_num+')">';
+              table+='<td class="qnaTabTd">'+json.idx+'</td>';
+              table+='<td class="qnaTabTd">'+json.qna_subject+'</td>';
+              table+='<td class="qnaTabTd">'+json.qna_flag+'</td>';
+              table+='<td class="qnaTabTd">'+json.input_date+'</td>';
+              table+='</tr>';
+           })//each
+           table+='</tbody>';
+           table+='</table>';
+           $("#containerContent").html(table);
+           
+           var page='<nav aria-label="Page navigation example">';
+           page+='<ul class="pagination justify-content-center">';
+           var pre="active";
+           var preOnclick='onclick="qnaMovePage('+jsonObj.pre_page+')" ';
+           if(jsonObj.pre_page<=0){
+              pre="disabled"
+              preOnclick="";
+           }//end if
+           page+='<li class="page-item '+pre+'">';
+           page+='<a class="page-link"'+preOnclick+' aria-label="Previous">';
+           page+='<span aria-hidden="true">&laquo;</span>';
+           page+='</a>';
+           page+='</li>';
+           
+           var curOnclick="";
+           for(var i=jsonObj.start_page; i<jsonObj.end_page+1; i++){
+              curOnclick='onclick="qnaMovePage('+i+')" ';
+              if(jsonObj.current_page==i){
+                 cur="disabled"
+                 curOnclick="";
+              }//end if
+              page+='<li class="page-item">';
+              page+='<a class="page-link"'+curOnclick+'>';
+              page+=i;
+              page+='</a>';
+              page+='</li>';
+           }//end for
+           var next="active";
+           var nextOnclick='onclick="qnaMovePage('+jsonObj.next_page+')" ';
+           if(cur_page>=jsonObj.total_page){
+              next="disabled"
+              nextOnclick="";
+           }//end if
+           page+='<li class="page-item '+next+'">';
+           page+='<a class="page-link" '+nextOnclick+'aria-label="Next">';
+           page+='<span aria-hidden="true">&raquo;</span>';
+           page+='</a>';
+           page+='</li>';
+           page+='</ul>';
+           page+='</nav>';
+           $("#pagination").html(page);
+           
+        }else{
+           var table='<table class="tab">';
+           table+='<thead>';
+           table+='<tr class="contentTr">';
+           table+='<td class="qnaTabTd"" style="width: 50px">번호</th>';
+           table+='<td class="qnaTabTd">제목</th>';
+           table+='<td class="qnaTabTd" style="width: 100px">답변유무</th>';
+           table+='<td class="qnaTabTd" style="width: 150px">작성일</th>';
+           table+='</tr>';
+           table+='</thead>';
+           table+='<tbody>';
+           table+='<tr>';
+           table+='<td colspan="4">문의 내역이 없습니다.</td>';
+           table+='</tr>';
+           table+='</tbody>';
+           table+='</table>';
+           
+           $("#containerContent").html(table);
+        }
+     }//success
+  });//ajax
+  
+}//qnaMovePage
+
+
+
+
 
 function toggleReply(qna_num){
 	
@@ -144,10 +252,10 @@ function delReply(qna_num){
 	 <table class="qnaTab">
 	  <thead>
 		<tr class="titleTab">
-			<th class="qnaTabTh">번호</th>
+			<th class="qnaTabTh" style="width: 50px">번호</th>
 			<th class="qnaTabTh">제목</th>
-			<th class="qnaTabTh">답변유무</th>
-			<th class="qnaTabTh">작성일</th>
+			<th class="qnaTabTh" style="width: 100px">답변유무</th>
+			<th class="qnaTabTh" style="width: 150px">작성일</th>
 		</tr>
 	 </thead>
 	<tbody>
@@ -157,22 +265,43 @@ function delReply(qna_num){
 			</tr>
 		</c:if>
 
-		<c:forEach begin="1" end="${qna_list.size()}" var="idx">
-			<tr id="qnaTr${qna_list[idx-1].qna_num}" class="tableContent" onclick="toggleReply(${qna_list[idx-1].qna_num})">
-				<td class="qnaTabTd"><c:out value="${idx }"/>
-				<td class="qnaTabTd"><c:out value="${qna_list[idx-1].qna_subject }"/></td>
-				<td class="qnaTabTd"><c:out value="${qna_list[idx-1].qna_flag}"/></td>
-				<td class="qnaTabTd"><c:out value="${qna_list[idx-1].input_date }"/></td>
+		<c:forEach var="qna" items="${ qna_list }">
+			<tr id="qnaTr${ qna.qna_num }" class="tableContent" onclick="toggleReply(${ qna.qna_num })">
+				<td class="qnaSubTd"><c:out value="${ qna.idx }"/>
+				<td class="qnaSubTd" ><c:out value="${ qna.qna_subject }"/></td>
+				<td class="qnaSubTd"><c:out value="${ qna.qna_flag }"/></td>
+				<td class="qnaTabTd"><c:out value="${ qna.input_date }"/></td>
 			</tr>
 		</c:forEach>
 	 </tbody>
 	</table>
-		
+	</div>
+	<div id="pagination" class="pagination">
+	   <nav aria-label="Page navigation example">
+	     <ul class="pagination justify-content-center">
+	       <li class="page-item ${paging.pre_page <= 0 ? 'disabled':'active'}">
+	          <a class="page-link"<c:if test="${ paging.pre_page ne '0'}">onclick="qnaMovePage(${paging.pre_page})"</c:if> aria-label="Previous">
+	              <span aria-hidden="true">&laquo;</span>
+	            </a>
+	       </li>
+	       <c:forEach begin="${paging.start_page}" end="${paging.end_page}" step="1" var="cur_page" >
+	          <li class="page-item">
+	             <a class="page-link"<c:if test="${paging.current_page ne cur_page}"> onclick="qnaMovePage(${cur_page})"</c:if>>
+	                <c:out value="${cur_page}" />
+	             </a>
+	          </li>
+	       </c:forEach>
+	       <li class="page-item ${paging.current_page >= paging.total_page ? 'disabled':'active'}">
+	         <a class="page-link"<c:if test="${paging.current_page < paging.total_page}"> onclick="qnaMovePage(${paging.next_page})"</c:if> aria-label="Next">
+	           <span aria-hidden="true">&raquo;</span>
+	         </a>
+	       </li>
+	     </ul>
+	   </nav>
 	</div>
 	</div>
 	</div>
 	</div>
-	
 	<jsp:include page="../common/footer.jsp" />
 	
 

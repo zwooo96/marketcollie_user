@@ -41,7 +41,7 @@ public class MemberDAO {
 			
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
 			
-		ss.insert("insertMember", jVO);
+		ss.insert("kr.co.collie.user.member.insertMember", jVO);
 			
 		ss.commit();
 		
@@ -63,7 +63,7 @@ public class MemberDAO {
 		String rid = "";
 		
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		rid = ss.selectOne("dupId", id);
+		rid = ss.selectOne("kr.co.collie.user.member.dupId", id);
 		ss.close();
 		
 		return rid;
@@ -73,7 +73,7 @@ public class MemberDAO {
 		String rEmail="";
 		
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		rEmail = ss.selectOne("dupEmail",email);
+		rEmail = ss.selectOne("kr.co.collie.user.member.dupEmail",email);
 		ss.close();
 		
 		return rEmail;
@@ -83,7 +83,7 @@ public class MemberDAO {
 	public String selectMemberPass(FindPassVO fpsVO) {
 		String pass ="";
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		pass = ss.selectOne("selectMemberPass",fpsVO);//id
+		pass = ss.selectOne("kr.co.collie.user.member.selectMemberPass",fpsVO);//id
 		ss.close();
 		return pass;
 	}
@@ -92,7 +92,7 @@ public class MemberDAO {
 		
 		int cnt=0;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		cnt = ss.update("updateMemberPass",upVO);
+		cnt = ss.update("kr.co.collie.user.member.updateMemberPass",upVO);
 		if(cnt==1) {
 			ss.commit();
 		}
@@ -100,10 +100,5 @@ public class MemberDAO {
 		return cnt;
 	}
 	
-		public static void main(String[] args) {
-			
-			System.out.println(memDAO.getInstance().dupEmail("gildong@gmail.com"));
-			
-		}
 	
 }//class
