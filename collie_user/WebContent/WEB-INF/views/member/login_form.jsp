@@ -78,7 +78,7 @@ function chkNull() {
 }//chkNull
 
 	function join() {
-	location.href="join_form.do";
+	location.href="join_clause.do";
 		
 	}
 

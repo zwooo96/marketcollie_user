@@ -36,7 +36,7 @@ $(function(){
 				data: "id="+id,
 				dataType:"json",
 				error : function() {
-						console.log("실패");
+						console.log("실패"); 
 				},
 				success : function( json ) {
 					
