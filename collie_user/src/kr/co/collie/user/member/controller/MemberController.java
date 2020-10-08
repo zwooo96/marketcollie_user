@@ -105,25 +105,27 @@ public class MemberController {
     @RequestMapping(value = "/find/find_id_process.do",method = POST)
     public String findId(FindIdVO fidVO,Model model) {
         MemberService ms = new MemberService();
-         model.addAttribute("user_id",ms.findId(fidVO));
+        model.addAttribute("user_id",ms.findId(fidVO));
         return "find/id";
     }
     
-    @RequestMapping(value = "/find/passForm.do",method = GET)
+    @RequestMapping(value = "/find/passForm.do",method = {GET, POST})
     public String findPassForm() {
         return "find/passForm";
     }
     
-    @RequestMapping(value = "/find/find_pass_process.do",method = POST)
+    @RequestMapping(value = "/find/find_pass_process.do",method = POST )
     public String findPass(FindPassVO fpsVO,Model model) {
         String url="forward:/find/passForm.do";
         
         MemberService ms = new MemberService();
-        
+        boolean findPass = false;
         if(!ms.findPass(fpsVO)) { //findPass의 결과가 false면 맞음, !ms.findPass == true if문 실행
-             model.addAttribute("find_pass_info",fpsVO);
-             url="forward:/find/modify_pass_form.do";
+        	findPass = true;
+            model.addAttribute("find_pass_info",fpsVO);
+            url="forward:/find/modify_pass_form.do";
         }
+        model.addAttribute("find_pass", findPass);
         
         return url;
     }

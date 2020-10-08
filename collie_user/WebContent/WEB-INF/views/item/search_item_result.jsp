@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MARKET COLLIE</title>
 <style type="text/css">
 #wrap{ min-height: 940px; margin: 0px auto; }
 #container{ min-height: 600px;}
@@ -21,7 +21,7 @@
 </style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="../common/css/common.css">
+<link rel="stylesheet" type="text/css" href="http://211.238.142.25/common/css/common.css">
 <style type="text/css">
 .page-item.active .page-link {background-color:#17462B; border-color:#17462B;}
 </style>

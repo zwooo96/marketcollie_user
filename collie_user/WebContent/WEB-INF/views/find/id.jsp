@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마켓콜리</title>
+<title>MARKET COLLIE</title>
 <style type="text/css">
 #wrap{ min-height: 940px; margin: 0px auto; }
 #container{ min-height: 600px;}
@@ -20,7 +20,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
+<link rel="stylesheet" type="text/css" href="http://211.238.142.25/common/css/common.css">
 
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -29,11 +29,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	
 	$("#homeBtn").click(function() {
-		
 		location.href="../index.do";
-		
 	});//click
 	
 });//ready
@@ -46,28 +43,19 @@ $(function(){
 	<jsp:include page="../common/header.jsp" />
 	<div id="container">
 	<div id="frmWarp">
-	<c:if test="${user_id eq true }">
-	<h4 id="title">	입력하신 정보와 일치하는 아이디가 없습니다. 
-		다시 시도해주세요 </h4>
-	
+		<c:if test="${empty user_id}">
+		<h4 id="title">	입력하신 정보와 일치하는 아이디가 없습니다. 
+			다시 시도해주세요 </h4>
+		</c:if>
+		<c:if test="${not empty user_id}">
+			<h4 id="title">${param.name}님의 아이디는 <c:out value="${user_id }"/>입니다.</h4>
+		</c:if>
 		<div id="btnDiv">
 			<input type="button" value="메인으로" id="homeBtn" class="collieBtnMain">	
 		</div>
-	</c:if>
 	</div>
-		<div id="frmWarp">
-	<h4 id="title">${param.name}님의 아이디는 
-	
-		<c:out value="${user_id }"/>입니다.</h4>
-
-		<div id="btnDiv">
-			<input type="button" value="메인으로" id="homeBtn" class="collieBtnMain">	
-		</div>
-		</div>
-	</div>
-	
 	<jsp:include page="../common/footer.jsp" />
-	
+</div>
 </div>
 
 </body>

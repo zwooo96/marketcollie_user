@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MARKET COLLIE</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
+<link rel="stylesheet" type="text/css" href="http://211.238.142.25/common/css/common.css">
 
 <style type="text/css">
 #wrap{ min-height: 1200px; margin: 0px auto; }

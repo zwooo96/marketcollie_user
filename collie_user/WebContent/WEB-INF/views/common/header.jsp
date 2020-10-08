@@ -35,8 +35,6 @@
 	  <li class="nav-item">
 	    <a class="nav-link" href="/qna/qna_form.do" style="color: #000000">고객센터</a>
 	  </li>
-		
-	
 	</ul>
 	
 	<div id="logoWrap">

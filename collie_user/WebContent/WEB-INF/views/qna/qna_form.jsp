@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마켓콜리</title>
+<title>MARKET COLLIE</title>
 <style type="text/css">
 #wrap{ min-height: 1240px; margin: 0px auto; }
 #container{ min-height: 800px;}
@@ -25,7 +25,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
+<link rel="stylesheet" type="text/css" href="http://211.238.142.25/common/css/common.css">
 
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
