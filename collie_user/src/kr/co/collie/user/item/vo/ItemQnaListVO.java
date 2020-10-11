@@ -1,7 +1,7 @@
 package kr.co.collie.user.item.vo;
 
 public class ItemQnaListVO {
-	int item_num, start_num, end_num;
+	private int item_num, start_num, end_num;
 
 	public int getItem_num() {
 		return item_num;

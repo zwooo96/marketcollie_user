@@ -52,7 +52,7 @@ public class CartDAO {
 		return list;
 	}//selectCartGoods
 	
-	public int updateItemCntPlus(ItemCntVO icVO) {
+	public int updateItemCnt(ItemCntVO icVO) {
 		int cnt=0;
 		
 		SqlSession ss=GetCollieHandler.getInstance().getSqlSession();

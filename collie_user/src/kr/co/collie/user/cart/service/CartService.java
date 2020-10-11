@@ -42,7 +42,7 @@ public class CartService {
 		json.put("flag", "fail");
 		
 		CartDAO cDAO=CartDAO.getInstance();
-		int cnt=cDAO.updateItemCntPlus(icVO);
+		int cnt=cDAO.updateItemCnt(icVO);
 		if(cnt==1) {
 			json.put("flag", "success");
 		}

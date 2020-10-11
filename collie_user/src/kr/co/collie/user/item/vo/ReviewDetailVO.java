@@ -1,7 +1,7 @@
 package kr.co.collie.user.item.vo;
 
 public class ReviewDetailVO {
-	public int review_num, item_num;
+	private int review_num, item_num;
 
 	public int getReview_num() {
 		return review_num;

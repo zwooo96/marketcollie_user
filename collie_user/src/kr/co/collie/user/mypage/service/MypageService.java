@@ -210,7 +210,7 @@ public class MypageService {
 		
 	}//removeMember
 	
-	public int getQnaTotlCnt(int member_num) {
+	public int getQnaTotalCnt(int member_num) {
 		int cnt=0;
 		
 		MypageDAO mpDAO = MypageDAO.getInstance();

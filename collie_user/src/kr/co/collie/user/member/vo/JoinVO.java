@@ -1,9 +1,9 @@
 package kr.co.collie.user.member.vo;
 
 public class JoinVO {
-	String id, pass, name, email, phone, zipcode, addr, addr_detail, ip;
+	private String id, pass, name, email, phone, zipcode, addr, addr_detail, ip;
 	
-	String email2;
+	private String email2;
 
 	public String getId() {
 		return id;

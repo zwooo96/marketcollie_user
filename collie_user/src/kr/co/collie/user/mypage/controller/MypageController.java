@@ -269,7 +269,7 @@ public class MypageController {
 		RangeVO rVO=new RangeVO();
 		rVO.setField_name("member_num");
 		rVO.setField_value(member_num);
-		rVO.setTotal_cnt(ms.getQnaTotlCnt(member_num));
+		rVO.setTotal_cnt(ms.getQnaTotalCnt(member_num));
 		rVO.calcPaging();
 		
 		model.addAttribute("qna_list",ms.getQnaList(rVO));

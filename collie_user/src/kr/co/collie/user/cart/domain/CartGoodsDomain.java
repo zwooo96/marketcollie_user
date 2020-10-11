@@ -1,8 +1,8 @@
 package kr.co.collie.user.cart.domain;
 
 public class CartGoodsDomain {
-	int cart_num, item_num, item_price, item_cnt;
-	String item_name, item_img;
+	private int cart_num, item_num, item_price, item_cnt;
+	private String item_name, item_img;
 	public int getCart_num() {
 		return cart_num;
 	}
