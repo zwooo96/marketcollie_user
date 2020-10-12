@@ -52,6 +52,10 @@
 $(function(){
 });//ready
 
+function trackingInfo(){
+	$("#trackingForm").submit();
+}//trackingInfo
+
 function cancelOrder(order_num){
 	if( confirm("해당 주문을 취소하시겠습니까?") ){
 		location.href = "order_cancel.do?order_num="+order_num;
@@ -94,8 +98,14 @@ function cancelOrder(order_num){
 				</div>
 			</c:forEach>
 				</div>
+				
+				<form id="trackingForm" method="POST" action="/mypage/tracking_info.do">
+					<input type="hidden" value="${ order_detail.company }" name="company"/>
+					<input type="hidden" value="${ order_detail.invoice_no }" name="invoice_no"/>
+				</form>
+				
 				<div id="orderBtn">
-					<button id="searchBtn" type="button" class="btn btn-outline-success">배송 현황 조회</button>
+					<button id="searchBtn" type="button" class="btn btn-outline-success" onclick="trackingInfo();">배송 현황 조회</button>
 					<button id="cancelBtn" type="button" class="btn btn-outline-success" onclick="cancelOrder(${ param.order_num });">전체 상품 주문 취소</button>
 				</div>
 				<div id="Info">

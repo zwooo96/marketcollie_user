@@ -5,8 +5,8 @@ import java.util.List;
 public class OrderDetailDomain {
 	private List<OrderItemDomain> orderItemList;
 	private int total_price;
-	private String input_date, card_num, card_bank, receive_name, receive_phone, receive_addr, receive_addr_detail, receive_zipcode;
-	
+	private String input_date, card_num, card_bank, receive_name, receive_phone, receive_addr, receive_addr_detail, receive_zipcode, company, invoice_no;
+
 	public List<OrderItemDomain> getOrderItemList() {
 		return orderItemList;
 	}
@@ -36,6 +36,12 @@ public class OrderDetailDomain {
 	}
 	public String getReceive_zipcode() {
 		return receive_zipcode;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public String getInvoice_no() {
+		return invoice_no;
 	}
 	public void setOrderItemList(List<OrderItemDomain> orderItemList) {
 		this.orderItemList = orderItemList;
@@ -67,6 +73,11 @@ public class OrderDetailDomain {
 	public void setReceive_zipcode(String receive_zipcode) {
 		this.receive_zipcode = receive_zipcode;
 	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public void setInvoice_no(String invoice_no) {
+		this.invoice_no = invoice_no;
+	}
 
-	
 }

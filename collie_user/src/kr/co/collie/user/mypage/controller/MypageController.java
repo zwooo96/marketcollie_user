@@ -112,6 +112,15 @@ public class MypageController {
 		return "mypage/order_list";
 	}//cancelOrder
 	
+	/**
+	 * 배송현황 조회 폼을 불러오는 일
+	 * @return
+	 */
+	@RequestMapping(value="/mypage/tracking_info.do", method=POST)
+	public String trackingInfo() {
+		return "mypage/tracking_info";
+	}//trackingInfo
+	
 	@RequestMapping(value="/mypage/check_member_form.do", method= GET)
 	public String checkMypageForm() {
 		
