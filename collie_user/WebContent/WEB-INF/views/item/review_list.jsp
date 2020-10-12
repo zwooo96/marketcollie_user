@@ -5,7 +5,7 @@
 <script type="text/javascript">
 function writeReview(item_num) {
 	var buyFlag = '<c:out value="${ buyFlag }"/>';
-	if( buyFlag == 'false' ){
+	if( buyFlag == 'false' || buyFlag == ''){
 		alert("상품을 구입하신 분만 후기 작성이 가능합니다.");
 		return;
 	}//end if
@@ -53,7 +53,7 @@ function writeReview(item_num) {
 	</table>
 </div>
 <div id="reviewBtnWrap">
-	<button type="button" class="btn btn-primary" id="reviewBtn" onclick="writeReview(${ param.item_num });">후기쓰기</button>
+	<input type="button" value="후기쓰기"  class="collieBtnMain"  onclick="writeReview(${ param.item_num });" />
 </div>
 <div id="reviewPaginationWrap">
 	<c:if test="${ not empty review_list }">

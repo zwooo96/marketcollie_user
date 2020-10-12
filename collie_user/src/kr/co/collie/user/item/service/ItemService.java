@@ -36,7 +36,6 @@ public class ItemService {
 		rVO.setTotal_cnt(totalCnt);
 		rVO.setPage_scale(1);
 		rVO.calcPaging();// 모든 변수 값 설정 후 페이징 계산
-		System.out.println("next_page >>>>>>>>>>>>>>>>>>>>>>>> " + rVO.getNext_page());
 		list = dDAO.selectItemList(rVO);
 		
 		return list;
