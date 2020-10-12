@@ -36,6 +36,40 @@
 $(function(){
 	
 });//ready
+
+window.onload=function(){
+	document.getElementById("qnaSub").addEventListener("keydown",chkEnter);
+	document.getElementById("qnaCon").addEventListener("keydown",chkEnter);
+	document.getElementById("qnaBtn").addEventListener("click",chkNull);
+	
+}//function
+
+function chkEnter() { 
+	if(window.event.which==13){
+		 chkNull();
+	}//end if
+}//chkEnter
+
+function chkNull() {
+	
+	var obj = document.qnaFrm;
+	if(obj.qna_subject.value.trim()==""){
+		alert("제목을 입력해주세요");
+		obj.qna_subject.focus(); //control에 커서를 이동
+		return;
+	}//end if
+	
+	if(obj.qna_content.value.trim()==""){
+		alert("내용을 입력해주세요.");
+		obj.qna_content.focus();
+		return;
+		
+	}//end if
+	
+	$("#qnaFrm").submit();
+	
+}//chkNull
+
 </script>
 </head>
 <body style="font-family: nanumbarungothic">
@@ -47,17 +81,17 @@ $(function(){
 	<div id="container">
 	
 		<div class="frmWarp">
-			<form action="qna_process.do" method="post">
+			<form id="qnaFrm" name="qnaFrm" action="qna_process.do" method="post">
 				<div class="inputBox">
 						<h3 id="title">1:1문의</h3><br/>
 						<h6 id="address"> email : collie@gmail.com</h6><br/>
 					<div class="form">
 					<label>제목</label><br/>
-						<input type="text" name="qna_subject" class="form-control" style="height: 50px"><br/>
+						<input type="text" name="qna_subject" id="qnaSub" class="form-control" style="height: 50px"><br/>
 					</div>
 					<div class="form">
 					<label>내용</label><br/>
-						<textarea name="qna_content" class="form-control" cols="50" rows="10"></textarea><br/>
+						<textarea name="qna_content" id="qnaCon" class="form-control" cols="50" rows="10"></textarea><br/>
 					</div>
 					
 				</div>
