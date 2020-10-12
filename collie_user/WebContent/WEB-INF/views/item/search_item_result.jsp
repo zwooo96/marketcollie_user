@@ -71,7 +71,7 @@ function movePage(field_name, field_value, target_page) {
 			output += '<ul class="pagination justify-content-center">';
 	
 			var disableOption = 'disabled';
-			alert("start_page : " + jo.start_page);
+			
 			if(jo.pre_page > 1 && jo.pre_page < jo.start_page) {
 				disableOption = 'active';
 			}
@@ -82,7 +82,6 @@ function movePage(field_name, field_value, target_page) {
 			output += '</li>';
 			for(var i = jo.start_page; i <= jo.end_page; i++) {
 				disableOption = 'disabled';
-				console.log("현재 페이지 : " + jo.current_page);
 				if(jo.current_page != i) {
 					disableOption = 'active';
 				}
@@ -93,7 +92,7 @@ function movePage(field_name, field_value, target_page) {
 			}
 			
 			disableOption = 'active';
-			alert("next_page / total_page : " + jo.next_page + " / " + jo.total_page);
+			
 			if(jo.next_page >= jo.total_page) {
 				disableOption = 'disabled';
 			}
@@ -149,6 +148,7 @@ function movePage(field_name, field_value, target_page) {
 			        	<span aria-hidden="true">&laquo;</span>
 			      	</a>
 			    </li>
+			    
 			    <c:forEach begin="${paging.start_page}" end="${paging.end_page}" step="1" var="cnt" >
 				    <li class="page-item ${paging.current_page eq cnt ? 'disabled':'active'}" >
 				    	<a class="page-link" onclick="movePage('${paging.field_name}','${paging.field_value}',${cnt});">
@@ -156,7 +156,8 @@ function movePage(field_name, field_value, target_page) {
 				    	</a>
 				    </li>
 			    </c:forEach>
-			    <li class="page-item ${paging.current_page eq paging.end_page ? 'disabled':'active'}">
+			    
+			    <li class="page-item ${paging.next_page >= paging.total_page ? 'disabled':'active'}">
 			      <a class="page-link"  onclick="movePage('${paging.field_name}','${paging.field_value}', ${paging.next_page});"aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			      </a>
