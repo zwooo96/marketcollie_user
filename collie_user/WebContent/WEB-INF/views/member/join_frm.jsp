@@ -1,20 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>MARKET COLLIE</title>
 <style type="text/css">
-	#wrap{ width:900px; min-height:1200px; margin:0px auto; }
-	#header{ width:900px; height:180px; }
-	#headerTop{ width:900px; height:140px; position:relative; background:#FFFFFF url("http://211.238.142.36/jsp_prj/common/images/header_bg.png") }
+	#wrap{ min-height: 940px; margin: 0px auto; }
+	#container{ min-height: 600px;}
 	#mainText{ font-family: 고딕,godic,Sans-Serif; font-size:30px; font-weight:bold; width:140px; height:50px; margin:0px auto; padding-top:20px; }
 	#naviBar{ width:900px; height:60px; margin-top:10px }
-	#container{ width: 900px; height:800px; position:relative; margin-top: 30px}
-	#footer{ width: 900px; height:120px; position:relative; }
-	#footerLogo{ width:170px; height:60px; margin-left:10px; margin-top:10px; }
-	#footerContent{ width:700px; height:100px; margin-left:600px; margin-top:10px; font-family:고딕,godic; font-size:14px; text-align: right; margin-right:20px;}
+	.join-content{width:900px; margin:0px auto;}
 </style>  
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="http://211.238.142.25/common/css/common.css">
@@ -368,15 +365,14 @@ function sample4_execDaumPostcode() {
 </head>
 <body>
 <div id="wrap">
-	<div id="header">
-	<jsp:include page="../common/header.jsp" />
-	</div>
+	<c:import url="/header.do" />
 	
 	<div id="container">
-	<div style="margin: 0 auto">
+	<div class="join-content">
 	<div style="border-bottom: 3px solid #333; text-align: center; font-size: 35px">회원가입</div>
 	<div></div>
 	
+	<div class="join-frm">
 	
 	<form action="join_process.do" method="post" id="joinFrm" name="joinFrm">
 		<div class="form-row" style="margin-top: 20px">
@@ -471,13 +467,12 @@ function sample4_execDaumPostcode() {
 	  	<div id="addrCheck" style="color: red;"> </div>
 	    <div style="text-align: center ; margin-top: 30px"><button type="button" class="btn btn-primary" style="zoom:1.2; background-color: white; color: black; border-color: black;" value="회원가입" id="joinBtn">회원가입</button></div>
 	  </form>
+	  </div>
   	</div>
 	</div>
 </div>
 
-	<div id="footer">
-		<jsp:include page="../common/footer.jsp" />
-	</div>
+<jsp:include page="../common/footer.jsp" />
 	
 </body>
 </html>

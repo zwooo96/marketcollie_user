@@ -1,23 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>MARKET COLLIE</title>
 <style type="text/css">
-	#wrap{ width:900px; height:900px; margin:0px auto; }
-	#header{ width:900px; height:180px; }
-	#headerTop{ width:900px; height:140px; position:relative; background:#FFFFFF url("http://211.238.142.36/jsp_prj/common/images/header_bg.png") }
+	#wrap{ min-height: 940px; margin: 0px auto; }
+	#container{ min-height: 600px; padding-top: 50px; padding-bottom: 50px}
 	#mainText{ font-family: 고딕,godic,Sans-Serif; font-size:30px; font-weight:bold; width:140px; height:50px; margin:0px auto; padding-top:20px; }
-	#naviBar{ width:900px; height:60px; margin-top:10px }
-	#container{ width: 900px; height:600px; position:relative; }
-	#footer{ width: 900px; height:120px; position:relative; }
-	#footerLogo{ width:170px; height:60px; margin-left:10px; margin-top:10px; }
-	#footerContent{ width:700px; height:100px; margin-left:600px; margin-top:10px; font-family:고딕,godic; font-size:14px; text-align: right; margin-right:20px;}
+	#naviBar{ width:900px; height:60px; margin-top:10px; }
 	#fnt{ font-size: 27px }
 	#smfnt{ font-size: 23px; color: green; }
-	#form-control{ width:800px; height:100px; resize: none; }
+	#form-control{ width:900px; height:150px; resize: none; border: 1px solid #ced4da; border-radius: .25rem;}
 	input[type=checkbox]
 	{
   /* Double-sized Checkboxes */
@@ -27,6 +23,9 @@
   -o-transform: scale(1.5); /* Opera */
   padding: 10px;
 	}
+	.clause-content {width: 900px; margin: 0px auto;}
+	.clause-subtitle {margin-bottom: 10px;}
+	.clause-btns{width: 900px; margin: 0px auto; text-align:center; margin-top: 30px;}
 </style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="http://211.238.142.25/common/css/common.css">
@@ -63,13 +62,12 @@ $(function(){
 </head>
 <body>
 <div id="wrap">
-	<div id="header">
-	<jsp:include page="../common/header.jsp" />
-	</div>
+
+	<c:import url="/header.do" />
 	
 	<div id="container">
-	<div style="margin-left: 50px; margin-top: 50px">
-		<div>
+	<div class="clause-content">
+		<div class="clause-subtitle">
 			<strong id="fnt" >이용약관 동의</strong> <span id="smfnt">(필수)</span>  <input type="checkbox" id="chk1"/>
 		</div>
 		<div>
@@ -102,7 +100,7 @@ $(function(){
 콜리 서비스와 관련하여 궁금하신 사항이 있으시면 고객센터(대표번호: 1588 – 3820/ 평일 09:00~18:00)로 문의 주시기 바랍니다.</textarea>
 		</div>
 		<br/>
-		<div> 
+		<div class="clause-subtitle"> 
 			<strong id="fnt">개인정보 수집 및 이용 동의</strong> <span id="smfnt">(필수)</span>  <input type="checkbox" id="chk2" style="zoom:1.2"/>
 		</div> 
 		<div>
@@ -132,7 +130,7 @@ NAVER 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과정�
 </textarea>
 		</div>
 		<br/>
-		<div> 
+		<div class="clause-subtitle"> 
 			<strong id="fnt">위치정보 이용약관 동의</strong> <span id="smfnt">(선택)</span>  <input type="checkbox"/>
 		</div> 
 		<div>
@@ -154,15 +152,14 @@ NAVER 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과정�
 			</textarea>
 		</div>
 	</div>
-		<div style="margin-left: 290px; margin-top: 40px;">
+		<div class="clause-btns">
 			<span><a href="javascript:history.back()"><input type="button" class="btn btn-secondary" style="width:100px; zoom:1.3; margin-right: 20px" value="취소"/></a></span><input class="btn btn-success" type="button" style="width:100px; zoom:1.3;" id="chkBtn" value="확인"/>
 		</div>
 	</div>
 	
 	</div>
-	<div id="footer">
-		<jsp:include page="../common/footer.jsp" />
-	</div>
+	
+	<jsp:include page="../common/footer.jsp" />
 	
 </body>
 </html>

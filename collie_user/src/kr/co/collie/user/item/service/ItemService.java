@@ -34,9 +34,9 @@ public class ItemService {
 		//JSP에서 필요한 전체 레코드 갯수 조회
 		int totalCnt = getItemListCnt(rVO);
 		rVO.setTotal_cnt(totalCnt);
-		rVO.setPage_scale(4);
+		rVO.setPage_scale(1);
 		rVO.calcPaging();// 모든 변수 값 설정 후 페이징 계산
-		
+		System.out.println("next_page >>>>>>>>>>>>>>>>>>>>>>>> " + rVO.getNext_page());
 		list = dDAO.selectItemList(rVO);
 		
 		return list;
@@ -60,6 +60,7 @@ public class ItemService {
 		jo.put("pre_page", rVO.getPre_page());
 		jo.put("next_page", rVO.getNext_page());
 		jo.put("current_page", rVO.getCurrent_page());
+		jo.put("total_page", rVO.getTotal_page());
 		
 		JSONArray ja = new JSONArray();
 		JSONObject jsonTemp = null;
@@ -80,7 +81,12 @@ public class ItemService {
 		
 		ItemDAO dDAO = ItemDAO.getInstance();
 		idd = dDAO.selectItemDetail(item_Num);
+		
+		List<String> result = dDAO.detailImgList(item_Num);
+				
+		
 		idd.setDetailImgList(dDAO.detailImgList(item_Num));
+		
 		return idd;
 	}
 	

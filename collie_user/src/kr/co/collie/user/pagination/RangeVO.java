@@ -18,7 +18,7 @@ public class RangeVO {
 	
 	private int page_scale = 5; // 한페이지당 볼 수 있는 게시글 수
 
-	private int page_range = 3; //조회할 페이지 갯수 단위
+	private int page_range = 5; //조회할 페이지 갯수 단위
 	
 	private int start_page; //시작 페이지 번호
 	private int end_page; //끝 페이지 번호
@@ -136,7 +136,6 @@ public class RangeVO {
 	}
 
 	public void calcPaging() {
-		
 		total_page = (int)Math.ceil((double)total_cnt/page_scale);
 		start_num = (current_page-1)*page_scale+1;
 		end_num=start_num+page_scale-1;
@@ -150,14 +149,15 @@ public class RangeVO {
 		if(total_page < end_page) {
 			end_page = total_page;
 		}
-		
+
 		if( current_page > page_range ) {
 			pre_page=((current_page-1)/page_range)*page_range;
 		} else {
 			pre_page = current_page - 1;
 		}
-		if( total_page>end_page ){ //"다음" 버튼 활성화하는 조건
-			next_page=pre_page+page_range+1;
+		
+		if( end_page > current_page ){ //"다음" 버튼 활성화하는 조건
+			next_page=current_page+page_range;
 		} else {
 			next_page = current_page + 1;
 		}
@@ -167,7 +167,19 @@ public class RangeVO {
 		if(end_num>total_cnt){
 			end_num=total_cnt;
 		}
+		
 	}
+
+	@Override
+	public String toString() {
+		return "RangeVO [field_name=" + field_name + ", field_value=" + field_value + ", total_cnt=" + total_cnt
+				+ ", current_page=" + current_page + ", start_num=" + start_num + ", end_num=" + end_num
+				+ ", total_page=" + total_page + ", page_scale=" + page_scale + ", page_range=" + page_range
+				+ ", start_page=" + start_page + ", end_page=" + end_page + ", pre_page=" + pre_page + ", next_page="
+				+ next_page + "]";
+	}
+	
+	
 
 	
 }

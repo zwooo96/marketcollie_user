@@ -36,7 +36,7 @@ $(function(){
 });//ready
 
 function showDetailImage(item_num) {
-	   location.href="item_detail.do?item_num="+item_num;
+	location.href="item_detail.do?item_num="+item_num;
 }
 
 function movePage(field_name, field_value, target_page) {
@@ -71,7 +71,8 @@ function movePage(field_name, field_value, target_page) {
 			output += '<ul class="pagination justify-content-center">';
 	
 			var disableOption = 'disabled';
-			if(jo.pre_page > 0) {
+			alert("start_page : " + jo.start_page);
+			if(jo.pre_page > 1 && jo.pre_page < jo.start_page) {
 				disableOption = 'active';
 			}
 			output += '<li class="page-item '+disableOption+'">';
@@ -92,7 +93,8 @@ function movePage(field_name, field_value, target_page) {
 			}
 			
 			disableOption = 'active';
-			if(target_page == jo.end_page) {
+			alert("next_page / total_page : " + jo.next_page + " / " + jo.total_page);
+			if(jo.next_page >= jo.total_page) {
 				disableOption = 'disabled';
 			}
 			output += '<li class="page-item '+disableOption+'">';

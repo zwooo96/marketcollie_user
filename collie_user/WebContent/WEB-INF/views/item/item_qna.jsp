@@ -236,7 +236,7 @@ function delReply(item_qna_num){
 </form>
 <div class="itemQnaBtnDivWrap">
 <div class="itemQnaBtnDiv">
-<input type="button" id="itemQnaBtn" value="상품문의" class="collieBtnMain"/>
+	<input type="button" id="itemQnaBtn" value="상품문의" class="collieBtnMain"/>
 </div>
 </div>
 

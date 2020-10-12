@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +8,9 @@
 <title>MARKET COLLIE - 회원가입</title>
 <style type="text/css">
 	#wrap{ width:900px; height:800px; margin:0px auto; }
-	#header{ width:900px; height:180px; }
-	#headerTop{ width:900px; height:140px; position:relative; background:#FFFFFF url("http://211.238.142.36/jsp_prj/common/images/header_bg.png") }
 	#mainText{ font-family: 고딕,godic,Sans-Serif; font-size:30px; font-weight:bold; width:140px; height:50px; margin:0px auto; padding-top:20px; }
 	#naviBar{ width:900px; height:60px; margin-top:10px }
 	#container{ width: 900px; height:800px; position:relative; margin-top: 30px}
-	#footer{ width: 900px; height:120px; position:relative; }
-	#footerLogo{ width:170px; height:60px; margin-left:10px; margin-top:10px; }
-	#footerContent{ width:700px; height:100px; margin-left:600px; margin-top:10px; font-family:고딕,godic; font-size:14px; text-align: right; margin-right:20px;}
 </style>  
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="http://211.238.142.25/common/css/common.css">
@@ -224,9 +220,7 @@ function sample4_execDaumPostcode() {
 </head>
 <body>
 <div id="wrap">
-	<div id="header">
-	<jsp:include page="../common/header.jsp" />
-	</div>
+	<c:import url="/header.do" />
 	
 	<div id="container">
 		<div id="contentWrap">
@@ -239,8 +233,8 @@ function sample4_execDaumPostcode() {
 				<div style="text-align: center; height:500px; margin-top: 150px; font-size: 40px">
 				<strong>회원가입을 축하드립니다!</strong>
 				<div style="margin-top: 150px">
-				<button type="button" class="btn btn-primary" onclick="location.href='/collie_user/login_form.do'" style="background-color: white; color: black; border-color: black; height: 70px; width: 180px">로그인</button>
-				<button type="button" class="btn btn-primary" onclick="location.href='/collie_user/index.do'" style="background-color: white; color: black; border-color: black; height: 70px; width: 180px">메인으로</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='/login_form.do'" style="background-color: white; color: black; border-color: black; height: 70px; width: 180px">로그인</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='/index.do'" style="background-color: white; color: black; border-color: black; height: 70px; width: 180px">메인으로</button>
 				</div>
 				</div>
 				<div id="btnDiv">
@@ -251,9 +245,7 @@ function sample4_execDaumPostcode() {
 	</div>
 </div>
 
-	<div id="footer">
-		<jsp:include page="../common/footer.jsp" />
-	</div>
+	<jsp:include page="../common/footer.jsp" />
 	
 </body>
 </html>

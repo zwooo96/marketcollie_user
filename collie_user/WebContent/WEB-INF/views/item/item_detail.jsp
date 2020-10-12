@@ -121,7 +121,7 @@ word-break: break-all;
 #reviewDiv{ display: flex; justify-content: center }
 #reviewBtn{ background-color: #17462B !important; border-color: #17462B !important; margin-top: 20px; width: 100px; padding: 5px !important; font-size: 14px }
 #reviewBtn:hover, #reviewBtn:active, #reviewBtn:focus{ background-color: #17462B !important; font-size: 14px }
-#reviewBtnWrap{ width: 100px; float: right; margin-right: 310px }
+#reviewBtnWrap{ width: 70%; margin:0px auto; display: flex; justify-content: flex-end; }
 #reviewPagination{ margin-top: 80px; clear: both; }
 /* ==================리뷰=================== */
 
