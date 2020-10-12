@@ -23,27 +23,13 @@
 #cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
 #contentWrap{ margin-left: 240px }
 #containerSubTitle{ border-bottom: 1px solid #17462B; margin-top: 40px; padding-bottom: 0px; color: #666666 }
-#inputDiv{ width:300px; margin: 0px auto; margin-top: 50px }
-#outputDiv{ width:500px; margin: 0px auto }
-#oneGoods{ border-bottom: 1px solid #DCDBDE }
-#goodsImg{ width: 100px; padding-left: 30px }
-#goodsThm{ width:80px; height: 100px }
-#goodsInfo{ vertical-align: middle; font-weight: bold }
-#goodsTitle{ font-size: 17px; color:#333 }
-#goodsTitle:hover{ font-size: 17px; text-decoration: none; }
-#goodsPrice{ font-size: 16px; padding-left: 2px }
-#goodsCnt{ color:#666666; font-size: 15px; margin-left: 5px }
-.btn-outline-success{ border-color: #17462B !important; color: #17462B !important }
-.btn-outline-success:hover, #btn-outline-success:active, #btn-outline-success:focus { border-color: #17462B !important; background-color: #FFFFFF !important; color:#17462B !important }
-#orderBtn{ text-align: center; margin-top:50px }
-#searchBtn{ width: 250px; padding: 15px }
-#cancelBtn{ margin-left:20px; width: 250px; padding: 15px }
-#Info{ margin-top: 100px }
-#payInfo, #orderInfo, #receiveInfo{ color:#666666; border-bottom: 2px solid #17462B; padding-left: 0px; padding-bottom: 5px; width: 1100px  }
-.infoColumn{ font-size: 15px; font-weight: bold; width: 250px }
-.infoValue{ color:#4C4C4C; font-size: 14px }
-.lastColumn{ border-bottom: 1px solid #DCDBDE }
-#receiveWrap{ margin-bottom: 200px }
+#outputDiv{ width:1000px; margin: 0px auto; margin-top: 70px }
+#myPtag{ margin-bottom: 0px }
+#falseMsg{ text-align: center; margin: 0px auto; width: 350px; margin-left: 325px; font-size: 16px; margin-top: 40px }
+.btn-primary{ background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 100px; padding: 10px  }
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{ background-color: #17462B !important; }
+#btnDiv{ width: 100px; margin: 0px auto; margin-top: 60px }
+
 </style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -80,10 +66,10 @@ $(document).ready(function(){
             success:function(data){
                 var myInvoiceData = "";
                 if(data.status == false){
-                    myInvoiceData += ('<p>'+data.msg+'<p>');
+                    myInvoiceData += ('<p id="falseMsg">'+data.msg+'<p>');
                 }else{
                     myInvoiceData += ('<tr>');                
-                    myInvoiceData += ('<th>'+"송장번호"+'</td>');                     
+                    myInvoiceData += ('<th style="width:100px">'+"송장번호"+'</td>');                     
                     myInvoiceData += ('<th>'+data.invoiceNo+'</td>');                     
                     myInvoiceData += ('</tr>');     
                 }//end if
@@ -136,14 +122,15 @@ $(document).ready(function(){
 			<div id="containerSubTitle"></div>
 			<div id="containerContent">
 				<div id="outputDiv">
-				<div>
-					<table id="myPtag"></table>
+				<div id="myPtagDiv">
+					<table class="table table-border" id="myPtag"></table>
 				</div>
-				<br/>
 				<div>
-					<table id="myPtag2"></table>
+					<table class="table table-border" id="myPtag2"></table>
 				</div>
-				<button onclick="javascript:history.back();">뒤로 </button>
+				<div id="btnDiv">
+					<button type="button" class="btn btn-primary" onclick="javascript:history.back();">뒤로 </button>
+				</div>
 				</div>
 			</div>
 		</div>
