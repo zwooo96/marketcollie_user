@@ -341,7 +341,7 @@ function moveReviewPage(field_value, target_page){
 				<c:set var="item" value="${item_detail}"/>	
 				<div class="thum">
 					<img src="http://localhost/common/images/item/${item.item_img }">
-				</div>
+				</div> 
 				<!-- 우측의 설명 -->
 				<div id="infoDiv"> 
 					<p class="goods_name">
