@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +16,15 @@
 #infoDiv{float: right;
     width: 660px;
     margin-top: 29px;
-    padding: 0px 10px 100px 10px; }
+    padding: 0px 10px 0px 10px; }
 #boder{padding-top: 10px}
 
 .item_description {
-	padding: 20px 40px 20px 40px;
+	padding: 20px 100px 20px 100px;
 	font-size: 18px;
     line-height: 32px;
     color: #373737;
+    margin-top: 20px;
 	
 }
 .thum{padding: 20px 0px 0px 0px;
@@ -102,36 +104,16 @@ word-break: break-all;
     line-height: 18px;
     text-align: center;
 }
-.btn{
-	overflow: hidden;
-    position: relative;
-    float: left;
-    width: 22px;
-    height: 22px;
-    border: 0;
-    background: #f6f7f7;
-    font-size: 0;
-    line-height: 0;
-    text-indent: -9999px;
-}
-.btn:after .btn:before{
-	content: "";
-    position: absolute;
-    left: 6px;
-    top: 10px;
-    width: 10px;
-    height: 2px;
-    background-color: #5f0080;
-}
-.up{
-    float: right;
-    border-left: 1px solid #dddfe1
 
-}
 
-#addBtn{text-align: center;
+#addBtn{text-align: right;
 }
-
+.priceDivPrice{text-align:right; margin-top: 10px; font-size: 17pt; font-weight: bold  }
+.quantityWrap{ display: flex; justify-content: center; }
+.quantity{ width: 80% ;border: 0.5px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
+.icoBtn{ border: 0px; }
+.btn_reduce { border-right: 1px solid #ddd;  }
+.btn_rise{ border-left: 1px solid #ddd; }
 /* ==================리뷰=================== */
 #reviewTitleWrap{ margin-top: 100px; margin-bottom: 20px; display: flex; justify-content: center; flex-direction: column; align-items: center }
 #reviewTitleColumn{ width: 70%; font-weight: bold; font-size: 20pt }
@@ -307,6 +289,43 @@ function moveReviewPage(field_value, target_page){
 }//moveReviewPage
 /* ===============================리뷰================================= */
 
+ 	function modifyCnt(cnt, flag){
+	
+		if(flag=='minus'){
+			$("#itemCnt").html(cnt-1);
+			$("#cntM").removeAttr("onclick");
+			if(cnt-1>1){
+				$("#cntM").attr("onclick","modifyCnt("+ (cnt-1) +", 'minus')");
+			}
+			$("#cntP").removeAttr("onclick");
+			$("#cntP").attr("onclick","modifyCnt("+ (cnt-1) +", 'plus')");
+			
+			$("#item_cnt").val(cnt-1);
+			modifyPrice(cnt-1);
+		}else{
+			$("#itemCnt").html(cnt+1);
+			$("#cntM").removeAttr("onclick");
+			$("#cntM").attr("onclick","modifyCnt("+ (cnt+1) +", 'minus')");
+			$("#cntP").removeAttr("onclick");
+			$("#cntP").attr("onclick","modifyCnt("+ (cnt+1) +", 'plus')");
+			
+			$("#item_cnt").val(cnt+1);
+			modifyPrice(cnt+1);
+		}//end else
+		
+	}//modifyCnt
+
+	function modifyPrice(cnt) {
+	
+	var itemPrice = $("#finalPrice").val();
+	var cntPrice = itemPrice*cnt;
+	
+	//alert($("[name='itemCnt']").val())
+
+
+	$("#totalPrice").html(cntPrice.toLocaleString()+"원");	
+	}//modifyPrice
+	
 
 </script>
 </head>
@@ -321,7 +340,7 @@ function moveReviewPage(field_value, target_page){
 			<div id="itemwrap" class="itemwrap">
 				<c:set var="item" value="${item_detail}"/>	
 				<div class="thum">
-				<img src="http://localhost/collie_user/common/images/item/${item.item_img }">
+					<img src="http://localhost/common/images/item/${item.item_img }">
 				</div>
 				<!-- 우측의 설명 -->
 				<div id="infoDiv"> 
@@ -329,61 +348,82 @@ function moveReviewPage(field_value, target_page){
 						<span class="item_name"><c:out value="${item.item_name}"/></span>
 					</p>
 					<p class="goods_name">
-						<span class="price"><c:out value="${item.item_price}"/></span>
+						<span class="price"><fmt:formatNumber pattern="#,###" value="${ item.item_price }"/></span>
 						<span class="won">원</span>
 					</p>
+					
 					<div class="goods_info">
-					<dl id="boder">
-						<dt class="tit">판매단위 </dt>
-						<dd><c:out value="${item.item_unit}"/></dd>
-					</dl>
-					<dl>
-						<dt class="tit">중량/용량</dt>
-						<dd><c:out value="${item.item_weight}"/></dd>
-					</dl>
-					<dl>
-						<dt class="tit">안내사항 </dt>
-						<dd><c:out value="${item.item_guide}"/></dd>
-					</dl>
-					<dl>
-						<dt class="tit">재고</dt>
-						<dd><c:out value="${item.item_stock}"/>개<br/></dd>
-					</dl>
+						<dl id="boder">
+							<dt class="tit">판매단위 </dt>
+							<dd><c:out value="${item.item_unit}"/></dd>
+						</dl>
+						<dl>
+							<dt class="tit">중량/용량</dt>
+							<dd><c:out value="${item.item_weight}"/></dd>
+						</dl>
+						<dl>
+							<dt class="tit">안내사항 </dt>
+							<dd><c:out value="${item.item_guide}"/><br/></dd>
+						</dl>
+						<dl>
+							<dt class="tit">재고</dt>
+							<dd><c:out value="${item.item_stock}"/>개<br/></dd>
+						</dl>
 					
 						<span class="tit tit_item">구매수량</span>
-						<span class="count">
-							<button type="button" class="btn down"></button>
-							<input type="number" readonly="readonly" onfocus="this.blur()" class="inp">
-							<button type="button" class="btn up"></button>
+				      	<c:set var="cnt" value="1"/>
+						<span class="count" >
+ 							<button type="button" id="cntM" class="icoBtn"<c:if test="${ cnt>1 }"> onclick="modifyCnt(${ cnt },'minus')"</c:if>>
+	      						<img src="/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px">
+	      					</button>
 						</span>
-						
-						<span class="price">
-							<span class="dc_price"></span>
-						</span>
+ 				      	<a id="itemCnt" name="itemCnt"><c:out value="${ cnt }"/></a>
+				      	<!-- <span id="itemCnt" name="itemCnt">1</span> -->
+ 				      	<button type="button" id="cntP" class="icoBtn" onclick="modifyCnt(${ cnt },'plus')">
+				      		<img src="/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px">
+				      	</button>
+				      	
+				      	<!-- 장바구니 담기 : item_cnt의 value에 구매하려는 상품 개수의 값을 넣어주세요!! -->
+					<div id="addBtn">
+					
+					<div class="priceWrapper">
+					
+					<div class="priceDiv">
+					<span class="priceDivLabel">총 상품금액  : </span>
+					<c:set var="totaPrice" value="${item.item_price}"/>
+					<input type="hidden" id="finalPrice" value="${ item.item_price}">
+					<span class="priceDivPrice" name="totalPrice" id="totalPrice">
+						<%-- <fmt:formatNumber pattern="#,###" value="${item.item_price * cnt }"/> --%>
+						<fmt:formatNumber pattern="#,###" value="${item.item_price}"/>
+					</span>
+					</div>
+					</div>
+					
+					
+					<form id="addCartForm" name="addCartForm">
+						<input type="hidden" name="item_num" value="${ param.item_num }"/>
+						<input type="hidden" name="item_cnt" id="item_cnt" value="1"/>
+					</form>
+					<input type="button" id="addCartBtn" value="장바구니 담기" class="collieBtnMain"/>
 					</div>	
-				</div>
-			</div>
-			
-			<!-- 장바구니 담기 : item_cnt의 value에 구매하려는 상품 개수의 값을 넣어주세요!! -->
-			<div id="addBtn">
-			<form id="addCartForm" name="addCartForm">
-				<input type="hidden" name="item_num" value="${ param.item_num }"/>
-				<input type="hidden" name="item_cnt" value="1"/>
-			</form>
-			<input type="button" id="addCartBtn" value="장바구니 담기" class="collieBtnMain"/>
-			</div>		
+				      	
+				      	</div>
+				      	</div>
+				      	
+					
+							</div>	
 							
-			<!-- 하단의 설명 -->
-			<div class="item_description">
-			
-			<h3 style="text-align: center"><small><c:out value="${item.item_title}"/><br/></small>
-				<c:out value="${item.item_subtitle}"/><br/></h3>
-				
-			<p class="word">
-				<c:out value="${item.item_detail}"/><br/>
-			</p>
-			</div>
-		</div>
+								<!-- 하단의 설명 -->
+						<div class="item_description">
+						
+						<h3 style="text-align: center"><small><c:out value="${item.item_title}"/><br/></small>
+							<c:out value="${item.item_subtitle}"/><br/></h3>
+							
+						<p class="word">
+							<c:out value="${item.item_detail}"/><br/>
+						</p>
+						</div>
+							
 		</div>
 		
 		<div id="reviewWrap">
