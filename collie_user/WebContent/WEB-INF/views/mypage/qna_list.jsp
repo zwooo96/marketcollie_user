@@ -49,7 +49,10 @@ hr{ margin-top: 90px }
 
 a, a:hover{ color: #000000; text-decoration: none }
 .pagination{ margin-left: 180px; margin-top: 30px; }
-
+#qnaBox{ background-color: #F7F7F7; color: #666666; padding: 10px; font-size: 13px; padding-left: 20px }
+#qnaBox:hover{ cursor: pointer; }
+.active {cursor:pointer;}
+.page-item.active .page-link {background-color:#17462B; border-color:#17462B;}
 </style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -99,37 +102,47 @@ function qnaMovePage(cur_page){
            
            var page='<nav aria-label="Page navigation example">';
            page+='<ul class="pagination justify-content-center">';
-           var pre="active";
-           var preOnclick='onclick="qnaMovePage('+jsonObj.pre_page+')" ';
-           if(jsonObj.pre_page<=0){
-              pre="disabled"
-              preOnclick="";
-           }//end if
+           var pre="disabled";
+           var preOnclick='';
+			
+			if(jsonObj.pre_page > 1 && jsonObj.pre_page < jsonObj.start_page) {
+				pre = 'active';
+				preOnclick='onclick="qnaMovePage('+jsonObj.pre_page+')" ';
+			}
            page+='<li class="page-item '+pre+'">';
            page+='<a class="page-link"'+preOnclick+' aria-label="Previous">';
            page+='<span aria-hidden="true">&laquo;</span>';
            page+='</a>';
            page+='</li>';
            
+           var cur="disabled";
            var curOnclick="";
+           
            for(var i=jsonObj.start_page; i<jsonObj.end_page+1; i++){
-              curOnclick='onclick="qnaMovePage('+i+')" ';
-              if(jsonObj.current_page==i){
-                 cur="disabled"
-                 curOnclick="";
+        	   cur="disabled";
+        	   curOnclick="";
+              if(jsonObj.current_page!=i){
+                 cur="active";
+				 curOnclick='onclick="qnaMovePage('+i+')" ';
               }//end if
-              page+='<li class="page-item">';
+              
+              page+='<li class="page-item '+cur+'">';
               page+='<a class="page-link"'+curOnclick+'>';
               page+=i;
               page+='</a>';
               page+='</li>';
            }//end for
+           
+           
            var next="active";
            var nextOnclick='onclick="qnaMovePage('+jsonObj.next_page+')" ';
-           if(cur_page>=jsonObj.total_page){
-              next="disabled"
-              nextOnclick="";
-           }//end if
+
+			// 다음 페이지가 현재 페이지보다 크고, 다음 페이지가 전체 페이지보다 클 때 비활성화 된다.
+			if(jsonObj.current_page >= jsonObj.total_page) {
+				next = 'disabled';
+				nextOnclick="";
+			}
+			
            page+='<li class="page-item '+next+'">';
            page+='<a class="page-link" '+nextOnclick+'aria-label="Next">';
            page+='<span aria-hidden="true">&raquo;</span>';
@@ -279,23 +292,26 @@ function delReply(qna_num){
 	<div id="pagination" class="pagination">
 	   <nav aria-label="Page navigation example">
 	     <ul class="pagination justify-content-center">
-	       <li class="page-item ${paging.pre_page <= 0 ? 'disabled':'active'}">
-	          <a class="page-link"<c:if test="${ paging.pre_page ne '0'}">onclick="qnaMovePage(${paging.pre_page})"</c:if> aria-label="Previous">
+	       <li class="page-item ${paging.pre_page eq '0' ? 'disabled':'active'}" onclick="qnaMovePage(${paging.pre_page})">
+	          <a class="page-link" aria-label="Previous">
 	              <span aria-hidden="true">&laquo;</span>
 	            </a>
 	       </li>
 	       <c:forEach begin="${paging.start_page}" end="${paging.end_page}" step="1" var="cur_page" >
-	          <li class="page-item">
-	             <a class="page-link"<c:if test="${paging.current_page ne cur_page}"> onclick="qnaMovePage(${cur_page})"</c:if>>
+	          <li class="page-item  ${paging.current_page eq cur_page ? 'disabled':'active'}" onclick="qnaMovePage(${cur_page})">
+	             <a class="page-link">
 	                <c:out value="${cur_page}" />
 	             </a>
 	          </li>
 	       </c:forEach>
+	       
+	       
 	       <li class="page-item ${paging.current_page >= paging.total_page ? 'disabled':'active'}">
-	         <a class="page-link"<c:if test="${paging.current_page < paging.total_page}"> onclick="qnaMovePage(${paging.next_page})"</c:if> aria-label="Next">
+	         <a class="page-link" onclick="qnaMovePage(${paging.next_page})" aria-label="Next">
 	           <span aria-hidden="true">&raquo;</span>
 	         </a>
 	       </li>
+	       
 	     </ul>
 	   </nav>
 	</div>

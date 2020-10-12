@@ -92,10 +92,12 @@ function movePage(field_name, field_value, target_page) {
 			}
 			
 			disableOption = 'active';
-			
-			if(jo.next_page >= jo.total_page) {
+			// 다음 페이지가 현재 페이지보다 크고, 다음 페이지가 전체 페이지보다 클 때 비활성화 된다.
+// 			console.log("current_page / total_page " + jo.current_page + " / " + jo.total_page);
+			if(jo.current_page >= jo.total_page) {
 				disableOption = 'disabled';
 			}
+
 			output += '<li class="page-item '+disableOption+'">';
 			output += '<a class="page-link"  onclick="movePage(\'${paging.field_name}\',\'${paging.field_value}\', '+jo.next_page+');"aria-label="Next">';
 			output += '<span aria-hidden="true">&raquo;</span>';
@@ -156,8 +158,7 @@ function movePage(field_name, field_value, target_page) {
 				    	</a>
 				    </li>
 			    </c:forEach>
-			    
-			    <li class="page-item ${paging.next_page >= paging.total_page ? 'disabled':'active'}">
+			    <li class="page-item ${paging.current_page >= paging.total_page ? 'disabled':'active'}">
 			      <a class="page-link"  onclick="movePage('${paging.field_name}','${paging.field_value}', ${paging.next_page});"aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			      </a>

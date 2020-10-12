@@ -137,6 +137,11 @@ public class RangeVO {
 
 	public void calcPaging() {
 		total_page = (int)Math.ceil((double)total_cnt/page_scale);
+		
+		if(current_page > total_page) {
+			current_page = total_page;
+		}
+		
 		start_num = (current_page-1)*page_scale+1;
 		end_num=start_num+page_scale-1;
 		
@@ -149,17 +154,18 @@ public class RangeVO {
 		if(total_page < end_page) {
 			end_page = total_page;
 		}
-
+		
 		if( current_page > page_range ) {
 			pre_page=((current_page-1)/page_range)*page_range;
 		} else {
 			pre_page = current_page - 1;
 		}
 		
-		if( end_page > current_page ){ //"다음" 버튼 활성화하는 조건
-			next_page=current_page+page_range;
-		} else {
-			next_page = current_page + 1;
+		// 다음 페이지가 현재 페이지보다 크고, 다음 페이지가 전체 페이지보다 클 때 비활성화 된다.
+		next_page = current_page + 1;
+		
+		if(current_page < end_page) {
+			next_page = pre_page + 1 + page_range;
 		}
 		
 		start_num=(current_page-1)*page_scale+1; //현 페이지 게시물 시작번호

@@ -86,10 +86,10 @@ function cancelOrder(order_num){
 				    <table class="table table-borderless">
 					    <tr id="oneGoods">
 					      	<td id="goodsImg">
-					      		<a href="http://localhost/collie_user/item/item_detail.do?item_num=${ odd.item_num }"><img src="http://localhost/collie_user/common/images/item/${ odd.item_img }" id="goodsThm" /></a>
+					      		<a href="http://211.238.142.25/item/item_detail.do?item_num=${ odd.item_num }"><img src="http://211.238.142.25/common/images/item/${ odd.item_img }" id="goodsThm" /></a>
 					      	</td>
 					      	<td id="goodsInfo">
-					      		<div><a href="http://localhost/collie_user/item/item_detail.do?item_num=${ odd.item_num }" id="goodsTitle">${ odd.item_name }</a></div>
+					      		<div><a href="http://211.238.142.25/item/item_detail.do?item_num=${ odd.item_num }" id="goodsTitle">${ odd.item_name }</a></div>
 					      		<span id="goodsPrice"><fmt:formatNumber value="${ odd.item_price }" pattern="#,###"/>원</span>
 					      		<span id="goodsCnt">${ odd.item_cnt }개 구매</span>
 					      	</td>

@@ -119,8 +119,8 @@ word-break: break-all;
 #reviewTitleColumn{ width: 70%; font-weight: bold; font-size: 20pt }
 #reviewTitleValue{ width: 70%; margin-top: 20px; color: #bebebe; font-size: 9pt }
 #reviewDiv{ display: flex; justify-content: center }
-#reviewBtn{ background-color: #17462B !important; border-color: #17462B !important; margin-top: 20px; width: 100px; padding: 5px !important; font-size: 14px }
-#reviewBtn:hover, #reviewBtn:active, #reviewBtn:focus{ background-color: #17462B !important; font-size: 14px }
+/* #reviewBtn{ background-color: #17462B !important; border-color: #17462B !important; margin-top: 20px; width: 100px; padding: 5px !important; font-size: 14px } */
+/* #reviewBtn:hover, #reviewBtn:active, #reviewBtn:focus{ background-color: #17462B !important; font-size: 14px } */
 #reviewBtnWrap{ width: 70%; margin:0px auto; display: flex; justify-content: flex-end; }
 #reviewPagination{ margin-top: 80px; clear: both; }
 /* ==================리뷰=================== */

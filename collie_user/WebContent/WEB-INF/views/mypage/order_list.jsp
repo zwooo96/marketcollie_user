@@ -28,17 +28,17 @@
 #containerContent{ margin-top: 30px }
 #orderTime{ color:#666666; font-weight: bold; }
 .table-borderless{ margin:0px }
-#orderGoods{ border: 1px solid #dee2e6; margin-top: 10px; padding: 10px; padding-left: 20px; padding-right: 20px }
+#orderGoods{ border: 1px solid #dee2e6; margin-top: 10px; padding: 10px; padding-left: 20px; padding-right: 20px;}
 #goodsTitle{ border-bottom: 1px solid #dee2e6; padding: 0px; padding-top: 10px; padding-bottom: 10px; font-weight: bold }
 .btn-outline-success{ border-color: #17462B !important; color: #17462B !important }
 .btn-outline-success:hover, #btn-outline-success:active, #btn-outline-success:focus { border-color: #17462B !important; background-color: #17462B !important; color:#FFFFFF !important }
 #goodsImg{ padding-left: 10px; width: 10px; padding-top: 20px; padding-right: 0px }
 #goodsThm{ width:60px; height: 75px }
-#orderNumColumn{ padding-top: 25px; width: 50px; vertical-align: middle; font-size: 14px; padding-bottom: 0px; padding-left: 0px }
-#orderNumValue{ padding-top: 25px; width:500px; vertical-align: middle; font-size: 14px; padding-bottom: 0px; padding-left: 0px }
-#orderPriceColumn{ font-size: 14px; padding-top: 0px; padding-left: 0px }
+#orderNumColumn{ padding-top: 25px; width: 10%; vertical-align: middle; font-size: 14px; padding-bottom: 0px; }
+#orderNumValue{ padding-top: 25px; vertical-align: middle; font-size: 14px; padding-bottom: 0px; padding-left: 0px;}
+#orderPriceColumn{ font-size: 14px; width:10%; padding-top: 0px; }
 #orderPriceValue{ font-size: 14px; padding-top: 0px; padding-left: 0px }
-#goodsBtn{ vertical-align: middle; width:85px; padding-right: 0px; padding-left: 30px }
+#goodsBtn{ vertical-align: middle; width: 15%; padding-right: 0px; padding-left: 30px }
 #btn{ font-size: 14px }
 #pagination{ margin-left: 240px; margin-top: 100px; margin-bottom: 200px }
 </style>
@@ -94,9 +94,9 @@ function movePage(target_page){
 				output += '<td rowspan="2" id="goodsImg">';
 				
 				if( list.item_name.search(',') > 0 ){
-					output += '<img src="http://localhost/collie_user/common/images/item/'+list.item_img.split(',')[0]+'" id="goodsThm"/></td>';
+					output += '<img src="http://211.238.142.25/common/images/item/'+list.item_img.split(',')[0]+'" id="goodsThm"/></td>';
 				}else{
-					output += '<img src="http://localhost/collie_user/common/images/item/'+list.item_img+'" id="goodsThm"/></td>';
+					output += '<img src="http://211.238.142.25/common/images/item/'+list.item_img+'" id="goodsThm"/></td>';
 				}//end else
 				
 				output += '<td id="orderNumColumn">주문번호</td>';
@@ -120,7 +120,7 @@ function movePage(target_page){
 			output += '<ul class="pagination justify-content-center">';
 	
 			var disableOption = 'disabled';
-			if(jo.pre_page > 0) {
+			if(jo.pre_page > 1 && jo.pre_page < jo.start_page) {
 				disableOption = 'active';
 			}
 			output += '<li class="page-item '+disableOption+'">';
@@ -136,7 +136,7 @@ function movePage(target_page){
 			}
 			
 			var disableOption = 'active';
-			if(target_page == jo.end_page) {
+			if(jo.current_page >= jo.total_page) {
 				disableOption = 'disabled';
 			}
 			output += '<li class="page-item '+disableOption+'">';
@@ -191,10 +191,10 @@ function movePage(target_page){
 				    <tr id="orderNum">
 				      <td rowspan="2" id="goodsImg">
 						<c:if test="${ not fn:contains(old.item_name, ',') }">
-					      	<img src="http://localhost/collie_user/common/images/item/${ old.item_img }" id="goodsThm"/>
+					      	<img src="http://211.238.142.25/common/images/item/${ old.item_img }" id="goodsThm"/>
 						</c:if>
 						<c:if test="${ fn:contains(old.item_name, ',') }">
-					      	<img src="http://localhost/collie_user/common/images/item/${ fn:split(old.item_img, ',')[0] }" id="goodsThm"/>
+					      	<img src="http://211.238.142.25/common/images/item/${ fn:split(old.item_img, ',')[0] }" id="goodsThm"/>
 						</c:if>
 				      </td>
 				      <td id="orderNumColumn">주문번호</td>
@@ -229,20 +229,19 @@ function movePage(target_page){
 				    	</a>
 				    </li>
 			    </c:forEach>
-			    <li class="page-item ${paging.current_page eq paging.end_page ? 'disabled':'active'}">
+			    <li class="page-item ${paging.current_page >= paging.total_page ? 'disabled':'active'}">
 			      <a class="page-link"  onclick="movePage(${paging.next_page});"aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			      </a>
 			    </li>
 			  </ul>
 			</nav>
+		</div>
 		</c:if>
 		</div>
 	</div>
 	
 	<jsp:include page="../common/footer.jsp" />
 	
-</div>
-
 </body>
 </html>	

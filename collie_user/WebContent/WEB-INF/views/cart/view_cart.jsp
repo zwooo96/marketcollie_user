@@ -179,13 +179,13 @@ function modifyCnt(cart_num, item_cnt, item_price,flag){
 					output+=' onclick="modifyCnt('+cart_num+','+item_cnt+','+item_price+',\'minus\')"';
 				}//end if
 				output+='>';
-				output+='<img src="/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px">';
+				output+='<img src="http://211.238.142.25/cart/ico_minus.png" class="btn_reduce" style="width: 10px">';
 				output+='</button>';
 				
 				output+=item_cnt;
 				
 				output+='<button type="button" class="icoBtn" onclick="modifyCnt('+cart_num+','+item_cnt+','+item_price+',\'plus\')">';
-				output+='<img src="/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px">';
+				output+='<img src="http://211.238.142.25/cart/ico_plus.png" class="btn_rise" style="width: 10px">';
 				output+='</button>';
 				$("#quantity"+cart_num).html(output);
 				var totalPrice=item_cnt*item_price;
@@ -300,11 +300,11 @@ function modifyTotalPrice(){
 	      	<div class="quantityWrap">
 	      	<div class="quantity" id="quantity${ cart.cart_num }">
  	      	<button type="button" class="icoBtn"<c:if test="${ cart.item_cnt>1 }"> onclick="modifyCnt(${cart.cart_num},${ cart.item_cnt },${ cart.item_price },'minus')"</c:if>>
-	      	<img src="/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px">
+	      	<img src="http://211.238.142.25/cart/ico_minus.png" class="btn_reduce" style="width: 10px">
 	      	</button>
 	      	<c:out value="${ cart.item_cnt }"/>
 	      	<button type="button" class="icoBtn" onclick="modifyCnt(${cart.cart_num},${ cart.item_cnt },${ cart.item_price },'plus')">
-	      	<img src="/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px">
+	      	<img src="http://211.238.142.25/cart/ico_plus.png" class="btn_rise" style="width: 10px">
 	      	</button>
 	      	</div>
 	      	</div>
@@ -314,7 +314,7 @@ function modifyTotalPrice(){
 	      	<fmt:formatNumber pattern="#,###" value="${ cart.item_price * cart.item_cnt }"/>원
 	      </td>
 	      <td style="vertical-align: middle; text-align: center;">
-	      	<img src="/collie_user/cart/cart_x.png" onclick="delItem(${cart.cart_num})" style="width: 10px; cursor: pointer;">
+	      	<img src="http://211.238.142.25/cart/cart_x.png" onclick="delItem(${cart.cart_num})" style="width: 10px; cursor: pointer;">
 	      </td>
 	    </tr>
 		</c:forEach>

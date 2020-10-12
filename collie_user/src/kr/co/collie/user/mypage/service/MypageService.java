@@ -71,6 +71,8 @@ public class MypageService {
 		jo.put("end_page", rVO.getEnd_page());
 		jo.put("pre_page", rVO.getPre_page());
 		jo.put("next_page", rVO.getNext_page());
+		jo.put("current_page", rVO.getCurrent_page());
+		jo.put("total_page", rVO.getTotal_page());
 		
 		JSONArray ja = new JSONArray();
 		JSONObject joTemp = null;
@@ -241,6 +243,8 @@ public class MypageService {
 		rVO.setTotal_cnt(mpDAO.selectQnaTotalCnt(member_num));
 		rVO.calcPaging();
 		
+		System.out.println("range vo : " + rVO);
+		
 		list = mpDAO.selectQnaList(rVO);
 		String flag="fail";
 		if(list!=null) {
@@ -260,12 +264,16 @@ public class MypageService {
 			}//end for
 			json.put("qna_list", jsonArr);
 			
-			json.put("pre_page", rVO.getPre_page());
+			json.put("start_num", rVO.getStart_num());
+			json.put("end_num", rVO.getEnd_num());
+			
 			json.put("start_page", rVO.getStart_page());
 			json.put("end_page", rVO.getEnd_page());
+			json.put("pre_page", rVO.getPre_page());
+			json.put("next_page", rVO.getNext_page());
 			json.put("current_page", rVO.getCurrent_page());
 			json.put("total_page", rVO.getTotal_page());
-			json.put("next_page", rVO.getNext_page());
+			
 		}//end if
 		json.put("flag", flag);
 		
