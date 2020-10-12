@@ -374,13 +374,13 @@ function moveReviewPage(field_value, target_page){
 				      	<c:set var="cnt" value="1"/>
 						<span class="count" >
  							<button type="button" id="cntM" class="icoBtn"<c:if test="${ cnt>1 }"> onclick="modifyCnt(${ cnt },'minus')"</c:if>>
-	      						<img src="/collie_user/cart/ico_minus.png" class="btn_reduce" style="width: 10px">
+	      						<img src="/cart/ico_minus.png" class="btn_reduce" style="width: 10px">
 	      					</button>
 						</span>
  				      	<a id="itemCnt" name="itemCnt"><c:out value="${ cnt }"/></a>
 				      	<!-- <span id="itemCnt" name="itemCnt">1</span> -->
  				      	<button type="button" id="cntP" class="icoBtn" onclick="modifyCnt(${ cnt },'plus')">
-				      		<img src="/collie_user/cart/ico_plus.png" class="btn_rise" style="width: 10px">
+				      		<img src="/cart/ico_plus.png" class="btn_rise" style="width: 10px">
 				      	</button>
 				      	
 				      	<!-- 장바구니 담기 : item_cnt의 value에 구매하려는 상품 개수의 값을 넣어주세요!! -->
