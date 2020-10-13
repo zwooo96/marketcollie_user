@@ -123,6 +123,8 @@ word-break: break-all;
 /* #reviewBtn:hover, #reviewBtn:active, #reviewBtn:focus{ background-color: #17462B !important; font-size: 14px } */
 #reviewBtnWrap{ width: 70%; margin:0px auto; display: flex; justify-content: flex-end; }
 #reviewPagination{ margin-top: 80px; clear: both; }
+.active {cursor:pointer;}
+.page-item.active .page-link {background-color:#17462B !important; border-color:#17462B !important;}
 /* ==================리뷰=================== */
 
 /* ==================아이템문의=================== */
@@ -241,7 +243,7 @@ function moveReviewPage(field_value, target_page){
 			output += '</thead>';
 			output += '<tbody>';
 			$.each(jo.review_list, function(idx, list){
-				output += '<tr id="reviewTr'+list.review_num+'" class="tableContent" onclick="reviewToggle('+list.review_num+')">';
+				output += '<tr id="reviewTr'+list.review_num+'" class="tableContent" onclick="reviewToggle('+list.review_num+')" style="cursor:pointer">';
 				output += '<td class="tabTd">' + list.review_num + '</td>';
 				output += '<td class="tabTd">' + list.review_subject + '</td>';
 				output += '<td class="tabTd">' + list.id + '</td>';

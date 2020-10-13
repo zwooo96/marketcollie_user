@@ -191,12 +191,4 @@ public class ItemDAO {
 		
 	}//insertItemQna
 	
-	public static void main(String[] args) {
-		ReviewDetailVO rdVO = new ReviewDetailVO();
-		rdVO.setItem_num(1);
-		rdVO.setReview_num(66);
-		
-		System.out.println(ItemDAO.getInstance().selectReviewDetail(rdVO));
-	}
-	
 }

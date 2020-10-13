@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <title>마켓콜리</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/collie_user/common/css/common.css">
-
+<link rel="stylesheet" type="text/css" href="http://211.238.142.25/common/css/common.css">
 <style type="text/css">
 #container{ width: 70%; margin: 0px auto; min-height: 700px; margin-top:50px; }
 #containerMenu{ width: 200px; float: left; }
@@ -56,7 +55,7 @@ $(function(){
 				<h4><strong>비밀번호가 변경되었습니다.</strong></h4>
 				<hr>
 				<div id="btnDiv">
-					<button type="button" class="btn btn-primary" onclick="location.href='/collie_user/index.do'">메인으로</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='/index.do'">메인으로</button>
 				</div>
 			</div>
 		</div>
