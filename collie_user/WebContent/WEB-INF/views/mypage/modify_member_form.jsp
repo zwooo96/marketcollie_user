@@ -28,6 +28,8 @@
 hr{ margin-top: 90px }
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus{ background-color: #17462B !important; }
 #btnDiv{ width: 250px; margin: 0px auto }
+.modify-btns {text-align:right;}
+.modify-btn {background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 150px; padding: 15px; color: white }
 </style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -37,6 +39,8 @@ hr{ margin-top: 90px }
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+	setDefaultValue();
 	
 	var msg = '${ msg }';
 	if( msg != '' ){
@@ -144,6 +148,30 @@ function sample4_execDaumPostcode() {
        }
     }).open();
 }
+
+
+function setDefaultValue() {
+	var phone = '${user_info.phone}';
+	if(phone != '') {
+		var phoneArr = phone.split('-');
+		$('#phone1').val(phoneArr[0]);
+		$('#phone2').val(phoneArr[1]);
+		$('#phone3').val(phoneArr[2]);
+	}
+	
+	var zipcode = '${user_info.zipcode}';
+	if(zipcode != '') {
+		$('#zipcode').val(zipcode);
+	}
+	var addr = '${user_info.addr}';
+	if(addr != '') {
+		$('#addr').val(addr);
+	}
+	var addr_detail = '${user_info.addr_detail}';
+	if(addr_detail != '') {
+		$('#addr_detail').val(addr_detail);
+	}
+}
 </script>
 </head>
 <body style="font-family: nanumbarungothic">
@@ -217,9 +245,9 @@ function sample4_execDaumPostcode() {
 			      <input type="email" class="form-control" name="addr_detail" id="addr_detail">
 			    </div>
 		  	</div>
-				<div style="margin-left: 350px;">
-					<input type="button"  class="btn-primary" value="탈퇴하기" id="removeBtn"  style="background-color: #17462B; border-color: #17462B; margin:0px auto; margin-top: 30px; width: 150px; padding: 15px; color: white" />
-					 <input type="button" class="btn-primary" value="회원정보 수정" id="modifyBtn" style="background-color: #17462B; border-color: #17462B; margin-left:150px ; margin-top:20px; margin:0px auto; width: 150px; padding: 15px; color: white">
+				<div class="modify-btns">
+					<input type="button"  class="modify-btn" value="탈퇴하기" id="removeBtn" />
+					 <input type="button" class="modify-btn" value="회원정보 수정" id="modifyBtn">
 				</div> 
 		    </form>
 				</div>
