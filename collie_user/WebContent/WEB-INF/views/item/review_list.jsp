@@ -37,12 +37,12 @@ function writeReview(item_num) {
 	<tbody>
 		<c:if test="${ empty review_list }">
 		<tr>
-			<td colspan="4">상품 후기가 없습니다.</td>
+			<td colspan="4" style="text-align: center; padding-top: 30px">상품 후기가 없습니다.</td>
 		</tr>
 		</c:if>
 		<c:forEach var="review" items="${ review_list }">
 			<input type="hidden" name="review_num" value="${ review.review_num }"/>
-			<tr id="reviewTr${ review.review_num }" class="tableContent" onclick="reviewToggle(${ review.review_num });">
+			<tr id="reviewTr${ review.review_num }" class="tableContent" onclick="reviewToggle(${ review.review_num });" style="cursor: pointer">
 				<td class="tabTd">${ review.review_num }</td>
 				<td class="tabTd">${ review.review_subject }</td>
 				<td class="tabTd">${ review.id }</td>

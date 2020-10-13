@@ -77,7 +77,7 @@
 		from member
 		where member_num = #{ member_num } and pass = #{ pass } 
 	</select>
-
+ 
 	
 	      <!-- 개인정보 수정하는 일  -->
        <update id="updateMember" parameterType="kr.co.collie.user.mypage.vo.ModifyMemberVO" >

@@ -41,6 +41,8 @@
 #goodsBtn{ vertical-align: middle; width: 15%; padding-right: 0px; padding-left: 30px }
 #btn{ font-size: 14px }
 #pagination{ margin-left: 240px; margin-top: 100px; margin-bottom: 200px }
+.active {cursor:pointer;}
+.page-item.active .page-link {background-color:#17462B !important; border-color:#17462B !important;}
 </style>
 <!-- Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

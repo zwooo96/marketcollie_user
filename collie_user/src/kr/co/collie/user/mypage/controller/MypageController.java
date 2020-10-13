@@ -235,14 +235,14 @@ public class MypageController {
 			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
 		}//end catch
 		
-		return "redirect:modify_pass_form.jsp";
+		return "redirect:modify_pass_form.do";
 	}//checkPassForm
 	
 	/**
 	 * 비밀번호 수정하기 위한 폼
 	 * @return
 	 */
-	@RequestMapping(value="/mypage/modify_pass_form.do", method=POST)
+	@RequestMapping(value="/mypage/modify_pass_form.do", method=GET)
 	public String modifyPassForm() {
 		return "mypage/modify_pass_form";
 	}//modifyPassForm
