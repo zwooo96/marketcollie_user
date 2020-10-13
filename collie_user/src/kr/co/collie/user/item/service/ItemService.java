@@ -34,7 +34,7 @@ public class ItemService {
 		//JSP에서 필요한 전체 레코드 갯수 조회
 		int totalCnt = getItemListCnt(rVO);
 		rVO.setTotal_cnt(totalCnt);
-		rVO.setPage_scale(1);
+		rVO.setPage_scale(6);
 		rVO.calcPaging();// 모든 변수 값 설정 후 페이징 계산
 		list = dDAO.selectItemList(rVO);
 		
