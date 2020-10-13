@@ -37,7 +37,7 @@
 
 if(${ empty sessionScope.user_info }){
 	alert("로그인 후 이용 가능합니다.");
-	location.href="index.do";
+	location.href="/index.do";
 }//end else
 
 $(function(){

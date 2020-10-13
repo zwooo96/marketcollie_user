@@ -84,7 +84,7 @@ border-color: #17462B; }
 
 if(${ empty sessionScope.user_info }){
 	alert("로그인 후 이용 가능합니다.");
-	location.href="index.do";
+	location.href="/index.do";
 }//end else
 
 $(function(){
@@ -289,10 +289,12 @@ function modifyTotalPrice(){
 	      </div>
 	      </td>
 	      <td style="vertical-align: middle; text-align: center;">
-	      	<c:out value="${ cart.item_img }"/>
+	      	<img alt="상품 이미지" src="/common/images/item/${ cart.item_img }" style="width: 80px"/>
 	      </td>
 	      <td style="vertical-align: middle;">
-	      	<a href="#${ cart.item_num }" style="font-weight: bold;"><c:out value="${ cart.item_name }"/></a>
+	      	<a href="/item/item_detail.do?item_num=${ cart.item_num }" style="font-weight: bold;">
+	      	<c:out value="${ cart.item_name }"/>
+	      	</a>
 	      	<br/>
 	      	<a style="font-size: 10pt"><fmt:formatNumber pattern="#,###" value="${ cart.item_price }"/>원</a>
 	      </td>

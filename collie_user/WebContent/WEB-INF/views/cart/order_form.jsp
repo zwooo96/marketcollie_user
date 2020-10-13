@@ -83,7 +83,7 @@ border-color: #17462B; }
 
 if(${ empty sessionScope.user_info }){
 	alert("로그인 후 이용 가능합니다.");
-	location.href="index.do";
+	location.href="/index.do";
 }//end else
 
 $(function(){
@@ -379,7 +379,7 @@ function orderItem(){
 		<c:set var="totalCnt" value="${ totalCnt + cart.item_price * cart.item_cnt }"/>
 	    <tr id="tableContent${ cart.cart_num }" class="tableContent">
 	      <td style="vertical-align: middle; text-align: center;">
-	      	<c:out value="${ cart.item_img }"/>
+	      	<img alt="상품 이미지" src="/common/images/item/${ cart.item_img }" style="width: 80px">
 	      	<input type="hidden" name="cart_num" value="${ cart.cart_num }"/>
 	      	<input type="hidden" name="item_num" value="${ cart.item_num }"/>
 	      	<input type="hidden" name="item_cnt" value="${ cart.item_cnt }"/>
