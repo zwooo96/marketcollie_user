@@ -39,14 +39,15 @@ public class MypageController {
 	@RequestMapping(value="/mypage/order_list.do", method = GET)
 	public String orderList(HttpSession session, Model model, RangeVO rVO) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		rVO.setField_name("member_num");
-		rVO.setField_value(ld.getMember_num());
-		
-		MypageService ms = new MypageService();
-		List<OrderListDomain> list = ms.getOrderList(rVO);
-		model.addAttribute("order_list", list);
-		model.addAttribute("paging", rVO);
-		
+		if( ld != null ) {
+			rVO.setField_name("member_num");
+			rVO.setField_value(ld.getMember_num());
+			
+			MypageService ms = new MypageService();
+			List<OrderListDomain> list = ms.getOrderList(rVO);
+			model.addAttribute("order_list", list);
+			model.addAttribute("paging", rVO);
+		}//end if
 		return "mypage/order_list";
 	}//orderList
 	
@@ -61,13 +62,15 @@ public class MypageController {
 	@RequestMapping(value="/mypage/order_list_page.do", method = GET)
 	public String orderListPaging(HttpSession session, Model model, RangeVO rVO) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		rVO.setField_name("member_num");
-		rVO.setField_value(ld.getMember_num());
-		
-		MypageService ms = new MypageService();
-		List<OrderListDomain> list = ms.getOrderList(rVO);
-		String json = ms.orderListJson(list, rVO);
-		model.addAttribute("json", json);
+		if( ld != null ) {
+			rVO.setField_name("member_num");
+			rVO.setField_value(ld.getMember_num());
+			
+			MypageService ms = new MypageService();
+			List<OrderListDomain> list = ms.getOrderList(rVO);
+			String json = ms.orderListJson(list, rVO);
+			model.addAttribute("json", json);
+		}//end if
 		
 		return "mypage/order_list_json";
 	}//orderListPaging
@@ -82,13 +85,15 @@ public class MypageController {
 	@RequestMapping(value="/mypage/order_detail.do", method=GET)
 	public String orderDetail(MyOrderVO moVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		moVO.setMember_num(ld.getMember_num());
-		
-		MypageService ms = new MypageService();
-		OrderDetailDomain odd = ms.getOrderDetail(moVO);
-		
-		model.addAttribute("order_detail", odd);
-		model.addAttribute("user_name", ld.getName());
+		if( ld != null ) {
+			moVO.setMember_num(ld.getMember_num());
+			
+			MypageService ms = new MypageService();
+			OrderDetailDomain odd = ms.getOrderDetail(moVO);
+			
+			model.addAttribute("order_detail", odd);
+			model.addAttribute("user_name", ld.getName());
+		}//end if
 		
 		return "mypage/order_detail";
 	}//orderDetail
@@ -103,11 +108,13 @@ public class MypageController {
 	@RequestMapping(value="/mypage/order_cancel.do", method=GET)
 	public String cancelOrder(MyOrderVO moVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		moVO.setMember_num(ld.getMember_num());
-		
-		MypageService ms = new MypageService();
-		boolean flag = ms.cancelOrder(moVO);
-		model.addAttribute("cancelFlag", flag);
+		if( ld != null ) {
+			moVO.setMember_num(ld.getMember_num());
+			
+			MypageService ms = new MypageService();
+			boolean flag = ms.cancelOrder(moVO);
+			model.addAttribute("cancelFlag", flag);
+		}//end if
 		
 		return "mypage/order_list";
 	}//cancelOrder
@@ -234,14 +241,15 @@ public class MypageController {
 	@RequestMapping(value="/mypage/check_pass.do", method=POST)
 	public String checkPass(PassCheckVO pcVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
-		pcVO.setMember_num(ld.getMember_num());
-		
-		MypageService ms = new MypageService();
-		try {
-			boolean flag = ms.getMemberPass(pcVO);
-		} catch(NullPointerException npe) {
-			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
-		}//end catch
+		if( ld != null) {
+			pcVO.setMember_num(ld.getMember_num());
+			MypageService ms = new MypageService();
+			try {
+				boolean flag = ms.getMemberPass(pcVO);
+			} catch(NullPointerException npe) {
+				model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			}//end catch
+		}//end if
 		
 		return "redirect:modify_pass_form.do";
 	}//checkPassForm
@@ -263,10 +271,11 @@ public class MypageController {
 	@RequestMapping(value="/mypage/modify_pass.do", method=POST)
 	public String modifyPass(UpdatePassVO upVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
-		upVO.setMember_num(ld.getMember_num());
-		
-		MypageService ms = new MypageService();
-		boolean flag = ms.modifyPass(upVO);
+		if( ld != null ) {
+			upVO.setMember_num(ld.getMember_num());
+			MypageService ms = new MypageService();
+			boolean flag = ms.modifyPass(upVO);
+		}//end if
 		
 		return "mypage/modify_pass_result";
 	}//checkPassForm

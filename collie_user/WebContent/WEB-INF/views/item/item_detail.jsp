@@ -167,6 +167,11 @@ word-break: break-all;
 <script type="text/javascript">
 $(function(){
 	$("#addCartBtn").click(function(){
+		if( ${ empty sessionScope.user_info } ){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href = "/login_form.do";
+			return;
+		}//end if
 		var param = $("form[name=addCartForm]").serialize();
 		$.ajax({
 			url : "cart.do",

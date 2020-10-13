@@ -5,8 +5,9 @@ import java.util.List;
 public class OrderDetailDomain {
 	private List<OrderItemDomain> orderItemList;
 	private int total_price;
-	private String input_date, card_num, card_bank, receive_name, receive_phone, receive_addr, receive_addr_detail, receive_zipcode, company, invoice_no;
-
+	private String input_date, card_num, card_bank, receive_name, receive_phone, receive_addr, receive_addr_detail, receive_zipcode,
+						company, invoice_no, shipping_flag;
+	
 	public List<OrderItemDomain> getOrderItemList() {
 		return orderItemList;
 	}
@@ -42,6 +43,9 @@ public class OrderDetailDomain {
 	}
 	public String getInvoice_no() {
 		return invoice_no;
+	}
+	public String getShipping_flag() {
+		return shipping_flag;
 	}
 	public void setOrderItemList(List<OrderItemDomain> orderItemList) {
 		this.orderItemList = orderItemList;
@@ -79,5 +83,8 @@ public class OrderDetailDomain {
 	public void setInvoice_no(String invoice_no) {
 		this.invoice_no = invoice_no;
 	}
-
+	public void setShipping_flag(String shipping_flag) {
+		this.shipping_flag = shipping_flag;
+	}
+	
 }

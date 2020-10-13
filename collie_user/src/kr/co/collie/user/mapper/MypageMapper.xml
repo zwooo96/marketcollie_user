@@ -35,10 +35,11 @@
 		<result property="receive_zipcode" column="RECEIVE_ZIPCODE"/>
 		<result property="company" column="COMPANY"/>
 		<result property="invoice_no" column="INVOICE_NO"/>
+		<result property="shipping_flag" column="SHIPPING_FLAG"/>
 		<collection property="orderItemList" column="{member_num=MEMBER_NUM, order_num=ORDER_NUM}" javaType="java.util.ArrayList" ofType="kr.co.collie.user.mypage.domain.OrderItemDomain" select="selectOrderItem"/>
 	</resultMap>
 	<select id="selectOrderInfo" parameterType="kr.co.collie.user.mypage.vo.MyOrderVO" resultMap="selectOrderDetail">
-		select f.total_price, f.input_date, p.card_num, p.card_bank, d.receive_name, d.receive_phone, d.receive_addr, d.receive_addr_detail, d.receive_zipcode, f.member_num, f.order_num, f.company, f.invoice_no
+		select f.total_price, f.input_date, p.card_num, p.card_bank, d.receive_name, d.receive_phone, d.receive_addr, d.receive_addr_detail, d.receive_zipcode, f.member_num, f.order_num, f.company, f.invoice_no, f.shipping_flag
 		from order_form f, payment p, destination d, member m
 		where (p.order_num=f.order_num and d.order_num=f.order_num and f.member_num=m.member_num)
 					and f.member_num = #{ member_num } and f.order_num = #{ order_num }

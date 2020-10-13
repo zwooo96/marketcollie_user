@@ -4,6 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript">
 function writeReview(item_num) {
+	if( ${ empty sessionScope.user_info } ){
+		alert("로그인이 필요한 서비스입니다.");
+		location.href = "/login_form.do";
+		return;
+	}//end if	
 	var buyFlag = '<c:out value="${ buyFlag }"/>';
 	if( buyFlag == 'false' || buyFlag == ''){
 		alert("상품을 구입하신 분만 후기 작성이 가능합니다.");

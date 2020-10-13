@@ -35,6 +35,11 @@ td{ vertical-align: middle !important; }
 <script type="text/javascript">
 $(function(){
 	$("#btn").click(function(){
+		if( ${ empty sessionScope.user_info } ){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href = "/login_form.do";
+			return;
+		}//end if
 		if( $("#review_subject").val() == "" ){
 			alert("제목을 입력해주세요.");
 			return;

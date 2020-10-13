@@ -132,10 +132,11 @@ public class ItemController {
 	@RequestMapping(value="/item/review_write.do", method=RequestMethod.POST)
 	public String addReview(ReviewVO rVO, HttpSession session, int item_num) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		rVO.setMember_num(ld.getMember_num());
-		
-		ItemService is = new ItemService();
-		is.addReview(rVO);
+		if( ld != null) {
+			rVO.setMember_num(ld.getMember_num());
+			ItemService is = new ItemService();
+			is.addReview(rVO);
+		}//end if
 		
 		return "redirect:/item/item_detail.do?item_num="+item_num;
 	}//addReview

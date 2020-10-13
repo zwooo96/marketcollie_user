@@ -35,9 +35,11 @@ public class CartController {
 	@ResponseBody
 	public void addCart(HttpSession session, CartVO cVO) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
-		cVO.setMember_num(ld.getMember_num());
-		CartService cs = new CartService();
-		cs.addCart(cVO);
+		if( ld != null ) {
+			cVO.setMember_num(ld.getMember_num());
+			CartService cs = new CartService();
+			cs.addCart(cVO);
+		}//end if
 	}//addCart
 	
 	@RequestMapping(value="/cart/view.do", method=GET)

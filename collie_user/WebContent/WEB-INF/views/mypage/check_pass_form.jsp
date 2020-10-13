@@ -37,7 +37,18 @@ hr{ margin-top: 90px }
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
+	if( ${ empty sessionScope.user_info } ){
+		alert("로그인이 필요한 서비스입니다.");
+		location.href = "/login_form.do";
+		return;
+	}//end if	
+	
 	$("#btn").click(function(){
+		if( ${ empty sessionScope.user_info } ){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href = "/login_form.do";
+			return;
+		}//end if
 		if( $("#pass").val() == "" ){
 			alert("비밀번호를 입력해주세요.");
 			return;

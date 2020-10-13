@@ -46,6 +46,11 @@ $(function(){
 	
 	//비밀번호 변경
 	$("#btn").click(function(){
+		if( ${ empty sessionScope.user_info } ){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href = "/login_form.do";
+			return;
+		}//end if
 		if($("#new_pass").val().replace(/[0-9A-Za-z]/g, "") != ""){
 			alert("비밀번호는 숫자 또는 영문 대,소문자만 가능합니다.");
 			$("#new_pass").val("");

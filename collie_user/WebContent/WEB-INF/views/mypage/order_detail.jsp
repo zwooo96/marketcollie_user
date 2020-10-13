@@ -31,12 +31,14 @@
 #goodsTitle:hover{ font-size: 17px; text-decoration: none; }
 #goodsPrice{ font-size: 16px; padding-left: 2px }
 #goodsCnt{ color:#666666; font-size: 15px; margin-left: 5px }
+#orderStatus{ color: #17462B; font-weight: bold; text-align: right; vertical-align: middle; padding-right: 60px }
 .btn-outline-success{ border-color: #17462B !important; color: #17462B !important }
 .btn-outline-success:hover, #btn-outline-success:active, #btn-outline-success:focus { border-color: #17462B !important; background-color: #FFFFFF !important; color:#17462B !important }
 #orderBtn{ text-align: center; margin-top:50px }
 #searchBtn{ width: 250px; padding: 15px }
 #cancelBtn{ margin-left:20px; width: 250px; padding: 15px }
-#Info{ margin-top: 100px }
+#orderMsg{ margin-top: 20px; text-align: center; color: #666666 }
+#Info{ margin-top: 90px }
 #payInfo, #orderInfo, #receiveInfo{ color:#666666; border-bottom: 2px solid #17462B; padding-left: 0px; padding-bottom: 5px; width: 1100px  }
 .infoColumn{ font-size: 15px; font-weight: bold; width: 250px }
 .infoValue{ color:#4C4C4C; font-size: 14px }
@@ -50,6 +52,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
+	if( ${ empty sessionScope.user_info } ){
+		alert("로그인이 필요한 서비스입니다.");
+		location.href = "/login_form.do";
+		return;
+	}//end if
+	if( '${ order_detail.shipping_flag }' == 'Y' ){
+		$("#cancelBtn").attr('disabled', true);
+	}//end if
 });//ready
 
 function trackingInfo(){
@@ -93,6 +103,10 @@ function cancelOrder(order_num){
 					      		<span id="goodsPrice"><fmt:formatNumber value="${ odd.item_price }" pattern="#,###"/>원</span>
 					      		<span id="goodsCnt">${ odd.item_cnt }개 구매</span>
 					      	</td>
+					      	<td id="orderStatus">
+					      		<c:if test="${ order_detail.shipping_flag eq 'N' }">발송대기</c:if>
+					      		<c:if test="${ order_detail.shipping_flag eq 'Y' }">발송완료</c:if>
+					      	</td>
 					      </tr>
 					</table>
 				</div>
@@ -108,6 +122,7 @@ function cancelOrder(order_num){
 					<button id="searchBtn" type="button" class="btn btn-outline-success" onclick="trackingInfo();">배송 현황 조회</button>
 					<button id="cancelBtn" type="button" class="btn btn-outline-success" onclick="cancelOrder(${ param.order_num });">전체 상품 주문 취소</button>
 				</div>
+				<div id="orderMsg">직접 주문 취소는 <strong>'발송대기'</strong> 상태일 경우에만 가능합니다</div>
 				<div id="Info">
 				<div id="payWrap">
 				<table class="table table-borderless">

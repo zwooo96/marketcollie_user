@@ -51,14 +51,28 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	
+	if( ${ empty sessionScope.user_info } ){
+		alert("로그인이 필요한 서비스입니다.");
+		location.href = "/login_form.do";
+		return;
+	}//end if	
 });//ready
 
 function getOrderDetail(order_num) {
-	   location.href="order_detail.do?order_num="+order_num;
+	if( ${ empty sessionScope.user_info } ){
+		alert("로그인이 필요한 서비스입니다.");
+		location.href = "/login_form.do";
+		return;
+	}//end if	
+	location.href="order_detail.do?order_num="+order_num;
 }//getOrderDetail
 
 function movePage(target_page){
+	if( ${ empty sessionScope.user_info } ){
+		alert("로그인이 필요한 서비스입니다.");
+		location.href = "/login_form.do";
+		return;
+	}//end if	
 	$.ajax({
 		url : "order_list_page.do",
 		type : "GET",
