@@ -95,7 +95,7 @@
        <!-- 회원 탈퇴하는 일  -->
        <update id="removeMember" parameterType="kr.co.collie.user.mypage.vo.DeleteMemberVO">
             update member
-            set  member_flag = 'N'
+            set  member_flag = 'N', id=null, pass=null, name=null, email=null,phone=null,zipcode=null, addr=null, addr_detail=null, ip=null
             where  member_num = #{ member_num } and pass=#{ pass }
        </update>
        
@@ -118,7 +118,7 @@
 		
 		<!-- 문의내역 상세 조회 -->
 		<select id="selectQnaDetail" parameterType="kr.co.collie.user.mypage.vo.QnaVO" resultType="kr.co.collie.user.mypage.domain.QnaDetailDomain">
-			select qna_content, qna_reply, to_char(reply_date,'yyyy-mm-dd')reply_date
+			select qna_content, qna_reply, to_char(reply_date,'yyyy-mm-dd') reply_date
 			from qna
 			where member_num=#{member_num} and qna_num=#{qna_num}
 		</select>

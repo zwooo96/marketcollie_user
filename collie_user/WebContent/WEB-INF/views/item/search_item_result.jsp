@@ -116,6 +116,7 @@ function movePage(field_name, field_value, target_page) {
 
 <div id="wrap">
 	<c:import url="/header.do" />
+	
 	<div id="container">
 		
 		<div id="containerHeader">

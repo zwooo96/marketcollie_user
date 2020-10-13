@@ -45,7 +45,7 @@ $(function(){
 	<c:import url="/header.do" />
 	
 	<div id="container">
-		<jsp:include page="../WEB-INF/views/common/mypage_menu.jsp"/>
+		<jsp:include page="../common/mypage_menu.jsp"/>
 		<div id="contentWrap">
 		<div id="containerTitle">
 			<h4><strong>비밀번호 변경</strong></h4>
@@ -56,13 +56,13 @@ $(function(){
 				<h4><strong>비밀번호가 변경되었습니다.</strong></h4>
 				<hr>
 				<div id="btnDiv">
-					<button type="button" class="btn btn-primary" onclick="location.href='/collie_user/index.do'">메인으로</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='/index.do'">메인으로</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<jsp:include page="../WEB-INF/views/common/footer.jsp" />
+	<jsp:include page="../common/footer.jsp" />
 	
 </div>
 

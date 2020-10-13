@@ -48,7 +48,7 @@ hr{ margin-top: 90px }
 }
 
 a, a:hover{ color: #000000; text-decoration: none }
-.pagination{ margin-left: 180px; margin-top: 30px; }
+.pagination{margin: 0px auto; width: 700px; margin-top: 20px; margin-bottom: 20px;}
 #qnaBox{ background-color: #F7F7F7; color: #666666; padding: 10px; font-size: 13px; padding-left: 20px }
 #qnaBox:hover{ cursor: pointer; }
 .active {cursor:pointer;}
@@ -318,6 +318,7 @@ function delReply(qna_num){
 	</div>
 	</div>
 	</div>
+	
 	<jsp:include page="../common/footer.jsp" />
 	
 

@@ -126,7 +126,6 @@ public class MypageService {
 	 */
 	public boolean getMemberPass(PassCheckVO pcVO) {
 		boolean flag = false;
-		
 		MypageDAO mpDAO = MypageDAO.getInstance();
 		try {
 			pcVO.setPass(DataEncrypt.messageDigest("MD5", pcVO.getPass()));

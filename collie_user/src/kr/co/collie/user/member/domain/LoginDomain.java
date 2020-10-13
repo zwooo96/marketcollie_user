@@ -52,6 +52,11 @@ public class LoginDomain {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
+	@Override
+	public String toString() {
+		return "LoginDomain [member_num=" + member_num + ", id=" + id + ", name=" + name + ", email=" + email
+				+ ", phone=" + phone + ", addr=" + addr + ", addr_detail=" + addr_detail + ", zipcode=" + zipcode + "]";
+	}
 	
 	
 }

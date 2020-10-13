@@ -16,5 +16,11 @@ public class DeleteMemberVO {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+	@Override
+	public String toString() {
+		return "DeleteMemberVO [member_num=" + member_num + ", pass=" + pass + "]";
+	}
 	 
+	
+	
 }
