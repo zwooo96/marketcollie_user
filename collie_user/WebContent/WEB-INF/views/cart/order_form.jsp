@@ -219,13 +219,6 @@ function orderItem(){
 		return;
 	}//end if
 	
-	if($("#addr_detail").val().replace(/[ㄱ-힣A-Za-z0-9]/g, "") != ""){
-		alert("상세주소는 한글, 영문, 숫자만 입력 가능합니다.");
-		$("#addr_detail").val("");
-		$("#addr_detail").focus();
-		return;
-	}//end if
-	
 	if($("#card_num1").val().trim()==""){
 		alert("카드번호를 입력해주세요");
 		$("#card_num1").focus();

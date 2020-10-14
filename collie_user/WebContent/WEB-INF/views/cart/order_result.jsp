@@ -44,6 +44,11 @@ $(function(){
 	
 });//ready
 
+function moveToOrderHistory() {
+	location.href='/mypage/order_list.do';
+	return;
+}
+
 </script>
 </head>
 <body style="font-family: NanumBarunGothic;">
@@ -64,7 +69,7 @@ $(function(){
 	주문번호 : <c:out value="${ order_num }"/>
 	</div>
 	
-	<input type="button" value="주문내역" class="collieBtnMain"/>
+	<input type="button" value="주문내역" class="collieBtnMain" onclick="moveToOrderHistory()"/>
 	
 	</div>
 	
