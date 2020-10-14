@@ -6,9 +6,9 @@ $(function(){
 	$("#keyword").keydown(function(evt){
 		if( evt.which == 13 ){
 			if($("#keyword").val().trim().length == 0) {
-				alert("검색어를 입력해주세요")
 				evt.preventDefault();
 			}//end if
+			clickSearchBtn();
 		}//end if
 	});//keyup
 });

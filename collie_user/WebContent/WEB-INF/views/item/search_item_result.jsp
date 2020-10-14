@@ -17,6 +17,7 @@
 #containerHeader{ height: 250px; display: flex; justify-content: center; align-items: center; flex-direction: column; }
 #containerHeaderTitle{ font-size: 30pt; }
 #containerHeaderContent{ font-size: 12pt; color: #bebebe }
+#noResult{ text-align: center; }
 .active {cursor:pointer;}
 </style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -123,7 +124,12 @@ function movePage(field_name, field_value, target_page) {
 			<a id="containerHeaderTitle">검색 결과</a><br/>
 			<a id="containerHeaderContent">총 ${paging.total_cnt}건이 검색되었습니다.</a>
 		</div>
+		
+		<c:if test="${ empty item_list }">
+			<div id="noResult">일치하는 상품이 없습니다.</div>
+		</c:if>
 					
+		<c:if test="${ not empty item_list }">			
 		<div id="containerContentWrap">
 			<div id="containerContent">
 				<div id="start_foreach">
@@ -143,6 +149,7 @@ function movePage(field_name, field_value, target_page) {
 				</div>
 			</div>
 		</div>
+		
 		<div id="pagination">
 			<nav aria-label="Page navigation example">
 			  <ul class="pagination justify-content-center">
@@ -167,6 +174,7 @@ function movePage(field_name, field_value, target_page) {
 			  </ul>
 			</nav>
 		</div>
+		</c:if>
 	</div>
 	
 	<jsp:include page="../common/footer.jsp" />

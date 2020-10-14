@@ -291,6 +291,7 @@ function delReply(qna_num){
 	 </tbody>
 	</table>
 	</div>
+	<c:if test="${ not empty qna_list }">
 	<div id="pagination" class="pagination">
 	   <nav aria-label="Page navigation example">
 	     <ul class="pagination justify-content-center">
@@ -317,6 +318,7 @@ function delReply(qna_num){
 	     </ul>
 	   </nav>
 	</div>
+	</c:if>
 	</div>
 	</div>
 	</div>
