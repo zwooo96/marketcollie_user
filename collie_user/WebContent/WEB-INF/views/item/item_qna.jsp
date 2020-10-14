@@ -214,7 +214,7 @@ function delReply(item_qna_num){
 	<tbody>
 		<c:if test="${ empty qna_list }">
 		<tr>
-		<td colspan="5">문의 내역이 없습니다.</td>
+		<td colspan="5" style="text-align: center; padding-top: 30px">문의 내역이 없습니다.</td>
 		</tr>
 		</c:if>
 		<c:forEach var="item_qna" items="${ qna_list }">
@@ -241,7 +241,7 @@ function delReply(item_qna_num){
 </div>
 
 <div class="paginationDiv">
-
+<c:if test="${ not empty qna_list }">
 <div id="pagination">
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
@@ -265,5 +265,5 @@ function delReply(item_qna_num){
 	  </ul>
 	</nav>
 </div>
-
+</c:if>
 </div>

@@ -2,9 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
+$(function(){
+	$("#keyword").keydown(function(evt){
+		if( evt.which == 13 ){
+			if($("#keyword").val().trim().length == 0) {
+				alert("검색어를 입력해주세요")
+				evt.preventDefault();
+			}//end if
+		}//end if
+	});//keyup
+});
+
 	function clickSearchBtn() {
 		if($("#keyword").val().trim().length > 0) {
-			$("#keyword_value").val($("#keyword").val());
+			$("#keyword_value").val($("#keyword").val().trim());
 			$("#searchFrm").submit();
 		}
 	}

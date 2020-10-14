@@ -255,11 +255,13 @@ $(function(){
 			}//end if
 			
 			if($("#dupId_chk").val()=="off"){
+				alert("아이디 중복확인을 확인해주세요");
 				$("#id").focus();
 				return;
 			}
 			
 			if($("#dupEmail_chk").val()=="off"){
+				alert("이메일 중복확인을 확인해주세요");
 				$("#email").focus();
 				return;
 			}

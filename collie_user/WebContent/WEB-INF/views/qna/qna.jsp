@@ -8,12 +8,12 @@
 <title>MARKET COLLIE</title>
 <style type="text/css">
 #wrap{ min-height: 940px; margin: 0px auto; }
-#container{ min-height: 600px;}
+#container{ min-height: 400px; width: 70%; margin: 0px auto; text-align: center; margin-top: 150px; }
 
-#msgWarp{margin-top: 80px; display: flex; justify-content: center;}
+#msgWarp{margin:0px auto; margin-top: 80px; display: flex; justify-content: center;}
 
 #btnDiv{margin-top: 20px; align-items: center;}
-.collieBtnMain{ width: 140px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 5px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
+.collieBtnMain{ width: 140px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 50px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
 
 </style>
 
@@ -28,14 +28,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	
-});//ready
-	
 	$("#goHome").click(function() {
-		
-		location.href="index.do";
-		
+		location.href="/index.do";
 	});//click
+});//ready
 
 </script>
 </head>
@@ -51,7 +47,7 @@ $(function(){
 	</div>	
 		
 	<div id="btnDiv">
-		<button type="button" class="collieBtnMain" onclick="goHome()">메인으로</button>
+		<button type="button" class="collieBtnMain" id="goHome">메인으로</button>
 	</div>	
 	</div>
 	
