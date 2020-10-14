@@ -106,17 +106,16 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage/order_cancel.do", method=GET)
-	public String cancelOrder(MyOrderVO moVO, HttpSession session, Model model) {
+	public String cancelOrder(MyOrderVO moVO, HttpSession session) {
 		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
 		if( ld != null ) {
 			moVO.setMember_num(ld.getMember_num());
 			
 			MypageService ms = new MypageService();
 			boolean flag = ms.cancelOrder(moVO);
-			model.addAttribute("cancelFlag", flag);
 		}//end if
 		
-		return "mypage/order_list";
+		return "redirect:order_list.do";
 	}//cancelOrder
 	
 	/**
