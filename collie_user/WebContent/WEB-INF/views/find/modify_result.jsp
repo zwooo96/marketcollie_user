@@ -44,7 +44,7 @@ $(function(){
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<c:import url="/header.do" />
 	<div id="container">
 	
 	<div id="frmWarp">

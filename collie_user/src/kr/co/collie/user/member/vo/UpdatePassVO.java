@@ -2,7 +2,7 @@ package kr.co.collie.user.member.vo;
 
 public class UpdatePassVO {
 
-	private String id, newPass;
+	private String id, new_pass;
 
 	public String getId() {
 		return id;
@@ -12,12 +12,21 @@ public class UpdatePassVO {
 		this.id = id;
 	}
 
-	public String getNewPass() {
-		return newPass;
+	public String getNew_pass() {
+		return new_pass;
 	}
 
-	public void setNewPass(String newPass) {
-		this.newPass = newPass;
+	public void setNew_pass(String new_pass) {
+		this.new_pass = new_pass;
 	}
+
+	@Override
+	public String toString() {
+		return "UpdatePassVO [id=" + id + ", new_pass=" + new_pass + "]";
+	}
+
+	
+	
+	
 	
 }

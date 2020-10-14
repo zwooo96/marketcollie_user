@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,14 +32,35 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function(){
-	$("#loginBtn").click(function(){
-		$("#findPassFrm").submit();
-	})
-	
-	if("${find_pass}" == "false") {
-		alert("입력하신 정보가 올바르지 않습니다. 다시 한 번 확인해주세요.");
-	}
 });//ready
+
+if( !${find_pass== null?true:find_pass}) {
+	alert("입력하신 정보가 올바르지 않습니다. 다시 한 번 확인해주세요.");
+	}
+
+function chkPass() {
+	
+	if($("#name").val().trim()==""){
+		alert("이름을 입력해주세요");
+		$("#name").focus();
+		return;
+	}
+	
+	if($("#id").val().trim()==""){
+		alert("아이디를 입력해주세요");
+		$("#id").focus();
+		return;
+	}
+	if($("#email").val().trim()==""){
+		alert("이메일을 입력해주세요");
+		$("#email").focus();
+		return;
+	}
+	
+	
+	$("#findPassFrm").submit();
+	
+}//chkPass
 </script>
 
 
@@ -47,7 +69,7 @@ $(function(){
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<c:import url="/header.do" />
 	
 	<div id="container">
 		<div id="findDiv">
@@ -56,12 +78,12 @@ $(function(){
 		<div class="frmWarp">
 			<form action="find_pass_process.do" method="post" id="findPassFrm">
 				<label>이름</label><br/>
-				<input type="text" class="form-control" name="name" style="height: 50px"><br/>
+				<input type="text" class="form-control" name="name" id="name" style="height: 50px"><br/>
 				<label>아이디</label><br/>
-				<input type="text" class="form-control" name="id" style="height: 50px"><br/>
+				<input type="text" class="form-control" name="id" id="id" style="height: 50px"><br/>
 				<label>이메일</label><br/>
-				<input type="text" class="form-control" name="email" style="height: 50px"><br/>
-				<button type="button" style="widows: 100px" id="loginBtn" class="collieBtnMain">찾기</button>
+				<input type="text" class="form-control" name="email" id="email" style="height: 50px"><br/>
+				<button type="button" style="widows: 100px" onclick="chkPass()" id="loginBtn" class="collieBtnMain">찾기</button>
 			</form>
 		</div>
 	</div>

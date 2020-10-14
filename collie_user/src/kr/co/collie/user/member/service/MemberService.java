@@ -74,9 +74,8 @@ public class MemberService {
 	}//dupEmailCheck
 	
 	public String findId(FindIdVO fidVO) {
-		String id = "";
 		MemberDAO mDAO = MemberDAO.getInstance();
-		id =  mDAO.selectMemberId(fidVO);
+		String id =  mDAO.selectMemberId(fidVO);
 		return id;
 	}//findId
 	
@@ -85,7 +84,7 @@ public class MemberService {
 		MemberDAO mDAO = MemberDAO.getInstance();
 		//조회한 아이디가 null이 아니면 true 
 		String pass=mDAO.selectMemberPass(fpsVO);
-		if(pass == null) {//비밀번호 틀림
+		if(pass != null) {//비밀번호 맞음
 			flag= true;
 		}
 		return flag;
@@ -95,7 +94,7 @@ public class MemberService {
 		boolean flag= false;
 		MemberDAO mDAO = MemberDAO.getInstance();
 		try {
-			upVO.setNewPass(DataEncrypt.messageDigest("MD5", upVO.getNewPass()));
+			upVO.setNew_pass(DataEncrypt.messageDigest("MD5", upVO.getNew_pass()));
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}

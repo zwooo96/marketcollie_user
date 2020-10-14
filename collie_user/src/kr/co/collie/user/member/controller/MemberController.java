@@ -98,15 +98,24 @@ public class MemberController {
     @RequestMapping(value = "/find/idForm.do",method = GET)
     public String findIdForm() {
         
-        return "find/idForm";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
+        return "find/idForm";
         
     }
     
     @RequestMapping(value = "/find/find_id_process.do",method = POST)
     public String findId(FindIdVO fidVO,Model model) {
+    	String url ="find/idForm";
         MemberService ms = new MemberService();
-        model.addAttribute("user_id",ms.findId(fidVO));
-        return "find/id";
+        boolean findId = false;
+        String findIdStr = ms.findId(fidVO); 
+        if(findIdStr != null) {
+        	findId = true;
+        	model.addAttribute("user_id",findIdStr);
+        	url ="find/id";
+        }
+        
+        model.addAttribute("find_id",findId);
+        return url;
     }
     
     @RequestMapping(value = "/find/passForm.do",method = {GET, POST})
@@ -116,11 +125,13 @@ public class MemberController {
     
     @RequestMapping(value = "/find/find_pass_process.do",method = POST )
     public String findPass(FindPassVO fpsVO,Model model) {
+    	
+    	System.out.println("=========================================================== findpass : " + fpsVO.getId());
         String url="forward:/find/passForm.do";
         
         MemberService ms = new MemberService();
         boolean findPass = false;
-        if(!ms.findPass(fpsVO)) { //findPass의 결과가 false면 맞음, !ms.findPass == true if문 실행
+        if(ms.findPass(fpsVO)) {
         	findPass = true;
             model.addAttribute("find_pass_info",fpsVO);
             url="forward:/find/modify_pass_form.do";
@@ -135,14 +146,15 @@ public class MemberController {
         return "find/modify_pass_form";
     }
     
-    @RequestMapping(value = "/find/modify_pass_process.do",method = POST)
-    public String modifyPass(UpdatePassVO upVO,HttpSession ss,Model model) {
+    @RequestMapping(value = "/find/modify_pass_process.do", method = POST)
+    public String modifyPass(UpdatePassVO upVO, HttpSession ss, Model model) {
         MemberService ms = new MemberService();
-        
         FindPassVO fpsVO=(FindPassVO)ss.getAttribute("find_pass_info");
-        upVO.setId(fpsVO.getId());
         
-         model.addAttribute("update_flag",ms.modifyPass(upVO));
+        if(fpsVO !=null) {
+        	upVO.setId(fpsVO.getId());
+        	model.addAttribute("update_flag",ms.modifyPass(upVO));
+        }
         
         return "find/modify_result";
     }

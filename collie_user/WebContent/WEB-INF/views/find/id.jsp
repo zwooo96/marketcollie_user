@@ -31,8 +31,8 @@
 $(function(){
 	$("#homeBtn").click(function() {
 		location.href="../index.do";
+		return;
 	});//click
-	
 });//ready
 </script>
 </head>
@@ -40,16 +40,13 @@ $(function(){
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<c:import url="/header.do" />
 	<div id="container">
 	<div id="frmWarp">
-		<c:if test="${empty user_id}">
-		<h4 id="title">	입력하신 정보와 일치하는 아이디가 없습니다. 
-			다시 시도해주세요 </h4>
-		</c:if>
-		<c:if test="${not empty user_id}">
+		
+		
 			<h4 id="title">${param.name}님의 아이디는 <c:out value="${user_id }"/>입니다.</h4>
-		</c:if>
+		
 		<div id="btnDiv">
 			<input type="button" value="메인으로" id="homeBtn" class="collieBtnMain">	
 		</div>

@@ -96,6 +96,7 @@ public class MemberDAO {
 		if(cnt==1) {
 			ss.commit();
 		}
+		
 		ss.close();
 		return cnt;
 	}

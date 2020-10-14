@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,31 +33,53 @@
 $(function(){
 	
 });//ready
+
+if( !${find_id== null?true:find_id}) {
+	alert("입력하신 정보가 올바르지 않습니다. 다시 한 번 확인해주세요.");
+}
+
+function chkId() {
+	
+	if($("#name").val().trim()==""){
+		alert("이름을 입력해주세요");
+		$("#name").focus();
+		return;
+	}
+	
+	if($("#email").val().trim()==""){
+		alert("이메일을 입력해주세요");
+		$("#email").focus();
+		return;
+	}
+	
+	$("#findFrm").submit();
+	
+}
 </script>
 </head>
 <body style="font-family: nanumbarungothic">
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<c:import url="/header.do" />
 	<div id="container">
 		
 		<div id="findDiv">
 	
 	   	<h3 id="title">아이디 찾기</h3>
 		 <div class="frmWarp">
-		  <form action="find_id_process.do" method="post">
+		  <form id="findFrm" action="find_id_process.do" method="post">
 		  
 		   <div class="form">
 			<label>이름</label><br/>
-				<input type="text" class="form-control" name="name" style="height: 50px;" ><br/>
+				<input type="text" class="form-control" id="name" name="name" style="height: 50px;" ><br/>
 		   </div>
 			<div class="form">
 			<label>이메일</label><br/>
-				<input type="text" class="form-control" name="email" style="height: 50px;" ><br/>
+				<input type="text" class="form-control" id="email" name="email" style="height: 50px;" ><br/>
 			</div>
 				<div id="btnDiv">
-				<button type="submit" style="widows: 100px" id="findBtn" class="collieBtnMain">찾기</button>
+				<button type="button" style="widows: 100px" id="findBtn" onclick="chkId()" class="collieBtnMain">찾기</button>
 				</div>
 			</form>
 		 </div>

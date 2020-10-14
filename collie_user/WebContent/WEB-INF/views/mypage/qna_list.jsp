@@ -27,6 +27,7 @@ hr{ margin-top: 90px }
 
 .qnaTab{ width: 90% }
 .tableContent{ text-align: center; }
+.emptyContent{ text-align: center; margin-bottom: 50px}
 .titleTab{height: 50px; text-align: center;}
 
 .qnaTabTh{
@@ -46,6 +47,7 @@ hr{ margin-top: 90px }
     padding: 30px 0px 30px 0px;
     cursor: pointer; 
 }
+.emptyQnaTabTh{padding: 10px 10px;}
 
 a, a:hover{ color: #000000; text-decoration: none }
 .pagination{margin: 0px auto; width: 700px; margin-top: 20px; margin-bottom: 20px;}
@@ -273,8 +275,8 @@ function delReply(qna_num){
 	 </thead>
 	<tbody>
 		<c:if test="${ empty qna_list }">
-			<tr class="tableContent">
-				<td colspan="3" class="qnaTabTh">등록된 문의가 없습니다.</td>
+			<tr class="emptyContent">
+				<td colspan="4" class="emptyQnaTabTh">등록된 문의가 없습니다.</td>
 			</tr>
 		</c:if>
 

@@ -40,7 +40,7 @@
   
   <select id="updateMemberPass" resultType="int" parameterType="kr.co.collie.user.member.vo.UpdatePassVO">
   update member
-  set pass=#{newPass}
+  set pass=#{new_pass}
   where id=#{id}
   
   </select>
