@@ -23,6 +23,7 @@
 #cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
 #contentWrap{ margin-left: 240px }
 #containerSubTitle{ border-bottom: 1px solid #17462B; margin-top: 40px; padding-bottom: 0px; color: #666666 }
+#errorTable{ margin-top: 70px; text-align: center }
 #oneGoods{ border-bottom: 1px solid #DCDBDE }
 #goodsImg{ width: 100px; padding-left: 30px }
 #goodsThm{ width:80px; height: 100px }
@@ -89,6 +90,12 @@ function cancelOrder(order_num){
 			<div id="containerSubTitle">
 				<h5><strong>주문번호 ${ param.order_num }</strong></h5>
 			</div>
+			<c:if test="${ empty order_detail }">
+				<table class="table table-borderless" id="errorTable">
+					<tr><td>주문내역이 없습니다.</td></tr>
+				</table>
+			</c:if>
+			<c:if test="${ not empty order_detail }">
 			<div id="containerContent">
 			<div id="foreachWrap">
 			<c:forEach var="odd" items="${ order_detail.getOrderItemList() }">
@@ -190,6 +197,7 @@ function cancelOrder(order_num){
 				</div>
 				</div>
 			</div>
+			</c:if>
 		</div>
 	</div>
 	
