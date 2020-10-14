@@ -207,12 +207,6 @@ function orderItem(){
 		return;
 	}//end if
 	
-	if($("#addr").val().replace(/[ㄱ-힣A-Za-z0-9()]/g, "").trim() != ""){
-		$("#addr").val("");
-		$("#addr").focus();
-		return;
-	}//end if
-	
 	if($("#addr_detail").val().trim()==""){
 		alert("상세주소를 입력해주세요");
 		$("#addr_detail").focus();
@@ -320,6 +314,11 @@ function orderItem(){
 		alert("카드 비밀번호는 숫자만 입력 가능합니다.");
 		$("#card_pass").val("");
 		$("#card_pass").focus();
+		return;
+	}//end if
+	
+	if( !$("#agree").is(":checked") ){
+		alert("결제 진행 동의는 필수입니다.");
 		return;
 	}//end if
 	

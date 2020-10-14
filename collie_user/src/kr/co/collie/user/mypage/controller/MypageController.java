@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.mypage.domain.OrderDetailDomain;
@@ -163,10 +164,14 @@ public class MypageController {
 		
 		MypageService ms = new MypageService();
 		mmVO.setPhone(request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3"));
-		
-		
 		flag = ms.modifyMemberInfo(mmVO);
 		
+		LoginDomain ld = (LoginDomain)session.getAttribute("user_info");
+		ld.setPhone(mmVO.getPhone());
+		ld.setZipcode(mmVO.getZipcode());
+		ld.setAddr(mmVO.getAddr());
+		ld.setAddr_detail(mmVO.getAddr_detail());
+		session.setAttribute("user_info", ld);
 		
 		return "mypage/modify_member_result";
 	}//modifyMemberInfo
@@ -237,7 +242,7 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage/check_pass.do", method=POST)
-	public String checkPass(PassCheckVO pcVO, HttpSession session, Model model) {
+	public String checkPass(PassCheckVO pcVO, HttpSession session, RedirectAttributes ra) {
 		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
 		if( ld != null) {
 			pcVO.setMember_num(ld.getMember_num());
@@ -245,7 +250,7 @@ public class MypageController {
 			try {
 				boolean flag = ms.getMemberPass(pcVO);
 			} catch(NullPointerException npe) {
-				model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+				ra.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
 			}//end catch
 		}//end if
 		

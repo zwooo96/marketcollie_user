@@ -21,7 +21,9 @@
 #cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
 #contentWrap{ margin-left: 240px }
 #containerSubTitle{ border-bottom: 1px solid #333; margin-top: 30px; padding-bottom: 0px; color: #666666 }
-#containerContent{ margin-top: 25px;  }
+#containerContent{ margin-top: 40px; }
+#contentDiv{ margin: 0px auto; padding-left: 40px }
+.form-control-plaintext{ width: 80px }
 #passForm{ width: 620px; margin: 0px auto }
 .col-form-label{ padding-right: 0px; padding-left: 50px }
 #pass{ width:300px;  padding: 0px; margin-left: 60px }
@@ -178,7 +180,7 @@ function setDefaultValue() {
 
 <div id="wrap">
 	
-	<jsp:include page="../common/header.jsp" />
+	<c:import url="/header.do" />
 	
 	<div id="container">
 		<jsp:include page="../common/mypage_menu.jsp"/>
@@ -187,11 +189,10 @@ function setDefaultValue() {
 			<h4><strong>개인정보 수정</strong></h4>
 		</div>
 			<div id="containerSubTitle">
-				<h5><strong>비밀번호 재확인</strong></h5>
-				<h6>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인해주세요.</h6>
 			</div>
 			<div id="containerContent">
 			<form action="update_member.do" method="post" id="Frm">
+			<div id="contentDiv">
 	  		<div class="form-inline">
 		 	 	<div class="form-group mb-2">
 			    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="아이디">
@@ -239,13 +240,14 @@ function setDefaultValue() {
 			      <input type="email" class="form-control" name="addr" id="addr" readonly="readonly">
 			    </div>
 	  		</div>
-	  		<div class="form-row" style="border-bottom: 3px solid #333;">
+	  		<div class="form-row">
 		    <div class="form-group col-md-6" style="margin-bottom: 40px">
 			      <label for="inputPassword4">상세주소</label>
 			      <input type="email" class="form-control" name="addr_detail" id="addr_detail">
 			    </div>
 		  	</div>
-				<div class="modify-btns">
+		    </div>
+				<div class="modify-btns" style="border-top: 3px solid #333;">
 					<input type="button"  class="modify-btn" value="탈퇴하기" id="removeBtn" />
 					 <input type="button" class="modify-btn" value="회원정보 수정" id="modifyBtn">
 				</div> 
