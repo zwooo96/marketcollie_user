@@ -86,7 +86,6 @@ function showDetailImage(item_num) {
   <!--Slides-->
   <div class="carousel-inner" role="listbox">
     <div class="carousel-item active">
-    <div class="row">
     <c:forEach items="${new_item_list }" var="newItemList" varStatus="status">
     	<c:if test="${status.index > 0 and status.index mod 4 eq 0}">
     		</div><div class="carousel-item">
