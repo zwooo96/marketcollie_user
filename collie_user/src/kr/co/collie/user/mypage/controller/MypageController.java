@@ -179,8 +179,6 @@ public class MypageController {
 	 */
 	@RequestMapping( value="/mypage/remove_member_form.do", method=GET )
 	public String removeMemberInfoForm( ) {
-		
-		
 		return"mypage/remove_member_form";
 	}//removeMemberInfo
 	
@@ -197,25 +195,26 @@ public class MypageController {
 		
 		MypageService ms = new MypageService();
 		
-		try {
-			// 비밀번호 일치하는지 확인하는 코드
-			// 공통 로직으로 PassCheckVO 생성해서 넣어줌
-			PassCheckVO pcVO = new PassCheckVO();
-			pcVO.setMember_num(dmVO.getMember_num());
-			pcVO.setPass(dmVO.getPass());
-			boolean passFlag = ms.getMemberPass(pcVO);
-			//비밀번호가 일치하면 회원 삭제 진행
-			if(passFlag) {
-				boolean deleteFlag = ms.removeMember(dmVO);
-				if(!deleteFlag) {
-					model.addAttribute("msg", "회원 탈퇴를 할 수 없습니다. 잠시 후 다시 시도해주세요.");
-				}
-			}
-		} catch(NullPointerException npe) {
-			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
-		}//end catch
+		// 비밀번호 일치하는지 확인하는 코드
+		// 공통 로직으로 비밀번호 체크하기 위해 PassCheckVO 생성해서 넣어줌
+		PassCheckVO pcVO = new PassCheckVO();
+		pcVO.setMember_num(dmVO.getMember_num());
+		pcVO.setPass(dmVO.getPass());
+		boolean passFlag = ms.getMemberPass(pcVO);
 		
-		session.removeAttribute("user_info");
+		//비밀번호가 일치하면 회원 삭제 진행
+		if(passFlag) {
+			boolean deleteFlag = ms.removeMember(dmVO);
+			if(!deleteFlag) {
+				model.addAttribute("msg", "회원 탈퇴를 할 수 없습니다. 잠시 후 다시 시도해주세요.");
+			} else {
+				//회원 탈퇴 성공하면 세션 제거
+				session.removeAttribute("user_info");
+			}
+		} else {
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+		}
+		
 		
 		return "mypage/remove_member_result";
 	}

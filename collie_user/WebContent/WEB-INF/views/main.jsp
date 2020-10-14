@@ -44,13 +44,13 @@ function showDetailImage(item_num) {
 	<div id="mainImg" class="carousel slide" data-ride="carousel">
 	  <div class="carousel-inner">
 	    <div class="carousel-item active" data-interval="3000">
-	      <img src="common/images/main_img1.jpg" class="d-block w-100">
+	      <img src="/common/images/main_img1.jpg" class="d-block w-100">
 	    </div>
 	    <div class="carousel-item" data-interval="3000">
-	      <img src="common/images/main_img2.jpg" class="d-block w-100">
+	      <img src="/common/images/main_img2.jpg" class="d-block w-100">
 	    </div>
 	    <div class="carousel-item" data-interval="3000">
-	      <img src="common/images/main_img3.jpg" class="d-block w-100">
+	      <img src="/common/images/main_img3.jpg" class="d-block w-100">
 	    </div>
 	  </div>
 	  <a class="carousel-control-prev" href="#mainImg" role="button" data-slide="prev">
@@ -64,21 +64,49 @@ function showDetailImage(item_num) {
 	</div>
 	<div class="contentSubtitle">NEW!</div> 
 	<div id="containerContentWrap">
-	<div id="containerContent"> 
+	<div id="containerContent">
 	
-		<div class="row row-cols-1 row-cols-md-4">
-			<c:forEach items="${new_item_list }" var="newItemList">
-				<div class="col mb-4">
-					<div class="card" onclick="showDetailImage(${newItemList.item_num});" style="cursor:pointer;">
-						<img src="common/images/item/${newItemList.item_img}" class="card-img-top">
-						<div class="card-body">
-							<h6 class="card-title">${newItemList.item_name}</h6>
-							<p class="card-text">${newItemList.item_price}원</p>
-						</div>
-					</div>
+		<!--Carousel Wrapper-->
+<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+  <!--Controls-->
+  <div class="controls-top">
+    <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+    <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+        class="fas fa-chevron-right"></i></a>
+  </div>
+  <!--/.Controls-->
+
+  <!--Indicators-->
+  <ol class="carousel-indicators">
+    <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+    <li data-target="#multi-item-example" data-slide-to="1"></li>
+  </ol>
+
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+    <div class="row">
+    <c:forEach items="${new_item_list }" var="newItemList" varStatus="status">
+    	<c:if test="${status.index > 0 and status.index mod 4 eq 0}">
+    		</div><div class="carousel-item">
+    	</c:if>
+		<div class="col-md-3" style="float:left">
+			<div class="card mb-2" onclick="showDetailImage(${newItemList.item_num});" style="cursor:pointer;">
+				<img src="common/images/item/${newItemList.item_img}" class="card-img-top">
+        		<div class="card-body">
+					<h6 class="card-title">${newItemList.item_name}</h6>
+					<p class="card-text">${newItemList.item_price}원</p>
 				</div>
-			</c:forEach>
+        	</div>
 		</div>
+     </c:forEach>
+	</div>
+  </div>
+
+</div>
+<!--/.Carousel Wrapper-->
+		
 	</div>
 	</div>
 	</div>

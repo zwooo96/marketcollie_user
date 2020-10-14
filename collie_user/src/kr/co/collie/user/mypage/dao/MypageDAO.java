@@ -99,12 +99,15 @@ public class MypageDAO {
       * @return
       */
      public int selectMemberPass(PassCheckVO pcVO) {
-         int member_num = 0;
+         Integer result = 0;
          SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-         member_num = ss.selectOne("kr.co.collie.user.mypage.selectMemberPass", pcVO);
+         result = ss.selectOne("kr.co.collie.user.mypage.selectMemberPass", pcVO);
+         if(result == null) {
+        	 result = 0;
+         }
          ss.close();
          
-         return member_num;
+         return result.intValue();
      }//selectMemberPass
      
      /**
