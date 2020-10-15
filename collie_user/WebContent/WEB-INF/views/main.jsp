@@ -10,8 +10,10 @@
 #wrap{ min-height: 940px; margin: 0px auto; }
 #container{ min-height: 600px;}
 #containerContentWrap{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; }
-#containerContent{ width: 70%; display: flex; align-items: center; }
+#containerContent{ width: 70%; align-items: center; }
 .contentSubtitle{ margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center; color:#17462B; font-size:4rem; font-weight: bold;}
+.controls-top {text-align: right;}
+.bi {margin-bottom:10px}
 </style>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -66,45 +68,49 @@ function showDetailImage(item_num) {
 	<div id="containerContentWrap">
 	<div id="containerContent">
 	
-		<!--Carousel Wrapper-->
-<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-  <!--Controls-->
-  <div class="controls-top">
-    <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
-    <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
-        class="fas fa-chevron-right"></i></a>
-  </div>
-  <!--/.Controls-->
-
-  <!--Indicators-->
-  <ol class="carousel-indicators">
-    <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-    <li data-target="#multi-item-example" data-slide-to="1"></li>
-  </ol>
-
-  <!--Slides-->
-  <div class="carousel-inner" role="listbox">
-    <div class="carousel-item active">
-    <c:forEach items="${new_item_list }" var="newItemList" varStatus="status">
-    	<c:if test="${status.index > 0 and status.index mod 4 eq 0}">
-    		</div><div class="carousel-item">
-    	</c:if>
-		<div class="col-md-3" style="float:left">
-			<div class="card mb-2" onclick="showDetailImage(${newItemList.item_num});" style="cursor:pointer;">
-				<img src="common/images/item/${newItemList.item_img}" class="card-img-top">
-        		<div class="card-body">
-					<h6 class="card-title">${newItemList.item_name}</h6>
-					<p class="card-text">${newItemList.item_price}원</p>
-				</div>
-        	</div>
+	
+		<!--Controls-->
+		<div class="controls-top">
+			<a href="#multi-item-example" data-slide="prev">
+			    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-caret-left-fill" fill="#17462B" xmlns="http://www.w3.org/2000/svg">
+				  <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+				</svg>
+		    </a>
+		    <a href="#multi-item-example" data-slide="next">
+			    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="#17462B" xmlns="http://www.w3.org/2000/svg">
+				  <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+				</svg>
+			</a>
 		</div>
-     </c:forEach>
-	</div>
-  </div>
+		<!--/.Controls-->
+	
+		<!--Carousel Wrapper-->
+		<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+		
 
-</div>
-<!--/.Carousel Wrapper-->
+
+		
+		  <!--Slides-->
+		  <div class="carousel-inner" role="listbox">
+		    <div class="carousel-item active">
+		    <c:forEach items="${new_item_list }" var="newItemList" varStatus="status">
+		    	<c:if test="${status.index > 0 and status.index mod 4 eq 0}">
+		    		</div><div class="carousel-item">
+		    	</c:if>
+				<div class="col-md-3" style="float:left">
+					<div class="card mb-2" onclick="showDetailImage(${newItemList.item_num});" style="cursor:pointer;">
+						<img src="common/images/item/${newItemList.item_img}" class="card-img-top">
+		        		<div class="card-body">
+							<h6 class="card-title">${newItemList.item_name}</h6>
+							<p class="card-text">${newItemList.item_price}원</p>
+						</div>
+		        	</div>
+				</div>
+		     </c:forEach>
+			</div>
+		  </div>
+		
+		</div>
 		
 	</div>
 	</div>
