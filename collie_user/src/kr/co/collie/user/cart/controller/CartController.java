@@ -1,13 +1,18 @@
 package kr.co.collie.user.cart.controller;
 
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.collie.user.cart.domain.CartGoodsDomain;
 import kr.co.collie.user.cart.service.CartService;
@@ -15,12 +20,6 @@ import kr.co.collie.user.cart.vo.CartVO;
 import kr.co.collie.user.cart.vo.ItemCntVO;
 import kr.co.collie.user.cart.vo.OrderVO;
 import kr.co.collie.user.member.domain.LoginDomain;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 public class CartController {

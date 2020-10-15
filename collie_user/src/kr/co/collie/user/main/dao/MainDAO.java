@@ -3,7 +3,6 @@ package kr.co.collie.user.main.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 
 import kr.co.collie.user.dao.GetCollieHandler;
 import kr.co.collie.user.main.domain.CategoryDomain;
@@ -13,12 +12,8 @@ public class MainDAO {
 
 	private static MainDAO mDAO;
 
-	private static SqlSessionFactory ssf;
-	
-	
 	private MainDAO() {
 	}
-	
 	
 	public static MainDAO getInstance() {
 		if(mDAO == null) {
@@ -29,7 +24,7 @@ public class MainDAO {
 	
 	/**
 	 * 카테고리 목록 조회
-	 * @return
+	 * @return 카테고리 목록
 	 */
 	public List<CategoryDomain> selectCategoryList() {
 		List<CategoryDomain> cateList = null;
@@ -39,7 +34,10 @@ public class MainDAO {
 		return cateList;
 	}
 
-
+	/**
+	 * 신제품(조회 일시 한달 전 ~ 조회 일시까지의 상품) 목록 조회
+	 * @return 신제품 목록
+	 */
 	public List<NewItemDomain> selectNewItems() {
 		List<NewItemDomain> newItemList = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
@@ -47,10 +45,4 @@ public class MainDAO {
 		ss.close();
 		return newItemList;
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(MainDAO.getInstance().selectNewItems());
-	}
-	
-	
 }

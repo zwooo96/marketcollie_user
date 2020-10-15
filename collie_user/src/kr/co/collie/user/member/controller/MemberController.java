@@ -25,45 +25,34 @@ import kr.co.collie.user.mypage.vo.ModifyMemberVO;
 @SessionAttributes({"user_info","find_pass_info"})
 @Controller
 public class MemberController {
+
 	
-	@RequestMapping(value = "/login_form.do",method = GET)
-    public String loginForm() {
-        
-        return "member/login_form";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
-        
-    }
-    
-	  @RequestMapping(value = "/login_process.do",method = POST)
-	    public String login(LoginVO loginVO, Model model) {
-	    
-	        MemberService mems=new MemberService();
-	        LoginDomain loginDomain=mems.login(loginVO);
-	        String url = "";
-	        if(loginDomain==null) {
-	             url = "member/login_form";
-	             model.addAttribute("login_flag","fail");
-	        } else {
-	             url = "redirect:index.do";
-	             model.addAttribute("user_info",loginDomain);
-	        }
-	        return url;
-	        
-	    }//login
-    
-    @RequestMapping(value="/join_clause.do", method = GET)
+	/**
+	 * 회원가입 버튼 클릭시 회원 가입 약관 form으로 이동
+	 * @return 회원 가입 약관 form으로 이동
+	 */
+	@RequestMapping(value="/join_clause.do", method = GET)
     public String joinForm() {
-        
-        
         return "member/join_clause";
     }//joinForm
     
+	
+    /**
+     * 회원가입 약관 동의 후 회원가입 form으로 이동
+     * @return 회원가입 form으로 이동
+     */
     @RequestMapping(value="/join_form.do", method = GET)
     public String joinClause() {
-        
-        
         return "member/join_frm";
     }//joinForm
     
+
+    /**
+     * 회원가입 진행
+     * @param jVO 회원 가입 정보 VO
+     * @param request 회원의 ip 정보를 가질 {@link HttpServletRequest}
+     * @return 회원가입 완료 페이지
+     */
     @RequestMapping(value="/join_process.do", method= POST)
     public String join(JoinVO jVO, HttpServletRequest request) {
         MemberService ms = new MemberService();
@@ -76,6 +65,35 @@ public class MemberController {
         
         return "member/join";
     }//join
+    
+    
+	@RequestMapping(value = "/login_form.do",method = GET)
+    public String loginForm() {
+        return "member/login_form";//이걸 리턴시키면 WEB-INF/views/login_frm.jsp로 이동한다는 의미에요!
+    }
+    
+	@RequestMapping(value = "/login_process.do",method = POST)
+    public String login(LoginVO loginVO, Model model) {
+        MemberService mems=new MemberService();
+        LoginDomain loginDomain=mems.login(loginVO);
+        String url = "";
+        if(loginDomain==null) {
+             url = "member/login_form";
+             model.addAttribute("login_flag","fail");
+        } else {
+             url = "redirect:index.do";
+             model.addAttribute("user_info",loginDomain);
+        }
+        return url;
+        
+    }//login
+	
+
+	@RequestMapping(value = "/logout.do")
+	public String logout(SessionStatus ss) {
+		ss.setComplete();
+		return "redirect:index.do";
+	}
     
     @RequestMapping(value="/id_chk_ajax.do", method=GET)
     @ResponseBody
@@ -99,7 +117,6 @@ public class MemberController {
     public String findIdForm() {
         
         return "find/idForm";
-        
     }
     
     @RequestMapping(value = "/find/find_id_process.do",method = POST)
@@ -126,7 +143,6 @@ public class MemberController {
     @RequestMapping(value = "/find/find_pass_process.do",method = POST )
     public String findPass(FindPassVO fpsVO,Model model) {
     	
-    	System.out.println("=========================================================== findpass : " + fpsVO.getId());
         String url="forward:/find/passForm.do";
         
         MemberService ms = new MemberService();
@@ -158,19 +174,4 @@ public class MemberController {
         
         return "find/modify_result";
     }
-
-    @RequestMapping(value="/mypage/modify_member_info.do", method=GET)
-    public String modifyMemberInfo(ModifyMemberVO mmVO, HttpSession session, Model model) {
-         
-         
-         
-         
-         return "mypage/modify_member_info";
-    }//modifyMemberInfo
-	
-	@RequestMapping(value = "/logout.do")
-	public String logout(SessionStatus ss) {
-		ss.setComplete();
-		return "redirect:index.do";
-	}
 }//class

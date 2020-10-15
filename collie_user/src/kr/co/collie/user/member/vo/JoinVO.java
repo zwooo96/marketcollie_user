@@ -2,8 +2,6 @@ package kr.co.collie.user.member.vo;
 
 public class JoinVO {
 	private String id, pass, name, email, phone, zipcode, addr, addr_detail, ip;
-	
-	private String email2;
 
 	public String getId() {
 		return id;
@@ -76,14 +74,5 @@ public class JoinVO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-
-	public String getEmail2() {
-		return email2;
-	}
-
-	public void setEmail2(String email2) {
-		this.email2 = email2;
-	}
-	
 	
 }

@@ -15,18 +15,6 @@ import kr.co.collie.user.member.vo.UpdatePassVO;
 import kr.co.sist.util.cipher.DataEncrypt;
 public class MemberService {
 	
-	public LoginDomain login(LoginVO loginVO) {
-		LoginDomain loginDomain =  null;
-		MemberDAO memDao = MemberDAO.getInstance();
-		try {
-			loginVO.setPass(DataEncrypt.messageDigest("MD5", loginVO.getPass()));
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		loginDomain = memDao.selectLogin(loginVO);
-		return loginDomain;
-	}//login
 
 	public boolean join(JoinVO jVO) {
 		boolean flag = false;
@@ -46,6 +34,20 @@ public class MemberService {
 		
 		return flag;
 	}//join
+	
+	public LoginDomain login(LoginVO loginVO) {
+		LoginDomain loginDomain =  null;
+		MemberDAO memDao = MemberDAO.getInstance();
+		try {
+			loginVO.setPass(DataEncrypt.messageDigest("MD5", loginVO.getPass()));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		loginDomain = memDao.selectLogin(loginVO);
+		return loginDomain;
+	}//login
+
 	
 	public String dupIdCheck(String id) {
 		String rid = "";

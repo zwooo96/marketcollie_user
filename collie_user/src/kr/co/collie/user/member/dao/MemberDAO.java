@@ -28,15 +28,7 @@ public class MemberDAO {
 		return memDAO;
 	}//getInstance
 	
-	public LoginDomain selectLogin(LoginVO loginVO) {
-		LoginDomain logindomain = null;
-		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		
-		logindomain = ss.selectOne("kr.co.collie.user.member.selectLogin",loginVO);
-		ss.close();
-		return logindomain;
-	}//loginDomain
-	
+
 	public void insertMember(JoinVO jVO) throws IOException{
 			
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
@@ -49,15 +41,15 @@ public class MemberDAO {
 			
 	}//insertMember
 	
-	public String selectMemberId(FindIdVO fidVO) {
-		String id = "";
+	
+	public LoginDomain selectLogin(LoginVO loginVO) {
+		LoginDomain logindomain = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
-		id = ss.selectOne("kr.co.collie.user.member.selectMemberId",fidVO);
-//		fidVO.setEmail("gildong@gmail.com");
-//		fidVO.setName("송길동");
+		
+		logindomain = ss.selectOne("kr.co.collie.user.member.selectLogin",loginVO);
 		ss.close();
-		return id;
-	}
+		return logindomain;
+	}//loginDomain
 	
 	public String dupId(String id) {
 		String rid = "";
@@ -79,6 +71,17 @@ public class MemberDAO {
 		return rEmail;
 		
 	}//dupEmail
+	
+	public String selectMemberId(FindIdVO fidVO) {
+		String id = "";
+		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
+		id = ss.selectOne("kr.co.collie.user.member.selectMemberId",fidVO);
+//		fidVO.setEmail("gildong@gmail.com");
+//		fidVO.setName("송길동");
+		ss.close();
+		return id;
+	}
+	
 	
 	public String selectMemberPass(FindPassVO fpsVO) {
 		String pass ="";

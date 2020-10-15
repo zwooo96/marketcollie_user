@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.collie.user.member.domain.LoginDomain;
 import kr.co.collie.user.mypage.domain.OrderDetailDomain;
 import kr.co.collie.user.mypage.domain.OrderListDomain;
-import kr.co.collie.user.mypage.domain.QnaDetailDomain;
 import kr.co.collie.user.mypage.service.MypageService;
 import kr.co.collie.user.mypage.vo.DeleteMemberVO;
 import kr.co.collie.user.mypage.vo.ModifyMemberVO;
@@ -153,7 +152,6 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage/memberInfo_form.do" , method=POST)
 	public String memberInfoForm(HttpSession session) {	
-		
 		return "mypage/modify_member_form";
 	}//memberInfoForm
 	

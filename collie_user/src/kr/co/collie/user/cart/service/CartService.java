@@ -3,7 +3,6 @@ package kr.co.collie.user.cart.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import kr.co.collie.user.cart.dao.CartDAO;
