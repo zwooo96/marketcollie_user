@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.co.collie.user.item.domain.ItemDetailDomain"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,8 +13,16 @@
 #wrap{ min-height: 940px; margin: 0px auto; }
 #container{ min-height: 600px; border-top: 1px solid #f4f4f4;}
 #containerContent{ width: 70%; display: flex; flex-direction:column; margin:0 auto;}
-.itemwrap{display: flex; flex-direction:row; align-items: center; margin:0 auto; min-width: 700px}
-.imgdiv{width:30vw; height:400vh;}
+.itemwrap{display: flex; 
+		flex-direction:row; 
+		align-items: center; 
+		margin:0 auto; 
+		min-width: 700px;
+		padding-bottom: 50px;
+    	border-bottom: 1px solid #D5D5D5;
+    	padding-top: 10px;}
+    	
+/* .imgdiv{width:30vw; height:400vh; } */
 #infoDiv{float: right;
     width: 660px;
     margin-top: 29px;
@@ -20,11 +30,12 @@
 #boder{padding-top: 10px}
 
 .item_description {
-	padding: 20px 100px 20px 100px;
+	padding: 100px 100px 20px 100px;
 	font-size: 18px;
     line-height: 32px;
     color: #373737;
     margin-top: 20px;
+    border: 1px;
 	
 }
 .thum{padding: 20px 0px 0px 0px;
@@ -91,6 +102,7 @@ word-break: break-all;
 
 .word{
 	margin-top: 28px;
+	margin-bottom: 70px;
 }
 .inp{
 	float: left;
@@ -107,8 +119,20 @@ word-break: break-all;
 
 
 #addBtn{text-align: right;
+		padding-top: 50px;
 }
-.priceDivPrice{text-align:right; margin-top: 10px; font-size: 17pt; font-weight: bold  }
+#context h3{    display: block;
+    margin: 75px 0 0;
+    padding-bottom: 35px;
+    font-size: 38px;
+    line-height: 46px;
+    text-align: center;
+    border-bottom: 1px solid #c1c1c1;
+    color: #666;}
+.priceDivLabel{font-size: 17pt;}
+.imgC { margin-bottom: 20px; max-width: 100% }
+.imgDiv{  text-align:center;  width: 100%!important;}
+.priceDivPrice{text-align:right; margin-top: 10px; font-size: 20pt; font-weight: bold  }
 .quantityWrap{ display: flex; justify-content: center; }
 .quantity{ width: 80% ;border: 0.5px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
 .icoBtn{ border: 0px; }
@@ -149,7 +173,7 @@ word-break: break-all;
 
 .itemQnaBtnDivWrap{ display: flex; justify-content: center; }
 .itemQnaBtnDiv{ width: 70%; display: flex; justify-content: flex-end; }
-.collieBtnMain{ width: 240px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 20px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
+.collieBtnMain{ width: 240px; height:50px; border: 1px solid #17462B; padding: 10px 0px 10px 0px; margin-top: 20px; margin-bottom: 5px; color: #fff; font-size: 15px; background-color: #17462B }
 .paginationDiv{ margin-top: 50px }
 /* ==================아이템문의=================== */
 
@@ -416,19 +440,45 @@ function moveReviewPage(field_value, target_page){
 				      	
 				      	</div>
 				      	</div>
-				      	
-					
 							</div>	
 							
 								<!-- 하단의 설명 -->
 						<div class="item_description">
 						
-						<h3 style="text-align: center"><small><c:out value="${item.item_title}"/><br/></small>
+						
+			<div id="imgWrap">
+				<%
+				ItemDetailDomain itemDetail=(ItemDetailDomain)request.getAttribute("item_detail");
+				 List<String> imgList= itemDetail.getDetailImgList();
+				 List<String> tabList= itemDetail.getTabImgList();
+				  
+					 for(int i=0; i < imgList.size() ; i++){
+				%>
+				<div class="imgDiv">
+				<img class="imgC" alt="상품 상세이미지" src="http://localhost/common/images/item/<%= imgList.get(i)%>"/>
+				</div>
+				<% }//end for%>	
+				
+					<div id="context">
+				<h3 style="text-align: center"><small><c:out value="${item.item_title}"/><br/></small>
 							<c:out value="${item.item_subtitle}"/><br/></h3>
 							
 						<p class="word">
 							<c:out value="${item.item_detail}"/><br/>
 						</p>
+				</div>
+				
+				
+			
+					    <div class="imgDiv">
+					    <% for(int j= 0 ; j < tabList.size() ;j++){ %>
+					      <img class="imgC" src="http://localhost/common/images/item/<%= tabList.get(j)%>" alt="상품 탭이미지">
+					    </div>
+					      <%}//end for %>
+			
+				
+						
+						</div>
 						</div>
 							
 		</div>

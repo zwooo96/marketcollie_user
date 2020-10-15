@@ -9,6 +9,7 @@ public class ItemDetailDomain {
 			item_title, item_subtitle, item_detail, item_img;
 
 	private List<String> detailImgList;
+	private List<String> tabImgList ;
 
 	public int getItem_stock() {
 		return item_stock;
@@ -96,6 +97,14 @@ public class ItemDetailDomain {
 
 	public void setDetailImgList(List<String> detailImgList) {
 		this.detailImgList = detailImgList;
+	}
+
+	public List<String> getTabImgList() {
+		return tabImgList;
+	}
+
+	public void setTabImgList(List<String> tabImgList) {
+		this.tabImgList = tabImgList;
 	}
 
 	

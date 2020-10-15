@@ -1,6 +1,7 @@
 package kr.co.collie.user.item.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -75,16 +76,35 @@ public class ItemService {
 		return jo.toJSONString();
 	}
 	
+	/**
+	 * 아이템 상세페이지 
+	 * @param item_Num
+	 * @return
+	 */
 	public ItemDetailDomain viewItemDetail(int item_Num) {
 		ItemDetailDomain idd = null;
 		
 		ItemDAO dDAO = ItemDAO.getInstance();
 		idd = dDAO.selectItemDetail(item_Num);
+
+		List<String> detailImgList = new ArrayList<String>();
+		List<String> tabImgList = new ArrayList<String>();
 		
 		List<String> result = dDAO.detailImgList(item_Num);
 				
+	      for(int i = 0; i < result.size(); i++) {
+	         String imgPath = result.get(i); //DB에서 받아온 이미지 경로  가져오기
+	         if(imgPath.startsWith("tab_")) {
+	            tabImgList.add(imgPath);
+	         } else {
+	        	 detailImgList.add(imgPath);
+	         }//end else
+	      }
+	      System.out.println( "itemservice "+  tabImgList.size() );
+	      idd.setDetailImgList(detailImgList);
+	      idd.setTabImgList(tabImgList);
 		
-		idd.setDetailImgList(dDAO.detailImgList(item_Num));
+		//idd.setDetailImgList(dDAO.detailImgList(item_Num));
 		
 		return idd;
 	}

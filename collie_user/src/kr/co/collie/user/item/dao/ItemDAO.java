@@ -68,6 +68,7 @@ public class ItemDAO {
 		List<String> list = null;
 		SqlSession ss = GetCollieHandler.getInstance().getSqlSession();
 		list = ss.selectList("detailImgList",item_Num);
+		System.out.println("DAO======"+ list.size());
 		ss.close();
 		return list;
 	}
