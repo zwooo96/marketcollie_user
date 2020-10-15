@@ -20,7 +20,6 @@ import kr.co.collie.user.member.vo.FindPassVO;
 import kr.co.collie.user.member.vo.JoinVO;
 import kr.co.collie.user.member.vo.LoginVO;
 import kr.co.collie.user.member.vo.UpdatePassVO;
-import kr.co.collie.user.mypage.vo.ModifyMemberVO;
 
 @SessionAttributes({"user_info","find_pass_info"})
 @Controller

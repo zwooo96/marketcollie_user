@@ -122,7 +122,7 @@ public class MypageService {
 	/**
 	 * 현재 비밀번호를 확인하는 일
 	 * @param pcVO
-	 * @return
+	 * @return 일치 하면 true, 일치하지 않으면 false
 	 */
 	public boolean getMemberPass(PassCheckVO pcVO) {
 		boolean flag = false;

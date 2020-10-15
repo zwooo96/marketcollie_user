@@ -136,16 +136,22 @@ public class MypageController {
 	@RequestMapping(value="/mypage/check_member.do", method=POST)
 	public String checkMember(PassCheckVO pcVO, HttpSession session, Model model) {
 		LoginDomain ld = (LoginDomain) session.getAttribute("user_info");
-		// pcVO.setMember_num(ld.getMember_num());
 		pcVO.setMember_num(ld.getMember_num());
 	
-		
 		MypageService ms = new MypageService();
+		
+		boolean flag = false;
+		
 		try {
-			boolean flag = ms.getMemberPass(pcVO);
+			flag = ms.getMemberPass(pcVO);
 		} catch(NullPointerException npe) {
-			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+//			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			flag = false;
 		}//end catch
+		
+		if(!flag) {
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+		}
 		
 		return "forward:/mypage/memberInfo_form.do";
 	}//checkPassForm
@@ -171,6 +177,9 @@ public class MypageController {
 		ld.setAddr_detail(mmVO.getAddr_detail());
 		session.setAttribute("user_info", ld);
 		
+		if(!flag) {
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+		}
 		return "mypage/modify_member_result";
 	}//modifyMemberInfo
 	
@@ -245,11 +254,17 @@ public class MypageController {
 		if( ld != null) {
 			pcVO.setMember_num(ld.getMember_num());
 			MypageService ms = new MypageService();
+			boolean flag = false;
 			try {
-				boolean flag = ms.getMemberPass(pcVO);
+				flag = ms.getMemberPass(pcVO);
 			} catch(NullPointerException npe) {
-				ra.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+//				ra.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+				flag = false;
 			}//end catch
+			
+			if(!flag) {
+				ra.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			}
 		}//end if
 		
 		return "redirect:modify_pass_form.do";

@@ -47,7 +47,7 @@ $(function(){
 	var msg = '${ msg }';
 	if( msg != '' ){
 		alert(msg);
-		location.href = history.back();
+		history.back();
 	}//end if
 		
 	$("#removeBtn").click(function(){
