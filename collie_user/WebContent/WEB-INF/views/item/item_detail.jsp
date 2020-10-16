@@ -273,7 +273,7 @@ function moveReviewPage(field_value, target_page){
 			output += '<tbody>';
 			$.each(jo.review_list, function(idx, list){
 				output += '<tr id="reviewTr'+list.review_num+'" class="tableContent" onclick="reviewToggle('+list.review_num+')" style="cursor:pointer">';
-				output += '<td class="tabTd">' + list.review_num + '</td>';
+				output += '<td class="tabTd">' + list.idx + '</td>';
 				output += '<td class="tabTd">' + list.review_subject + '</td>';
 				output += '<td class="tabTd">' + list.id + '</td>';
 				output += '<td class="tabTd">';

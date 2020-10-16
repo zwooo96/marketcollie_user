@@ -1,9 +1,15 @@
 package kr.co.collie.user.item.domain;
 
 public class ReviewDomain {
-	private int review_num;
+	private int idx, review_num;
 	private String review_subject, id, input_date;
 	
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
 	public int getReview_num() {
 		return review_num;
 	}

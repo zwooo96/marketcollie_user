@@ -48,7 +48,7 @@ function writeReview(item_num) {
 		<c:forEach var="review" items="${ review_list }">
 			<input type="hidden" name="review_num" value="${ review.review_num }"/>
 			<tr id="reviewTr${ review.review_num }" class="tableContent" onclick="reviewToggle(${ review.review_num });" style="cursor: pointer">
-				<td class="tabTd">${ review.review_num }</td>
+				<td class="tabTd">${ review.idx }</td>
 				<td class="tabTd">${ review.review_subject }</td>
 				<td class="tabTd">${ review.id }</td>
 				<td class="tabTd">${ fn:substring(review.input_date,0,10) }</td>

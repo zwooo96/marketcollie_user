@@ -59,10 +59,11 @@
   
   <!-- 리뷰 목록을 조회하는 일 : field_name = item_num -->
   <select id="selectReviewList" parameterType="kr.co.collie.user.pagination.RangeVO" resultType="kr.co.collie.user.item.domain.ReviewDomain">
-	select review_num, review_subject, id, input_date
-	from(select r.review_num, r.review_subject, m.id, r.input_date, row_number() over(order by r.review_num desc) rnum
-			from review r, member m
-			where r.member_num=m.member_num and ${ field_name } = #{ field_value })
+	select review_num, review_subject, id, to_char(input_date, 'yyyy-mm-dd') input_date, idx
+	from(select review_num, review_subject, id, input_date, idx, row_number() over(order by idx desc) rnum
+			from(select r.review_num, r.review_subject, m.id, r.input_date, row_number() over(order by r.review_num) idx
+					from review r, member m
+					where r.member_num=m.member_num and ${ field_name } = #{ field_value }))
 	where rnum between #{ start_num } and #{ end_num }
   </select>
   
@@ -97,10 +98,12 @@
     <!-- 문의 리스트를 조회하는 일 -->
    <select id="selectItemQnaList" parameterType="kr.co.collie.user.item.vo.ItemQnaListVO" resultType="kr.co.collie.user.item.domain.ItemQnaDomain">
 	select idx, item_qna_num, item_qna_subject, item_qna_flag, to_char(input_date, 'yyyy-mm-dd') input_date, id
-	from(select row_number() over(order by item_qna_num desc) idx, iq.item_qna_num, iq.item_qna_subject, iq.item_qna_flag, iq.input_date, m.id
-			from item_qna iq, member m
-			where iq.member_num=m.member_num and iq.item_num=#{ item_num })
-	where idx between #{ start_num } and #{ end_num }
+	from(select idx, item_qna_num, item_qna_subject, item_qna_flag, input_date, id, row_number() over(order by idx desc) rnum
+		from(select idx, item_qna_num, item_qna_subject, item_qna_flag, input_date, id
+			from(select row_number() over(order by item_qna_num) idx, iq.item_qna_num, iq.item_qna_subject, iq.item_qna_flag, iq.input_date, m.id
+				from item_qna iq, member m
+				where iq.member_num=m.member_num and iq.item_num=#{ item_num })))
+	where rnum between #{start_num} and #{end_num}
   </select>
    
    <!-- 문의 상세내역을 조회하는 일 -->

@@ -162,6 +162,7 @@ public class ItemService {
 		JSONObject jsonTemp = null;
 		for(ReviewDomain review : list) {
 			jsonTemp = new JSONObject();
+			jsonTemp.put("idx", review.getIdx());
 			jsonTemp.put("review_num", review.getReview_num());
 			jsonTemp.put("review_subject", review.getReview_subject());
 			jsonTemp.put("id", review.getId());
