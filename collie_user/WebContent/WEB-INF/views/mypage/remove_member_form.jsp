@@ -87,8 +87,8 @@ $(function(){
 				</div>
 			</div>
 		</div>
-	<jsp:include page="../common/footer.jsp" />
 	</div>
+	<jsp:include page="../common/footer.jsp" />
 </div>
 
 </body>

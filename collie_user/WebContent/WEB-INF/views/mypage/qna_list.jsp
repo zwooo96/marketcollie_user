@@ -18,6 +18,7 @@
 .table-bordered{ width: 200px; text-align: left; margin-top: 30px; color: #666666; font-size: 15px; }
 .table-bordered td:hover{ background-color: #F7F7F7; color: #17462B }
 .table-bordered td{ cursor: pointer; }
+#cscBox{ color: #666666; font-size: 14px; margin-top: 70px }
 #contentWrap{ margin-left: 240px }
 #containerSubTitle{ border-bottom: 1px solid #333; margin-top: 30px; padding-bottom: 0px; color: #666666 }
 #containerContent{ margin-top: 90px; display:flex; align-items: center; justify-content: center;}
