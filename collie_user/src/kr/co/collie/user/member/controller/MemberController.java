@@ -31,7 +31,7 @@ public class MemberController {
 	 * @return 회원 가입 약관 form으로 이동
 	 */
 	@RequestMapping(value="/join_clause.do", method = GET)
-    public String joinForm() {
+    public String joinClause() {
         return "member/join_clause";
     }//joinForm
     
@@ -41,7 +41,7 @@ public class MemberController {
      * @return 회원가입 form으로 이동
      */
     @RequestMapping(value="/join_form.do", method = GET)
-    public String joinClause() {
+    public String joinForm() {
         return "member/join_frm";
     }//joinForm
     
