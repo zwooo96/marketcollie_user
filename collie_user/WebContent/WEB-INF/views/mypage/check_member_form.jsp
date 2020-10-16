@@ -53,7 +53,7 @@ $(function(){
 	
 	<c:import url="/header.do" />
 	
-	<div id="container">
+	<div id="container"> 
 		<jsp:include page="../common/mypage_menu.jsp"/>
 		<div id="contentWrap">
 		<div id="containerTitle">
