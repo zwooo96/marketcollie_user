@@ -380,7 +380,7 @@ function sample4_execDaumPostcode() {
 		<div class="form-row" style="margin-top: 20px">
 		    <div class="form-group col-md-6">
 		      <label for="inputEmail4">아이디</label>
-		      <input type="email" class="form-control" name="id" id="id" placeholder="6자이상의 영문 혹은 영문 숫자를 조합">
+		      <input type="email" class="form-control" name="id" id="id" maxlength="20" placeholder="6자이상의 영문 혹은 영문 숫자를 조합">
 		    </div>
 		    <input type="button" style="height:36px; margin-top: 32px; margin-left: 10px; background-color: white; color: black; " id="chkId" value="중복확인"/>
 	    </div>
@@ -389,13 +389,13 @@ function sample4_execDaumPostcode() {
 	    <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">비밀번호</label>
-		      <input type="password" class="form-control" id="pass" name="pass" maxlength="10" placeholder="비밀번호를 입력해주세요">
+		      <input type="password" class="form-control" id="pass" name="pass" maxlength="20" placeholder="비밀번호를 입력해주세요">
 		    </div>
 	  	</div>
 	    <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">비밀번호 확인</label>
-		      <input type="password" class="form-control" id="passCheck" name="passCheck" onchange="checkPwd()" placeholder="비밀번호를 한번 더 입력해주세요" maxlength="10" />
+		      <input type="password" class="form-control" id="passCheck" name="passCheck" onchange="checkPwd()" placeholder="비밀번호를 한번 더 입력해주세요" maxlength="20" />
 		    </div>
 	  	</div>
 	  	 <div id="checkPwd"></div>
