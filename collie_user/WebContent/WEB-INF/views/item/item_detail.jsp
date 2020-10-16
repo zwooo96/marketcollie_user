@@ -442,45 +442,62 @@ function moveReviewPage(field_value, target_page){
 				      	</div>
 							</div>	
 							
-								<!-- 하단의 설명 -->
-						<div class="item_description">
-						
-						
-			<div id="imgWrap">
-				<%
-				ItemDetailDomain itemDetail=(ItemDetailDomain)request.getAttribute("item_detail");
-				 List<String> imgList= itemDetail.getDetailImgList();
-				 List<String> tabList= itemDetail.getTabImgList();
-				  
-					 for(int i=0; i < imgList.size() ; i++){
-				%>
-				<div class="imgDiv">
-				<img class="imgC" alt="상품 상세이미지" src="http://localhost/common/images/item/<%= imgList.get(i)%>"/>
-				</div>
-				<% }//end for%>	
-				
+			<!-- 하단의 설명 -->
+			<div class="item_description">
+				<div id="imgWrap">
+					<%
+					ItemDetailDomain itemDetail=(ItemDetailDomain)request.getAttribute("item_detail");
+					 List<String> imgList= itemDetail.getDetailImgList();
+					 List<String> tabList= itemDetail.getTabImgList();
+					  
+						 for(int i=0; i < imgList.size() ; i++){
+					%>
+					<div class="imgDiv">
+					<img class="imgC" alt="상품 상세이미지" src="/common/images/item/<%= imgList.get(i)%>"/>
+					</div>
+					<% }//end for%>	
+					
 					<div id="context">
-				<h3 style="text-align: center"><small><c:out value="${item.item_title}"/><br/></small>
-							<c:out value="${item.item_subtitle}"/><br/></h3>
-							
+						<h3 style="text-align: center"><small><c:out value="${item.item_title}"/><br/></small>
+								<c:out value="${item.item_subtitle}"/><br/>
+						</h3>
 						<p class="word">
 							<c:out value="${item.item_detail}"/><br/>
 						</p>
+					</div>
+			    	
+			    	<div id="carouselExampleIndicators" class="carousel carousel-fade" data-ride="carousel">
+					  <ol class="carousel-indicators">
+					  <% for(int j= 0 ; j < tabList.size() ;j++){ 
+					  	if(j==0){%>
+					    <li data-target="#carouselExampleIndicators" data-slide-to="<%=j %>" class="active"></li>
+					    <%} else {%>
+					    <li data-target="#carouselExampleIndicators" data-slide-to="<%=j%>"></li>
+					   <%}
+					  	} %>
+					  </ol>
+					  <div class="carousel-inner">
+					    <% for(int j= 0 ; j < tabList.size() ;j++){ 
+					    	if(j==0) { %>
+					      		<div class="carousel-item active">
+					    <%} else {%>
+					    		<div class="carousel-item">
+					    <%} %>
+					      <img class="d-block w-100" src="/common/images/item/<%= tabList.get(j)%>" alt="상품 탭이미지">
+					    		  </div>
+					    <%}//end for %>
+					  </div>
+					  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					    <span class="sr-only">Previous</span>
+					  </a>
+					  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    <span class="sr-only">Next</span>
+					  </a>
+					</div>
 				</div>
-				
-				
-			
-					    <div class="imgDiv">
-					    <% for(int j= 0 ; j < tabList.size() ;j++){ %>
-					      <img class="imgC" src="http://localhost/common/images/item/<%= tabList.get(j)%>" alt="상품 탭이미지">
-					    </div>
-					      <%}//end for %>
-			
-				
-						
-						</div>
-						</div>
-							
+			</div>
 		</div>
 		
 		<div id="reviewWrap">
