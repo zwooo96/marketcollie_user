@@ -365,8 +365,8 @@ function orderItem(){
 	    </tr>
 	  </thead>
 	  <tbody>
-		<c:forEach var="cart" items="${ cart_list }">
 		<c:set var="totalCnt"/>
+		<c:forEach var="cart" items="${ cart_list }">
 		<c:set var="totalCnt" value="${ totalCnt + cart.item_price * cart.item_cnt }"/>
 	    <tr id="tableContent${ cart.cart_num }" class="tableContent">
 	      <td style="vertical-align: middle; text-align: center;">
